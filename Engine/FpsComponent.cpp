@@ -1,4 +1,4 @@
-#include "MiniginPCH.h"
+#include "pch.h"
 #include "FpsComponent.h"
 #include "TextComponent.h"
 #include <stdio.h>

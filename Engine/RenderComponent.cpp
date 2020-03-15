@@ -1,4 +1,4 @@
-#include "MiniginPCH.h"
+#include "pch.h"
 #include "RenderComponent.h"
 #include "TransformComponent.h"
 #include "ResourceManager.h"

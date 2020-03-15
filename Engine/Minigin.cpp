@@ -1,4 +1,4 @@
-#include "MiniginPCH.h"
+#include "pch.h"
 #include "Minigin.h"
 #include <chrono>
 #include <thread>
@@ -7,7 +7,6 @@
 #include "Renderer.h"
 #include "ResourceManager.h"
 #include <SDL.h>
-#include "TextObject.h"
 #include "GameObject.h"
 #include "Scene.h"
 #include "TransformComponent.h"
