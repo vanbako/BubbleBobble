@@ -10,6 +10,13 @@ namespace ieg
 	class Minigin final
 	{
 	public:
+		Minigin() = default;
+		~Minigin() = default;
+		Minigin(const Minigin & other) = delete;
+		Minigin(Minigin && other) = delete;
+		Minigin& operator=(const Minigin & other) = delete;
+		Minigin& operator=(Minigin && other) = delete;
+
 		void Initialize();
 		void LoadGame(ResourceManager* pResourceManager, SceneManager* pSceneManager) const;
 		void Cleanup();
