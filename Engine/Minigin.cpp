@@ -24,7 +24,7 @@ void ieg::Minigin::Initialize()
 		SDL_WINDOWPOS_UNDEFINED,
 		SDL_WINDOWPOS_UNDEFINED,
 		640,
-		480,
+		400,
 		SDL_WINDOW_OPENGL
 	);
 	if (mpWindow == nullptr)
@@ -35,63 +35,64 @@ void ieg::Minigin::Initialize()
 
 void ieg::Minigin::LoadGame(ResourceManager* pResourceManager, SceneManager* pSceneManager) const
 {
+	(pResourceManager);
 	Scene* pScene{ pSceneManager->CreateScene("Demo") };
 
-	Font* pFont{ nullptr };
+	//Font* pFont{ nullptr };
 	GameObject* pGameObject{ nullptr };
 	RenderComponent* pRenderComponent{ nullptr };
 	TransformComponent* pTransformComponent{ nullptr };
-	TextComponent* pTextComponent{ nullptr };
-	FpsComponent* pFpsComponent{ nullptr };
+	//TextComponent* pTextComponent{ nullptr };
+	//FpsComponent* pFpsComponent{ nullptr };
 
 	pGameObject = new GameObject{ pResourceManager };
 	pTransformComponent = new TransformComponent{};
 	pRenderComponent = new RenderComponent{ pResourceManager };
-	pRenderComponent->SetTexture("background.jpg");
+	pRenderComponent->SetTexture("StartScreen.png");
 	pRenderComponent->SetTransformComponent(pTransformComponent);
 	pGameObject->Add(pTransformComponent);
 	pGameObject->Add(pRenderComponent);
 	pScene->Add(pGameObject);
 
-	pGameObject = new GameObject{ pResourceManager };
-	pTransformComponent = new TransformComponent{};
-	pTransformComponent->SetPosition(216.f, 180.f, 0.f);
-	pRenderComponent = new RenderComponent{ pResourceManager };
-	pRenderComponent->SetTexture("logo.png");
-	pRenderComponent->SetTransformComponent(pTransformComponent);
-	pGameObject->Add(pTransformComponent);
-	pGameObject->Add(pRenderComponent);
-	pScene->Add(pGameObject);
+	//pGameObject = new GameObject{ pResourceManager };
+	//pTransformComponent = new TransformComponent{};
+	//pTransformComponent->SetPosition(216.f, 180.f, 0.f);
+	//pRenderComponent = new RenderComponent{ pResourceManager };
+	//pRenderComponent->SetTexture("logo.png");
+	//pRenderComponent->SetTransformComponent(pTransformComponent);
+	//pGameObject->Add(pTransformComponent);
+	//pGameObject->Add(pRenderComponent);
+	//pScene->Add(pGameObject);
 
-	pGameObject = new GameObject{ pResourceManager };
-	pTransformComponent = new TransformComponent{};
-	pTransformComponent->SetPosition(80.f, 20.f, 0.f);
-	pRenderComponent = new RenderComponent{ pResourceManager };
-	pRenderComponent->SetTransformComponent(pTransformComponent);
-	pFont = pResourceManager->LoadFont("Lingua.otf", 36);
-	pTextComponent = new TextComponent{ pFont };
-	pTextComponent->SetRenderComponent(pRenderComponent);
-	pTextComponent->SetText("Programming 4 Assignment");
-	pGameObject->Add(pTransformComponent);
-	pGameObject->Add(pRenderComponent);
-	pGameObject->Add(pTextComponent);
-	pScene->Add(pGameObject);
+	//pGameObject = new GameObject{ pResourceManager };
+	//pTransformComponent = new TransformComponent{};
+	//pTransformComponent->SetPosition(80.f, 20.f, 0.f);
+	//pRenderComponent = new RenderComponent{ pResourceManager };
+	//pRenderComponent->SetTransformComponent(pTransformComponent);
+	//pFont = pResourceManager->LoadFont("Lingua.otf", 36);
+	//pTextComponent = new TextComponent{ pFont };
+	//pTextComponent->SetRenderComponent(pRenderComponent);
+	//pTextComponent->SetText("Programming 4 Assignment");
+	//pGameObject->Add(pTransformComponent);
+	//pGameObject->Add(pRenderComponent);
+	//pGameObject->Add(pTextComponent);
+	//pScene->Add(pGameObject);
 
-	pGameObject = new GameObject{ pResourceManager };
-	pTransformComponent = new TransformComponent{};
-	pTransformComponent->SetPosition(10.f, 10.f, 0.f);
-	pRenderComponent = new RenderComponent{ pResourceManager };
-	pRenderComponent->SetTransformComponent(pTransformComponent);
-	pFont = pResourceManager->LoadFont("Lingua.otf", 24);
-	pTextComponent = new TextComponent{ pFont };
-	pTextComponent->SetRenderComponent(pRenderComponent);
-	pFpsComponent = new FpsComponent{};
-	pFpsComponent->SetTextComponent(pTextComponent);
-	pGameObject->Add(pTransformComponent);
-	pGameObject->Add(pRenderComponent);
-	pGameObject->Add(pTextComponent);
-	pGameObject->Add(pFpsComponent);
-	pScene->Add(pGameObject);
+	//pGameObject = new GameObject{ pResourceManager };
+	//pTransformComponent = new TransformComponent{};
+	//pTransformComponent->SetPosition(10.f, 10.f, 0.f);
+	//pRenderComponent = new RenderComponent{ pResourceManager };
+	//pRenderComponent->SetTransformComponent(pTransformComponent);
+	//pFont = pResourceManager->LoadFont("Lingua.otf", 24);
+	//pTextComponent = new TextComponent{ pFont };
+	//pTextComponent->SetRenderComponent(pRenderComponent);
+	//pFpsComponent = new FpsComponent{};
+	//pFpsComponent->SetTextComponent(pTextComponent);
+	//pGameObject->Add(pTransformComponent);
+	//pGameObject->Add(pRenderComponent);
+	//pGameObject->Add(pTextComponent);
+	//pGameObject->Add(pFpsComponent);
+	//pScene->Add(pGameObject);
 }
 
 void ieg::Minigin::Cleanup()
