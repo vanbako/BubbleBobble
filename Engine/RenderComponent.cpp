@@ -4,8 +4,9 @@
 #include "ResourceManager.h"
 #include "Renderer.h"
 
-ieg::RenderComponent::RenderComponent(ResourceManager* pResourceManager)
+ieg::RenderComponent::RenderComponent(ResourceManager* pResourceManager, Renderer* pRenderer)
 	: mpResourceManager{ pResourceManager }
+	, mpRenderer{ pRenderer }
 	, mpTransformComponent{ nullptr }
 	, mpTexture{ nullptr }
 {
@@ -16,7 +17,7 @@ void ieg::RenderComponent::Render() const
 	if (mpTransformComponent != nullptr && mpTexture != nullptr)
 	{
 		const auto pos{ mpTransformComponent->GetPosition() };
-		Renderer::GetInstance().RenderTexture(*mpTexture, pos.x, pos.y);
+		mpRenderer->RenderTexture(*mpTexture, pos.x, pos.y);
 	}
 }
 
@@ -27,7 +28,7 @@ void ieg::RenderComponent::SetTransformComponent(TransformComponent* pTransformC
 
 void ieg::RenderComponent::SetTexture(const std::string& file)
 {
-	mpTexture = mpResourceManager->LoadTexture(file);
+	mpTexture = mpResourceManager->LoadTexture(file, mpRenderer);
 }
 
 void ieg::RenderComponent::SetTexture(Texture2D* pTexture)

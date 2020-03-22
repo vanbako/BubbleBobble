@@ -1,5 +1,4 @@
 #pragma once
-#include "Singleton.h"
 
 struct SDL_Window;
 struct SDL_Renderer;
@@ -10,9 +9,15 @@ namespace ieg
 	class SceneManager;
 
 	class Renderer final
-		: public Singleton<Renderer>
 	{
 	public:
+		explicit Renderer() = default;
+		~Renderer() = default;
+		Renderer(const Renderer&) = delete;
+		Renderer(Renderer&&) = delete;
+		Renderer& operator= (const Renderer&) = delete;
+		Renderer& operator= (const Renderer&&) = delete;
+
 		void Init(SDL_Window* window);
 		void Render(SceneManager* pSceneManager) const;
 		void Destroy();

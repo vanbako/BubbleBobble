@@ -5,13 +5,19 @@ namespace ieg
 {
 	class Texture2D;
 	class Font;
+	class Renderer;
 
 	class ResourceManager final
 	{
 	public:
-		ResourceManager(const std::string& dataPath);
+		explicit ResourceManager(const std::string& dataPath);
 		~ResourceManager();
-		Texture2D* LoadTexture(const std::string& file);
+		ResourceManager(const ResourceManager&) = delete;
+		ResourceManager(ResourceManager&&) = delete;
+		ResourceManager& operator= (const ResourceManager&) = delete;
+		ResourceManager& operator= (const ResourceManager&&) = delete;
+
+		Texture2D* LoadTexture(const std::string& file, Renderer* pRenderer);
 		void RemoveTexture(Texture2D* pTexture);
 		void AddTexture(Texture2D* pTexture);
 		Font* LoadFont(const std::string& file, unsigned int size);

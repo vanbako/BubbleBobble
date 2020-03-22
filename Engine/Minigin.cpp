@@ -18,32 +18,19 @@ const int ieg::Minigin::MsPerFrame{ 16 }; //16 for 60 fps, 33 for 30 fps
 
 ieg::Minigin::Minigin()
 	: mpWindow{ nullptr }
-	, mpResourceManager{ nullptr }
-	, mpSceneManager{ nullptr }
-	, mpInputManager{ nullptr }
+	, mpResourceManager{ new ResourceManager{ "../Data/"} }
+	, mpSceneManager{ new SceneManager{} }
+	, mpInputManager{ new InputManager{} }
+	, mpRenderer{ new Renderer{} }
 {
-	mpResourceManager = new ResourceManager{ "../Data/"};
-	//if (mpResourceManager == nullptr)
-		// TODO: replace by logger line
-		//throw std::runtime_error("Could not allocate ResourceManager");
-	mpSceneManager = new SceneManager{};
-	//if (mpSceneManager == nullptr)
-		// TODO: replace by logger line
-		//throw std::runtime_error("Could not allocate SceneManager");
-	mpInputManager = new InputManager{};
-	//if (mpInputManager == nullptr)
-		// TODO: replace by logger line
-		//throw std::runtime_error("Could not allocate InputManager");
 }
 
 ieg::Minigin::~Minigin()
 {
-	if (mpResourceManager != nullptr)
-		delete mpResourceManager;
-	if (mpSceneManager != nullptr)
-		delete mpSceneManager;
-	if (mpInputManager != nullptr)
-		delete mpInputManager;
+	delete mpResourceManager;
+	delete mpSceneManager;
+	delete mpInputManager;
+	delete mpRenderer;
 }
 
 ieg::ResourceManager* ieg::Minigin::GetResourceManager()
@@ -59,6 +46,11 @@ ieg::SceneManager* ieg::Minigin::GetSceneManager()
 ieg::InputManager* ieg::Minigin::GetInputManager()
 {
 	return mpInputManager;
+}
+
+ieg::Renderer* ieg::Minigin::GetRenderer()
+{
+	return mpRenderer;
 }
 
 bool ieg::Minigin::Initialize()
@@ -85,8 +77,7 @@ bool ieg::Minigin::Initialize()
 		//throw std::runtime_error(std::string("SDL_CreateWindow Error: ") + SDL_GetError());
 		return false;
 
-	// TODO: remove singleton
-	Renderer::GetInstance().Init(mpWindow);
+	mpRenderer->Init(mpWindow);
 	return true;
 }
 
@@ -153,7 +144,7 @@ bool ieg::Minigin::Initialize()
 
 void ieg::Minigin::Cleanup()
 {
-	Renderer::GetInstance().Destroy();
+	mpRenderer->Destroy();
 	SDL_DestroyWindow(mpWindow);
 	mpWindow = nullptr;
 	SDL_Quit();
@@ -162,7 +153,6 @@ void ieg::Minigin::Cleanup()
 void ieg::Minigin::Run()
 {
 
-	auto& renderer{ Renderer::GetInstance() };
 	InputManager inputManager{};
 
 	bool doContinue{ true };
@@ -178,7 +168,7 @@ void ieg::Minigin::Run()
 
 		doContinue = inputManager.ProcessInput();
 		mpSceneManager->Update(deltaTime);
-		renderer.Render(mpSceneManager);
+		mpRenderer->Render(mpSceneManager);
 
 		endTime = std::chrono::high_resolution_clock::now();
 		sleepTime = std::chrono::duration_cast<std::chrono::duration<float>>(startTime + std::chrono::milliseconds(MsPerFrame) - endTime);

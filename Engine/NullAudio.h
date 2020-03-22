@@ -9,8 +9,12 @@ namespace ieg
 	public:
 		explicit NullAudio() = default;
 		~NullAudio() = default;
+		NullAudio(const NullAudio&) = delete;
+		NullAudio(NullAudio&&) = delete;
+		NullAudio& operator= (const NullAudio&) = delete;
+		NullAudio& operator= (const NullAudio&&) = delete;
 
-		virtual void PlaySound(int soundId) override { (soundId); };
-		virtual void StopSound(int soundId) override { (soundId);  };
+		virtual void PlaySound(size_t soundId) override { (soundId); };
+		virtual void StopSound(size_t soundId) override { (soundId);  };
 	};
 }

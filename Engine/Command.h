@@ -7,7 +7,13 @@ namespace ieg
 	class Command
 	{
 	public:
+		explicit Command() = default;
 		virtual ~Command() = default;
+		Command(const Command&) = delete;
+		Command(Command&&) = delete;
+		Command& operator= (const Command&) = delete;
+		Command& operator= (const Command&&) = delete;
+
 		virtual void Execute(Component* pActor) = 0;
 	};
 }

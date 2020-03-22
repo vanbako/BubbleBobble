@@ -5,10 +5,10 @@ namespace ieg
 {
 	class SceneObject;
 
-	class Scene
+	class Scene final
 	{
-		friend Scene* SceneManager::CreateScene(const std::string& name);
 	public:
+		explicit Scene(const std::string& name);
 		~Scene();
 		Scene(const Scene& other) = delete;
 		Scene(Scene&& other) = delete;
@@ -19,11 +19,7 @@ namespace ieg
 		void Update(const float deltaTime);
 		void Render() const;
 	private:
-		explicit Scene(const std::string& name);
-
 		std::string mName;
 		std::vector<SceneObject*> mpObjects;
-
-		static unsigned int mIdCounter;
 	};
 }

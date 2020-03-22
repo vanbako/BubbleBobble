@@ -44,7 +44,7 @@ ieg::RegularAudio::~RegularAudio()
 		mpFmodSystem->release();
 }
 
-void ieg::RegularAudio::PlaySound(int soundId)
+void ieg::RegularAudio::PlaySound(size_t soundId)
 {
 	if (mpFmodSystem != nullptr && soundId < mpSounds.size())
 	{
@@ -54,7 +54,7 @@ void ieg::RegularAudio::PlaySound(int soundId)
 	}
 }
 
-void ieg::RegularAudio::StopSound(int soundId)
+void ieg::RegularAudio::StopSound(size_t soundId)
 {
 	if (mpFmodSystem != nullptr && soundId < mpSounds.size())
 	{

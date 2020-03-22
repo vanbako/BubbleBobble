@@ -7,10 +7,12 @@ namespace ieg
 	class ResourceManager;
 	class SceneManager;
 	class InputManager;
+	class Renderer;
+
 	class Minigin final
 	{
 	public:
-		Minigin();
+		explicit Minigin();
 		~Minigin();
 		Minigin(const Minigin & other) = delete;
 		Minigin(Minigin && other) = delete;
@@ -20,6 +22,7 @@ namespace ieg
 		ResourceManager* GetResourceManager();
 		SceneManager* GetSceneManager();
 		InputManager* GetInputManager();
+		Renderer* GetRenderer();
 		bool Initialize();
 		//void LoadGame() const;
 		void Cleanup();
@@ -30,5 +33,6 @@ namespace ieg
 		ResourceManager* mpResourceManager;
 		SceneManager* mpSceneManager;
 		InputManager* mpInputManager;
+		Renderer* mpRenderer;
 	};
 }

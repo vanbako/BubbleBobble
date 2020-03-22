@@ -6,7 +6,7 @@ namespace ieg
 	{
 	public:
 		virtual ~Audio() = default;
-		virtual void PlaySound(int soundId) = 0;
-		virtual void StopSound(int soundId) = 0;
+		virtual void PlaySound(size_t soundId) = 0;
+		virtual void StopSound(size_t soundId) = 0;
 	};
 }

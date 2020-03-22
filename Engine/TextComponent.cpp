@@ -7,8 +7,9 @@
 #include "RenderComponent.h"
 #include "Texture2D.h"
 
-ieg::TextComponent::TextComponent(const Font* pFont)
+ieg::TextComponent::TextComponent(const Font* pFont, Renderer* pRenderer)
 	: mpFont{ pFont }
+	, mpRenderer{ pRenderer }
 	, mNeedsUpdate{ true }
 	, mText{}
 	, mpRenderComponent{ nullptr }
@@ -24,7 +25,7 @@ void ieg::TextComponent::Update(const float deltaTime)
 		const auto pSurf{ TTF_RenderText_Blended(mpFont->GetFont(), mText.c_str(), color) };
 		if (pSurf == nullptr)
 			throw std::runtime_error(std::string("Render text failed: ") + SDL_GetError());
-		auto pTexture{ SDL_CreateTextureFromSurface(Renderer::GetInstance().GetSDLRenderer(), pSurf) };
+		auto pTexture{ SDL_CreateTextureFromSurface(mpRenderer->GetSDLRenderer(), pSurf) };
 		if (pTexture == nullptr)
 			throw std::runtime_error(std::string("Create text texture from surface failed: ") + SDL_GetError());
 		SDL_FreeSurface(pSurf);

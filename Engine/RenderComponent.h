@@ -7,12 +7,13 @@ namespace ieg
 	class Texture2D;
 	class TransformComponent;
 	class ResourceManager;
+	class Renderer;
 
 	class RenderComponent
 		: public Component
 	{
 	public:
-		explicit RenderComponent(ResourceManager* pResourceManager);
+		explicit RenderComponent(ResourceManager* pResourceManager, Renderer* pRenderer);
 		~RenderComponent() = default;
 
 		void Update(const float deltaTime) { (deltaTime); };
@@ -23,6 +24,7 @@ namespace ieg
 		void SetTexture(Texture2D* pTexture);
 	private:
 		ResourceManager* mpResourceManager;
+		Renderer* mpRenderer;
 		TransformComponent* mpTransformComponent;
 		Texture2D* mpTexture;
 	};

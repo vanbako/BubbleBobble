@@ -31,10 +31,10 @@ ieg::ResourceManager::~ResourceManager()
 		delete pFont;
 }
 
-ieg::Texture2D* ieg::ResourceManager::LoadTexture(const std::string& file)
+ieg::Texture2D* ieg::ResourceManager::LoadTexture(const std::string& file, Renderer* pRenderer)
 {
 	const std::string fullPath{ mDataPath + file };
-	SDL_Texture* pTexture{ IMG_LoadTexture(Renderer::GetInstance().GetSDLRenderer(), fullPath.c_str()) };
+	SDL_Texture* pTexture{ IMG_LoadTexture(pRenderer->GetSDLRenderer(), fullPath.c_str()) };
 	if (pTexture == nullptr)
 		throw std::runtime_error(std::string("Failed to load texture: ") + SDL_GetError());
 	Texture2D* pTexture2D{ new Texture2D{ pTexture } };

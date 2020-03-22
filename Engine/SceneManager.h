@@ -3,6 +3,7 @@
 namespace ieg
 {
 	class Scene;
+
 	class SceneManager final
 	{
 	public:

@@ -11,9 +11,13 @@ namespace ieg
 	public:
 		explicit MutedAudio() = default;
 		~MutedAudio() = default;
+		MutedAudio(const MutedAudio&) = delete;
+		MutedAudio(MutedAudio&&) = delete;
+		MutedAudio& operator= (const MutedAudio&) = delete;
+		MutedAudio& operator= (const MutedAudio&&) = delete;
 
-		virtual void PlaySound(int soundId) override;
-		virtual void StopSound(int soundId) override;
+		virtual void PlaySound(size_t soundId) override;
+		virtual void StopSound(size_t soundId) override;
 	private:
 		std::ofstream mLogFile;
 	};

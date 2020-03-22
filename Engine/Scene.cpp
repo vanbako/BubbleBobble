@@ -4,8 +4,6 @@
 
 using namespace ieg;
 
-unsigned int Scene::mIdCounter{ 0 };
-
 Scene::Scene(const std::string& name)
 	: mName(name)
 	, mpObjects{}

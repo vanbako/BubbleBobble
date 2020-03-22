@@ -33,7 +33,7 @@ void ieg::BubbleBobble::AddScenes()
 
 	pGameObject = new GameObject{ mpEngine->GetResourceManager() };
 	pTransformComponent = new TransformComponent{};
-	pRenderComponent = new RenderComponent{ mpEngine->GetResourceManager() };
+	pRenderComponent = new RenderComponent{ mpEngine->GetResourceManager(), mpEngine->GetRenderer() };
 	pRenderComponent->SetTexture("StartScreen.png");
 	pRenderComponent->SetTransformComponent(pTransformComponent);
 	pGameObject->Add(pTransformComponent);
@@ -43,10 +43,10 @@ void ieg::BubbleBobble::AddScenes()
 	pGameObject = new GameObject{ mpEngine->GetResourceManager() };
 	pTransformComponent = new TransformComponent{};
 	pTransformComponent->SetPosition(10.f, 10.f, 0.f);
-	pRenderComponent = new RenderComponent{ mpEngine->GetResourceManager() };
+	pRenderComponent = new RenderComponent{ mpEngine->GetResourceManager(), mpEngine->GetRenderer() };
 	pRenderComponent->SetTransformComponent(pTransformComponent);
 	pFont = mpEngine->GetResourceManager()->LoadFont("Lingua.otf", 24);
-	pTextComponent = new TextComponent{ pFont };
+	pTextComponent = new TextComponent{ pFont, mpEngine->GetRenderer() };
 	pTextComponent->SetRenderComponent(pRenderComponent);
 	pFpsComponent = new FpsComponent{};
 	pFpsComponent->SetTextComponent(pTextComponent);

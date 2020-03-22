@@ -1,5 +1,4 @@
-#ifndef PCH_H
-#define PCH_H
+#pragma once
 
 #include <iostream>
 #include <sstream>
@@ -7,5 +6,3 @@
 
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
-
-#endif //PCH_H
