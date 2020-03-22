@@ -6,24 +6,24 @@
 
 void ieg::Renderer::Init(SDL_Window* window)
 {
-	mpRenderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-	if (mpRenderer == nullptr)
+	mpSDLRenderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+	if (mpSDLRenderer == nullptr)
 		throw std::runtime_error(std::string("SDL_CreateRenderer Error: ") + SDL_GetError());
 }
 
 void ieg::Renderer::Render(SceneManager* pSceneManager) const
 {
-	SDL_RenderClear(mpRenderer);
+	SDL_RenderClear(mpSDLRenderer);
 	pSceneManager->Render();
-	SDL_RenderPresent(mpRenderer);
+	SDL_RenderPresent(mpSDLRenderer);
 }
 
 void ieg::Renderer::Destroy()
 {
-	if (mpRenderer != nullptr)
+	if (mpSDLRenderer != nullptr)
 	{
-		SDL_DestroyRenderer(mpRenderer);
-		mpRenderer = nullptr;
+		SDL_DestroyRenderer(mpSDLRenderer);
+		mpSDLRenderer = nullptr;
 	}
 }
 
@@ -48,5 +48,5 @@ void ieg::Renderer::RenderTexture(const Texture2D& texture, const float x, const
 
 SDL_Renderer* ieg::Renderer::GetSDLRenderer() const
 {
-	return mpRenderer;
+	return mpSDLRenderer;
 }

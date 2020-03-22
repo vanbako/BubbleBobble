@@ -14,13 +14,66 @@
 #include "TextComponent.h"
 #include "FpsComponent.h"
 
-void ieg::Minigin::Initialize()
+const int ieg::Minigin::MsPerFrame{ 16 }; //16 for 60 fps, 33 for 30 fps
+
+ieg::Minigin::Minigin()
+	: mpWindow{ nullptr }
+	, mpResourceManager{ nullptr }
+	, mpSceneManager{ nullptr }
+	, mpInputManager{ nullptr }
 {
+	mpResourceManager = new ResourceManager{ "../Data/"};
+	//if (mpResourceManager == nullptr)
+		// TODO: replace by logger line
+		//throw std::runtime_error("Could not allocate ResourceManager");
+	mpSceneManager = new SceneManager{};
+	//if (mpSceneManager == nullptr)
+		// TODO: replace by logger line
+		//throw std::runtime_error("Could not allocate SceneManager");
+	mpInputManager = new InputManager{};
+	//if (mpInputManager == nullptr)
+		// TODO: replace by logger line
+		//throw std::runtime_error("Could not allocate InputManager");
+}
+
+ieg::Minigin::~Minigin()
+{
+	if (mpResourceManager != nullptr)
+		delete mpResourceManager;
+	if (mpSceneManager != nullptr)
+		delete mpSceneManager;
+	if (mpInputManager != nullptr)
+		delete mpInputManager;
+}
+
+ieg::ResourceManager* ieg::Minigin::GetResourceManager()
+{
+	return mpResourceManager;
+}
+
+ieg::SceneManager* ieg::Minigin::GetSceneManager()
+{
+	return mpSceneManager;
+}
+
+ieg::InputManager* ieg::Minigin::GetInputManager()
+{
+	return mpInputManager;
+}
+
+bool ieg::Minigin::Initialize()
+{
+	if (mpResourceManager == nullptr ||
+		mpSceneManager == nullptr ||
+		mpInputManager == nullptr)
+		return false;
 	if (SDL_Init(SDL_INIT_VIDEO) != 0)
-		throw std::runtime_error(std::string("SDL_Init Error: ") + SDL_GetError());
+		// TODO: Add logger line
+		//throw std::runtime_error(std::string("SDL_Init Error: ") + SDL_GetError());
+		return false;
 
 	mpWindow = SDL_CreateWindow(
-		"Programming 4 assignment",
+		"Bubble Bobble",
 		SDL_WINDOWPOS_UNDEFINED,
 		SDL_WINDOWPOS_UNDEFINED,
 		640,
@@ -28,31 +81,34 @@ void ieg::Minigin::Initialize()
 		SDL_WINDOW_OPENGL
 	);
 	if (mpWindow == nullptr)
-		throw std::runtime_error(std::string("SDL_CreateWindow Error: ") + SDL_GetError());
+		// TODO: Add logger line
+		//throw std::runtime_error(std::string("SDL_CreateWindow Error: ") + SDL_GetError());
+		return false;
 
+	// TODO: remove singleton
 	Renderer::GetInstance().Init(mpWindow);
+	return true;
 }
 
-void ieg::Minigin::LoadGame(ResourceManager* pResourceManager, SceneManager* pSceneManager) const
-{
-	(pResourceManager);
-	Scene* pScene{ pSceneManager->CreateScene("Demo") };
+//void ieg::Minigin::LoadGame() const
+//{
+//	Scene* pScene{ mpSceneManager->CreateScene("Demo") };
 
 	//Font* pFont{ nullptr };
-	GameObject* pGameObject{ nullptr };
-	RenderComponent* pRenderComponent{ nullptr };
-	TransformComponent* pTransformComponent{ nullptr };
+	//GameObject* pGameObject{ nullptr };
+	//RenderComponent* pRenderComponent{ nullptr };
+	//TransformComponent* pTransformComponent{ nullptr };
 	//TextComponent* pTextComponent{ nullptr };
 	//FpsComponent* pFpsComponent{ nullptr };
 
-	pGameObject = new GameObject{ pResourceManager };
-	pTransformComponent = new TransformComponent{};
-	pRenderComponent = new RenderComponent{ pResourceManager };
-	pRenderComponent->SetTexture("StartScreen.png");
-	pRenderComponent->SetTransformComponent(pTransformComponent);
-	pGameObject->Add(pTransformComponent);
-	pGameObject->Add(pRenderComponent);
-	pScene->Add(pGameObject);
+	//pGameObject = new GameObject{ mpResourceManager };
+	//pTransformComponent = new TransformComponent{};
+	//pRenderComponent = new RenderComponent{ mpResourceManager };
+	//pRenderComponent->SetTexture("StartScreen.png");
+	//pRenderComponent->SetTransformComponent(pTransformComponent);
+	//pGameObject->Add(pTransformComponent);
+	//pGameObject->Add(pRenderComponent);
+	//pScene->Add(pGameObject);
 
 	//pGameObject = new GameObject{ pResourceManager };
 	//pTransformComponent = new TransformComponent{};
@@ -93,7 +149,7 @@ void ieg::Minigin::LoadGame(ResourceManager* pResourceManager, SceneManager* pSc
 	//pGameObject->Add(pTextComponent);
 	//pGameObject->Add(pFpsComponent);
 	//pScene->Add(pGameObject);
-}
+//}
 
 void ieg::Minigin::Cleanup()
 {
@@ -105,30 +161,27 @@ void ieg::Minigin::Cleanup()
 
 void ieg::Minigin::Run()
 {
-	ResourceManager resourceManager{ "../Data/" };
-	SceneManager sceneManager{};
-	Initialize();
-
-	LoadGame(&resourceManager, &sceneManager);
 
 	auto& renderer{ Renderer::GetInstance() };
-	auto& input{ InputManager::GetInstance() };
+	InputManager inputManager{};
 
-	auto lastTime{ std::chrono::high_resolution_clock::now() };
 	bool doContinue{ true };
+	std::chrono::steady_clock::time_point lastTime{};
+	std::chrono::steady_clock::time_point startTime{ std::chrono::high_resolution_clock::now() };
+	std::chrono::steady_clock::time_point endTime{};
+	std::chrono::duration<float> sleepTime{};
 	while (doContinue)
 	{
-		const auto currTime{ std::chrono::high_resolution_clock::now() };
-		const auto deltaTime{ std::chrono::duration<float>(currTime - lastTime).count() };
+		lastTime = startTime;
+		startTime = std::chrono::high_resolution_clock::now();
+		const float deltaTime{ std::chrono::duration<float>(startTime - lastTime).count() };
 
-		doContinue = input.ProcessInput();
-		sceneManager.Update(deltaTime);
-		renderer.Render(&sceneManager);
+		doContinue = inputManager.ProcessInput();
+		mpSceneManager->Update(deltaTime);
+		renderer.Render(mpSceneManager);
 
-		auto sleepTime{ std::chrono::duration_cast<std::chrono::duration<float>>(lastTime + std::chrono::milliseconds(MsPerFrame) - std::chrono::high_resolution_clock::now()) };
+		endTime = std::chrono::high_resolution_clock::now();
+		sleepTime = std::chrono::duration_cast<std::chrono::duration<float>>(startTime + std::chrono::milliseconds(MsPerFrame) - endTime);
 		std::this_thread::sleep_for(sleepTime);
-		lastTime = currTime;
 	}
-
-	Cleanup();
 }

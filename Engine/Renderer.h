@@ -22,6 +22,6 @@ namespace ieg
 
 		SDL_Renderer* GetSDLRenderer() const;
 	private:
-		SDL_Renderer* mpRenderer{};
+		SDL_Renderer* mpSDLRenderer{};
 	};
 }
