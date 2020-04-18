@@ -193,13 +193,19 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\x64\*.dll" "$(OutputPath)" /R /Y</Com
     <ClInclude Include="ActorComponent.h" />
     <ClInclude Include="BubbleBobble.h" />
     <ClInclude Include="FireCommand.h" />
+    <ClInclude Include="IntroComponent.h" />
     <ClInclude Include="JumpCommand.h" />
+    <ClInclude Include="LeftCommand.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="RightCommand.h" />
+    <ClInclude Include="StartCommand.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BubbleBobble.cpp" />
     <ClCompile Include="FireCommand.cpp" />
+    <ClCompile Include="IntroComponent.cpp" />
     <ClCompile Include="JumpCommand.cpp" />
+    <ClCompile Include="LeftCommand.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -207,6 +213,8 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\x64\*.dll" "$(OutputPath)" /R /Y</Com
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="RightCommand.cpp" />
+    <ClCompile Include="StartCommand.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Engine\Engine.vcxproj">

@@ -1,9 +1,14 @@
 #pragma once
 #include "SceneManager.h"
+#include "GameObject.h"
 
 namespace ieg
 {
 	class SceneObject;
+	class InputManager;
+	class ResourceManager;
+	class Renderer;
+	class GameObject;
 
 	class Scene final
 	{
@@ -15,11 +20,29 @@ namespace ieg
 		Scene& operator=(const Scene& other) = delete;
 		Scene& operator=(Scene&& other) = delete;
 
-		void Add(SceneObject* pObject);
+		template <class T>
+		T* CreateObject(ResourceManager* pRes)
+		{
+			T* pSceneObject{ new T{} };
+			if (pSceneObject != nullptr)
+				mpObjects.push_back(pSceneObject);
+			return pSceneObject;
+		}
+		template <>
+		GameObject* CreateObject(ResourceManager* pRes)
+		{
+			GameObject* pSceneObject{ new GameObject{ pRes } };
+			if (pSceneObject != nullptr)
+				mpObjects.push_back(pSceneObject);
+			return pSceneObject;
+		}
 		void Update(const float deltaTime);
 		void Render() const;
+
+		InputManager* GetInputManager();
 	private:
 		std::string mName;
+		InputManager* mpInputManager;
 		std::vector<SceneObject*> mpObjects;
 	};
 }

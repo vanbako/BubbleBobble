@@ -2,10 +2,10 @@
 #include <Windows.h>
 #include <Xinput.h>
 #include <vector>
-#include "InputAction.h"
 
 namespace ieg
 {
+	class InputAction;
 	class Command;
 	class Component;
 
@@ -17,11 +17,13 @@ namespace ieg
 		bool ProcessInput();
 		bool IsKeyboardKeyDown(int key);
 		bool IsGamepadButtonPressed(WORD gamepadButtonCode) const;
-		void HandleInput(Component* pActor);
-		void AddInputAction(const InputAction& inputAction);
+		void HandleInput();
+		InputAction* CreateInputAction();
+		void DeleteInputAction(InputAction* pInputAction);
 	private:
-		XINPUT_STATE mState;
+		static XINPUT_STATE mState;
+		static BYTE mKeyboardState[256];
 		PBYTE mpKeyboardState;
-		std::vector<InputAction> mInputActions;
+		std::vector<InputAction*> mpInputActions;
 	};
 }

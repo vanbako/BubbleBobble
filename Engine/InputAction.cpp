@@ -1,40 +1,55 @@
 #include "pch.h"
 #include "InputAction.h"
 #include "Command.h"
+#include "Component.h"
 
-ieg::InputAction::InputAction(WORD code, int key, Command* pCommand)
+using namespace ieg;
+
+// Only InputManager can create InputAction
+InputAction::InputAction(WORD code, int key, Command* pCommand, Component* pActor)
 	: mGamepadButtonCode{ code }
 	, mKeyboardKey{ key }
 	, mpCommand{ pCommand }
+	, mpActor{ pActor }
 {
 }
 
-void ieg::InputAction::SetGamepadButtonCode(const WORD code)
+void InputAction::SetGamepadButtonCode(const WORD code)
 {
 	mGamepadButtonCode = code;
 }
 
-void ieg::InputAction::SetKeyboardKey(const int key)
+void InputAction::SetKeyboardKey(const int key)
 {
 	mKeyboardKey = key;
 }
 
-void ieg::InputAction::SetCommand(Command* pCommand)
+void InputAction::SetCommand(Command* pCommand)
 {
 	mpCommand = pCommand;
 }
 
-const WORD ieg::InputAction::GetGamepadButtonCode() const
+void ieg::InputAction::SetActor(Component* pComponent)
+{
+	mpActor = pComponent;
+}
+
+const WORD InputAction::GetGamepadButtonCode() const
 {
 	return mGamepadButtonCode;
 }
 
-const int ieg::InputAction::GetKeyboardKey() const
+const int InputAction::GetKeyboardKey() const
 {
 	return mKeyboardKey;
 }
 
-ieg::Command* ieg::InputAction::GetCommand()
+ieg::Command* InputAction::GetCommand()
 {
 	return mpCommand;
+}
+
+ieg::Component* InputAction::GetActor()
+{
+	return mpActor;
 }

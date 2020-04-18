@@ -1,34 +1,54 @@
 #include "pch.h"
 #include "SceneManager.h"
 #include "Scene.h"
+#include "InputManager.h"
 
-ieg::SceneManager::SceneManager()
+using namespace ieg;
+
+SceneManager::SceneManager()
 	: mpScenes{}
+	, mpActiveScene{ nullptr }
 {
 }
 
-ieg::SceneManager::~SceneManager()
+SceneManager::~SceneManager()
 {
-	for (Scene* pScene : mpScenes)
-		delete pScene;
+	for (auto& mapPairScene : mpScenes)
+		delete mapPairScene.second;
 }
 
-ieg::Scene* ieg::SceneManager::CreateScene(const std::string& name)
+Scene* SceneManager::CreateScene(const std::string& name)
 {
 	Scene* pScene{ new Scene{ name } };
 	if (pScene != nullptr)
-		mpScenes.push_back(pScene);
+		mpScenes.emplace(name, pScene);
 	return pScene;
 }
 
-void ieg::SceneManager::Update(const float deltaTime)
+void SceneManager::SetActiveScene(const std::string& name)
 {
-	for (auto pScene : mpScenes)
-		pScene->Update(deltaTime);
+	mpActiveScene = mpScenes.at(name);
 }
 
-void ieg::SceneManager::Render()
+void ieg::SceneManager::SetActiveScene(Scene* pScene)
 {
-	for (const auto pScene : mpScenes)
-		pScene->Render();
+	mpActiveScene = pScene;
+}
+
+bool SceneManager::Update(const float deltaTime)
+{
+	bool end{ false };
+	if (mpActiveScene != nullptr)
+	{
+		end = mpActiveScene->GetInputManager()->ProcessInput();
+		mpActiveScene->GetInputManager()->HandleInput();
+		mpActiveScene->Update(deltaTime);
+	}
+	return end;
+}
+
+void SceneManager::Render()
+{
+	if (mpActiveScene != nullptr)
+		mpActiveScene->Render();
 }

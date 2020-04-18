@@ -3,7 +3,7 @@
 
 namespace ieg
 {
-	class FireCommand
+	class FireCommand final
 		: public Command
 	{
 	public:

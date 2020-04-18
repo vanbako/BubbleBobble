@@ -4,7 +4,9 @@
 #include "ResourceManager.h"
 #include "Renderer.h"
 
-ieg::RenderComponent::RenderComponent(ResourceManager* pResourceManager, Renderer* pRenderer)
+using namespace ieg;
+
+RenderComponent::RenderComponent(ResourceManager* pResourceManager, Renderer* pRenderer)
 	: mpResourceManager{ pResourceManager }
 	, mpRenderer{ pRenderer }
 	, mpTransformComponent{ nullptr }
@@ -12,7 +14,7 @@ ieg::RenderComponent::RenderComponent(ResourceManager* pResourceManager, Rendere
 {
 }
 
-void ieg::RenderComponent::Render() const
+void RenderComponent::Render() const
 {
 	if (mpTransformComponent != nullptr && mpTexture != nullptr)
 	{
@@ -21,17 +23,17 @@ void ieg::RenderComponent::Render() const
 	}
 }
 
-void ieg::RenderComponent::SetTransformComponent(TransformComponent* pTransformComponent)
+void RenderComponent::SetTransformComponent(TransformComponent* pTransformComponent)
 {
 	mpTransformComponent = pTransformComponent;
 }
 
-void ieg::RenderComponent::SetTexture(const std::string& file)
+void RenderComponent::SetTexture(const std::string& file)
 {
 	mpTexture = mpResourceManager->LoadTexture(file, mpRenderer);
 }
 
-void ieg::RenderComponent::SetTexture(Texture2D* pTexture)
+void RenderComponent::SetTexture(Texture2D* pTexture)
 {
 	if (mpTexture != nullptr)
 		mpResourceManager->RemoveTexture(mpTexture);

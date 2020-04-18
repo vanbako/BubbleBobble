@@ -4,32 +4,28 @@
 #include "TransformComponent.h"
 #include "RenderComponent.h"
 
-ieg::GameObject::GameObject(ResourceManager* pRes)
+using namespace ieg;
+
+GameObject::GameObject( ResourceManager* pRes)
 	: mpRes{ pRes }
 	, mpComponents{}
 {
 }
 
-ieg::GameObject::~GameObject()
+GameObject::~GameObject()
 {
 	for (Component* pComponent : mpComponents)
 		delete pComponent;
 }
 
-void ieg::GameObject::Add(Component* pComponent)
-{
-	if (pComponent != nullptr)
-		mpComponents.push_back(pComponent);
-}
-
-void ieg::GameObject::Update(const float deltaTime)
+void GameObject::Update(const float deltaTime)
 {
 	(deltaTime);
 	for (Component* pComponent : mpComponents)
 		pComponent->Update(deltaTime);
 }
 
-void ieg::GameObject::Render() const
+void GameObject::Render() const
 {
 	for (Component* pComponent : mpComponents)
 		pComponent->Render();

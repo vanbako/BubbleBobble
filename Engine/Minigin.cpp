@@ -14,50 +14,43 @@
 #include "TextComponent.h"
 #include "FpsComponent.h"
 
-const int ieg::Minigin::MsPerFrame{ 16 }; //16 for 60 fps, 33 for 30 fps
+using namespace ieg;
 
-ieg::Minigin::Minigin()
+const int Minigin::MsPerFrame{ 16 }; //16 for 60 fps, 33 for 30 fps
+
+Minigin::Minigin()
 	: mpWindow{ nullptr }
 	, mpResourceManager{ new ResourceManager{ "../Data/"} }
 	, mpSceneManager{ new SceneManager{} }
-	, mpInputManager{ new InputManager{} }
 	, mpRenderer{ new Renderer{} }
 {
 }
 
-ieg::Minigin::~Minigin()
+Minigin::~Minigin()
 {
 	delete mpResourceManager;
 	delete mpSceneManager;
-	delete mpInputManager;
 	delete mpRenderer;
 }
 
-ieg::ResourceManager* ieg::Minigin::GetResourceManager()
+ResourceManager* Minigin::GetResourceManager()
 {
 	return mpResourceManager;
 }
 
-ieg::SceneManager* ieg::Minigin::GetSceneManager()
+SceneManager* Minigin::GetSceneManager()
 {
 	return mpSceneManager;
 }
 
-ieg::InputManager* ieg::Minigin::GetInputManager()
-{
-	return mpInputManager;
-}
-
-ieg::Renderer* ieg::Minigin::GetRenderer()
+Renderer* Minigin::GetRenderer()
 {
 	return mpRenderer;
 }
 
-bool ieg::Minigin::Initialize()
+bool Minigin::Initialize()
 {
-	if (mpResourceManager == nullptr ||
-		mpSceneManager == nullptr ||
-		mpInputManager == nullptr)
+	if (mpResourceManager == nullptr || mpSceneManager == nullptr)
 		return false;
 	if (SDL_Init(SDL_INIT_VIDEO) != 0)
 		// TODO: Add logger line
@@ -142,7 +135,7 @@ bool ieg::Minigin::Initialize()
 	//pScene->Add(pGameObject);
 //}
 
-void ieg::Minigin::Cleanup()
+void Minigin::Cleanup()
 {
 	mpRenderer->Destroy();
 	SDL_DestroyWindow(mpWindow);
@@ -150,11 +143,8 @@ void ieg::Minigin::Cleanup()
 	SDL_Quit();
 }
 
-void ieg::Minigin::Run()
+void Minigin::Run()
 {
-
-	InputManager inputManager{};
-
 	bool doContinue{ true };
 	std::chrono::steady_clock::time_point lastTime{};
 	std::chrono::steady_clock::time_point startTime{ std::chrono::high_resolution_clock::now() };
@@ -166,8 +156,7 @@ void ieg::Minigin::Run()
 		startTime = std::chrono::high_resolution_clock::now();
 		const float deltaTime{ std::chrono::duration<float>(startTime - lastTime).count() };
 
-		doContinue = inputManager.ProcessInput();
-		mpSceneManager->Update(deltaTime);
+		doContinue = mpSceneManager->Update(deltaTime);
 		mpRenderer->Render(mpSceneManager);
 
 		endTime = std::chrono::high_resolution_clock::now();

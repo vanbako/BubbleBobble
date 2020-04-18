@@ -4,20 +4,22 @@
 #include "MutedAudio.h"
 #include "NullAudio.h"
 
-ieg::Audio* ieg::ServiceLocator::mpAudioService{ nullptr };
-ieg::NullAudio ieg::ServiceLocator::mNullAudioService{};
+using namespace ieg;
 
-void ieg::ServiceLocator::init()
+Audio* ServiceLocator::mpAudioService{ nullptr };
+NullAudio ServiceLocator::mNullAudioService{};
+
+void ServiceLocator::init()
 {
 	mpAudioService = &mNullAudioService;
 }
 
-ieg::Audio* ieg::ServiceLocator::GetAudio()
+Audio* ServiceLocator::GetAudio()
 {
 	return mpAudioService;
 }
 
-void ieg::ServiceLocator::RegisterAudioService(Audio* audioService)
+void ServiceLocator::RegisterAudioService(Audio* audioService)
 {
 	if (audioService == nullptr)
 		mpAudioService = &mNullAudioService;

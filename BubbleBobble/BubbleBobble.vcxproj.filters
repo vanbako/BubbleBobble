@@ -16,6 +16,9 @@
     <Filter Include="Command">
       <UniqueIdentifier>{3e1903ca-9498-4665-8b41-7d64a1fa1775}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Actor">
+      <UniqueIdentifier>{33caf348-596f-4c32-b75c-d22d9cd28916}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -33,11 +36,20 @@
     <ClCompile Include="BubbleBobble.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="LeftCommand.cpp">
+      <Filter>Command</Filter>
+    </ClCompile>
+    <ClCompile Include="RightCommand.cpp">
+      <Filter>Command</Filter>
+    </ClCompile>
+    <ClCompile Include="StartCommand.cpp">
+      <Filter>Command</Filter>
+    </ClCompile>
+    <ClCompile Include="IntroComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ActorComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="FireCommand.h">
       <Filter>Command</Filter>
     </ClInclude>
@@ -49,6 +61,21 @@
     </ClInclude>
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LeftCommand.h">
+      <Filter>Command</Filter>
+    </ClInclude>
+    <ClInclude Include="RightCommand.h">
+      <Filter>Command</Filter>
+    </ClInclude>
+    <ClInclude Include="StartCommand.h">
+      <Filter>Command</Filter>
+    </ClInclude>
+    <ClInclude Include="ActorComponent.h">
+      <Filter>Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="IntroComponent.h">
+      <Filter>Actor</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

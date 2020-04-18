@@ -1,17 +1,19 @@
 #include "pch.h"
 #include "TransformComponent.h"
 
-ieg::TransformComponent::TransformComponent()
+using namespace ieg;
+
+TransformComponent::TransformComponent()
 	: mPosition{}
 {
 }
 
-const glm::vec3& ieg::TransformComponent::GetPosition() const
+const glm::vec3& TransformComponent::GetPosition() const
 {
 	return mPosition;
 }
 
-void ieg::TransformComponent::SetPosition(const float x, const float y, const float z)
+void TransformComponent::SetPosition(const float x, const float y, const float z)
 {
 	mPosition.x = x;
 	mPosition.y = y;

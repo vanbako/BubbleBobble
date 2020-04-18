@@ -7,7 +7,9 @@
 #include "RenderComponent.h"
 #include "Texture2D.h"
 
-ieg::TextComponent::TextComponent(const Font* pFont, Renderer* pRenderer)
+using namespace ieg;
+
+TextComponent::TextComponent(const Font* pFont, Renderer* pRenderer)
 	: mpFont{ pFont }
 	, mpRenderer{ pRenderer }
 	, mNeedsUpdate{ true }
@@ -16,7 +18,7 @@ ieg::TextComponent::TextComponent(const Font* pFont, Renderer* pRenderer)
 {
 }
 
-void ieg::TextComponent::Update(const float deltaTime)
+void TextComponent::Update(const float deltaTime)
 {
 	(deltaTime);
 	if (mNeedsUpdate && mpRenderComponent != nullptr)
@@ -34,12 +36,12 @@ void ieg::TextComponent::Update(const float deltaTime)
 	}
 }
 
-void ieg::TextComponent::SetRenderComponent(RenderComponent* pRenderComponent)
+void TextComponent::SetRenderComponent(RenderComponent* pRenderComponent)
 {
 	mpRenderComponent = pRenderComponent;
 }
 
-void ieg::TextComponent::SetText(const std::string & text)
+void TextComponent::SetText(const std::string & text)
 {
 	mText = text;
 	mNeedsUpdate = true;

@@ -1,7 +1,9 @@
 #include "pch.h"
 #include "RegularAudio.h"
 
-ieg::RegularAudio::RegularAudio()
+using namespace ieg;
+
+RegularAudio::RegularAudio()
 	: mpFmodSystem{ nullptr }
 	, mpSounds{}
 {
@@ -38,13 +40,13 @@ ieg::RegularAudio::RegularAudio()
 	}
 }
 
-ieg::RegularAudio::~RegularAudio()
+RegularAudio::~RegularAudio()
 {
 	if (mpFmodSystem != nullptr)
 		mpFmodSystem->release();
 }
 
-void ieg::RegularAudio::PlaySound(size_t soundId)
+void RegularAudio::PlaySound(size_t soundId)
 {
 	if (mpFmodSystem != nullptr && soundId < mpSounds.size())
 	{
@@ -54,7 +56,7 @@ void ieg::RegularAudio::PlaySound(size_t soundId)
 	}
 }
 
-void ieg::RegularAudio::StopSound(size_t soundId)
+void RegularAudio::StopSound(size_t soundId)
 {
 	if (mpFmodSystem != nullptr && soundId < mpSounds.size())
 	{

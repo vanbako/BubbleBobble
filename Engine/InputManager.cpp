@@ -1,25 +1,28 @@
 #include "pch.h"
 #include "InputManager.h"
+#include "InputAction.h"
 #include "Command.h"
+#include "Component.h"
 #include <SDL.h>
 
-ieg::InputManager::InputManager()
-	: mState{}
-	, mpKeyboardState{ nullptr }
-	, mInputActions{}
+using namespace ieg;
+
+XINPUT_STATE InputManager::mState{};
+BYTE InputManager::mKeyboardState[256]{};
+
+InputManager::InputManager()
+	: mpInputActions{}
+	, mpKeyboardState{ (PBYTE)&mKeyboardState }
 {
-	mpKeyboardState = new BYTE[256];
-	if (mpKeyboardState == nullptr)
-		throw std::runtime_error("Could not allocate KeyboardState");
 }
 
-ieg::InputManager::~InputManager()
+InputManager::~InputManager()
 {
-	if (mpKeyboardState != nullptr)
-		delete[] mpKeyboardState;
+	for (InputAction* pInputAction : mpInputActions)
+		delete pInputAction;
 }
 
-bool ieg::InputManager::ProcessInput()
+bool InputManager::ProcessInput()
 {
 	XInputGetState(0, &mState);
 	GetKeyboardState(mpKeyboardState);
@@ -37,7 +40,7 @@ bool ieg::InputManager::ProcessInput()
 	return true;
 }
 
-bool ieg::InputManager::IsKeyboardKeyDown(int key)
+bool InputManager::IsKeyboardKeyDown(int key)
 {
 	if (key > 0x07 && key <= 0xFE)
 		return (mpKeyboardState[key] & 0xF0) != 0;
@@ -45,22 +48,37 @@ bool ieg::InputManager::IsKeyboardKeyDown(int key)
 	return false;
 }
 
-bool ieg::InputManager::IsGamepadButtonPressed(WORD gamepadButtonCode) const
+bool InputManager::IsGamepadButtonPressed(WORD gamepadButtonCode) const
 {
 	return (mState.Gamepad.wButtons & gamepadButtonCode) != 0;
 }
 
-void ieg::InputManager::HandleInput(Component* pActor)
+void InputManager::HandleInput()
 {
-	for (auto& inputAction : mInputActions)
-		if (inputAction.GetCommand() != nullptr &&
-			(IsGamepadButtonPressed(inputAction.GetGamepadButtonCode()) ||
-				IsKeyboardKeyDown(inputAction.GetKeyboardKey())
+	for (auto pInputAction : mpInputActions)
+		if (pInputAction->GetCommand() != nullptr &&
+			(IsGamepadButtonPressed(pInputAction->GetGamepadButtonCode()) ||
+				IsKeyboardKeyDown(pInputAction->GetKeyboardKey())
 				))
-			inputAction.GetCommand()->Execute(pActor);
+			pInputAction->GetCommand()->Execute(pInputAction->GetActor());
 }
 
-void ieg::InputManager::AddInputAction(const InputAction& inputAction)
+InputAction* InputManager::CreateInputAction()
 {
-	mInputActions.push_back(inputAction);
+	InputAction* pInputAction{ new InputAction{} };
+	mpInputActions.push_back(pInputAction);
+	return pInputAction;
+}
+
+void InputManager::DeleteInputAction(InputAction* pInputAction)
+{
+	auto itInputAction{ mpInputActions.begin() };
+	while (itInputAction != mpInputActions.end())
+	{
+		if ((*itInputAction) == pInputAction)
+		{
+			mpInputActions.erase(itInputAction);
+			break;
+		}
+	}
 }

@@ -2,7 +2,9 @@
 #include "FireCommand.h"
 #include "ActorComponent.h"
 
-void ieg::FireCommand::Execute(Component* pActor)
+using namespace ieg;
+
+void FireCommand::Execute(Component* pActor)
 {
 	((ActorComponent*)pActor)->Fire();
 }

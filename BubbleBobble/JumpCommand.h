@@ -3,7 +3,7 @@
 
 namespace ieg
 {
-	class JumpCommand
+	class JumpCommand final
 		: public Command
 	{
 	public:

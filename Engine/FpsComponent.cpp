@@ -3,13 +3,15 @@
 #include "TextComponent.h"
 #include <stdio.h>
 
-ieg::FpsComponent::FpsComponent()
+using namespace ieg;
+
+FpsComponent::FpsComponent()
 	: mFps{ 0.f }
 	, mpTextComponent{ nullptr }
 {
 }
 
-void ieg::FpsComponent::Update(const float deltaTime)
+void FpsComponent::Update(const float deltaTime)
 {
 	if (mpTextComponent != nullptr)
 	{
@@ -22,7 +24,7 @@ void ieg::FpsComponent::Update(const float deltaTime)
 	}
 }
 
-void ieg::FpsComponent::SetTextComponent(TextComponent* pTextComponent)
+void FpsComponent::SetTextComponent(TextComponent* pTextComponent)
 {
 	mpTextComponent = pTextComponent;
 	mpTextComponent->SetText(std::to_string(mFps));

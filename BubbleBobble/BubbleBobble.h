@@ -5,10 +5,18 @@ namespace ieg
 {
 	class Scene;
 	class Minigin;
+	class FireCommand;
+	class StartCommand;
 
 	class BubbleBobble final
 	{
 	public:
+		enum class Scenes
+		{
+			Intro = 0,
+			Game,
+			Count
+		};
 		explicit BubbleBobble(Minigin* pEngine);
 		~BubbleBobble();
 
@@ -16,5 +24,7 @@ namespace ieg
 	private:
 		Minigin* mpEngine;
 		std::vector<Scene*> mpScenes;
+		FireCommand* mpFireCommand;
+		StartCommand* mpStartCommand;
 	};
 }

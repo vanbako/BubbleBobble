@@ -13,14 +13,12 @@ namespace ieg
 		explicit ActorComponent() = default;
 		~ActorComponent() = default;
 
-		virtual void Update(const float deltaTime) override { (deltaTime);  };
+		virtual void Update(const float deltaTime) override { (deltaTime); };
 		virtual void Render() const override {};
 
+		void Left() const {};
+		void Right() const {};
 		void Fire() const {};
 		void Jump() const {};
-		void ToggleAudio() {};
-	private:
-		std::vector<Audio*> mpAudio;
-		int mCurrAudio;
 	};
 }

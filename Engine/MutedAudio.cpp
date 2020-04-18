@@ -1,7 +1,9 @@
 #include "pch.h"
 #include "MutedAudio.h"
 
-void ieg::MutedAudio::PlaySound(size_t soundId)
+using namespace ieg;
+
+void MutedAudio::PlaySound(size_t soundId)
 {
 	mLogFile.open("Audio.log", std::ios::out);
 	if (mLogFile)
@@ -12,7 +14,7 @@ void ieg::MutedAudio::PlaySound(size_t soundId)
 	}
 }
 
-void ieg::MutedAudio::StopSound(size_t soundId)
+void MutedAudio::StopSound(size_t soundId)
 {
 	mLogFile.open("Audio.log", std::ios::out);
 	if (mLogFile)

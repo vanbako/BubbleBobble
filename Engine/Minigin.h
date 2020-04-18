@@ -21,7 +21,7 @@ namespace ieg
 
 		ResourceManager* GetResourceManager();
 		SceneManager* GetSceneManager();
-		InputManager* GetInputManager();
+		//InputManager* GetInputManager();
 		Renderer* GetRenderer();
 		bool Initialize();
 		//void LoadGame() const;
@@ -32,7 +32,7 @@ namespace ieg
 		SDL_Window* mpWindow{};
 		ResourceManager* mpResourceManager;
 		SceneManager* mpSceneManager;
-		InputManager* mpInputManager;
+		//InputManager* mpInputManager;
 		Renderer* mpRenderer;
 	};
 }

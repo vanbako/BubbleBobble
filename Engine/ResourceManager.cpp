@@ -7,7 +7,9 @@
 #include "Texture2D.h"
 #include "Font.h"
 
-ieg::ResourceManager::ResourceManager(const std::string& dataPath)
+using namespace ieg;
+
+ResourceManager::ResourceManager(const std::string& dataPath)
 	: mDataPath{ dataPath }
 	, mpTextures{}
 	, mpFonts{}
@@ -23,7 +25,7 @@ ieg::ResourceManager::ResourceManager(const std::string& dataPath)
 		throw std::runtime_error(std::string("Failed to load support for fonts: ") + SDL_GetError());
 }
 
-ieg::ResourceManager::~ResourceManager()
+ResourceManager::~ResourceManager()
 {
 	for (auto& pTexture : mpTextures)
 		delete pTexture;
@@ -31,7 +33,7 @@ ieg::ResourceManager::~ResourceManager()
 		delete pFont;
 }
 
-ieg::Texture2D* ieg::ResourceManager::LoadTexture(const std::string& file, Renderer* pRenderer)
+Texture2D* ResourceManager::LoadTexture(const std::string& file, Renderer* pRenderer)
 {
 	const std::string fullPath{ mDataPath + file };
 	SDL_Texture* pTexture{ IMG_LoadTexture(pRenderer->GetSDLRenderer(), fullPath.c_str()) };
@@ -42,18 +44,18 @@ ieg::Texture2D* ieg::ResourceManager::LoadTexture(const std::string& file, Rende
 	return pTexture2D;
 }
 
-void ieg::ResourceManager::RemoveTexture(Texture2D* pTexture)
+void ResourceManager::RemoveTexture(Texture2D* pTexture)
 {
 	delete pTexture;
 	mpTextures.erase(pTexture);
 }
 
-void ieg::ResourceManager::AddTexture(Texture2D* pTexture)
+void ResourceManager::AddTexture(Texture2D* pTexture)
 {
 	mpTextures.insert(pTexture);
 }
 
-ieg::Font* ieg::ResourceManager::LoadFont(const std::string& file, unsigned int size)
+Font* ResourceManager::LoadFont(const std::string& file, unsigned int size)
 {
 	Font* pFont{ new Font{mDataPath + file, size} };
 	mpFonts.push_back(pFont);

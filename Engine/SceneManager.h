@@ -1,4 +1,5 @@
 #pragma once
+#include <map>
 
 namespace ieg
 {
@@ -10,10 +11,13 @@ namespace ieg
 		SceneManager();
 		~SceneManager();
 		Scene* CreateScene(const std::string& name);
+		void SetActiveScene(const std::string& name);
+		void SetActiveScene(Scene* pScene);
 
-		void Update(const float deltaTime);
+		bool Update(const float deltaTime);
 		void Render();
 	private:
-		std::vector<Scene*> mpScenes;
+		std::map<std::string, Scene*> mpScenes;
+		Scene* mpActiveScene;
 	};
 }

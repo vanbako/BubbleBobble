@@ -4,21 +4,23 @@
 #include "SceneManager.h"
 #include "Texture2D.h"
 
-void ieg::Renderer::Init(SDL_Window* window)
+using namespace ieg;
+
+void Renderer::Init(SDL_Window* window)
 {
 	mpSDLRenderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 	if (mpSDLRenderer == nullptr)
 		throw std::runtime_error(std::string("SDL_CreateRenderer Error: ") + SDL_GetError());
 }
 
-void ieg::Renderer::Render(SceneManager* pSceneManager) const
+void Renderer::Render(SceneManager* pSceneManager) const
 {
 	SDL_RenderClear(mpSDLRenderer);
 	pSceneManager->Render();
 	SDL_RenderPresent(mpSDLRenderer);
 }
 
-void ieg::Renderer::Destroy()
+void Renderer::Destroy()
 {
 	if (mpSDLRenderer != nullptr)
 	{
@@ -27,7 +29,7 @@ void ieg::Renderer::Destroy()
 	}
 }
 
-void ieg::Renderer::RenderTexture(const Texture2D& texture, const float x, const float y) const
+void Renderer::RenderTexture(const Texture2D& texture, const float x, const float y) const
 {
 	SDL_Rect dst{};
 	dst.x = static_cast<int>(x);
@@ -36,7 +38,7 @@ void ieg::Renderer::RenderTexture(const Texture2D& texture, const float x, const
 	SDL_RenderCopy(GetSDLRenderer(), texture.GetSDLTexture(), nullptr, &dst);
 }
 
-void ieg::Renderer::RenderTexture(const Texture2D& texture, const float x, const float y, const float width, const float height) const
+void Renderer::RenderTexture(const Texture2D& texture, const float x, const float y, const float width, const float height) const
 {
 	SDL_Rect dst{};
 	dst.x = static_cast<int>(x);
@@ -46,7 +48,7 @@ void ieg::Renderer::RenderTexture(const Texture2D& texture, const float x, const
 	SDL_RenderCopy(GetSDLRenderer(), texture.GetSDLTexture(), nullptr, &dst);
 }
 
-SDL_Renderer* ieg::Renderer::GetSDLRenderer() const
+SDL_Renderer* Renderer::GetSDLRenderer() const
 {
 	return mpSDLRenderer;
 }

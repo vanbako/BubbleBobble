@@ -2,7 +2,9 @@
 #include <SDL_ttf.h>
 #include "Font.h"
 
-ieg::Font::Font(const std::string& fullPath, unsigned int size)
+using namespace ieg;
+
+Font::Font(const std::string& fullPath, unsigned int size)
 	: mFont{ nullptr }
 	, mSize{ size } 
 {
@@ -11,11 +13,11 @@ ieg::Font::Font(const std::string& fullPath, unsigned int size)
 		throw std::runtime_error(std::string("Failed to load font: ") + SDL_GetError());
 }
 
-ieg::Font::~Font()
+Font::~Font()
 {
 	TTF_CloseFont(mFont);
 }
 
-TTF_Font* ieg::Font::GetFont() const {
+TTF_Font* Font::GetFont() const {
 	return mFont;
 }
