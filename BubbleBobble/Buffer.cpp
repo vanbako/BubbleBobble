@@ -4,8 +4,8 @@
 
 using namespace ieg;
 
-Buffer::Buffer(const std::string& filename)
-	: mFilename{ filename }
+Buffer::Buffer(const std::string* pFilename)
+	: mpFilename{ pFilename }
 	, mSize{ 0 }
 	, mpData{ nullptr }
 {
@@ -21,7 +21,7 @@ bool Buffer::LoadFile()
 {
 	if (mpData == nullptr)
 	{
-		std::ifstream ifile{ mFilename, std::ios::binary | std::ios::ate };
+		std::ifstream ifile{ *mpFilename, std::ios::binary | std::ios::ate };
 		mSize = size_t(ifile.tellg());
 		ifile.seekg(0);
 		mpData = new char[mSize];

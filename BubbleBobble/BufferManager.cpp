@@ -2,6 +2,15 @@
 #include "BufferManager.h"
 #include "Buffer.h"
 #include "BufferAblocks.h"
+#include "BufferAdwarf.h"
+#include "BufferAextend.h"
+#include "BufferAirflow.h"
+#include "BufferApic.h"
+#include "BufferAsecret.h"
+#include "BufferAsprites.h"
+#include "BufferBdata.h"
+#include "BufferBubble.h"
+#include "BufferBubcode.h"
 
 using namespace ieg;
 
@@ -21,7 +30,16 @@ const std::vector<std::string> BufferManager::mFilenames{
 BufferManager::BufferManager()
 	: mpBuffers{}
 {
-	mpBuffers.push_back(new BufferAblocks{ mFilenames[size_t(EnumBuffer::Ablocks)] });
+	mpBuffers.push_back(new BufferAblocks{ &mFilenames[size_t(EnumBuffer::Ablocks)] });
+	mpBuffers.push_back(new BufferAdwarf{ &mFilenames[size_t(EnumBuffer::Adwarf)] });
+	mpBuffers.push_back(new BufferAextend{ &mFilenames[size_t(EnumBuffer::Aextend)] });
+	mpBuffers.push_back(new BufferAirflow{ &mFilenames[size_t(EnumBuffer::Airflow)] });
+	mpBuffers.push_back(new BufferAirflow{ &mFilenames[size_t(EnumBuffer::Apic)] });
+	mpBuffers.push_back(new BufferAsecret{ &mFilenames[size_t(EnumBuffer::Asecret)] });
+	mpBuffers.push_back(new BufferAsprites{ &mFilenames[size_t(EnumBuffer::Asprites)] });
+	mpBuffers.push_back(new BufferBdata{ &mFilenames[size_t(EnumBuffer::Bdata)] });
+	mpBuffers.push_back(new BufferBubble{ &mFilenames[size_t(EnumBuffer::Bubble)] });
+	mpBuffers.push_back(new BufferBubcode{ &mFilenames[size_t(EnumBuffer::Bubcode)] });
 }
 
 BufferManager::~BufferManager()

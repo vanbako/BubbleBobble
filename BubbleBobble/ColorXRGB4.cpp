@@ -1,0 +1,16 @@
+#include "pch.h"
+#include "ColorRGBA8.h"
+#include "ColorXRGB4.h"
+
+using namespace ieg;
+
+void ColorXRGB4::ConvertRGBA8(ColorRGBA8* pColor)
+{
+	pColor->SetR((mXR & 0x0F) * (unsigned char)(17));
+	pColor->SetG(((mGB & 0xF0) >> 4) * (unsigned char)(17));
+	pColor->SetB((mGB & 0x0F) * (unsigned char)(17));
+	if (mXR == 0 && mGB == 0)
+		pColor->SetA(0);
+	else
+		pColor->SetA((unsigned char)0xFF);
+}
