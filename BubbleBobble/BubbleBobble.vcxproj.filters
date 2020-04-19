@@ -19,6 +19,12 @@
     <Filter Include="Actor">
       <UniqueIdentifier>{33caf348-596f-4c32-b75c-d22d9cd28916}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObjects">
+      <UniqueIdentifier>{5067143d-99e5-4394-b72b-f672f0a19a4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Buffer">
+      <UniqueIdentifier>{4d00e032-59cf-4cee-a099-6fe2226a47a2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -48,6 +54,21 @@
     <ClCompile Include="IntroComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Level.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Buffer.cpp">
+      <Filter>Buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="BufferManager.cpp">
+      <Filter>Buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="BufferAblocks.cpp">
+      <Filter>Buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="BufferBubble.cpp">
+      <Filter>Buffer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FireCommand.h">
@@ -76,6 +97,21 @@
     </ClInclude>
     <ClInclude Include="IntroComponent.h">
       <Filter>Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="Level.h">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Buffer.h">
+      <Filter>Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="BufferManager.h">
+      <Filter>Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="BufferAblocks.h">
+      <Filter>Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="BufferBubble.h">
+      <Filter>Buffer</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

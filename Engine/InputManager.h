@@ -12,7 +12,7 @@ namespace ieg
 	class InputManager final
 	{
 	public:
-		InputManager();
+		explicit InputManager();
 		~InputManager();
 		bool ProcessInput();
 		bool IsKeyboardKeyDown(int key);

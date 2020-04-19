@@ -7,6 +7,7 @@ namespace ieg
 		: public Command
 	{
 	public:
+		explicit JumpCommand() = default;
 		virtual ~JumpCommand() = default;
 		virtual void Execute(Component* pActor) override;
 	};

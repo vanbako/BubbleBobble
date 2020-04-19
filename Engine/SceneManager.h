@@ -8,7 +8,7 @@ namespace ieg
 	class SceneManager final
 	{
 	public:
-		SceneManager();
+		explicit SceneManager();
 		~SceneManager();
 		Scene* CreateScene(const std::string& name);
 		void SetActiveScene(const std::string& name);

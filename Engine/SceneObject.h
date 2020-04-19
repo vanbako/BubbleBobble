@@ -5,7 +5,7 @@ namespace ieg
 	class SceneObject
 	{
 	public:
-		SceneObject() = default;
+		explicit SceneObject() = default;
 		virtual ~SceneObject() = default;
 		SceneObject(const SceneObject& other) = delete;
 		SceneObject(SceneObject&& other) = delete;

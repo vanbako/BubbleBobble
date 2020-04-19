@@ -7,6 +7,8 @@ namespace ieg
 	class Minigin;
 	class FireCommand;
 	class StartCommand;
+	class BufferManager;
+	class Level;
 
 	class BubbleBobble final
 	{
@@ -20,9 +22,12 @@ namespace ieg
 		explicit BubbleBobble(Minigin* pEngine);
 		~BubbleBobble();
 
+		void Initialize();
 		void AddScenes();
 	private:
 		Minigin* mpEngine;
+		BufferManager* mpBufferManager;
+		Level* mpLevel;
 		std::vector<Scene*> mpScenes;
 		FireCommand* mpFireCommand;
 		StartCommand* mpStartCommand;

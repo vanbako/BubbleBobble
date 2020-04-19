@@ -7,6 +7,7 @@ namespace ieg
 		: public Command
 	{
 	public:
+		explicit RightCommand() = default;
 		virtual ~RightCommand() = default;
 		virtual void Execute(Component* pActor) override;
 	};
