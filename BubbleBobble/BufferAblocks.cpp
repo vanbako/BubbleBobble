@@ -37,8 +37,7 @@ void BufferAblocks::GetLevelBlock(ColorRGBA8* pBlock, ColorRGBA8* pPalette, size
 			for (size_t bit{ 0 }; bit < 8; ++bit)
 				for (size_t bitplane{ 0 }; bitplane < mBitplanes; ++bitplane)
 				{
-					pixels[row * mBlockWidth + col * 8 + bit] <<= 1;
-					pixels[row * mBlockWidth + col * 8 + bit] |= byte[bitplane] & 0x01;
+					pixels[row * mBlockWidth + col * 8 + 7 - bit] |= (byte[bitplane] & 1) << bitplane;
 					byte[bitplane] >>= 1;
 				}
 		}
@@ -85,4 +84,14 @@ const size_t ieg::BufferAblocks::GetFalse3DCount()
 const size_t BufferAblocks::GetBlockPixelCount()
 {
 	return mBlockWidth * mBlockHeight;
+}
+
+const size_t ieg::BufferAblocks::GetBlockWidth()
+{
+	return mBlockWidth;
+}
+
+const size_t ieg::BufferAblocks::GetBlockHeight()
+{
+	return mBlockHeight;
 }

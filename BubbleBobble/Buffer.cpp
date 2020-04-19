@@ -21,7 +21,7 @@ bool Buffer::LoadFile()
 {
 	if (mpData == nullptr)
 	{
-		std::ifstream ifile{ *mpFilename, std::ios::binary | std::ios::ate };
+		std::ifstream ifile{ "../Data/Amiga/" + *mpFilename, std::ios::binary | std::ios::ate };
 		mSize = size_t(ifile.tellg());
 		ifile.seekg(0);
 		mpData = new char[mSize];

@@ -7,20 +7,21 @@ namespace ieg
 	class GameObject;
 	class Minigin;
 	class BufferManager;
+	class ColorRGBA8;
 
 	class Level final
 	{
 	public:
-		explicit Level(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager);
+		explicit Level(size_t level, Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager);
 		~Level();
-
-		void Clear();
-		void Create(int level);
 	private:
+		static const size_t mWidth;
+		static const size_t mHeight;
+		size_t mLevel;
 		Minigin* mpEngine;
 		Scene* mpScene;
 		BufferManager* mpBufferManager;
 		GameObject* mpGameObject;
-		size_t mLevel;
+		ColorRGBA8* mpPixels;
 	};
 }

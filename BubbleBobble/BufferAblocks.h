@@ -16,6 +16,8 @@ namespace ieg {
 
 		static const size_t GetFalse3DCount();
 		static const size_t GetBlockPixelCount();
+		static const size_t GetBlockWidth();
+		static const size_t GetBlockHeight();
 	private:
 		static const size_t mBitplanes;
 		static const size_t mLevelBlockOffset;
