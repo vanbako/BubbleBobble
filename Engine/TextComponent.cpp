@@ -27,11 +27,12 @@ void TextComponent::Update(const float deltaTime)
 		const auto pSurf{ TTF_RenderText_Blended(mpFont->GetFont(), mText.c_str(), color) };
 		if (pSurf == nullptr)
 			throw std::runtime_error(std::string("Render text failed: ") + SDL_GetError());
-		auto pTexture{ SDL_CreateTextureFromSurface(mpRenderer->GetSDLRenderer(), pSurf) };
-		if (pTexture == nullptr)
+		SDL_Texture* pSDLTexture{ SDL_CreateTextureFromSurface(mpRenderer->GetSDLRenderer(), pSurf) };
+		if (pSDLTexture == nullptr)
 			throw std::runtime_error(std::string("Create text texture from surface failed: ") + SDL_GetError());
 		SDL_FreeSurface(pSurf);
-		mpRenderComponent->SetTexture(new Texture2D{ pTexture });
+
+		mpRenderComponent->SetTexture(pSDLTexture);
 		mNeedsUpdate = false;
 	}
 }

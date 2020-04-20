@@ -1,6 +1,8 @@
 #pragma once
 #include <set>
 
+struct SDL_Texture;
+
 namespace ieg
 {
 	class Texture2D;
@@ -19,7 +21,7 @@ namespace ieg
 
 		Texture2D* LoadTexture(const std::string& file, Renderer* pRenderer);
 		void RemoveTexture(Texture2D* pTexture);
-		void AddTexture(Texture2D* pTexture);
+		Texture2D* CreateTexture(SDL_Texture* pSDLTexture);
 		Font* LoadFont(const std::string& file, unsigned int size);
 	private:
 		std::string mDataPath;

@@ -50,9 +50,11 @@ void ResourceManager::RemoveTexture(Texture2D* pTexture)
 	mpTextures.erase(pTexture);
 }
 
-void ResourceManager::AddTexture(Texture2D* pTexture)
+Texture2D* ResourceManager::CreateTexture(SDL_Texture* pSDLTexture)
 {
-	mpTextures.insert(pTexture);
+	Texture2D* texture2D{ new Texture2D{ pSDLTexture } };
+	mpTextures.insert(texture2D);
+	return texture2D;
 }
 
 Font* ResourceManager::LoadFont(const std::string& file, unsigned int size)

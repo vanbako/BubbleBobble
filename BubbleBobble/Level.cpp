@@ -29,6 +29,7 @@ Level::Level(size_t level, Minigin* pEngine, Scene* pScene, BufferManager* pBuff
 	, mLevel{ level }
 	, mpPixels{ new ColorRGBA8[mWidth * mHeight] }
 	, mpLevelColorPalette{ new ColorRGBA8[BufferBubble::GetPaletteColorCount()] }
+	, mpTexture2D{ nullptr }
 {
 	mpGameObject = mpScene->CreateObject<GameObject>(pEngine->GetResourceManager());
 	TransformComponent* pTransformComponent{ mpGameObject->CreateComponent<TransformComponent>(0) };
@@ -115,10 +116,8 @@ Level::Level(size_t level, Minigin* pEngine, Scene* pScene, BufferManager* pBuff
 			sizeof(ColorRGBA8),
 			mWidth * sizeof(ColorRGBA8),
 			SDL_PIXELFORMAT_RGBA32) };
-	SDL_Texture* pTexture{ SDL_CreateTextureFromSurface(pEngine->GetRenderer()->GetSDLRenderer(), pSurface) };
-	Texture2D* pTexture2D{ new Texture2D{ pTexture } };
-	pEngine->GetResourceManager()->AddTexture(pTexture2D);
-	pRenderComponent->SetTexture(pTexture2D);
+	SDL_Texture* pSDLTexture{ SDL_CreateTextureFromSurface(pEngine->GetRenderer()->GetSDLRenderer(), pSurface) };
+	mpTexture2D = pRenderComponent->SetTexture(pSDLTexture);
 
 	// TODO: Create Enemies
 
@@ -126,6 +125,7 @@ Level::Level(size_t level, Minigin* pEngine, Scene* pScene, BufferManager* pBuff
 
 Level::~Level()
 {
+	mpEngine->GetResourceManager()->RemoveTexture(mpTexture2D);
 	delete[] mpPixels;
 	delete[] mpLevelColorPalette;
 }

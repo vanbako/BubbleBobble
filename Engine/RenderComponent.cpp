@@ -33,10 +33,19 @@ void RenderComponent::SetTexture(const std::string& file)
 	mpTexture = mpResourceManager->LoadTexture(file, mpRenderer);
 }
 
+// When Texture2D is used, we don't remove the old one from ResourceManager
+// as it might be used for other RenderComponents
 void RenderComponent::SetTexture(Texture2D* pTexture)
+{
+	mpTexture = pTexture;
+}
+
+// When SDL_Texture is used, it's a new one, so we remove the old
+// Removing the old is mainly used for changing text textures
+Texture2D* RenderComponent::SetTexture(SDL_Texture* pSDLTexture)
 {
 	if (mpTexture != nullptr)
 		mpResourceManager->RemoveTexture(mpTexture);
-	mpResourceManager->AddTexture(pTexture);
-	mpTexture = pTexture;
+	mpTexture = mpResourceManager->CreateTexture(pSDLTexture);
+	return mpTexture;
 }

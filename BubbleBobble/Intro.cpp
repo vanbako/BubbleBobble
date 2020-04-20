@@ -27,15 +27,15 @@ Intro::Intro(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, Sce
 	, mpColorPalette{ new ColorRGBA8[BufferBubble::GetPaletteColorCount()] }
 	, mpStartCommand{ new StartCommand{} }
 {
-	mpGameObject = mpScene->CreateObject<GameObject>(pEngine->GetResourceManager());
+	mpGameObject = mpScene->CreateObject<GameObject>(mpEngine->GetResourceManager());
 	TransformComponent* pTransformComponent{ mpGameObject->CreateComponent<TransformComponent>(0) };
 	pTransformComponent->SetPosition(0.f, 0.f, 0.f);
-	RenderComponent* pRenderComponent{ mpGameObject->CreateComponent<RenderComponent>(1, pEngine->GetRenderer()) };
+	RenderComponent* pRenderComponent{ mpGameObject->CreateComponent<RenderComponent>(1, mpEngine->GetRenderer()) };
 	pRenderComponent->SetTransformComponent(pTransformComponent);
 	IntroComponent* pIntroComponent{ mpGameObject->CreateComponent<IntroComponent>(0) };
 	pIntroComponent->SetSceneManager(mpEngine->GetSceneManager());
 	pIntroComponent->SetStartScene(pGameScene);
-	InputAction* pInputAction{ pScene->GetInputManager()->CreateInputAction() };
+	InputAction* pInputAction{ mpScene->GetInputManager()->CreateInputAction() };
 	pInputAction->SetKeyboardKey(VK_SPACE);
 	pInputAction->SetGamepadButtonCode(XINPUT_GAMEPAD_START);
 	pInputAction->SetCommand(mpStartCommand);
@@ -55,14 +55,13 @@ Intro::Intro(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, Sce
 		sizeof(ColorRGBA8),
 		320 * sizeof(ColorRGBA8),
 		SDL_PIXELFORMAT_RGBA32) };
-	SDL_Texture* pTexture{ SDL_CreateTextureFromSurface(pEngine->GetRenderer()->GetSDLRenderer(), pSurface) };
-	Texture2D* pTexture2D{ new Texture2D{ pTexture } };
-	pEngine->GetResourceManager()->AddTexture(pTexture2D);
-	pRenderComponent->SetTexture(pTexture2D);
+	SDL_Texture* pSDLTexture{ SDL_CreateTextureFromSurface(mpEngine->GetRenderer()->GetSDLRenderer(), pSurface) };
+	mpTexture2D = pRenderComponent->SetTexture(pSDLTexture);
 }
 
 Intro::~Intro()
 {
+	mpEngine->GetResourceManager()->RemoveTexture(mpTexture2D);
 	delete[] mpPixels;
 	delete[] mpColorPalette;
 	delete mpStartCommand;

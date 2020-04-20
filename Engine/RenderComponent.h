@@ -1,6 +1,8 @@
 #pragma once
 #include "Component.h"
 
+struct SDL_Texture;
+
 namespace ieg
 {
 	class ResourceManager;
@@ -22,6 +24,7 @@ namespace ieg
 		void SetTransformComponent(TransformComponent* pTransformComponent);
 		void SetTexture(const std::string& file);
 		void SetTexture(Texture2D* pTexture);
+		Texture2D* SetTexture(SDL_Texture* pSDLTexture);
 	private:
 		ResourceManager* mpResourceManager;
 		Renderer* mpRenderer;

@@ -8,6 +8,7 @@ namespace ieg
 	class BufferManager;
 	class ColorRGBA8;
 	class StartCommand;
+	class Texture2D;
 
 	class Intro final
 	{
@@ -22,5 +23,6 @@ namespace ieg
 		ColorRGBA8* mpPixels;
 		ColorRGBA8* mpColorPalette;
 		StartCommand* mpStartCommand;
+		Texture2D* mpTexture2D;
 	};
 }

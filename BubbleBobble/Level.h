@@ -7,6 +7,7 @@ namespace ieg
 	class Minigin;
 	class BufferManager;
 	class ColorRGBA8;
+	class Texture2D;
 
 	class Level final
 	{
@@ -23,6 +24,7 @@ namespace ieg
 		GameObject* mpGameObject;
 		ColorRGBA8* mpPixels;
 		ColorRGBA8* mpLevelColorPalette;
+		Texture2D* mpTexture2D;
 
 		static const size_t mBlockCount;
 		static const size_t mWidthInBlocks;
