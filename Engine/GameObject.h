@@ -8,7 +8,8 @@
 
 namespace ieg
 {
-	//class ResourceManager;
+	class Minigin;
+	class ResourceManager;
 
 	class GameObject final
 		: public SceneObject
@@ -22,35 +23,21 @@ namespace ieg
 		GameObject& operator=(GameObject&& other) = delete;
 
 		template<class T>
-		T* CreateComponent(int count...)
+		T* CreateComponent(Minigin* pEngine...)
 		{
-			(count);
-			T* pComponent{ new T{} };
+			T* pComponent{ new T{ pEngine } };
 			if (pComponent != nullptr)
 				mpComponents.push_back(pComponent);
 			return pComponent;
 		}
 		template<>
-		RenderComponent* CreateComponent(int count...)
+		TextComponent* CreateComponent(Minigin* pEngine...)
 		{
 			std::va_list args;
-			va_start(args, count);
-			Renderer* pRenderer{ va_arg(args, Renderer*) };
-			va_end(args);
-			RenderComponent* pComponent{ new RenderComponent{ mpRes, pRenderer } };
-			if (pComponent != nullptr)
-				mpComponents.push_back(pComponent);
-			return pComponent;
-		}
-		template<>
-		TextComponent* CreateComponent(int count...)
-		{
-			std::va_list args;
-			va_start(args, count);
+			va_start(args, pEngine);
 			Font* pFont{ va_arg(args, Font*) };
-			Renderer* pRenderer{ va_arg(args, Renderer*) };
 			va_end(args);
-			TextComponent* pComponent{ new TextComponent{ pFont, pRenderer } };
+			TextComponent* pComponent{ new TextComponent{ pEngine, pFont } };
 			if (pComponent != nullptr)
 				mpComponents.push_back(pComponent);
 			return pComponent;

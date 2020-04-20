@@ -8,6 +8,7 @@ namespace ieg
 	class SceneManager;
 	class InputManager;
 	class Renderer;
+	class ServiceLocator;
 
 	class Minigin final
 	{
@@ -22,6 +23,7 @@ namespace ieg
 		ResourceManager* GetResourceManager();
 		SceneManager* GetSceneManager();
 		Renderer* GetRenderer();
+		ServiceLocator* GetServiceLocator();
 		bool Initialize();
 		void Cleanup();
 		void Run();
@@ -31,5 +33,6 @@ namespace ieg
 		ResourceManager* mpResourceManager;
 		SceneManager* mpSceneManager;
 		Renderer* mpRenderer;
+		ServiceLocator* mpServiceLocator;
 	};
 }

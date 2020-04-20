@@ -16,9 +16,6 @@
     <Filter Include="Command">
       <UniqueIdentifier>{3e1903ca-9498-4665-8b41-7d64a1fa1775}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Actor">
-      <UniqueIdentifier>{33caf348-596f-4c32-b75c-d22d9cd28916}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameObjects">
       <UniqueIdentifier>{5067143d-99e5-4394-b72b-f672f0a19a4d}</UniqueIdentifier>
     </Filter>
@@ -27,6 +24,9 @@
     </Filter>
     <Filter Include="Color">
       <UniqueIdentifier>{5c466c9e-4670-47e4-89b8-9a54cad5b321}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component">
+      <UniqueIdentifier>{33caf348-596f-4c32-b75c-d22d9cd28916}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -53,9 +53,6 @@
     </ClCompile>
     <ClCompile Include="StartCommand.cpp">
       <Filter>Command</Filter>
-    </ClCompile>
-    <ClCompile Include="IntroComponent.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Level.cpp">
       <Filter>GameObjects</Filter>
@@ -108,6 +105,9 @@
     <ClCompile Include="Intro.cpp">
       <Filter>GameObjects</Filter>
     </ClCompile>
+    <ClCompile Include="IntroComponent.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FireCommand.h">
@@ -132,10 +132,10 @@
       <Filter>Command</Filter>
     </ClInclude>
     <ClInclude Include="ActorComponent.h">
-      <Filter>Actor</Filter>
+      <Filter>Component</Filter>
     </ClInclude>
     <ClInclude Include="IntroComponent.h">
-      <Filter>Actor</Filter>
+      <Filter>Component</Filter>
     </ClInclude>
     <ClInclude Include="Level.h">
       <Filter>GameObjects</Filter>

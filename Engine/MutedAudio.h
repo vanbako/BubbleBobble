@@ -16,6 +16,7 @@ namespace ieg
 		MutedAudio& operator= (const MutedAudio&) = delete;
 		MutedAudio& operator= (const MutedAudio&&) = delete;
 
+		virtual size_t AddSound(const std::string& filename, bool loop) override;
 		virtual void PlaySound(size_t soundId) override;
 		virtual void StopSound(size_t soundId) override;
 	private:

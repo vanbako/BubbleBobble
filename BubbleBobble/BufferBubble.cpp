@@ -13,8 +13,8 @@ const size_t BufferBubble::mLevelColorsOffset{ 0x275C };
 const size_t BufferBubble::mLevelColorsPaletteOffset{ 11 };
 const size_t BufferBubble::mLevelBigBlockOffsets{ 0x2418 };
 
-BufferBubble::BufferBubble(const std::string* pFilename)
-	: Buffer(pFilename)
+BufferBubble::BufferBubble(const std::string& filename)
+	: Buffer(filename)
 {
 }
 

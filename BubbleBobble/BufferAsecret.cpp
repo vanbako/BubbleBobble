@@ -3,7 +3,7 @@
 
 using namespace ieg;
 
-BufferAsecret::BufferAsecret(const std::string* pFilename)
-	: Buffer(pFilename)
+BufferAsecret::BufferAsecret(const std::string& filename)
+	: Buffer(filename)
 {
 }

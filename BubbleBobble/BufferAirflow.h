@@ -6,7 +6,7 @@ namespace ieg {
 		: public Buffer
 	{
 	public:
-		explicit BufferAirflow(const std::string* pFilename);
+		explicit BufferAirflow(const std::string& filename);
 	private:
 	};
 }

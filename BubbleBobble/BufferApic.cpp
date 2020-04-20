@@ -10,8 +10,8 @@ const size_t BufferApic::mByteWidth{ 40 };
 const size_t BufferApic::mHeight{ 200 };
 const size_t BufferApic::mBitplanePitch{ 8000 };
 
-BufferApic::BufferApic(const std::string* pFilename)
-	: Buffer(pFilename)
+BufferApic::BufferApic(const std::string& filename)
+	: Buffer(filename)
 {
 }
 

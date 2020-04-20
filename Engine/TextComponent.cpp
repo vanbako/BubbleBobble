@@ -5,13 +5,14 @@
 #include "Font.h"
 #include "TextComponent.h"
 #include "RenderComponent.h"
+#include "Minigin.h"
 #include "Texture2D.h"
 
 using namespace ieg;
 
-TextComponent::TextComponent(const Font* pFont, Renderer* pRenderer)
-	: mpFont{ pFont }
-	, mpRenderer{ pRenderer }
+TextComponent::TextComponent(Minigin* pEngine, const Font* pFont)
+	: mpEngine{ pEngine }
+	, mpFont{ pFont }
 	, mNeedsUpdate{ true }
 	, mText{}
 	, mpRenderComponent{ nullptr }
@@ -27,7 +28,7 @@ void TextComponent::Update(const float deltaTime)
 		const auto pSurf{ TTF_RenderText_Blended(mpFont->GetFont(), mText.c_str(), color) };
 		if (pSurf == nullptr)
 			throw std::runtime_error(std::string("Render text failed: ") + SDL_GetError());
-		SDL_Texture* pSDLTexture{ SDL_CreateTextureFromSurface(mpRenderer->GetSDLRenderer(), pSurf) };
+		SDL_Texture* pSDLTexture{ SDL_CreateTextureFromSurface(mpEngine->GetRenderer()->GetSDLRenderer(), pSurf) };
 		if (pSDLTexture == nullptr)
 			throw std::runtime_error(std::string("Create text texture from surface failed: ") + SDL_GetError());
 		SDL_FreeSurface(pSurf);
@@ -42,7 +43,7 @@ void TextComponent::SetRenderComponent(RenderComponent* pRenderComponent)
 	mpRenderComponent = pRenderComponent;
 }
 
-void TextComponent::SetText(const std::string & text)
+void TextComponent::SetText(const std::string& text)
 {
 	mText = text;
 	mNeedsUpdate = true;

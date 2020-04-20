@@ -7,11 +7,13 @@
 
 namespace ieg
 {
+	class Minigin;
+
 	class TransformComponent final
 		: public Component
 	{
 	public:
-		explicit TransformComponent();
+		explicit TransformComponent(Minigin* pEngine);
 		~TransformComponent() = default;
 
 		void Update(const float deltaTime) { (deltaTime);  };
@@ -20,6 +22,7 @@ namespace ieg
 		const glm::vec3& GetPosition() const;
 		void SetPosition(const float x, const float y, const float z);
 	private:
+		Minigin* mpEngine;
 		glm::vec3 mPosition;
 	};
 }

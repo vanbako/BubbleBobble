@@ -4,8 +4,8 @@
 
 using namespace ieg;
 
-BufferAsprites::BufferAsprites(const std::string* pFilename)
-	: Buffer(pFilename)
+BufferAsprites::BufferAsprites(const std::string& filename)
+	: Buffer(filename)
 {
 }
 

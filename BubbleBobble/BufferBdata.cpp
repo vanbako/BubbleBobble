@@ -8,8 +8,8 @@ const size_t BufferBdata::mLevelByteWidth{ 4 };
 const size_t BufferBdata::mLevelWidth{ 32 };
 const size_t BufferBdata::mLevelHeight{ 25 };
 
-BufferBdata::BufferBdata(const std::string* pFilename)
-	: Buffer(pFilename)
+BufferBdata::BufferBdata(const std::string& filename)
+	: Buffer(filename)
 {
 }
 

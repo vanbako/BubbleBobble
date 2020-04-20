@@ -3,7 +3,7 @@
 
 using namespace ieg;
 
-BufferBubcode::BufferBubcode(const std::string* pFilename)
-	: Buffer(pFilename)
+BufferBubcode::BufferBubcode(const std::string& filename)
+	: Buffer(filename)
 {
 }

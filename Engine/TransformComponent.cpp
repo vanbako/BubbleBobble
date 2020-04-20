@@ -3,8 +3,9 @@
 
 using namespace ieg;
 
-TransformComponent::TransformComponent()
-	: mPosition{}
+TransformComponent::TransformComponent(Minigin* pEngine)
+	: mpEngine{ pEngine }
+	, mPosition{}
 {
 }
 

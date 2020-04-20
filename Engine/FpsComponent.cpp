@@ -1,12 +1,14 @@
 #include "pch.h"
 #include "FpsComponent.h"
 #include "TextComponent.h"
+#include "Minigin.h"
 #include <stdio.h>
 
 using namespace ieg;
 
-FpsComponent::FpsComponent()
-	: mFps{ 0.f }
+FpsComponent::FpsComponent(Minigin* pEngine)
+	: mpEngine{ pEngine }
+	, mFps{ 0.f }
 	, mpTextComponent{ nullptr }
 {
 }

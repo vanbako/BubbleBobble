@@ -20,8 +20,8 @@ const size_t BufferAblocks::mBlockHeight{ 8 };
 const size_t BufferAblocks::mBigBlockHeight{ 16 };
 const size_t BufferAblocks::mFalse3DCount{ 6 };
 
-BufferAblocks::BufferAblocks(const std::string* pFilename)
-	: Buffer(pFilename)
+BufferAblocks::BufferAblocks(const std::string& filename)
+	: Buffer(filename)
 {
 }
 

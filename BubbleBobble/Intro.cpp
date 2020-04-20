@@ -14,6 +14,7 @@
 #include "../Engine/ResourceManager.h"
 #include "../Engine/InputManager.h"
 #include "../Engine/InputAction.h"
+#include "../Engine/ServiceLocator.h"
 #include <SDL.h>
 
 using namespace ieg;
@@ -27,13 +28,13 @@ Intro::Intro(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, Sce
 	, mpColorPalette{ new ColorRGBA8[BufferBubble::GetPaletteColorCount()] }
 	, mpStartCommand{ new StartCommand{} }
 {
+
 	mpGameObject = mpScene->CreateObject<GameObject>(mpEngine->GetResourceManager());
 	TransformComponent* pTransformComponent{ mpGameObject->CreateComponent<TransformComponent>(0) };
 	pTransformComponent->SetPosition(0.f, 0.f, 0.f);
-	RenderComponent* pRenderComponent{ mpGameObject->CreateComponent<RenderComponent>(1, mpEngine->GetRenderer()) };
+	RenderComponent* pRenderComponent{ mpGameObject->CreateComponent<RenderComponent>(mpEngine) };
 	pRenderComponent->SetTransformComponent(pTransformComponent);
-	IntroComponent* pIntroComponent{ mpGameObject->CreateComponent<IntroComponent>(0) };
-	pIntroComponent->SetSceneManager(mpEngine->GetSceneManager());
+	IntroComponent* pIntroComponent{ mpGameObject->CreateComponent<IntroComponent>(mpEngine) };
 	pIntroComponent->SetStartScene(pGameScene);
 	InputAction* pInputAction{ mpScene->GetInputManager()->CreateInputAction() };
 	pInputAction->SetKeyboardKey(VK_SPACE);

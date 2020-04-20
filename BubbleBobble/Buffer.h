@@ -6,7 +6,7 @@ namespace ieg
 	class Buffer
 	{
 	public:
-		explicit Buffer(const std::string* pFilename);
+		explicit Buffer(const std::string& filename);
 		virtual ~Buffer();
 
 		bool LoadFile();
@@ -15,6 +15,6 @@ namespace ieg
 		size_t mSize;
 		char* mpData;
 	private:
-		const std::string* mpFilename;
+		const std::string mFilename;
 	};
 }

@@ -3,7 +3,7 @@
 
 using namespace ieg;
 
-BufferAdwarf::BufferAdwarf(const std::string* pFilename)
-	: Buffer(pFilename)
+BufferAdwarf::BufferAdwarf(const std::string& filename)
+	: Buffer(filename)
 {
 }

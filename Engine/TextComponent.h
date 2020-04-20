@@ -3,27 +3,28 @@
 
 namespace ieg
 {
-	class RenderComponent;
+	class Minigin;
 	class Font;
 	class Renderer;
+	class RenderComponent;
 
 	class TextComponent final
 		: public Component
 	{
 	public:
-		explicit TextComponent(const Font* pFont, Renderer* pRenderer);
+		explicit TextComponent(Minigin* pEngine, const Font* pFont);
 		~TextComponent() = default;
 
 		void Update(const float deltaTime);
 		void Render() const {};
 
 		void SetRenderComponent(RenderComponent * pRenderComponent);
-		void SetText(const std::string & text);
+		void SetText(const std::string& text);
 	private:
-		Renderer* mpRenderer;
+		Minigin* mpEngine;
 		bool mNeedsUpdate;
 		const Font* mpFont;
-		std::string mText;
 		RenderComponent* mpRenderComponent;
+		std::string mText;
 	};
 }

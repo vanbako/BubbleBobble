@@ -5,17 +5,15 @@ struct SDL_Texture;
 
 namespace ieg
 {
-	class ResourceManager;
+	class Minigin;
 	class Texture2D;
 	class TransformComponent;
-	class ResourceManager;
-	class Renderer;
 
 	class RenderComponent final
 		: public Component
 	{
 	public:
-		explicit RenderComponent(ResourceManager* pResourceManager, Renderer* pRenderer);
+		explicit RenderComponent(Minigin* pEngine);
 		~RenderComponent() = default;
 
 		void Update(const float deltaTime) { (deltaTime); };
@@ -26,8 +24,7 @@ namespace ieg
 		void SetTexture(Texture2D* pTexture);
 		Texture2D* SetTexture(SDL_Texture* pSDLTexture);
 	private:
-		ResourceManager* mpResourceManager;
-		Renderer* mpRenderer;
+		Minigin* mpEngine;
 		TransformComponent* mpTransformComponent;
 		Texture2D* mpTexture;
 	};

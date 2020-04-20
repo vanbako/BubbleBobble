@@ -3,12 +3,12 @@
 #include "TransformComponent.h"
 #include "ResourceManager.h"
 #include "Renderer.h"
+#include "Minigin.h"
 
 using namespace ieg;
 
-RenderComponent::RenderComponent(ResourceManager* pResourceManager, Renderer* pRenderer)
-	: mpResourceManager{ pResourceManager }
-	, mpRenderer{ pRenderer }
+RenderComponent::RenderComponent(Minigin* pEngine)
+	: mpEngine{ pEngine }
 	, mpTransformComponent{ nullptr }
 	, mpTexture{ nullptr }
 {
@@ -19,7 +19,7 @@ void RenderComponent::Render() const
 	if (mpTransformComponent != nullptr && mpTexture != nullptr)
 	{
 		const auto pos{ mpTransformComponent->GetPosition() };
-		mpRenderer->RenderTexture(*mpTexture, pos.x, pos.y);
+		mpEngine->GetRenderer()->RenderTexture(*mpTexture, pos.x, pos.y);
 	}
 }
 
@@ -30,7 +30,7 @@ void RenderComponent::SetTransformComponent(TransformComponent* pTransformCompon
 
 void RenderComponent::SetTexture(const std::string& file)
 {
-	mpTexture = mpResourceManager->LoadTexture(file, mpRenderer);
+	mpTexture = mpEngine->GetResourceManager()->LoadTexture(file, mpEngine->GetRenderer());
 }
 
 // When Texture2D is used, we don't remove the old one from ResourceManager
@@ -45,7 +45,7 @@ void RenderComponent::SetTexture(Texture2D* pTexture)
 Texture2D* RenderComponent::SetTexture(SDL_Texture* pSDLTexture)
 {
 	if (mpTexture != nullptr)
-		mpResourceManager->RemoveTexture(mpTexture);
-	mpTexture = mpResourceManager->CreateTexture(pSDLTexture);
+		mpEngine->GetResourceManager()->RemoveTexture(mpTexture);
+	mpTexture = mpEngine->GetResourceManager()->CreateTexture(pSDLTexture);
 	return mpTexture;
 }

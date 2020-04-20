@@ -1,19 +1,36 @@
 #include "pch.h"
 #include "IntroComponent.h"
+#include "../Engine/Minigin.h"
 #include "../Engine/SceneManager.h"
 #include "../Engine/Scene.h"
+#include "../Engine/ServiceLocator.h"
 
 using namespace ieg;
 
-IntroComponent::IntroComponent()
-	: mpSceneManager{ nullptr }
+IntroComponent::IntroComponent(Minigin* pEngine)
+	: mpEngine{ pEngine }
 	, mpStartScene{ nullptr }
+	, mpAudio{ pEngine->GetServiceLocator()->GetAudio() }
+	, mStartSoundId{ 0 }
+	, mIntroSoundId{ 0 }
+	, mStartWait{ 9.5f }
+	, mStartAudio{ true }
 {
+	mStartSoundId = mpAudio->AddSound("../Data/Audio/start.wav", false);
+	mIntroSoundId = mpAudio->AddSound("../Data/Audio/intro.wav", true);
+	mpAudio->PlaySound(mStartSoundId);
 }
 
-void IntroComponent::SetSceneManager(SceneManager* pSceneManager)
+void ieg::IntroComponent::Update(const float deltaTime)
 {
-	mpSceneManager = pSceneManager;
+	if (mStartAudio)
+		if (mStartWait > 0.f)
+			mStartWait -= deltaTime;
+		else
+		{
+			mpAudio->PlaySound(mIntroSoundId);
+			mStartAudio = false;
+		}
 }
 
 void IntroComponent::SetStartScene(Scene* pScene)
@@ -23,6 +40,12 @@ void IntroComponent::SetStartScene(Scene* pScene)
 
 void IntroComponent::Start() const
 {
-	if (mpSceneManager != nullptr && mpStartScene != nullptr)
-		mpSceneManager->SetActiveScene(mpStartScene);
+	if (mpStartScene != nullptr)
+	{
+		if (mStartAudio)
+			mpAudio->StopSound(mStartSoundId);
+		else
+			mpAudio->StopSound(mIntroSoundId);
+		mpEngine->GetSceneManager()->SetActiveScene(mpStartScene);
+	}
 }

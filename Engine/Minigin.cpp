@@ -6,6 +6,7 @@
 #include "SceneManager.h"
 #include "Renderer.h"
 #include "ResourceManager.h"
+#include "ServiceLocator.h"
 #include <SDL.h>
 #include "GameObject.h"
 #include "Scene.h"
@@ -23,11 +24,13 @@ Minigin::Minigin()
 	, mpResourceManager{ new ResourceManager{ "../Data/"} }
 	, mpSceneManager{ new SceneManager{} }
 	, mpRenderer{ new Renderer{} }
+	, mpServiceLocator{ new ServiceLocator{} }
 {
 }
 
 Minigin::~Minigin()
 {
+	delete mpServiceLocator;
 	delete mpResourceManager;
 	delete mpSceneManager;
 	delete mpRenderer;
@@ -46,6 +49,11 @@ SceneManager* Minigin::GetSceneManager()
 Renderer* Minigin::GetRenderer()
 {
 	return mpRenderer;
+}
+
+ServiceLocator* ieg::Minigin::GetServiceLocator()
+{
+	return mpServiceLocator;
 }
 
 bool Minigin::Initialize()

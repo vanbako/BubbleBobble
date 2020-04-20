@@ -9,7 +9,7 @@ namespace ieg {
 		: public Buffer
 	{
 	public:
-		explicit BufferBubble(const std::string* pFilename);
+		explicit BufferBubble(const std::string& filename);
 
 		void GetIntroColors(ColorRGBA8* pPalette);
 		void GetLevelColors(ColorRGBA8* pPalette, size_t level);

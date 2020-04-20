@@ -6,7 +6,7 @@ namespace ieg {
 		: public Buffer
 	{
 	public:
-		explicit BufferAdwarf(const std::string* pFilename);
+		explicit BufferAdwarf(const std::string& filename);
 	private:
 	};
 }

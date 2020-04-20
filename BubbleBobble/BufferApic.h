@@ -8,7 +8,7 @@ namespace ieg {
 		: public Buffer
 	{
 	public:
-		explicit BufferApic(const std::string* pFilename);
+		explicit BufferApic(const std::string& filename);
 
 		void GetPic(ColorRGBA8* pPic, ColorRGBA8* pPalette) const;
 	private:

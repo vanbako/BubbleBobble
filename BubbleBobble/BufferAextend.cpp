@@ -3,7 +3,7 @@
 
 using namespace ieg;
 
-BufferAextend::BufferAextend(const std::string* pFilename)
-	: Buffer(pFilename)
+BufferAextend::BufferAextend(const std::string& filename)
+	: Buffer(filename)
 {
 }

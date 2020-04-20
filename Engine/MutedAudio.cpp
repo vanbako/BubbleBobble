@@ -8,6 +8,13 @@ ieg::MutedAudio::MutedAudio()
 {
 }
 
+size_t ieg::MutedAudio::AddSound(const std::string& filename, bool loop)
+{
+	(filename);
+	(loop);
+	return 0;
+}
+
 void MutedAudio::PlaySound(size_t soundId)
 {
 	mLogFile.open("Audio.log", std::ios::out);

@@ -31,13 +31,6 @@ RegularAudio::RegularAudio()
 		mpFmodSystem = nullptr;
 		return;
 	}
-	mpSounds.push_back(nullptr);
-	if (mpFmodSystem->createSound("07027199.wav", FMOD_DEFAULT, nullptr, &mpSounds.back()) != FMOD_OK)
-	{
-		mpFmodSystem->release();
-		mpFmodSystem = nullptr;
-		return;
-	}
 }
 
 RegularAudio::~RegularAudio()
@@ -46,13 +39,25 @@ RegularAudio::~RegularAudio()
 		mpFmodSystem->release();
 }
 
+size_t ieg::RegularAudio::AddSound(const std::string& filename, bool loop)
+{
+	FMOD_MODE mode{ FMOD_DEFAULT };
+	if (loop)
+		mode |= FMOD_LOOP_NORMAL;
+	FMOD::Sound* pSound{ nullptr };
+	size_t soundId{ mpSounds.size() };
+	if (mpFmodSystem->createSound(filename.c_str(), mode, nullptr, &pSound) == FMOD_OK)
+		mpSounds.push_back(pSound);
+	return soundId;
+}
+
 void RegularAudio::PlaySound(size_t soundId)
 {
 	if (mpFmodSystem != nullptr && soundId < mpSounds.size())
 	{
-		FMOD::Channel* channel;
-		if (mpFmodSystem->getChannel(0, &channel) == FMOD_OK)
-			mpFmodSystem->playSound(mpSounds[soundId], nullptr, false, &channel);
+		FMOD::Channel* pChannel{ nullptr };
+		if (mpFmodSystem->getChannel(0, &pChannel) == FMOD_OK)
+			mpFmodSystem->playSound(mpSounds[soundId], nullptr, false, &pChannel);
 	}
 }
 
@@ -60,8 +65,8 @@ void RegularAudio::StopSound(size_t soundId)
 {
 	if (mpFmodSystem != nullptr && soundId < mpSounds.size())
 	{
-		FMOD::Channel* channel;
-		if (mpFmodSystem->getChannel(0, &channel) == FMOD_OK)
-			channel->stop();
+		FMOD::Channel* pChannel{ nullptr };
+		if (mpFmodSystem->getChannel(0, &pChannel) == FMOD_OK)
+			pChannel->stop();
 	}
 }

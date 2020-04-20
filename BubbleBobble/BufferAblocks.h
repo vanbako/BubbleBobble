@@ -8,7 +8,7 @@ namespace ieg {
 		: public Buffer
 	{
 	public:
-		explicit BufferAblocks(const std::string* pFilename);
+		explicit BufferAblocks(const std::string& filename);
 
 		void GetLevelBlock(ColorRGBA8* pBlock, ColorRGBA8* pPalette, size_t level) const;
 		void GetLevelBigBlock(ColorRGBA8* pBlock, ColorRGBA8* pPalette, size_t level) const;

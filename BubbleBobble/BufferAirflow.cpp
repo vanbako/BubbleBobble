@@ -3,7 +3,7 @@
 
 using namespace ieg;
 
-BufferAirflow::BufferAirflow(const std::string* pFilename)
-	: Buffer(pFilename)
+BufferAirflow::BufferAirflow(const std::string& filename)
+	: Buffer(filename)
 {
 }
