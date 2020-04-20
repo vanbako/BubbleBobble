@@ -9,6 +9,8 @@ namespace ieg
 	class StartCommand;
 	class BufferManager;
 	class Level;
+	class Hud;
+	class Intro;
 
 	class BubbleBobble final
 	{
@@ -27,9 +29,9 @@ namespace ieg
 	private:
 		Minigin* mpEngine;
 		BufferManager* mpBufferManager;
+		Intro* mpIntro;
 		Level* mpLevel;
+		Hud* mpHud;
 		std::vector<Scene*> mpScenes;
-		FireCommand* mpFireCommand;
-		StartCommand* mpStartCommand;
 	};
 }

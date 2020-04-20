@@ -9,21 +9,20 @@
 #include "../Engine/InputManager.h"
 #include "../Engine/InputAction.h"
 #include "BufferManager.h"
+#include "Intro.h"
 #include "Level.h"
+#include "Hud.h"
 #include "ActorComponent.h"
 #include "IntroComponent.h"
-#include "FireCommand.h"
-#include "StartCommand.h"
 
 using namespace ieg;
 
 BubbleBobble::BubbleBobble(Minigin* pEngine)
 	: mpEngine{ pEngine }
 	, mpBufferManager{ new BufferManager{} }
+	, mpIntro{ nullptr }
 	, mpLevel{ nullptr }
 	, mpScenes{ size_t(Scenes::Count), nullptr }
-	, mpFireCommand{ new FireCommand{} }
-	, mpStartCommand{ new StartCommand{} }
 {
 }
 
@@ -31,9 +30,11 @@ BubbleBobble::~BubbleBobble()
 {
 	if (mpLevel != nullptr)
 		delete mpLevel;
+	if (mpHud != nullptr)
+		delete mpHud;
+	if (mpIntro != nullptr)
+		delete mpIntro;
 	delete mpBufferManager;
-	delete mpFireCommand;
-	delete mpStartCommand;
 }
 
 void ieg::BubbleBobble::Initialize()
@@ -43,61 +44,16 @@ void ieg::BubbleBobble::Initialize()
 
 void BubbleBobble::AddScenes()
 {
-	//size_t scene{ size_t(Scenes::Intro) };
-	//mpScenes[scene] = mpEngine->GetSceneManager()->CreateScene("Intro");
-	//mpEngine->GetSceneManager()->SetActiveScene(mpScenes[scene]);
+	size_t introScene{ size_t(Scenes::Intro) };
+	mpScenes[introScene] = mpEngine->GetSceneManager()->CreateScene("Intro");
+	size_t gameScene{ size_t(Scenes::Game) };
+	mpScenes[gameScene] = mpEngine->GetSceneManager()->CreateScene("Game");
 
-	////Font* pFont{ nullptr };
-	////GameObject* pGameObject{ nullptr };
-	//RenderComponent* pRenderComponent{ nullptr };
-	//TransformComponent* pTransformComponent{ nullptr };
-	////TextComponent* pTextComponent{ nullptr };
-	////FpsComponent* pFpsComponent{ nullptr };
-	////ActorComponent* pActorComponent{ nullptr };
-	//IntroComponent* pIntroComponent{ nullptr };
-	//InputAction* pInputAction{ nullptr };
+	mpEngine->GetSceneManager()->SetActiveScene(mpScenes[introScene]);
 
-	//// Intro Screen
-	//GameObject* pIntroGameObject{ mpScenes[scene]->CreateObject<GameObject>(mpEngine->GetResourceManager()) };
-	//pTransformComponent = pIntroGameObject->CreateComponent<TransformComponent>(0);
-	//pRenderComponent = pIntroGameObject->CreateComponent<RenderComponent>(1, mpEngine->GetRenderer());
-	//pRenderComponent->SetTexture("StartScreen.png");
-	//pRenderComponent->SetTransformComponent(pTransformComponent);
+	mpIntro = new Intro{ mpEngine, mpScenes[introScene], mpBufferManager, mpScenes[gameScene] };
 
-	size_t scene{ size_t(Scenes::Game) };
-	mpScenes[scene] = mpEngine->GetSceneManager()->CreateScene("Game");
-	mpEngine->GetSceneManager()->SetActiveScene(mpScenes[scene]);
-
-	mpLevel = new Level{ 0, mpEngine, mpScenes[scene], mpBufferManager };
-
-	// Test Fps
-	//pGameObject = mpScenes[scene]->CreateObject<GameObject>(mpEngine->GetResourceManager());
-	//pTransformComponent = pGameObject->CreateComponent<TransformComponent>(0);
-	//pTransformComponent->SetPosition(10.f, 10.f, 0.f);
-	//pRenderComponent = pGameObject->CreateComponent<RenderComponent>(1, mpEngine->GetRenderer());
-	//pRenderComponent->SetTransformComponent(pTransformComponent);
-	//pFont = mpEngine->GetResourceManager()->LoadFont("Lingua.otf", 24);
-	//pTextComponent = pGameObject->CreateComponent<TextComponent>(2, pFont, mpEngine->GetRenderer());
-	//pTextComponent->SetRenderComponent(pRenderComponent);
-	//pFpsComponent = pGameObject->CreateComponent<FpsComponent>(0);
-	//pFpsComponent->SetTextComponent(pTextComponent);
-
-	// Avatar 1: Bub
-	//pGameObject = mpScenes[scene]->CreateObject<GameObject>(mpEngine->GetResourceManager());
-	//pActorComponent = pGameObject->CreateComponent<ActorComponent>(0);
-	//pInputAction = mpScenes[scene]->GetInputManager()->CreateInputAction();
-	//pInputAction->SetKeyboardKey('A');
-	//pInputAction->SetGamepadButtonCode(XINPUT_GAMEPAD_A);
-	//pInputAction->SetCommand(mpFireCommand);
-	//pInputAction->SetActor(pActorComponent);
-
-	//// Input for Intro Scene
-	//pIntroComponent = pIntroGameObject->CreateComponent<IntroComponent>(0);
-	//pIntroComponent->SetSceneManager(mpEngine->GetSceneManager());
-	//pIntroComponent->SetStartScene(mpScenes[scene]);
-	//pInputAction = mpScenes[scene]->GetInputManager()->CreateInputAction();
-	//pInputAction->SetKeyboardKey(VK_SPACE);
-	//pInputAction->SetGamepadButtonCode(XINPUT_GAMEPAD_START);
-	//pInputAction->SetCommand(mpStartCommand);
-	//pInputAction->SetActor(pIntroComponent);
+	mpLevel = new Level{ 0, mpEngine, mpScenes[gameScene], mpBufferManager };
+	ColorRGBA8* pPalette{ mpLevel->GetColorPalette() };
+	mpHud = new Hud(mpEngine, mpScenes[gameScene], mpBufferManager, pPalette);
 }

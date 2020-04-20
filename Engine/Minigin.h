@@ -21,10 +21,8 @@ namespace ieg
 
 		ResourceManager* GetResourceManager();
 		SceneManager* GetSceneManager();
-		//InputManager* GetInputManager();
 		Renderer* GetRenderer();
 		bool Initialize();
-		//void LoadGame() const;
 		void Cleanup();
 		void Run();
 	private:
@@ -32,7 +30,6 @@ namespace ieg
 		SDL_Window* mpWindow{};
 		ResourceManager* mpResourceManager;
 		SceneManager* mpSceneManager;
-		//InputManager* mpInputManager;
 		Renderer* mpRenderer;
 	};
 }

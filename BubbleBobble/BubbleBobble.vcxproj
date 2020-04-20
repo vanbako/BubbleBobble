@@ -207,6 +207,8 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\x64\*.dll" "$(OutputPath)" /R /Y</Com
     <ClInclude Include="ColorRGBA8.h" />
     <ClInclude Include="ColorXRGB4.h" />
     <ClInclude Include="FireCommand.h" />
+    <ClInclude Include="Hud.h" />
+    <ClInclude Include="Intro.h" />
     <ClInclude Include="IntroComponent.h" />
     <ClInclude Include="JumpCommand.h" />
     <ClInclude Include="LeftCommand.h" />
@@ -232,6 +234,8 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\x64\*.dll" "$(OutputPath)" /R /Y</Com
     <ClCompile Include="ColorRGBA8.cpp" />
     <ClCompile Include="ColorXRGB4.cpp" />
     <ClCompile Include="FireCommand.cpp" />
+    <ClCompile Include="Hud.cpp" />
+    <ClCompile Include="Intro.cpp" />
     <ClCompile Include="IntroComponent.cpp" />
     <ClCompile Include="JumpCommand.cpp" />
     <ClCompile Include="LeftCommand.cpp" />
