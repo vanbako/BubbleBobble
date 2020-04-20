@@ -5,12 +5,18 @@
 
 using namespace ieg;
 
-void ieg::IntroComponent::SetSceneManager(SceneManager* pSceneManager)
+IntroComponent::IntroComponent()
+	: mpSceneManager{ nullptr }
+	, mpStartScene{ nullptr }
+{
+}
+
+void IntroComponent::SetSceneManager(SceneManager* pSceneManager)
 {
 	mpSceneManager = pSceneManager;
 }
 
-void ieg::IntroComponent::SetStartScene(Scene* pScene)
+void IntroComponent::SetStartScene(Scene* pScene)
 {
 	mpStartScene = pScene;
 }

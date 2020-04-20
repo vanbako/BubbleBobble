@@ -6,7 +6,7 @@ namespace ieg {
 		: public Buffer
 	{
 	public:
-		BufferBdata(const std::string* pFilename);
+		explicit BufferBdata(const std::string* pFilename);
 
 		void GetLayout(char* pLayout, size_t level);
 	private:

@@ -30,7 +30,7 @@ void SceneManager::SetActiveScene(const std::string& name)
 	mpActiveScene = mpScenes.at(name);
 }
 
-void ieg::SceneManager::SetActiveScene(Scene* pScene)
+void SceneManager::SetActiveScene(Scene* pScene)
 {
 	mpActiveScene = pScene;
 }

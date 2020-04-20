@@ -2,10 +2,10 @@
 
 namespace ieg
 {
-	class ColorRGBA8
+	class ColorRGBA8 final
 	{
 	public:
-		ColorRGBA8() = default;
+		explicit ColorRGBA8();
 		~ColorRGBA8() = default;
 
 		void SetR(unsigned char r);

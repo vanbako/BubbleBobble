@@ -8,7 +8,7 @@ namespace ieg {
 		: public Buffer
 	{
 	public:
-		BufferAsprites(const std::string* pFilename);
+		explicit BufferAsprites(const std::string* pFilename);
 
 		void GetSprite(size_t sprite, ColorRGBA8* pSprite, ColorRGBA8* pPalette) const;
 	};

@@ -6,7 +6,7 @@ namespace ieg {
 		: public Buffer
 	{
 	public:
-		BufferAextend(const std::string* pFilename);
+		explicit BufferAextend(const std::string* pFilename);
 	private:
 	};
 }

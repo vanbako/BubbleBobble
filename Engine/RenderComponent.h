@@ -9,7 +9,7 @@ namespace ieg
 	class ResourceManager;
 	class Renderer;
 
-	class RenderComponent
+	class RenderComponent final
 		: public Component
 	{
 	public:

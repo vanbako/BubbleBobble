@@ -11,7 +11,7 @@ namespace ieg
 		: public Component
 	{
 	public:
-		explicit IntroComponent() = default;
+		explicit IntroComponent();
 		~IntroComponent() = default;
 
 		virtual void Update(const float deltaTime) override { (deltaTime); };

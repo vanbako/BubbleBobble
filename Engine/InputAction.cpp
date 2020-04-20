@@ -29,7 +29,7 @@ void InputAction::SetCommand(Command* pCommand)
 	mpCommand = pCommand;
 }
 
-void ieg::InputAction::SetActor(Component* pComponent)
+void InputAction::SetActor(Component* pComponent)
 {
 	mpActor = pComponent;
 }

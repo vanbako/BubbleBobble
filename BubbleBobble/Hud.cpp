@@ -9,7 +9,9 @@
 #include "../Engine/Texture2D.h"
 #include "../Engine/ResourceManager.h"
 
-ieg::Hud::Hud(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, ColorRGBA8* pPalette)
+using namespace ieg;
+
+Hud::Hud(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, ColorRGBA8* pPalette)
 	: mpEngine{ pEngine }
 	, mpScene{ pScene }
 	, mpBufferManager{ pBufferManager }
@@ -19,7 +21,7 @@ ieg::Hud::Hud(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, Co
 	std::memcpy(mpColorPalette, pPalette, 16 * sizeof(ColorRGBA8));
 }
 
-ieg::Hud::~Hud()
+Hud::~Hud()
 {
 	delete[] mpColorPalette;
 }

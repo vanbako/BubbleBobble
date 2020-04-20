@@ -7,7 +7,7 @@ namespace ieg
 	class Font;
 	class Renderer;
 
-	class TextComponent
+	class TextComponent final
 		: public Component
 	{
 	public:

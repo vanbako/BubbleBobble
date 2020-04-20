@@ -3,6 +3,11 @@
 
 using namespace ieg;
 
+ieg::MutedAudio::MutedAudio()
+	: mLogFile{}
+{
+}
+
 void MutedAudio::PlaySound(size_t soundId)
 {
 	mLogFile.open("Audio.log", std::ios::out);

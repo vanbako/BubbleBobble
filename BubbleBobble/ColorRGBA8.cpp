@@ -3,6 +3,14 @@
 
 using namespace ieg;
 
+ColorRGBA8::ColorRGBA8()
+	: mR{ 0 }
+	, mG{ 0 }
+	, mB{ 0 }
+	, mA{ 0 }
+{
+}
+
 void ColorRGBA8::SetR(unsigned char r)
 {
 	mR = r;

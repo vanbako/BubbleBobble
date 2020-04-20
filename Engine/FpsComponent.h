@@ -5,7 +5,7 @@ namespace ieg
 {
 	class TextComponent;
 
-	class FpsComponent
+	class FpsComponent final
 		: public Component
 	{
 	public:

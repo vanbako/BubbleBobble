@@ -6,6 +6,11 @@
 
 using namespace ieg;
 
+ieg::Renderer::Renderer()
+	: mpSDLRenderer{ nullptr }
+{
+}
+
 void Renderer::Init(SDL_Window* window)
 {
 	mpSDLRenderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);

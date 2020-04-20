@@ -4,10 +4,10 @@ namespace ieg
 {
 	class ColorRGBA8;
 
-	class ColorXRGB4
+	class ColorXRGB4 final
 	{
 	public:
-		ColorXRGB4() = default;
+		explicit ColorXRGB4();
 		~ColorXRGB4() = default;
 
 		void ConvertRGBA8(ColorRGBA8* pColor);

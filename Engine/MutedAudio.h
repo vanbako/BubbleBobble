@@ -9,7 +9,7 @@ namespace ieg
 		: public Audio
 	{
 	public:
-		explicit MutedAudio() = default;
+		explicit MutedAudio();
 		~MutedAudio() = default;
 		MutedAudio(const MutedAudio&) = delete;
 		MutedAudio(MutedAudio&&) = delete;

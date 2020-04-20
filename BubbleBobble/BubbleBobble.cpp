@@ -22,6 +22,7 @@ BubbleBobble::BubbleBobble(Minigin* pEngine)
 	, mpBufferManager{ new BufferManager{} }
 	, mpIntro{ nullptr }
 	, mpLevel{ nullptr }
+	, mpHud{ nullptr }
 	, mpScenes{ size_t(Scenes::Count), nullptr }
 {
 }
@@ -37,7 +38,7 @@ BubbleBobble::~BubbleBobble()
 	delete mpBufferManager;
 }
 
-void ieg::BubbleBobble::Initialize()
+void BubbleBobble::Initialize()
 {
 	mpBufferManager->LoadFiles();
 }

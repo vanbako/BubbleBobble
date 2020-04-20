@@ -11,7 +11,7 @@ namespace ieg
 	class Renderer final
 	{
 	public:
-		explicit Renderer() = default;
+		explicit Renderer();
 		~Renderer() = default;
 		Renderer(const Renderer&) = delete;
 		Renderer(Renderer&&) = delete;
