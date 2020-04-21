@@ -34,6 +34,9 @@
     <Filter Include="Minigin">
       <UniqueIdentifier>{688233e7-f866-4f1d-b506-951a1fb96217}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ServiceLocator\Audio">
+      <UniqueIdentifier>{279b9a01-a081-4218-8c96-a83fa894d597}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -75,18 +78,6 @@
     <ClInclude Include="ServiceLocator.h">
       <Filter>ServiceLocator</Filter>
     </ClInclude>
-    <ClInclude Include="MutedAudio.h">
-      <Filter>ServiceLocator</Filter>
-    </ClInclude>
-    <ClInclude Include="NullAudio.h">
-      <Filter>ServiceLocator</Filter>
-    </ClInclude>
-    <ClInclude Include="RegularAudio.h">
-      <Filter>ServiceLocator</Filter>
-    </ClInclude>
-    <ClInclude Include="Audio.h">
-      <Filter>ServiceLocator</Filter>
-    </ClInclude>
     <ClInclude Include="ResourceManager.h">
       <Filter>Resource</Filter>
     </ClInclude>
@@ -104,6 +95,18 @@
     </ClInclude>
     <ClInclude Include="GameObject.h">
       <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Audio.h">
+      <Filter>ServiceLocator\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="MutedAudio.h">
+      <Filter>ServiceLocator\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="NullAudio.h">
+      <Filter>ServiceLocator\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="RegularAudio.h">
+      <Filter>ServiceLocator\Audio</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -134,12 +137,6 @@
     <ClCompile Include="InputManager.cpp">
       <Filter>Input</Filter>
     </ClCompile>
-    <ClCompile Include="MutedAudio.cpp">
-      <Filter>ServiceLocator</Filter>
-    </ClCompile>
-    <ClCompile Include="RegularAudio.cpp">
-      <Filter>ServiceLocator</Filter>
-    </ClCompile>
     <ClCompile Include="ServiceLocator.cpp">
       <Filter>ServiceLocator</Filter>
     </ClCompile>
@@ -163,6 +160,12 @@
     </ClCompile>
     <ClCompile Include="NullAudio.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MutedAudio.cpp">
+      <Filter>ServiceLocator\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="RegularAudio.cpp">
+      <Filter>ServiceLocator\Audio</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

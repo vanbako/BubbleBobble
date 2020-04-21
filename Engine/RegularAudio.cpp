@@ -32,6 +32,12 @@ RegularAudio::RegularAudio()
 		mpFmodSystem = nullptr;
 		return;
 	}
+	if (mpFmodSystem->createChannelGroup("CG", &mpChannelGroup) != FMOD_OK)
+	{
+		mpFmodSystem->release();
+		mpFmodSystem = nullptr;
+		return;
+	}
 }
 
 RegularAudio::~RegularAudio()
@@ -57,17 +63,12 @@ void RegularAudio::PlaySound(size_t soundId)
 	if (mpFmodSystem != nullptr && soundId < mpSounds.size())
 	{
 		FMOD::Channel* pChannel{ nullptr };
-		if (mpFmodSystem->getChannel(0, &pChannel) == FMOD_OK)
-			mpFmodSystem->playSound(mpSounds[soundId], nullptr, false, &pChannel);
+		mpFmodSystem->playSound(mpSounds[soundId], mpChannelGroup, false, &pChannel);
 	}
 }
 
 void RegularAudio::StopSound(size_t soundId)
 {
 	if (mpFmodSystem != nullptr && soundId < mpSounds.size())
-	{
-		FMOD::Channel* pChannel{ nullptr };
-		if (mpFmodSystem->getChannel(0, &pChannel) == FMOD_OK)
-			pChannel->stop();
-	}
+		mpChannelGroup->stop();
 }

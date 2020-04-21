@@ -31,15 +31,15 @@ Level::Level(size_t level, Minigin* pEngine, Scene* pScene, BufferManager* pBuff
 	, mpLevelColorPalette{ new ColorRGBA8[BufferBubble::GetPaletteColorCount()] }
 	, mpTexture2D{ nullptr }
 {
+	BufferBubble* pBubble{ (BufferBubble*)mpBufferManager->GetBuffer(EnumBuffer::Bubble) };
+	BufferAblocks* pAblocks{ (BufferAblocks*)mpBufferManager->GetBuffer(EnumBuffer::Ablocks) };
+	BufferBdata* pBdata{ (BufferBdata*)mpBufferManager->GetBuffer(EnumBuffer::Bdata) };
+
 	mpGameObject = mpScene->CreateObject<GameObject>(mpEngine->GetResourceManager());
 	TransformComponent* pTransformComponent{ mpGameObject->CreateComponent<TransformComponent>(0) };
 	pTransformComponent->SetPosition(0.f, 0.f, 0.f);
 	RenderComponent* pRenderComponent{ mpGameObject->CreateComponent<RenderComponent>(mpEngine) };
 	pRenderComponent->SetTransformComponent(pTransformComponent);
-
-	BufferBubble* pBubble{ (BufferBubble*)mpBufferManager->GetBuffer(EnumBuffer::Bubble) };
-	BufferAblocks* pAblocks{ (BufferAblocks*)mpBufferManager->GetBuffer(EnumBuffer::Ablocks) };
-	BufferBdata* pBdata{ (BufferBdata*)mpBufferManager->GetBuffer(EnumBuffer::Bdata) };
 
 	std::memset(mpPixels, 0, mWidth * mHeight * sizeof(ColorRGBA8));
 

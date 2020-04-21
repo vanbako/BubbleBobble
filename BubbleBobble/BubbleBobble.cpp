@@ -21,7 +21,6 @@ BubbleBobble::BubbleBobble(Minigin* pEngine)
 	: mpEngine{ pEngine }
 	, mpBufferManager{ new BufferManager{} }
 	, mpIntro{ nullptr }
-	, mpLevel{ nullptr }
 	, mpHud{ nullptr }
 	, mpScenes{ size_t(Scenes::Count), nullptr }
 {
@@ -29,8 +28,6 @@ BubbleBobble::BubbleBobble(Minigin* pEngine)
 
 BubbleBobble::~BubbleBobble()
 {
-	if (mpLevel != nullptr)
-		delete mpLevel;
 	if (mpHud != nullptr)
 		delete mpHud;
 	if (mpIntro != nullptr)
@@ -45,16 +42,10 @@ void BubbleBobble::Initialize()
 
 void BubbleBobble::AddScenes()
 {
-	size_t introScene{ size_t(Scenes::Intro) };
-	mpScenes[introScene] = mpEngine->GetSceneManager()->CreateScene("Intro");
-	size_t gameScene{ size_t(Scenes::Game) };
-	mpScenes[gameScene] = mpEngine->GetSceneManager()->CreateScene("Game");
+	mpScenes[size_t(Scenes::Intro)] = mpEngine->GetSceneManager()->CreateScene("Intro");
+	mpScenes[size_t(Scenes::Game)] = mpEngine->GetSceneManager()->CreateScene("Game");
+	mpEngine->GetSceneManager()->SetActiveScene(mpScenes[size_t(Scenes::Intro)]);
 
-	mpEngine->GetSceneManager()->SetActiveScene(mpScenes[introScene]);
-
-	mpIntro = new Intro{ mpEngine, mpScenes[introScene], mpBufferManager, mpScenes[gameScene] };
-
-	mpLevel = new Level{ 0, mpEngine, mpScenes[gameScene], mpBufferManager };
-	ColorRGBA8* pPalette{ mpLevel->GetColorPalette() };
-	mpHud = new Hud(mpEngine, mpScenes[gameScene], mpBufferManager, pPalette);
+	mpIntro = new Intro{ mpEngine, mpScenes[size_t(Scenes::Intro)], mpBufferManager, mpScenes[size_t(Scenes::Game)] };
+	mpHud = new Hud(mpEngine, mpScenes[size_t(Scenes::Game)], mpBufferManager);
 }

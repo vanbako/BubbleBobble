@@ -7,7 +7,6 @@ namespace ieg
 	class FireCommand;
 	class StartCommand;
 	class BufferManager;
-	class Level;
 	class Hud;
 	class Intro;
 
@@ -29,7 +28,6 @@ namespace ieg
 		Minigin* mpEngine;
 		BufferManager* mpBufferManager;
 		Intro* mpIntro;
-		Level* mpLevel;
 		Hud* mpHud;
 		std::vector<Scene*> mpScenes;
 	};
