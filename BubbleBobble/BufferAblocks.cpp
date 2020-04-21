@@ -121,7 +121,10 @@ void ieg::BufferAblocks::GetCharacter(ColorRGBA8* pChr, ColorRGBA8* pPalette, si
 	size_t offset{ mFontOffset1 };
 	chr -= mFontStart;
 	if (chr >= 40)
+	{
 		offset = mFontOffset2;
+		chr -= 40;
+	}
 	offset += chr;
 	for (size_t row{ 0 }; row < mFontHeight; ++row)
 	{
