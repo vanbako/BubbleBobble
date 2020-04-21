@@ -5,7 +5,6 @@
 #pragma warning(disable: 4505) //Unreferenced local function removed (FMOD_ErrorString)
 #include "fmod_errors.h"
 #pragma warning(pop)
-#include <vector>
 
 namespace ieg
 {
@@ -25,6 +24,7 @@ namespace ieg
 		virtual void StopSound(size_t soundId) override;
 	private:
 		FMOD::System* mpFmodSystem;
+		FMOD::ChannelGroup* mpChannelGroup;
 		std::vector<FMOD::Sound*> mpSounds;
 	};
 }

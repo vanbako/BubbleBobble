@@ -5,6 +5,7 @@ using namespace ieg;
 
 RegularAudio::RegularAudio()
 	: mpFmodSystem{ nullptr }
+	, mpChannelGroup{ nullptr }
 	, mpSounds{}
 {
 	if (FMOD::System_Create(&mpFmodSystem) != FMOD_OK)

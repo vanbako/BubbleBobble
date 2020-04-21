@@ -1,5 +1,4 @@
 #pragma once
-#include <vector>
 #include "../Engine/Component.h"
 
 namespace ieg

@@ -8,12 +8,9 @@
       <AdditionalIncludeDirectories>$(SolutionDir)3rdParty/Fmod/inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(SolutionDir)3rdParty/Fmod/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>fmod_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)3rdParty/Fmod/lib/x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>fmodL_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-    <PostBuildEvent>
-      <Command>xcopy "$(SolutionDir)3rdParty\Fmod\bin\*.dll" "$(OutputPath)" /R /Y</Command>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup />
 </Project>

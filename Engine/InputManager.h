@@ -1,7 +1,6 @@
 #pragma once
 #include <Windows.h>
 #include <Xinput.h>
-#include <vector>
 
 namespace ieg
 {
