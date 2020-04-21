@@ -19,6 +19,14 @@ const size_t BufferAblocks::mBigBlockByteWidth{ 2 };
 const size_t BufferAblocks::mBlockHeight{ 8 };
 const size_t BufferAblocks::mBigBlockHeight{ 16 };
 const size_t BufferAblocks::mFalse3DCount{ 6 };
+const size_t BufferAblocks::mFontOffset1{ 0xb40 };
+const size_t BufferAblocks::mFontOffset2{ 0xc80 };
+const size_t BufferAblocks::mFontWidth{ 8 } ;
+const size_t BufferAblocks::mFontByteWidth{ 1 };
+const size_t BufferAblocks::mFontHeight{ 8 };
+const size_t BufferAblocks::mFontStart{ 48 };
+const size_t BufferAblocks::mFontRowPitch{ 40 };
+const size_t BufferAblocks::mFontBitplanePitch{ 0xdc0 };
 
 BufferAblocks::BufferAblocks(const std::string& filename)
 	: Buffer(filename)
@@ -29,9 +37,9 @@ void BufferAblocks::GetLevelBlock(ColorRGBA8* pBlock, ColorRGBA8* pPalette, size
 {
 	size_t levelOffset{ level % mLevelBlockRowPitch };
 	size_t levelBlockOffset{ mLevelBlockOffset + (level / mLevelBlockRowPitch) * mLevelBlockRowPitch * mBlockHeight };
-	unsigned char byte[mBitplanes];
+	unsigned char byte[mBitplanes]{};
 	static const size_t pixelsPerBlock{ mBlockWidth * mBlockHeight };
-	unsigned char pixels[pixelsPerBlock];
+	unsigned char pixels[pixelsPerBlock]{};
 	std::memset(pixels, 0, pixelsPerBlock);
 	for (size_t row{ 0 }; row < mBlockHeight; ++row)
 	{
@@ -54,9 +62,9 @@ void BufferAblocks::GetLevelBlock(ColorRGBA8* pBlock, ColorRGBA8* pPalette, size
 
 void ieg::BufferAblocks::GetLevelBigBlock(ColorRGBA8* pBlock, ColorRGBA8* pPalette, size_t offset) const
 {
-	unsigned char byte[mBitplanes];
+	unsigned char byte[mBitplanes]{};
 	static const size_t pixelsPerBlock{ mBigBlockWidth * mBigBlockHeight };
-	unsigned char pixels[pixelsPerBlock];
+	unsigned char pixels[pixelsPerBlock]{};
 	std::memset(pixels, 0, pixelsPerBlock);
 	for (size_t row{ 0 }; row < mBigBlockHeight; ++row)
 	{
@@ -79,9 +87,9 @@ void ieg::BufferAblocks::GetLevelBigBlock(ColorRGBA8* pBlock, ColorRGBA8* pPalet
 
 void BufferAblocks::GetLevelFalse3D(ColorRGBA8* pFalse3D, ColorRGBA8* pPalette) const
 {
-	unsigned char byte[mBitplanes];
+	unsigned char byte[mBitplanes]{};
 	static const size_t pixelsPerBlock{ mBlockWidth * mBlockHeight };
-	unsigned char pixels[pixelsPerBlock];
+	unsigned char pixels[pixelsPerBlock]{};
 	for (size_t false3D{ 0 }; false3D < mFalse3DCount; ++false3D)
 	{
 		std::memset(pixels, 0, pixelsPerBlock);
@@ -103,6 +111,35 @@ void BufferAblocks::GetLevelFalse3D(ColorRGBA8* pFalse3D, ColorRGBA8* pPalette) 
 			for (size_t col{ 0 }; col < mBlockWidth; ++col)
 				pFalse3D[false3D * pixelsPerBlock + row * mBlockWidth + col] = pPalette[pixels[row * mBlockWidth + col]];
 	}
+}
+
+void ieg::BufferAblocks::GetCharacter(ColorRGBA8* pChr, ColorRGBA8* pPalette, size_t color, char chr)
+{
+	unsigned char byte{};
+	static const size_t pixelsPerChr{ mFontWidth * mFontHeight };
+	char pixels[pixelsPerChr]{};
+	size_t offset{ mFontOffset1 };
+	chr -= mFontStart;
+	if (chr >= 40)
+		offset = mFontOffset2;
+	offset += chr;
+	for (size_t row{ 0 }; row < mFontHeight; ++row)
+	{
+		byte = mpData[offset + row * mFontRowPitch];
+		byte |= mpData[offset + row * mFontRowPitch + mFontBitplanePitch];
+		byte |= mpData[offset + row * mFontRowPitch + mFontBitplanePitch * 2];
+		byte |= mpData[offset + row * mFontRowPitch + mFontBitplanePitch * 3];
+		for (size_t bit{ 0 }; bit < 8; ++bit)
+		{
+			pixels[row * mFontWidth + 7 - bit] = byte & 1;
+			byte >>= 1;
+		}
+	}
+	memset(pChr, 0, mFontByteWidth * mFontHeight * sizeof(ColorRGBA8));
+	for (size_t row{ 0 }; row < mFontHeight; ++row)
+		for (size_t col{ 0 }; col < mFontWidth; ++col)
+			if (pixels[row * mFontWidth + col] != 0)
+				pChr[row * mFontWidth + col] = pPalette[color];
 }
 
 const size_t ieg::BufferAblocks::GetFalse3DCount()
@@ -138,4 +175,14 @@ const size_t ieg::BufferAblocks::GetBlockHeight()
 const size_t ieg::BufferAblocks::GetBigBlockHeight()
 {
 	return mBigBlockHeight;
+}
+
+const size_t ieg::BufferAblocks::GetFontWidth()
+{
+	return mFontWidth;
+}
+
+const size_t ieg::BufferAblocks::GetFontHeight()
+{
+	return mFontHeight;
 }

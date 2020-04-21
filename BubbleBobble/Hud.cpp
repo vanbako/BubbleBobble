@@ -4,6 +4,7 @@
 #include "ColorRGBA8.h"
 #include "BufferManager.h"
 #include "BufferAsprites.h"
+#include "BufferAblocks.h"
 #include "../Engine/GameObject.h"
 #include "../Engine/Scene.h"
 #include "../Engine/Minigin.h"
@@ -18,6 +19,8 @@ const size_t Hud::mWidth{ 64 };
 const size_t Hud::mHeight{ 200 };
 const size_t Hud::mBlockWidth{ 4 };
 const size_t Hud::mBlockHeight{ 25 };
+const size_t Hud::mChrWidth{ 8 };
+const size_t Hud::mChrHeight{ 25 };
 
 Hud::Hud(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager)
 	: mpEngine{ pEngine }
@@ -31,6 +34,7 @@ Hud::Hud(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager)
 	, mpTexture2D{ nullptr }
 {
 	BufferAsprites* pAsprites{ (BufferAsprites*)mpBufferManager->GetBuffer(EnumBuffer::Asprites) };
+	BufferAblocks* pAblocks{ (BufferAblocks*)mpBufferManager->GetBuffer(EnumBuffer::Ablocks) };
 
 	mpGameObject = mpScene->CreateObject<GameObject>(mpEngine->GetResourceManager());
 	TransformComponent* pTransformComponent{ mpGameObject->CreateComponent<TransformComponent>(0) };
@@ -55,6 +59,11 @@ Hud::Hud(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager)
 	DrawSprite(pSprite, 0, 6 * mBlockWidth);
 	DrawSprite(pSprite, 1, 6 * mBlockWidth + 2);
 	delete[] pSprite;
+
+	ColorRGBA8* pChr{ new ColorRGBA8[BufferAblocks::GetFontWidth() * BufferAblocks::GetFontHeight()] };
+	pAblocks->GetCharacter(pChr, mpColorPalette, 15, 'A');
+	DrawChr(pChr, 4 * mChrWidth + 2);
+	delete[] pChr;
 
 	SDL_Surface* pSurface{
 	SDL_CreateRGBSurfaceWithFormatFrom(
@@ -82,4 +91,13 @@ void Hud::DrawSprite(ColorRGBA8* pSprite, size_t offset, size_t loc)
 		height{ BufferAsprites::GetHeight() };
 	for (size_t row{ 0 }; row < height; ++row)
 		memcpy(&mpPixels[row * mWidth + (loc % mBlockWidth) * height + (loc / mBlockWidth) * mWidth * height], &pSprite[offset * width * height + row * width], width * sizeof(ColorRGBA8));
+}
+
+void ieg::Hud::DrawChr(ColorRGBA8* pChr, size_t loc)
+{
+	const size_t
+		width{ BufferAblocks::GetFontWidth() },
+		height{ BufferAblocks::GetFontHeight() };
+	for (size_t row{ 0 }; row < height; ++row)
+		memcpy(&mpPixels[row * mWidth + (loc % mChrWidth) * height + (loc / mChrWidth) * mWidth * height], &pChr[row * width], width * sizeof(ColorRGBA8));
 }
