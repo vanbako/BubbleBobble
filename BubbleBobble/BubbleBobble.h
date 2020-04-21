@@ -9,6 +9,7 @@ namespace ieg
 	class BufferManager;
 	class Hud;
 	class Intro;
+	class Start;
 
 	class BubbleBobble final
 	{
@@ -16,6 +17,7 @@ namespace ieg
 		enum class Scenes
 		{
 			Intro = 0,
+			Start,
 			Game,
 			Count
 		};
@@ -29,6 +31,7 @@ namespace ieg
 		BufferManager* mpBufferManager;
 		Intro* mpIntro;
 		Hud* mpHud;
+		Start* mpStart;
 		std::vector<Scene*> mpScenes;
 	};
 }

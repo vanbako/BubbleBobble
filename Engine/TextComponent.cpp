@@ -33,7 +33,7 @@ void TextComponent::Update(const float deltaTime)
 			throw std::runtime_error(std::string("Create text texture from surface failed: ") + SDL_GetError());
 		SDL_FreeSurface(pSurf);
 
-		mpRenderComponent->SetTexture(pSDLTexture);
+		mpRenderComponent->ReplaceTexture(pSDLTexture);
 		mNeedsUpdate = false;
 	}
 }

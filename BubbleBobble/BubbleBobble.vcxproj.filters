@@ -108,6 +108,12 @@
     <ClCompile Include="IntroComponent.cpp">
       <Filter>Component</Filter>
     </ClCompile>
+    <ClCompile Include="Start.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="StartComponent.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FireCommand.h">
@@ -187,6 +193,12 @@
     </ClInclude>
     <ClInclude Include="Intro.h">
       <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Start.h">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="StartComponent.h">
+      <Filter>Component</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

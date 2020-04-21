@@ -24,5 +24,8 @@ namespace ieg
 		ColorRGBA8* mpColorPalette;
 		StartCommand* mpStartCommand;
 		Texture2D* mpTexture2D;
+
+		static const size_t mWidth;
+		static const size_t mHeight;
 	};
 }

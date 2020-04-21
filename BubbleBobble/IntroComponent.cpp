@@ -13,7 +13,7 @@ IntroComponent::IntroComponent(Minigin* pEngine)
 	, mpAudio{ pEngine->GetServiceLocator()->GetAudio() }
 	, mStartSoundId{ 0 }
 	, mIntroSoundId{ 0 }
-	, mStartWait{ 9.5f }
+	, mStartWait{ 9.616f }
 	, mStartAudio{ true }
 {
 	mStartSoundId = mpAudio->AddSound("../Data/Audio/start.wav", false);
@@ -21,7 +21,7 @@ IntroComponent::IntroComponent(Minigin* pEngine)
 	mpAudio->PlaySound(mStartSoundId);
 }
 
-void ieg::IntroComponent::Update(const float deltaTime)
+void IntroComponent::Update(const float deltaTime)
 {
 	if (mStartAudio)
 		if (mStartWait > 0.f)

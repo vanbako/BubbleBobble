@@ -23,6 +23,7 @@ namespace ieg
 		void SetTexture(const std::string& file);
 		void SetTexture(Texture2D* pTexture);
 		Texture2D* SetTexture(SDL_Texture* pSDLTexture);
+		Texture2D* ReplaceTexture(SDL_Texture* pSDLTexture);
 	private:
 		Minigin* mpEngine;
 		TransformComponent* mpTransformComponent;

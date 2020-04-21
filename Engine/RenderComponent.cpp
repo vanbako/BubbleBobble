@@ -40,9 +40,16 @@ void RenderComponent::SetTexture(Texture2D* pTexture)
 	mpTexture = pTexture;
 }
 
+Texture2D* RenderComponent::SetTexture(SDL_Texture* pSDLTexture)
+{
+	mpTexture = mpEngine->GetResourceManager()->CreateTexture(pSDLTexture);
+	return mpTexture;
+}
+
 // When SDL_Texture is used, it's a new one, so we remove the old
 // Removing the old is mainly used for changing text textures
-Texture2D* RenderComponent::SetTexture(SDL_Texture* pSDLTexture)
+// as this is way too confusing, I changed this to ReplaceTexture
+Texture2D* RenderComponent::ReplaceTexture(SDL_Texture* pSDLTexture)
 {
 	if (mpTexture != nullptr)
 		mpEngine->GetResourceManager()->RemoveTexture(mpTexture);

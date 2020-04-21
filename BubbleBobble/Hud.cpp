@@ -75,7 +75,7 @@ Hud::~Hud()
 	delete[] mpPixels;
 }
 
-void ieg::Hud::DrawSprite(ColorRGBA8* pSprite, size_t offset, size_t loc)
+void Hud::DrawSprite(ColorRGBA8* pSprite, size_t offset, size_t loc)
 {
 	const size_t
 		width{ BufferAsprites::GetWidth() },

@@ -19,14 +19,18 @@
 
 using namespace ieg;
 
+const size_t Intro::mWidth{ 320 };
+const size_t Intro::mHeight{ 200 };
+
 Intro::Intro(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, Scene* pGameScene)
 	: mpEngine{ pEngine }
 	, mpScene{ pScene }
 	, mpBufferManager{ pBufferManager }
 	, mpGameObject{ nullptr }
-	, mpPixels{ new ColorRGBA8[320 * 200] }
+	, mpPixels{ new ColorRGBA8[mWidth * mHeight] }
 	, mpColorPalette{ new ColorRGBA8[BufferBubble::GetPaletteColorCount()] }
 	, mpStartCommand{ new StartCommand{} }
+	, mpTexture2D{ nullptr }
 {
 
 	mpGameObject = mpScene->CreateObject<GameObject>(mpEngine->GetResourceManager());
@@ -51,10 +55,10 @@ Intro::Intro(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, Sce
 	SDL_Surface* pSurface{
 	SDL_CreateRGBSurfaceWithFormatFrom(
 		mpPixels,
-		320,
-		200,
+		mWidth,
+		mHeight,
 		sizeof(ColorRGBA8),
-		320 * sizeof(ColorRGBA8),
+		mWidth * sizeof(ColorRGBA8),
 		SDL_PIXELFORMAT_RGBA32) };
 	SDL_Texture* pSDLTexture{ SDL_CreateTextureFromSurface(mpEngine->GetRenderer()->GetSDLRenderer(), pSurface) };
 	mpTexture2D = pRenderComponent->SetTexture(pSDLTexture);

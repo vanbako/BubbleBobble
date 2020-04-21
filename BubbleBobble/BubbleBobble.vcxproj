@@ -227,7 +227,9 @@ xcopy "$(SolutionDir)3rdParty\Fmod\lib\x64\fmod.dll" "$(OutputPath)" /R /Y</Comm
     <ClInclude Include="Level.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="RightCommand.h" />
+    <ClInclude Include="Start.h" />
     <ClInclude Include="StartCommand.h" />
+    <ClInclude Include="StartComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BubbleBobble.cpp" />
@@ -260,7 +262,9 @@ xcopy "$(SolutionDir)3rdParty\Fmod\lib\x64\fmod.dll" "$(OutputPath)" /R /Y</Comm
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="RightCommand.cpp" />
+    <ClCompile Include="Start.cpp" />
     <ClCompile Include="StartCommand.cpp" />
+    <ClCompile Include="StartComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Engine\Engine.vcxproj">
