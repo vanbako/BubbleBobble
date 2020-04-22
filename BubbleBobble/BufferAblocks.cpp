@@ -27,6 +27,7 @@ const size_t BufferAblocks::mFontHeight{ 8 };
 const size_t BufferAblocks::mFontStart{ 48 };
 const size_t BufferAblocks::mFontRowPitch{ 40 };
 const size_t BufferAblocks::mFontBitplanePitch{ 0xdc0 };
+const char BufferAblocks::mFontChrCount{ 50 };
 
 BufferAblocks::BufferAblocks(const std::string& filename)
 	: Buffer(filename)
@@ -60,7 +61,7 @@ void BufferAblocks::GetLevelBlock(ColorRGBA8* pBlock, ColorRGBA8* pPalette, size
 			pBlock[row * mBlockWidth + col] = pPalette[pixels[row * mBlockWidth + col]];
 }
 
-void ieg::BufferAblocks::GetLevelBigBlock(ColorRGBA8* pBlock, ColorRGBA8* pPalette, size_t offset) const
+void BufferAblocks::GetLevelBigBlock(ColorRGBA8* pBlock, ColorRGBA8* pPalette, size_t offset) const
 {
 	unsigned char byte[mBitplanes]{};
 	static const size_t pixelsPerBlock{ mBigBlockWidth * mBigBlockHeight };
@@ -113,7 +114,7 @@ void BufferAblocks::GetLevelFalse3D(ColorRGBA8* pFalse3D, ColorRGBA8* pPalette) 
 	}
 }
 
-void ieg::BufferAblocks::GetCharacter(ColorRGBA8* pChr, ColorRGBA8* pPalette, size_t color, char chr)
+void BufferAblocks::GetCharacter(ColorRGBA8* pChr, ColorRGBA8* pPalette, size_t color, char chr)
 {
 	unsigned char byte{};
 	static const size_t pixelsPerChr{ mFontWidth * mFontHeight };
@@ -145,7 +146,13 @@ void ieg::BufferAblocks::GetCharacter(ColorRGBA8* pChr, ColorRGBA8* pPalette, si
 				pChr[row * mFontWidth + col] = pPalette[color];
 }
 
-const size_t ieg::BufferAblocks::GetFalse3DCount()
+void BufferAblocks::GetFont(ColorRGBA8* pFont, ColorRGBA8* pPalette, size_t color)
+{
+	for (char chr{ 0 }; chr < mFontChrCount; ++chr)
+		GetCharacter(&pFont[size_t(chr) * mFontWidth * mFontHeight], pPalette, color, unsigned char(chr) + mFontStart);
+}
+
+const size_t BufferAblocks::GetFalse3DCount()
 {
 	return mFalse3DCount;
 }
@@ -155,37 +162,47 @@ const size_t BufferAblocks::GetBlockPixelCount()
 	return mBlockWidth * mBlockHeight;
 }
 
-const size_t ieg::BufferAblocks::GetBigBlockPixelCount()
+const size_t BufferAblocks::GetBigBlockPixelCount()
 {
 	return mBigBlockWidth * mBigBlockHeight;
 }
 
-const size_t ieg::BufferAblocks::GetBlockWidth()
+const size_t BufferAblocks::GetBlockWidth()
 {
 	return mBlockWidth;
 }
 
-const size_t ieg::BufferAblocks::GetBigBlockWidth()
+const size_t BufferAblocks::GetBigBlockWidth()
 {
 	return mBigBlockWidth;
 }
 
-const size_t ieg::BufferAblocks::GetBlockHeight()
+const size_t BufferAblocks::GetBlockHeight()
 {
 	return mBlockHeight;
 }
 
-const size_t ieg::BufferAblocks::GetBigBlockHeight()
+const size_t BufferAblocks::GetBigBlockHeight()
 {
 	return mBigBlockHeight;
 }
 
-const size_t ieg::BufferAblocks::GetFontWidth()
+const size_t BufferAblocks::GetFontWidth()
 {
 	return mFontWidth;
 }
 
-const size_t ieg::BufferAblocks::GetFontHeight()
+const size_t BufferAblocks::GetFontHeight()
 {
 	return mFontHeight;
+}
+
+const size_t ieg::BufferAblocks::GetFontStart()
+{
+	return mFontStart;
+}
+
+const char BufferAblocks::GetFontChrCount()
+{
+	return mFontChrCount;
 }

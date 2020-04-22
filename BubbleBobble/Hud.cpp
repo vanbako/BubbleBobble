@@ -27,7 +27,7 @@ Hud::Hud(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager)
 	, mpScene{ pScene }
 	, mpBufferManager{ pBufferManager }
 	, mpOldLevel{ nullptr }
-	, mpLevel{ new Level{ 0, pEngine, pScene, pBufferManager } }
+	, mpLevel{ new Level{ 73, pEngine, pScene, pBufferManager } }
 	, mpGameObject{ nullptr }
 	, mpColorPalette{ new ColorRGBA8[16] }
 	, mpPixels{ new ColorRGBA8[mWidth * mHeight] }
@@ -60,10 +60,17 @@ Hud::Hud(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager)
 	DrawSprite(pSprite, 1, 6 * mBlockWidth + 2);
 	delete[] pSprite;
 
-	ColorRGBA8* pChr{ new ColorRGBA8[BufferAblocks::GetFontWidth() * BufferAblocks::GetFontHeight()] };
-	pAblocks->GetCharacter(pChr, mpColorPalette, 15, 'A');
-	DrawChr(pChr, 4 * mChrWidth + 2);
-	delete[] pChr;
+	//ColorRGBA8* pChr{ new ColorRGBA8[BufferAblocks::GetFontWidth() * BufferAblocks::GetFontHeight()] };
+	//pAblocks->GetCharacter(pChr, mpColorPalette, 15, 'A');
+	//DrawChr(pChr, 4 * mChrWidth + 2);
+	//delete[] pChr;
+
+	ColorRGBA8* pFont{ new ColorRGBA8[BufferAblocks::GetFontChrCount() * BufferAblocks::GetFontWidth() * BufferAblocks::GetFontHeight()] };
+	pAblocks->GetFont(pFont, mpColorPalette, 14);
+	DrawStr(pFont, 20 * mChrWidth, "HI SCORE");
+	pAblocks->GetFont(pFont, mpColorPalette, 15);
+	DrawStr(pFont, 23 * mChrWidth, "CREDITS");
+	delete[] pFont;
 
 	SDL_Surface* pSurface{
 	SDL_CreateRGBSurfaceWithFormatFrom(
@@ -93,11 +100,20 @@ void Hud::DrawSprite(ColorRGBA8* pSprite, size_t offset, size_t loc)
 		memcpy(&mpPixels[row * mWidth + (loc % mBlockWidth) * height + (loc / mBlockWidth) * mWidth * height], &pSprite[offset * width * height + row * width], width * sizeof(ColorRGBA8));
 }
 
-void ieg::Hud::DrawChr(ColorRGBA8* pChr, size_t loc)
+void Hud::DrawChr(ColorRGBA8* pChr, size_t loc)
 {
 	const size_t
 		width{ BufferAblocks::GetFontWidth() },
 		height{ BufferAblocks::GetFontHeight() };
 	for (size_t row{ 0 }; row < height; ++row)
 		memcpy(&mpPixels[row * mWidth + (loc % mChrWidth) * height + (loc / mChrWidth) * mWidth * height], &pChr[row * width], width * sizeof(ColorRGBA8));
+}
+
+void Hud::DrawStr(ColorRGBA8* pFont, size_t loc, const std::string& str)
+{
+	const size_t
+		width{ BufferAblocks::GetFontWidth() },
+		height{ BufferAblocks::GetFontHeight() };
+	for (size_t i{ 0 }; i < str.size(); ++i)
+		DrawChr(&pFont[(str[i] - BufferAblocks::GetFontStart()) * width * height], loc + i);
 }

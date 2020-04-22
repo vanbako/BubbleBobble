@@ -13,7 +13,8 @@ namespace ieg {
 		void GetLevelBlock(ColorRGBA8* pBlock, ColorRGBA8* pPalette, size_t level) const;
 		void GetLevelBigBlock(ColorRGBA8* pBlock, ColorRGBA8* pPalette, size_t level) const;
 		void GetLevelFalse3D(ColorRGBA8* pFalse3D, ColorRGBA8* pPalette) const;
-		void GetCharacter(ColorRGBA8* pBlock, ColorRGBA8* pPalette, size_t color, char chr);
+		void GetCharacter(ColorRGBA8* pChr, ColorRGBA8* pPalette, size_t color, char chr);
+		void GetFont(ColorRGBA8* pFont, ColorRGBA8* pPalette, size_t color);
 
 		static const size_t GetFalse3DCount();
 		static const size_t GetBlockPixelCount();
@@ -24,6 +25,8 @@ namespace ieg {
 		static const size_t GetBigBlockHeight();
 		static const size_t GetFontWidth();
 		static const size_t GetFontHeight();
+		static const size_t GetFontStart();
+		static const char GetFontChrCount();
 	private:
 		static const size_t mBitplanes;
 		static const size_t mLevelBlockOffset;
@@ -45,5 +48,6 @@ namespace ieg {
 		static const size_t mFontStart;
 		static const size_t mFontRowPitch;
 		static const size_t mFontBitplanePitch;
+		static const char mFontChrCount;
 	};
 }

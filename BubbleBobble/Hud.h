@@ -36,5 +36,6 @@ namespace ieg
 
 		void DrawSprite(ColorRGBA8* pSprite, size_t offset, size_t loc);
 		void DrawChr(ColorRGBA8* pChr, size_t loc);
+		void DrawStr(ColorRGBA8* pFont, size_t loc, const std::string& str);
 	};
 }
