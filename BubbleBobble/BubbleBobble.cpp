@@ -13,7 +13,7 @@
 #include "Start.h"
 #include "Level.h"
 #include "Hud.h"
-#include "ActorComponent.h"
+#include "AvatarComponent.h"
 #include "IntroComponent.h"
 
 using namespace ieg;

@@ -2,10 +2,12 @@
 
 namespace ieg
 {
+	class Minigin;
+
 	class Component
 	{
 	public:
-		explicit Component() = default;
+		explicit Component(Minigin* pEngine);
 		virtual ~Component() = default;
 		Component(const Component& other) = delete;
 		Component(Component&& other) = delete;
@@ -14,5 +16,7 @@ namespace ieg
 
 		virtual void Update(const float deltaTime) = 0;
 		virtual void Render() const = 0;
+	protected:
+		Minigin* mpEngine;
 	};
 }

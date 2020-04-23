@@ -18,7 +18,6 @@ namespace ieg
 
 		void SetTextComponent(TextComponent* pTextComponent);
 	private:
-		Minigin* mpEngine;
 		float mFps;
 		TextComponent* mpTextComponent;
 	};

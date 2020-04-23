@@ -9,6 +9,6 @@ namespace ieg
 	public:
 		explicit JumpCommand() = default;
 		virtual ~JumpCommand() = default;
-		virtual void Execute(Component* pActor) override;
+		virtual void Execute(Component* pAvatar) override;
 	};
 }

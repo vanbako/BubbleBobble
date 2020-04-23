@@ -22,7 +22,6 @@ namespace ieg
 		const glm::vec3& GetPosition() const;
 		void SetPosition(const float x, const float y, const float z);
 	private:
-		Minigin* mpEngine;
 		glm::vec3 mPosition;
 	};
 }

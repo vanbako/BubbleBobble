@@ -16,9 +16,6 @@
     <Filter Include="Command">
       <UniqueIdentifier>{3e1903ca-9498-4665-8b41-7d64a1fa1775}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameObjects">
-      <UniqueIdentifier>{5067143d-99e5-4394-b72b-f672f0a19a4d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Buffer">
       <UniqueIdentifier>{4d00e032-59cf-4cee-a099-6fe2226a47a2}</UniqueIdentifier>
     </Filter>
@@ -27,6 +24,15 @@
     </Filter>
     <Filter Include="Component">
       <UniqueIdentifier>{33caf348-596f-4c32-b75c-d22d9cd28916}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="State">
+      <UniqueIdentifier>{129dc4a5-b196-4661-9f5a-ebb1021dcfff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{293f5462-bf7d-49a6-a9bd-b2c08c4db186}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects">
+      <UniqueIdentifier>{5067143d-99e5-4394-b72b-f672f0a19a4d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -41,9 +47,6 @@
     </ClCompile>
     <ClCompile Include="JumpCommand.cpp">
       <Filter>Command</Filter>
-    </ClCompile>
-    <ClCompile Include="BubbleBobble.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="LeftCommand.cpp">
       <Filter>Command</Filter>
@@ -114,6 +117,24 @@
     <ClCompile Include="StartComponent.cpp">
       <Filter>Component</Filter>
     </ClCompile>
+    <ClCompile Include="BubbleBobble.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="StandingState.cpp">
+      <Filter>State</Filter>
+    </ClCompile>
+    <ClCompile Include="AvatarState.cpp">
+      <Filter>State</Filter>
+    </ClCompile>
+    <ClCompile Include="AvatarComponent.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Avatar.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="JumpingState.cpp">
+      <Filter>State</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FireCommand.h">
@@ -121,9 +142,6 @@
     </ClInclude>
     <ClInclude Include="JumpCommand.h">
       <Filter>Command</Filter>
-    </ClInclude>
-    <ClInclude Include="BubbleBobble.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
@@ -136,9 +154,6 @@
     </ClInclude>
     <ClInclude Include="StartCommand.h">
       <Filter>Command</Filter>
-    </ClInclude>
-    <ClInclude Include="ActorComponent.h">
-      <Filter>Component</Filter>
     </ClInclude>
     <ClInclude Include="IntroComponent.h">
       <Filter>Component</Filter>
@@ -199,6 +214,24 @@
     </ClInclude>
     <ClInclude Include="StartComponent.h">
       <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="AvatarState.h">
+      <Filter>State</Filter>
+    </ClInclude>
+    <ClInclude Include="BubbleBobble.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="AvatarComponent.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="StandingState.h">
+      <Filter>State</Filter>
+    </ClInclude>
+    <ClInclude Include="Avatar.h">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="JumpingState.h">
+      <Filter>State</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -5,6 +5,7 @@
 #include "BufferBubble.h"
 #include "BufferBdata.h"
 #include "ColorRGBA8.h"
+#include "Avatar.h"
 #include "../Engine/GameObject.h"
 #include "../Engine/Scene.h"
 #include "../Engine/Minigin.h"
@@ -30,48 +31,28 @@ Level::Level(size_t level, Minigin* pEngine, Scene* pScene, BufferManager* pBuff
 	, mpPixels{ new ColorRGBA8[mWidth * mHeight] }
 	, mpLevelColorPalette{ new ColorRGBA8[BufferBubble::GetPaletteColorCount()] }
 	, mpTexture2D{ nullptr }
+	, mpAvatar{ nullptr, nullptr }
 {
 	BufferBubble* pBubble{ (BufferBubble*)mpBufferManager->GetBuffer(EnumBuffer::Bubble) };
 	BufferAblocks* pAblocks{ (BufferAblocks*)mpBufferManager->GetBuffer(EnumBuffer::Ablocks) };
 	BufferBdata* pBdata{ (BufferBdata*)mpBufferManager->GetBuffer(EnumBuffer::Bdata) };
 
 	mpGameObject = mpScene->CreateObject<GameObject>();
-	TransformComponent* pTransformComponent{ mpGameObject->CreateComponent<TransformComponent>(0) };
+	TransformComponent* pTransformComponent{ mpGameObject->CreateComponent<TransformComponent>(mpEngine) };
 	pTransformComponent->SetPosition(0.f, 0.f, 0.f);
 	RenderComponent* pRenderComponent{ mpGameObject->CreateComponent<RenderComponent>(mpEngine) };
 	pRenderComponent->SetTransformComponent(pTransformComponent);
 
 	std::memset(mpPixels, 0, mWidth * mHeight * sizeof(ColorRGBA8));
 
-	// Get Level ColorPalette
 	pBubble->GetLevelColors(mpLevelColorPalette, mLevel);
 
-	// Draw Blocks
-	ColorRGBA8* pBlock{ new ColorRGBA8[BufferAblocks::GetBlockPixelCount()] };
-	pAblocks->GetLevelBlock(pBlock, mpLevelColorPalette, mLevel);
 	char pLayout[mBlockCount];
 	std::memset(pLayout, 0, mBlockCount);
 	pBdata->GetLayout(pLayout, mLevel);
-	const size_t blockHeight{ BufferAblocks::GetBlockHeight() };
-	const size_t blockWidth{ BufferAblocks::GetBlockWidth() };
-	for (size_t pos{ 0 }; pos < mBlockCount; ++pos)
-		if (pLayout[pos] == 1)
-			DrawBlock(pBlock, pos);
-	delete[] pBlock;
 
-	// Draw Big Blocks
-	size_t offset{ pBubble->GetLevelBigBlockOffset(level) };
-	if (offset != 0)
-	{
-		ColorRGBA8* pBigBlock{ new ColorRGBA8[BufferAblocks::GetBigBlockPixelCount()] };
-		pAblocks->GetLevelBigBlock(pBigBlock, mpLevelColorPalette, offset);
-		for (size_t row{ 0 }; row < 13; ++row)
-		{
-			DrawBigBlock(pBigBlock, row * 16);
-			DrawBigBlock(pBigBlock, row * 16 + 15);
-		}
-		delete[] pBigBlock;
-	}
+	DrawBlocks(pAblocks, pLayout);
+	DrawBigBlocks(pAblocks, pBubble);
 
 	// Draw False3D Blocks
 	ColorRGBA8* pFalse3D{ new ColorRGBA8[BufferAblocks::GetFalse3DCount() * BufferAblocks::GetBlockPixelCount()] };
@@ -116,8 +97,11 @@ Level::Level(size_t level, Minigin* pEngine, Scene* pScene, BufferManager* pBuff
 			sizeof(ColorRGBA8),
 			mWidth * sizeof(ColorRGBA8),
 			SDL_PIXELFORMAT_RGBA32) };
-	SDL_Texture* pSDLTexture{ SDL_CreateTextureFromSurface(pEngine->GetRenderer()->GetSDLRenderer(), pSurface) };
+	SDL_Texture* pSDLTexture{ SDL_CreateTextureFromSurface(mpEngine->GetRenderer()->GetSDLRenderer(), pSurface) };
 	mpTexture2D = pRenderComponent->SetTexture(pSDLTexture);
+
+	mpAvatar[0] = new Avatar{ mpEngine, mpScene, mpBufferManager,mpLevelColorPalette, AvatarType::Bub };
+	mpAvatar[1] = new Avatar{ mpEngine, mpScene, mpBufferManager,mpLevelColorPalette, AvatarType::Bob };
 
 	// TODO: Create Enemies
 
@@ -126,13 +110,45 @@ Level::Level(size_t level, Minigin* pEngine, Scene* pScene, BufferManager* pBuff
 Level::~Level()
 {
 	mpEngine->GetResourceManager()->RemoveTexture(mpTexture2D);
+	delete mpAvatar[0];
+	if (mpAvatar[1] != nullptr)
+		delete mpAvatar[1];
 	delete[] mpPixels;
 	delete[] mpLevelColorPalette;
 }
 
-ColorRGBA8* ieg::Level::GetColorPalette()
+ColorRGBA8* Level::GetColorPalette()
 {
 	return mpLevelColorPalette;
+}
+
+void Level::DrawBlocks(BufferAblocks* pAblocks, char* pLayout)
+{
+	ColorRGBA8* pBlock{ new ColorRGBA8[BufferAblocks::GetBlockPixelCount()] };
+	pAblocks->GetLevelBlock(pBlock, mpLevelColorPalette, mLevel);
+
+	const size_t blockHeight{ BufferAblocks::GetBlockHeight() };
+	const size_t blockWidth{ BufferAblocks::GetBlockWidth() };
+	for (size_t pos{ 0 }; pos < mBlockCount; ++pos)
+		if (pLayout[pos] == 1)
+			DrawBlock(pBlock, pos);
+	delete[] pBlock;
+}
+
+void Level::DrawBigBlocks(BufferAblocks* pAblocks, BufferBubble* pBubble)
+{
+	size_t offset{ pBubble->GetLevelBigBlockOffset(mLevel) };
+	if (offset != 0)
+	{
+		ColorRGBA8* pBigBlock{ new ColorRGBA8[BufferAblocks::GetBigBlockPixelCount()] };
+		pAblocks->GetLevelBigBlock(pBigBlock, mpLevelColorPalette, offset);
+		for (size_t row{ 0 }; row < 13; ++row)
+		{
+			DrawBigBlock(pBigBlock, row * 16);
+			DrawBigBlock(pBigBlock, row * 16 + 15);
+		}
+		delete[] pBigBlock;
+	}
 }
 
 void Level::DrawBlock(ColorRGBA8* pBlock, size_t pos)

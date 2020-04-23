@@ -24,7 +24,6 @@ namespace ieg
 		void SetRenderComponent(RenderComponent* pRenderComponent);
 		void SetTexture(Texture2D* pTexture, size_t num);
 	private:
-		Minigin* mpEngine;
 		Scene* mpStartScene;
 		Audio* mpAudio;
 		size_t mStartSoundId;

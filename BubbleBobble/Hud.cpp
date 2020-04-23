@@ -29,7 +29,7 @@ Hud::Hud(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager)
 	, mpScene{ pScene }
 	, mpBufferManager{ pBufferManager }
 	, mpOldLevel{ nullptr }
-	, mpLevel{ new Level{ 73, pEngine, pScene, pBufferManager } }
+	, mpLevel{ new Level{ 2, pEngine, pScene, pBufferManager } }
 	, mpGameObject{ nullptr }
 	, mpColorPalette{ new ColorRGBA8[16] }
 	, mpPixels{ new ColorRGBA8[mWidth * mHeight] }
@@ -39,7 +39,7 @@ Hud::Hud(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager)
 	BufferAblocks* pAblocks{ (BufferAblocks*)mpBufferManager->GetBuffer(EnumBuffer::Ablocks) };
 
 	mpGameObject = mpScene->CreateObject<GameObject>();
-	TransformComponent* pTransformComponent{ mpGameObject->CreateComponent<TransformComponent>(0) };
+	TransformComponent* pTransformComponent{ mpGameObject->CreateComponent<TransformComponent>(mpEngine) };
 	pTransformComponent->SetPosition(mPosX, mPosY, 0.f);
 	RenderComponent* pRenderComponent{ mpGameObject->CreateComponent<RenderComponent>(mpEngine) };
 	pRenderComponent->SetTransformComponent(pTransformComponent);
@@ -77,7 +77,7 @@ Hud::Hud(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager)
 		sizeof(ColorRGBA8),
 		mWidth * sizeof(ColorRGBA8),
 		SDL_PIXELFORMAT_RGBA32) };
-	SDL_Texture* pSDLTexture{ SDL_CreateTextureFromSurface(pEngine->GetRenderer()->GetSDLRenderer(), pSurface) };
+	SDL_Texture* pSDLTexture{ SDL_CreateTextureFromSurface(mpEngine->GetRenderer()->GetSDLRenderer(), pSurface) };
 	mpTexture2D = pRenderComponent->SetTexture(pSDLTexture);
 }
 

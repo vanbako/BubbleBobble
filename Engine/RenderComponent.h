@@ -22,11 +22,15 @@ namespace ieg
 		void SetTransformComponent(TransformComponent* pTransformComponent);
 		void SetTexture(const std::string& file);
 		void SetTexture(Texture2D* pTexture);
+		void SetSize(float width, float height);
+		void SetIndex(size_t index);
 		Texture2D* SetTexture(SDL_Texture* pSDLTexture);
 		Texture2D* ReplaceTexture(SDL_Texture* pSDLTexture);
 	private:
-		Minigin* mpEngine;
 		TransformComponent* mpTransformComponent;
 		Texture2D* mpTexture;
+		float mWidth;
+		float mHeight;
+		size_t mIndex;
 	};
 }

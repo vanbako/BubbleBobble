@@ -4,7 +4,7 @@
 using namespace ieg;
 
 TransformComponent::TransformComponent(Minigin* pEngine)
-	: mpEngine{ pEngine }
+	: Component(pEngine)
 	, mPosition{}
 {
 }

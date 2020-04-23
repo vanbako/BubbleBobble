@@ -1,10 +1,10 @@
 #include "pch.h"
 #include "FireCommand.h"
-#include "ActorComponent.h"
+#include "AvatarComponent.h"
 
 using namespace ieg;
 
-void FireCommand::Execute(Component* pActor)
+void FireCommand::Execute(Component* pAvatar)
 {
-	((ActorComponent*)pActor)->Fire();
+	((AvatarComponent*)pAvatar)->Fire();
 }

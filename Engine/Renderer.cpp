@@ -36,23 +36,18 @@ void Renderer::Destroy()
 
 void Renderer::RenderTexture(const Texture2D& texture, const float x, const float y) const
 {
-	SDL_Rect dst{};
-	dst.x = static_cast<int>(x) * 4;
-	dst.y = static_cast<int>(y) * 4;
+	SDL_Rect dst{int(x) * 4, int(y) * 4, 0, 0};
 	SDL_QueryTexture(texture.GetSDLTexture(), nullptr, nullptr, &dst.w, &dst.h);
 	dst.w *= 4;
 	dst.h *= 4;
 	SDL_RenderCopy(GetSDLRenderer(), texture.GetSDLTexture(), nullptr, &dst);
 }
 
-void Renderer::RenderTexture(const Texture2D& texture, const float x, const float y, const float width, const float height) const
+void Renderer::RenderTexture(const Texture2D& texture, float srcX, float srcY, float width, float height, float dstX, float dstY) const
 {
-	SDL_Rect dst{};
-	dst.x = static_cast<int>(x);
-	dst.y = static_cast<int>(y);
-	dst.w = static_cast<int>(width);
-	dst.h = static_cast<int>(height);
-	SDL_RenderCopy(GetSDLRenderer(), texture.GetSDLTexture(), nullptr, &dst);
+	SDL_Rect src{ int(srcX), int(srcY), int(width), int(height) };
+	SDL_Rect dst{ int(dstX) * 4, int(dstY) * 4, int(width) * 4, int(height) * 4 };
+	SDL_RenderCopy(GetSDLRenderer(), texture.GetSDLTexture(), &src, &dst);
 }
 
 SDL_Renderer* Renderer::GetSDLRenderer() const

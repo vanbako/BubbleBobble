@@ -9,6 +9,6 @@ namespace ieg
 	public:
 		explicit FireCommand() = default;
 		virtual ~FireCommand() = default;
-		virtual void Execute(Component* pActor) override;
+		virtual void Execute(Component* pAvatar) override;
 	};
 }

@@ -40,7 +40,7 @@ Start::Start(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, Sce
 	BufferAblocks* pAblocks{ (BufferAblocks*)mpBufferManager->GetBuffer(EnumBuffer::Ablocks) };
 
 	mpGameObject = mpScene->CreateObject<GameObject>();
-	TransformComponent* pTransformComponent{ mpGameObject->CreateComponent<TransformComponent>(0) };
+	TransformComponent* pTransformComponent{ mpGameObject->CreateComponent<TransformComponent>(mpEngine) };
 	pTransformComponent->SetPosition(0.f, 0.f, 0.f);
 	RenderComponent* pRenderComponent0{ mpGameObject->CreateComponent<RenderComponent>(mpEngine) };
 	pRenderComponent0->SetTransformComponent(pTransformComponent);

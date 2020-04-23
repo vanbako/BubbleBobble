@@ -11,7 +11,7 @@
 using namespace ieg;
 
 TextComponent::TextComponent(Minigin* pEngine, const Font* pFont)
-	: mpEngine{ pEngine }
+	: Component(pEngine)
 	, mpFont{ pFont }
 	, mNeedsUpdate{ true }
 	, mText{}

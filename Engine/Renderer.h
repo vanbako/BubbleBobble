@@ -23,7 +23,7 @@ namespace ieg
 		void Destroy();
 
 		void RenderTexture(const Texture2D& texture, float x, float y) const;
-		void RenderTexture(const Texture2D& texture, float x, float y, float width, float height) const;
+		void RenderTexture(const Texture2D& texture, float srcX, float srcY, float width, float height, float dstX, float dstY) const;
 
 		SDL_Renderer* GetSDLRenderer() const;
 	private:

@@ -21,7 +21,6 @@ namespace ieg
 		void SetRenderComponent(RenderComponent * pRenderComponent);
 		void SetText(const std::string& text);
 	private:
-		Minigin* mpEngine;
 		bool mNeedsUpdate;
 		const Font* mpFont;
 		RenderComponent* mpRenderComponent;

@@ -9,6 +9,6 @@ namespace ieg
 	public:
 		explicit RightCommand() = default;
 		virtual ~RightCommand() = default;
-		virtual void Execute(Component* pActor) override;
+		virtual void Execute(Component* pAvatar) override;
 	};
 }

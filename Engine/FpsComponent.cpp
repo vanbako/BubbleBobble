@@ -7,7 +7,7 @@
 using namespace ieg;
 
 FpsComponent::FpsComponent(Minigin* pEngine)
-	: mpEngine{ pEngine }
+	: Component(pEngine)
 	, mFps{ 0.f }
 	, mpTextComponent{ nullptr }
 {

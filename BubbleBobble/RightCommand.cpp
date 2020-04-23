@@ -1,10 +1,10 @@
 #include "pch.h"
 #include "RightCommand.h"
-#include "ActorComponent.h"
+#include "AvatarComponent.h"
 
 using namespace ieg;
 
-void RightCommand::Execute(Component* pActor)
+void RightCommand::Execute(Component* pAvatar)
 {
-	((ActorComponent*)pActor)->Right();
+	((AvatarComponent*)pAvatar)->Right();
 }

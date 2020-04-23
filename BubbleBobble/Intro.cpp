@@ -34,7 +34,7 @@ Intro::Intro(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, Sce
 {
 
 	mpGameObject = mpScene->CreateObject<GameObject>();
-	TransformComponent* pTransformComponent{ mpGameObject->CreateComponent<TransformComponent>(0) };
+	TransformComponent* pTransformComponent{ mpGameObject->CreateComponent<TransformComponent>(mpEngine) };
 	pTransformComponent->SetPosition(0.f, 0.f, 0.f);
 	RenderComponent* pRenderComponent{ mpGameObject->CreateComponent<RenderComponent>(mpEngine) };
 	pRenderComponent->SetTransformComponent(pTransformComponent);

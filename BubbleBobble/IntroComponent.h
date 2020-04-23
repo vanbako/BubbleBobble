@@ -22,7 +22,6 @@ namespace ieg
 
 		void Start() const;
 	private:
-		Minigin* mpEngine;
 		Scene* mpStartScene;
 		Audio* mpAudio;
 		size_t mStartSoundId;

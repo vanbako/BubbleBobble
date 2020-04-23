@@ -11,7 +11,7 @@ const float StartComponent::mStartWaitVal{ 8.917f };
 const float StartComponent::mSwapWaitVal{ 0.15f };
 
 StartComponent::StartComponent(Minigin* pEngine)
-	: mpEngine{ pEngine }
+	: Component(pEngine)
 	, mpStartScene{ nullptr }
 	, mpAudio{ pEngine->GetServiceLocator()->GetAudio() }
 	, mStartSoundId{ 0 }

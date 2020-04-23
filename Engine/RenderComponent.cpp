@@ -8,9 +8,12 @@
 using namespace ieg;
 
 RenderComponent::RenderComponent(Minigin* pEngine)
-	: mpEngine{ pEngine }
+	: Component(pEngine)
 	, mpTransformComponent{ nullptr }
 	, mpTexture{ nullptr }
+	, mWidth{ 0.f }
+	, mHeight{ 0.f }
+	, mIndex{ 0 }
 {
 }
 
@@ -19,7 +22,10 @@ void RenderComponent::Render() const
 	if (mpTransformComponent != nullptr && mpTexture != nullptr)
 	{
 		const auto pos{ mpTransformComponent->GetPosition() };
-		mpEngine->GetRenderer()->RenderTexture(*mpTexture, pos.x, pos.y);
+		if (mWidth == 0.f)
+			mpEngine->GetRenderer()->RenderTexture(*mpTexture, pos.x, pos.y);
+		else
+			mpEngine->GetRenderer()->RenderTexture(*mpTexture, mWidth * float(mIndex), 0.f, mWidth, mHeight, pos.x, pos.y);
 	}
 }
 
@@ -38,6 +44,17 @@ void RenderComponent::SetTexture(const std::string& file)
 void RenderComponent::SetTexture(Texture2D* pTexture)
 {
 	mpTexture = pTexture;
+}
+
+void RenderComponent::SetSize(float width, float height)
+{
+	mWidth = width;
+	mHeight = height;
+}
+
+void RenderComponent::SetIndex(size_t index)
+{
+	mIndex = index;
 }
 
 Texture2D* RenderComponent::SetTexture(SDL_Texture* pSDLTexture)
