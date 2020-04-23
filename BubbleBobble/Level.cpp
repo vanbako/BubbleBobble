@@ -35,7 +35,7 @@ Level::Level(size_t level, Minigin* pEngine, Scene* pScene, BufferManager* pBuff
 	BufferAblocks* pAblocks{ (BufferAblocks*)mpBufferManager->GetBuffer(EnumBuffer::Ablocks) };
 	BufferBdata* pBdata{ (BufferBdata*)mpBufferManager->GetBuffer(EnumBuffer::Bdata) };
 
-	mpGameObject = mpScene->CreateObject<GameObject>(mpEngine->GetResourceManager());
+	mpGameObject = mpScene->CreateObject<GameObject>();
 	TransformComponent* pTransformComponent{ mpGameObject->CreateComponent<TransformComponent>(0) };
 	pTransformComponent->SetPosition(0.f, 0.f, 0.f);
 	RenderComponent* pRenderComponent{ mpGameObject->CreateComponent<RenderComponent>(mpEngine) };

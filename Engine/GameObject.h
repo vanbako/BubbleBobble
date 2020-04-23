@@ -9,13 +9,12 @@
 namespace ieg
 {
 	class Minigin;
-	class ResourceManager;
 
 	class GameObject final
 		: public SceneObject
 	{
 	public:
-		explicit GameObject(ResourceManager* pRes);
+		explicit GameObject();
 		virtual ~GameObject();
 		GameObject(const GameObject& other) = delete;
 		GameObject(GameObject&& other) = delete;
@@ -62,7 +61,6 @@ namespace ieg
 		void Update(const float deltaTime) override;
 		void Render() const override;
 	private:
-		ResourceManager* mpRes;
 		std::vector<Component*> mpComponents;
 	};
 }

@@ -27,6 +27,8 @@ namespace ieg
 			*mpLevel;
 		Texture2D* mpTexture2D;
 
+		static const float mPosX;
+		static const float mPosY;
 		static const size_t mWidth;
 		static const size_t mHeight;
 		static const size_t mBlockWidth;

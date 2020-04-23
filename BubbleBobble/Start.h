@@ -19,15 +19,19 @@ namespace ieg
 		Scene* mpScene;
 		BufferManager* mpBufferManager;
 		GameObject* mpGameObject;
-		ColorRGBA8* mpPixels[2];
+		ColorRGBA8* mpPixels[3];
 		ColorRGBA8* mpColorPalette;
-		Texture2D* mpTexture2D[2];
+		Texture2D* mpTexture2D[3];
 
 		static const size_t mWidth;
 		static const size_t mHeight;
 		static const size_t mBlockWidth;
 		static const size_t mBlockHeight;
+		static const size_t mChrWidth;
+		static const size_t mChrHeight;
 
 		void DrawSprite(ColorRGBA8* pSprite, size_t screen, size_t offset, size_t loc);
+		void DrawChr(ColorRGBA8* pChr, size_t screen, size_t loc);
+		void DrawStr(ColorRGBA8* pFont, size_t screen, size_t loc, const std::string& str);
 	};
 }

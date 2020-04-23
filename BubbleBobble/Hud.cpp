@@ -15,6 +15,8 @@
 
 using namespace ieg;
 
+const float Hud::mPosX{ 256.f };
+const float Hud::mPosY{ 0.f };
 const size_t Hud::mWidth{ 64 };
 const size_t Hud::mHeight{ 200 };
 const size_t Hud::mBlockWidth{ 4 };
@@ -36,9 +38,9 @@ Hud::Hud(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager)
 	BufferAsprites* pAsprites{ (BufferAsprites*)mpBufferManager->GetBuffer(EnumBuffer::Asprites) };
 	BufferAblocks* pAblocks{ (BufferAblocks*)mpBufferManager->GetBuffer(EnumBuffer::Ablocks) };
 
-	mpGameObject = mpScene->CreateObject<GameObject>(mpEngine->GetResourceManager());
+	mpGameObject = mpScene->CreateObject<GameObject>();
 	TransformComponent* pTransformComponent{ mpGameObject->CreateComponent<TransformComponent>(0) };
-	pTransformComponent->SetPosition(256.f, 0.f, 0.f);
+	pTransformComponent->SetPosition(mPosX, mPosY, 0.f);
 	RenderComponent* pRenderComponent{ mpGameObject->CreateComponent<RenderComponent>(mpEngine) };
 	pRenderComponent->SetTransformComponent(pTransformComponent);
 
@@ -59,11 +61,6 @@ Hud::Hud(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager)
 	DrawSprite(pSprite, 0, 6 * mBlockWidth);
 	DrawSprite(pSprite, 1, 6 * mBlockWidth + 2);
 	delete[] pSprite;
-
-	//ColorRGBA8* pChr{ new ColorRGBA8[BufferAblocks::GetFontWidth() * BufferAblocks::GetFontHeight()] };
-	//pAblocks->GetCharacter(pChr, mpColorPalette, 15, 'A');
-	//DrawChr(pChr, 4 * mChrWidth + 2);
-	//delete[] pChr;
 
 	ColorRGBA8* pFont{ new ColorRGBA8[BufferAblocks::GetFontChrCount() * BufferAblocks::GetFontWidth() * BufferAblocks::GetFontHeight()] };
 	pAblocks->GetFont(pFont, mpColorPalette, 14);
@@ -111,9 +108,15 @@ void Hud::DrawChr(ColorRGBA8* pChr, size_t loc)
 
 void Hud::DrawStr(ColorRGBA8* pFont, size_t loc, const std::string& str)
 {
+	char chr{};
 	const size_t
 		width{ BufferAblocks::GetFontWidth() },
 		height{ BufferAblocks::GetFontHeight() };
 	for (size_t i{ 0 }; i < str.size(); ++i)
-		DrawChr(&pFont[(str[i] - BufferAblocks::GetFontStart()) * width * height], loc + i);
+	{
+		chr = str[i];
+		if (chr == ' ')
+			chr = 91;
+		DrawChr(&pFont[(chr - BufferAblocks::GetFontStart()) * width * height], loc + i);
+	}
 }

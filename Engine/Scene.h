@@ -6,7 +6,6 @@ namespace ieg
 {
 	class SceneObject;
 	class InputManager;
-	class ResourceManager;
 	class Renderer;
 	class GameObject;
 
@@ -21,17 +20,9 @@ namespace ieg
 		Scene& operator=(Scene&& other) = delete;
 
 		template <class T>
-		T* CreateObject(ResourceManager* pRes)
+		T* CreateObject()
 		{
 			T* pSceneObject{ new T{} };
-			if (pSceneObject != nullptr)
-				mpObjects.push_back(pSceneObject);
-			return pSceneObject;
-		}
-		template <>
-		GameObject* CreateObject(ResourceManager* pRes)
-		{
-			GameObject* pSceneObject{ new GameObject{ pRes } };
 			if (pSceneObject != nullptr)
 				mpObjects.push_back(pSceneObject);
 			return pSceneObject;

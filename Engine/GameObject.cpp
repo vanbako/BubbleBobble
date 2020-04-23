@@ -1,14 +1,12 @@
 #include "pch.h"
 #include "GameObject.h"
-#include "ResourceManager.h"
 #include "TransformComponent.h"
 #include "RenderComponent.h"
 
 using namespace ieg;
 
-GameObject::GameObject( ResourceManager* pRes)
-	: mpRes{ pRes }
-	, mpComponents{}
+GameObject::GameObject()
+	: mpComponents{}
 {
 }
 

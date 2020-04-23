@@ -37,6 +37,9 @@
     <Filter Include="ServiceLocator\Audio">
       <UniqueIdentifier>{279b9a01-a081-4218-8c96-a83fa894d597}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ServiceLocator\Log">
+      <UniqueIdentifier>{a6e87cd6-595a-4fc7-912f-aa82d07ddec5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">

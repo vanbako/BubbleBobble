@@ -33,7 +33,7 @@ Intro::Intro(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, Sce
 	, mpTexture2D{ nullptr }
 {
 
-	mpGameObject = mpScene->CreateObject<GameObject>(mpEngine->GetResourceManager());
+	mpGameObject = mpScene->CreateObject<GameObject>();
 	TransformComponent* pTransformComponent{ mpGameObject->CreateComponent<TransformComponent>(0) };
 	pTransformComponent->SetPosition(0.f, 0.f, 0.f);
 	RenderComponent* pRenderComponent{ mpGameObject->CreateComponent<RenderComponent>(mpEngine) };

@@ -120,6 +120,8 @@ void BufferAblocks::GetCharacter(ColorRGBA8* pChr, ColorRGBA8* pPalette, size_t 
 	static const size_t pixelsPerChr{ mFontWidth * mFontHeight };
 	char pixels[pixelsPerChr]{};
 	size_t offset{ mFontOffset1 };
+	if (chr == ' ')
+		chr = 91;
 	chr -= mFontStart;
 	if (chr >= 40)
 	{
