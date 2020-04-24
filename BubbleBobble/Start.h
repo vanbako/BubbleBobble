@@ -14,6 +14,10 @@ namespace ieg
 	public:
 		explicit Start(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, Scene* pGameScene);
 		~Start();
+		Start(const Start&) = delete;
+		Start(Start&&) = delete;
+		Start& operator= (const Start&) = delete;
+		Start& operator= (const Start&&) = delete;
 	private:
 		Minigin* mpEngine;
 		Scene* mpScene;

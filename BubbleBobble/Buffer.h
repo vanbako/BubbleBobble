@@ -8,6 +8,10 @@ namespace ieg
 	public:
 		explicit Buffer(const std::string& filename);
 		virtual ~Buffer();
+		Buffer(const Buffer&) = delete;
+		Buffer(Buffer&&) = delete;
+		Buffer& operator= (const Buffer&) = delete;
+		Buffer& operator= (const Buffer&&) = delete;
 
 		bool LoadFile();
 		char* GetData();

@@ -9,6 +9,11 @@ namespace ieg {
 	{
 	public:
 		explicit BufferApic(const std::string& filename);
+		~BufferApic() = default;
+		BufferApic(const BufferApic&) = delete;
+		BufferApic(BufferApic&&) = delete;
+		BufferApic& operator= (const BufferApic&) = delete;
+		BufferApic& operator= (const BufferApic&&) = delete;
 
 		void GetPic(ColorRGBA8* pPic, ColorRGBA8* pPalette) const;
 	private:

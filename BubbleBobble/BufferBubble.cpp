@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "BufferBubble.h"
-#include "ColorRGBA8.h"
+#include "../Engine/ColorRGBA8.h"
 #include "ColorXRGB4.h"
 
 using namespace ieg;

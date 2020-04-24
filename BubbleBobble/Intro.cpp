@@ -3,7 +3,7 @@
 #include "BufferManager.h"
 #include "BufferBubble.h"
 #include "BufferApic.h"
-#include "ColorRGBA8.h"
+#include "../Engine/ColorRGBA8.h"
 #include "IntroComponent.h"
 #include "StartCommand.h"
 #include "../Engine/GameObject.h"

@@ -9,6 +9,11 @@ namespace ieg {
 	{
 	public:
 		explicit BufferAblocks(const std::string& filename);
+		~BufferAblocks() = default;
+		BufferAblocks(const BufferAblocks&) = delete;
+		BufferAblocks(BufferAblocks&&) = delete;
+		BufferAblocks& operator= (const BufferAblocks&) = delete;
+		BufferAblocks& operator= (const BufferAblocks&&) = delete;
 
 		void GetLevelBlock(ColorRGBA8* pBlock, ColorRGBA8* pPalette, size_t level) const;
 		void GetLevelBigBlock(ColorRGBA8* pBlock, ColorRGBA8* pPalette, size_t level) const;

@@ -15,6 +15,10 @@ namespace ieg
 	public:
 		explicit Intro(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, Scene* pGameScene);
 		~Intro();
+		Intro(const Intro&) = delete;
+		Intro(Intro&&) = delete;
+		Intro& operator= (const Intro&) = delete;
+		Intro& operator= (const Intro&&) = delete;
 	private:
 		Minigin* mpEngine;
 		Scene* mpScene;

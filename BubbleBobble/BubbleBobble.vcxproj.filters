@@ -75,9 +75,6 @@
     <ClCompile Include="ColorXRGB4.cpp">
       <Filter>Color</Filter>
     </ClCompile>
-    <ClCompile Include="ColorRGBA8.cpp">
-      <Filter>Color</Filter>
-    </ClCompile>
     <ClCompile Include="BufferAdwarf.cpp">
       <Filter>Buffer</Filter>
     </ClCompile>
@@ -174,9 +171,6 @@
       <Filter>Buffer</Filter>
     </ClInclude>
     <ClInclude Include="ColorXRGB4.h">
-      <Filter>Color</Filter>
-    </ClInclude>
-    <ClInclude Include="ColorRGBA8.h">
       <Filter>Color</Filter>
     </ClInclude>
     <ClInclude Include="BufferAdwarf.h">

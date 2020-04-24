@@ -10,6 +10,12 @@ namespace ieg
 	{
 	public:
 		StandingState(Avatar* pAvatar);
+		~StandingState() = default;
+		StandingState(const StandingState&) = delete;
+		StandingState(StandingState&&) = delete;
+		StandingState& operator= (const StandingState&) = delete;
+		StandingState& operator= (const StandingState&&) = delete;
+
 		AvatarState* Left();
 		AvatarState* Right();
 		AvatarState* Fire();

@@ -15,6 +15,10 @@ namespace ieg
 	public:
 		explicit Hud(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager);
 		~Hud();
+		Hud(const Hud&) = delete;
+		Hud(Hud&&) = delete;
+		Hud& operator= (const Hud&) = delete;
+		Hud& operator= (const Hud&&) = delete;
 	private:
 		Minigin* mpEngine;
 		Scene* mpScene;

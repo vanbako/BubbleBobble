@@ -10,6 +10,12 @@ namespace ieg
 	{
 	public:
 		JumpingState(Avatar* pAvatar);
+		~JumpingState() = default;
+		JumpingState(const JumpingState&) = delete;
+		JumpingState(JumpingState&&) = delete;
+		JumpingState& operator= (const JumpingState&) = delete;
+		JumpingState& operator= (const JumpingState&&) = delete;
+
 		AvatarState* Left();
 		AvatarState* Right();
 		AvatarState* Fire();

@@ -21,6 +21,10 @@ namespace ieg
 	public:
 		explicit Avatar(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, ColorRGBA8* pPalette, AvatarType avatarType);
 		~Avatar();
+		Avatar(const Avatar&) = delete;
+		Avatar(Avatar&&) = delete;
+		Avatar& operator= (const Avatar&) = delete;
+		Avatar& operator= (const Avatar&&) = delete;
 	private:
 		Minigin* mpEngine;
 		Scene* mpScene;

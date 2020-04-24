@@ -7,6 +7,10 @@ namespace ieg {
 	{
 	public:
 		explicit BufferBubcode(const std::string& filename);
-	private:
+		~BufferBubcode() = default;
+		BufferBubcode(const BufferBubcode&) = delete;
+		BufferBubcode(BufferBubcode&&) = delete;
+		BufferBubcode& operator= (const BufferBubcode&) = delete;
+		BufferBubcode& operator= (const BufferBubcode&&) = delete;
 	};
 }

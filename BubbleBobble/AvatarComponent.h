@@ -13,6 +13,10 @@ namespace ieg
 	public:
 		explicit AvatarComponent(Minigin* pEngine);
 		~AvatarComponent();
+		AvatarComponent(const AvatarComponent&) = delete;
+		AvatarComponent(AvatarComponent&&) = delete;
+		AvatarComponent& operator= (const AvatarComponent&) = delete;
+		AvatarComponent& operator= (const AvatarComponent&&) = delete;
 
 		void Initialize(Avatar* pAvatar);
 

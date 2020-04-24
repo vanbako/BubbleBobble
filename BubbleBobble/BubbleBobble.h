@@ -23,6 +23,10 @@ namespace ieg
 		};
 		explicit BubbleBobble(Minigin* pEngine);
 		~BubbleBobble();
+		BubbleBobble(const BubbleBobble&) = delete;
+		BubbleBobble(BubbleBobble&&) = delete;
+		BubbleBobble& operator= (const BubbleBobble&) = delete;
+		BubbleBobble& operator= (const BubbleBobble&&) = delete;
 
 		void Initialize();
 		void AddScenes();

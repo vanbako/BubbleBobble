@@ -7,6 +7,11 @@ namespace ieg {
 	{
 	public:
 		explicit BufferBdata(const std::string& filename);
+		~BufferBdata() = default;
+		BufferBdata(const BufferBdata&) = delete;
+		BufferBdata(BufferBdata&&) = delete;
+		BufferBdata& operator= (const BufferBdata&) = delete;
+		BufferBdata& operator= (const BufferBdata&&) = delete;
 
 		void GetLayout(char* pLayout, size_t level);
 	private:

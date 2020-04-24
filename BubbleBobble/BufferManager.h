@@ -24,6 +24,10 @@ namespace ieg
 	public:
 		explicit BufferManager();
 		~BufferManager();
+		BufferManager(const BufferManager&) = delete;
+		BufferManager(BufferManager&&) = delete;
+		BufferManager& operator= (const BufferManager&) = delete;
+		BufferManager& operator= (const BufferManager&&) = delete;
 
 		void LoadFiles();
 		Buffer* GetBuffer(EnumBuffer buffer);

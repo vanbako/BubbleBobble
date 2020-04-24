@@ -9,6 +9,11 @@ namespace ieg
 	public:
 		explicit FireCommand() = default;
 		virtual ~FireCommand() = default;
+		FireCommand(const FireCommand&) = delete;
+		FireCommand(FireCommand&&) = delete;
+		FireCommand& operator= (const FireCommand&) = delete;
+		FireCommand& operator= (const FireCommand&&) = delete;
+
 		virtual void Execute(Component* pAvatar) override;
 	};
 }

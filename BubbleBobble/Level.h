@@ -17,6 +17,10 @@ namespace ieg
 	public:
 		explicit Level(size_t level, Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager);
 		~Level();
+		Level(const Level&) = delete;
+		Level(Level&&) = delete;
+		Level& operator= (const Level&) = delete;
+		Level& operator= (const Level&&) = delete;
 
 		ColorRGBA8* GetColorPalette();
 	private:

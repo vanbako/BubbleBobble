@@ -7,7 +7,7 @@
 #include "../Engine/Renderer.h"
 #include "../Engine/TransformComponent.h"
 #include "AvatarComponent.h"
-#include "ColorRGBA8.h"
+#include "../Engine/ColorRGBA8.h"
 #include <SDL.h>
 
 using namespace ieg;

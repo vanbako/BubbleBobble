@@ -40,6 +40,9 @@
     <Filter Include="ServiceLocator\Log">
       <UniqueIdentifier>{a6e87cd6-595a-4fc7-912f-aa82d07ddec5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fragment">
+      <UniqueIdentifier>{070b57c7-6931-4557-ab4d-d1ea31750559}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -111,6 +114,12 @@
     <ClInclude Include="RegularAudio.h">
       <Filter>ServiceLocator\Audio</Filter>
     </ClInclude>
+    <ClInclude Include="ColorRGBA8.h">
+      <Filter>Fragment</Filter>
+    </ClInclude>
+    <ClInclude Include="Frame.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -172,6 +181,12 @@
     </ClCompile>
     <ClCompile Include="Component.cpp">
       <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="ColorRGBA8.cpp">
+      <Filter>Fragment</Filter>
+    </ClCompile>
+    <ClCompile Include="Frame.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

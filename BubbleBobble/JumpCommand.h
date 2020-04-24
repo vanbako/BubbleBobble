@@ -9,6 +9,11 @@ namespace ieg
 	public:
 		explicit JumpCommand() = default;
 		virtual ~JumpCommand() = default;
+		JumpCommand(const JumpCommand&) = delete;
+		JumpCommand(JumpCommand&&) = delete;
+		JumpCommand& operator= (const JumpCommand&) = delete;
+		JumpCommand& operator= (const JumpCommand&&) = delete;
+
 		virtual void Execute(Component* pAvatar) override;
 	};
 }
