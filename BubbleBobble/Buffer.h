@@ -13,7 +13,7 @@ namespace ieg
 		Buffer& operator=(const Buffer&) = delete;
 		Buffer& operator=(Buffer&&) = delete;
 
-		bool LoadFile();
+		virtual bool LoadFile();
 		char* GetData();
 	protected:
 		size_t mSize;

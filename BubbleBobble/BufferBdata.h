@@ -13,6 +13,7 @@ namespace ieg {
 		BufferBdata& operator=(const BufferBdata&) = delete;
 		BufferBdata& operator=(BufferBdata&&) = delete;
 
+		bool LoadFile() override;
 		void GetLayout(char* pLayout, size_t level);
 	private:
 		static const size_t mLevelDataOffset;

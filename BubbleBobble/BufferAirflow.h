@@ -12,5 +12,7 @@ namespace ieg {
 		BufferAirflow(BufferAirflow&&) = delete;
 		BufferAirflow& operator=(const BufferAirflow&) = delete;
 		BufferAirflow& operator=(BufferAirflow&&) = delete;
+
+		bool LoadFile() override;
 	};
 }
