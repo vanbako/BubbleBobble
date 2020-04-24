@@ -14,6 +14,10 @@ namespace ieg
 	public:
 		explicit TextComponent(Minigin* pEngine, const Font* pFont);
 		~TextComponent() = default;
+		TextComponent(const TextComponent&) = delete;
+		TextComponent(TextComponent&&) = delete;
+		TextComponent& operator=(const TextComponent&) = delete;
+		TextComponent& operator=(TextComponent&&) = delete;
 
 		void Update(const float deltaTime);
 		void Render() const {};

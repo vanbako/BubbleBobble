@@ -12,6 +12,10 @@ namespace ieg
 	public:
 		explicit FpsComponent(Minigin* pEngine);
 		~FpsComponent() = default;
+		FpsComponent(const FpsComponent&) = delete;
+		FpsComponent(FpsComponent&&) = delete;
+		FpsComponent& operator=(const FpsComponent&) = delete;
+		FpsComponent& operator=(FpsComponent&&) = delete;
 
 		void Update(const float deltaTime);
 		void Render() const {};

@@ -15,6 +15,10 @@ namespace ieg
 	public:
 		explicit RenderComponent(Minigin* pEngine);
 		~RenderComponent() = default;
+		RenderComponent(const RenderComponent&) = delete;
+		RenderComponent(RenderComponent&&) = delete;
+		RenderComponent& operator=(const RenderComponent&) = delete;
+		RenderComponent& operator=(RenderComponent&&) = delete;
 
 		void Update(const float deltaTime) { (deltaTime); };
 		void Render() const;

@@ -15,6 +15,10 @@ namespace ieg
 	public:
 		explicit TransformComponent(Minigin* pEngine);
 		~TransformComponent() = default;
+		TransformComponent(const TransformComponent&) = delete;
+		TransformComponent(TransformComponent&&) = delete;
+		TransformComponent& operator=(const TransformComponent&) = delete;
+		TransformComponent& operator=(TransformComponent&&) = delete;
 
 		void Update(const float deltaTime) { (deltaTime);  };
 		void Render() const {};

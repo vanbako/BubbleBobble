@@ -117,9 +117,6 @@
     <ClInclude Include="ColorRGBA8.h">
       <Filter>Fragment</Filter>
     </ClInclude>
-    <ClInclude Include="Fragment.h">
-      <Filter>Fragment</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -170,9 +167,6 @@
     <ClCompile Include="GameObject.cpp">
       <Filter>Components</Filter>
     </ClCompile>
-    <ClCompile Include="NullAudio.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="MutedAudio.cpp">
       <Filter>ServiceLocator\Audio</Filter>
     </ClCompile>
@@ -185,8 +179,8 @@
     <ClCompile Include="ColorRGBA8.cpp">
       <Filter>Fragment</Filter>
     </ClCompile>
-    <ClCompile Include="Fragment.cpp">
-      <Filter>Fragment</Filter>
+    <ClCompile Include="NullAudio.cpp">
+      <Filter>ServiceLocator\Audio</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

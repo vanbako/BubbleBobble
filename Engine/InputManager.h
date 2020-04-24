@@ -13,6 +13,11 @@ namespace ieg
 	public:
 		explicit InputManager();
 		~InputManager();
+		InputManager(const InputManager&) = delete;
+		InputManager(InputManager&&) = delete;
+		InputManager& operator=(const InputManager&) = delete;
+		InputManager& operator=(InputManager&&) = delete;
+
 		bool ProcessInput();
 		bool IsKeyboardKeyDown(int key);
 		bool IsGamepadButtonPressed(WORD gamepadButtonCode) const;
