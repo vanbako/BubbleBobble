@@ -10,7 +10,7 @@ namespace ieg {
 		~BufferBubcode() = default;
 		BufferBubcode(const BufferBubcode&) = delete;
 		BufferBubcode(BufferBubcode&&) = delete;
-		BufferBubcode& operator= (const BufferBubcode&) = delete;
-		BufferBubcode& operator= (const BufferBubcode&&) = delete;
+		BufferBubcode& operator=(const BufferBubcode&) = delete;
+		BufferBubcode& operator=(BufferBubcode&&) = delete;
 	};
 }

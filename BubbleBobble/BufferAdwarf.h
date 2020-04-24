@@ -10,7 +10,7 @@ namespace ieg {
 		~BufferAdwarf() = default;
 		BufferAdwarf(const BufferAdwarf&) = delete;
 		BufferAdwarf(BufferAdwarf&&) = delete;
-		BufferAdwarf& operator= (const BufferAdwarf&) = delete;
-		BufferAdwarf& operator= (const BufferAdwarf&&) = delete;
+		BufferAdwarf& operator=(const BufferAdwarf&) = delete;
+		BufferAdwarf& operator=(BufferAdwarf&&) = delete;
 	};
 }

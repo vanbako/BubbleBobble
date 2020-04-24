@@ -10,7 +10,7 @@ namespace ieg {
 		~BufferAirflow() = default;
 		BufferAirflow(const BufferAirflow&) = delete;
 		BufferAirflow(BufferAirflow&&) = delete;
-		BufferAirflow& operator= (const BufferAirflow&) = delete;
-		BufferAirflow& operator= (const BufferAirflow&&) = delete;
+		BufferAirflow& operator=(const BufferAirflow&) = delete;
+		BufferAirflow& operator=(BufferAirflow&&) = delete;
 	};
 }

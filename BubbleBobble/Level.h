@@ -19,8 +19,8 @@ namespace ieg
 		~Level();
 		Level(const Level&) = delete;
 		Level(Level&&) = delete;
-		Level& operator= (const Level&) = delete;
-		Level& operator= (const Level&&) = delete;
+		Level& operator=(const Level&) = delete;
+		Level& operator=(Level&&) = delete;
 
 		ColorRGBA8* GetColorPalette();
 	private:

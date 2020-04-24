@@ -25,8 +25,8 @@ namespace ieg
 		~BubbleBobble();
 		BubbleBobble(const BubbleBobble&) = delete;
 		BubbleBobble(BubbleBobble&&) = delete;
-		BubbleBobble& operator= (const BubbleBobble&) = delete;
-		BubbleBobble& operator= (const BubbleBobble&&) = delete;
+		BubbleBobble& operator=(const BubbleBobble&) = delete;
+		BubbleBobble& operator=(BubbleBobble&&) = delete;
 
 		void Initialize();
 		void AddScenes();

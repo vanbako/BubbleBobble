@@ -16,8 +16,8 @@ namespace ieg
 		~ResourceManager();
 		ResourceManager(const ResourceManager&) = delete;
 		ResourceManager(ResourceManager&&) = delete;
-		ResourceManager& operator= (const ResourceManager&) = delete;
-		ResourceManager& operator= (const ResourceManager&&) = delete;
+		ResourceManager& operator=(const ResourceManager&) = delete;
+		ResourceManager& operator=(ResourceManager&&) = delete;
 
 		Texture2D* LoadTexture(const std::string& file, Renderer* pRenderer);
 		void RemoveTexture(Texture2D* pTexture);

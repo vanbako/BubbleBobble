@@ -13,8 +13,8 @@ namespace ieg
 		~StandingState() = default;
 		StandingState(const StandingState&) = delete;
 		StandingState(StandingState&&) = delete;
-		StandingState& operator= (const StandingState&) = delete;
-		StandingState& operator= (const StandingState&&) = delete;
+		StandingState& operator=(const StandingState&) = delete;
+		StandingState& operator=(StandingState&&) = delete;
 
 		AvatarState* Left();
 		AvatarState* Right();

@@ -10,7 +10,7 @@ namespace ieg {
 		~BufferAsecret() = default;
 		BufferAsecret(const BufferAsecret&) = delete;
 		BufferAsecret(BufferAsecret&&) = delete;
-		BufferAsecret& operator= (const BufferAsecret&) = delete;
-		BufferAsecret& operator= (const BufferAsecret&&) = delete;
+		BufferAsecret& operator=(const BufferAsecret&) = delete;
+		BufferAsecret& operator=(BufferAsecret&&) = delete;
 	};
 }

@@ -49,8 +49,8 @@ namespace ieg {
 		~BufferAsprites() = default;
 		BufferAsprites(const BufferAsprites&) = delete;
 		BufferAsprites(BufferAsprites&&) = delete;
-		BufferAsprites& operator= (const BufferAsprites&) = delete;
-		BufferAsprites& operator= (const BufferAsprites&&) = delete;
+		BufferAsprites& operator=(const BufferAsprites&) = delete;
+		BufferAsprites& operator=(BufferAsprites&&) = delete;
 
 		void GetSprites(ColorRGBA8* pSprite, size_t count, Sprite sprite, ColorRGBA8* pPalette) const;
 

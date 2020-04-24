@@ -23,8 +23,8 @@ namespace ieg
 		~Avatar();
 		Avatar(const Avatar&) = delete;
 		Avatar(Avatar&&) = delete;
-		Avatar& operator= (const Avatar&) = delete;
-		Avatar& operator= (const Avatar&&) = delete;
+		Avatar& operator=(const Avatar&) = delete;
+		Avatar& operator=(Avatar&&) = delete;
 	private:
 		Minigin* mpEngine;
 		Scene* mpScene;

@@ -16,8 +16,8 @@ namespace ieg
 		~RegularAudio();
 		RegularAudio(const RegularAudio&) = delete;
 		RegularAudio(RegularAudio&&) = delete;
-		RegularAudio& operator= (const RegularAudio&) = delete;
-		RegularAudio& operator= (const RegularAudio&&) = delete;
+		RegularAudio& operator=(const RegularAudio&) = delete;
+		RegularAudio& operator=(RegularAudio&&) = delete;
 
 		virtual size_t AddSound(const std::string& filename, bool loop) override;
 		virtual void PlaySound(size_t soundId) override;

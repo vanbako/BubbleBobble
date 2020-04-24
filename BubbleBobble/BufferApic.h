@@ -12,8 +12,8 @@ namespace ieg {
 		~BufferApic() = default;
 		BufferApic(const BufferApic&) = delete;
 		BufferApic(BufferApic&&) = delete;
-		BufferApic& operator= (const BufferApic&) = delete;
-		BufferApic& operator= (const BufferApic&&) = delete;
+		BufferApic& operator=(const BufferApic&) = delete;
+		BufferApic& operator=(BufferApic&&) = delete;
 
 		void GetPic(ColorRGBA8* pPic, ColorRGBA8* pPalette) const;
 	private:

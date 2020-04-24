@@ -16,8 +16,8 @@ namespace ieg
 		~IntroComponent() = default;
 		IntroComponent(const IntroComponent&) = delete;
 		IntroComponent(IntroComponent&&) = delete;
-		IntroComponent& operator= (const IntroComponent&) = delete;
-		IntroComponent& operator= (const IntroComponent&&) = delete;
+		IntroComponent& operator=(const IntroComponent&) = delete;
+		IntroComponent& operator=(IntroComponent&&) = delete;
 
 		virtual void Update(const float deltaTime) override;
 		virtual void Render() const override {};

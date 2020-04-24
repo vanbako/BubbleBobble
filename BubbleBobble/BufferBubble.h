@@ -13,8 +13,8 @@ namespace ieg {
 		~BufferBubble() = default;
 		BufferBubble(const BufferBubble&) = delete;
 		BufferBubble(BufferBubble&&) = delete;
-		BufferBubble& operator= (const BufferBubble&) = delete;
-		BufferBubble& operator= (const BufferBubble&&) = delete;
+		BufferBubble& operator=(const BufferBubble&) = delete;
+		BufferBubble& operator=(BufferBubble&&) = delete;
 
 		void GetIntroColors(ColorRGBA8* pPalette);
 		void GetLevelColors(ColorRGBA8* pPalette, size_t level);

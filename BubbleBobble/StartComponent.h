@@ -18,8 +18,8 @@ namespace ieg
 		~StartComponent() = default;
 		StartComponent(const StartComponent&) = delete;
 		StartComponent(StartComponent&&) = delete;
-		StartComponent& operator= (const StartComponent&) = delete;
-		StartComponent& operator= (const StartComponent&&) = delete;
+		StartComponent& operator=(const StartComponent&) = delete;
+		StartComponent& operator=(StartComponent&&) = delete;
 
 		virtual void Update(const float deltaTime) override;
 		virtual void Render() const override {};

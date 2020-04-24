@@ -10,7 +10,7 @@ namespace ieg {
 		~BufferAextend() = default;
 		BufferAextend(const BufferAextend&) = delete;
 		BufferAextend(BufferAextend&&) = delete;
-		BufferAextend& operator= (const BufferAextend&) = delete;
-		BufferAextend& operator= (const BufferAextend&&) = delete;
+		BufferAextend& operator=(const BufferAextend&) = delete;
+		BufferAextend& operator=(BufferAextend&&) = delete;
 	};
 }

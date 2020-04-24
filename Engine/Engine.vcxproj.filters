@@ -117,8 +117,8 @@
     <ClInclude Include="ColorRGBA8.h">
       <Filter>Fragment</Filter>
     </ClInclude>
-    <ClInclude Include="Frame.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Fragment.h">
+      <Filter>Fragment</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -185,8 +185,8 @@
     <ClCompile Include="ColorRGBA8.cpp">
       <Filter>Fragment</Filter>
     </ClCompile>
-    <ClCompile Include="Frame.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Fragment.cpp">
+      <Filter>Fragment</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

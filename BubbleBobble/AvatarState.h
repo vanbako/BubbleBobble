@@ -11,8 +11,8 @@ namespace ieg
 		virtual ~AvatarState() = default;
 		AvatarState(const AvatarState&) = delete;
 		AvatarState(AvatarState&&) = delete;
-		AvatarState& operator= (const AvatarState&) = delete;
-		AvatarState& operator= (const AvatarState&&) = delete;
+		AvatarState& operator=(const AvatarState&) = delete;
+		AvatarState& operator=(AvatarState&&) = delete;
 
 		virtual AvatarState* Left() = 0;
 		virtual AvatarState* Right() = 0;

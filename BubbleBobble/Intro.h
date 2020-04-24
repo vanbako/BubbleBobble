@@ -17,8 +17,8 @@ namespace ieg
 		~Intro();
 		Intro(const Intro&) = delete;
 		Intro(Intro&&) = delete;
-		Intro& operator= (const Intro&) = delete;
-		Intro& operator= (const Intro&&) = delete;
+		Intro& operator=(const Intro&) = delete;
+		Intro& operator=(Intro&&) = delete;
 	private:
 		Minigin* mpEngine;
 		Scene* mpScene;

@@ -15,8 +15,8 @@ namespace ieg
 		~AvatarComponent();
 		AvatarComponent(const AvatarComponent&) = delete;
 		AvatarComponent(AvatarComponent&&) = delete;
-		AvatarComponent& operator= (const AvatarComponent&) = delete;
-		AvatarComponent& operator= (const AvatarComponent&&) = delete;
+		AvatarComponent& operator=(const AvatarComponent&) = delete;
+		AvatarComponent& operator=(AvatarComponent&&) = delete;
 
 		void Initialize(Avatar* pAvatar);
 

@@ -11,8 +11,8 @@ namespace ieg
 		virtual ~RightCommand() = default;
 		RightCommand(const RightCommand&) = delete;
 		RightCommand(RightCommand&&) = delete;
-		RightCommand& operator= (const RightCommand&) = delete;
-		RightCommand& operator= (const RightCommand&&) = delete;
+		RightCommand& operator=(const RightCommand&) = delete;
+		RightCommand& operator=(RightCommand&&) = delete;
 
 		virtual void Execute(Component* pAvatar) override;
 	};

@@ -13,8 +13,8 @@ namespace ieg
 		~MutedAudio() = default;
 		MutedAudio(const MutedAudio&) = delete;
 		MutedAudio(MutedAudio&&) = delete;
-		MutedAudio& operator= (const MutedAudio&) = delete;
-		MutedAudio& operator= (const MutedAudio&&) = delete;
+		MutedAudio& operator=(const MutedAudio&) = delete;
+		MutedAudio& operator=(MutedAudio&&) = delete;
 
 		virtual size_t AddSound(const std::string& filename, bool loop) override;
 		virtual void PlaySound(size_t soundId) override;

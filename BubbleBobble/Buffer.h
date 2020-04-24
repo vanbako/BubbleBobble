@@ -10,8 +10,8 @@ namespace ieg
 		virtual ~Buffer();
 		Buffer(const Buffer&) = delete;
 		Buffer(Buffer&&) = delete;
-		Buffer& operator= (const Buffer&) = delete;
-		Buffer& operator= (const Buffer&&) = delete;
+		Buffer& operator=(const Buffer&) = delete;
+		Buffer& operator=(Buffer&&) = delete;
 
 		bool LoadFile();
 		char* GetData();

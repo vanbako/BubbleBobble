@@ -11,8 +11,8 @@ namespace ieg
 		virtual ~StartCommand() = default;
 		StartCommand(const StartCommand&) = delete;
 		StartCommand(StartCommand&&) = delete;
-		StartCommand& operator= (const StartCommand&) = delete;
-		StartCommand& operator= (const StartCommand&&) = delete;
+		StartCommand& operator=(const StartCommand&) = delete;
+		StartCommand& operator=(StartCommand&&) = delete;
 
 		virtual void Execute(Component* pActor) override;
 	};

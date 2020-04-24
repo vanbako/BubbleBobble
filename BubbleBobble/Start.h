@@ -16,8 +16,8 @@ namespace ieg
 		~Start();
 		Start(const Start&) = delete;
 		Start(Start&&) = delete;
-		Start& operator= (const Start&) = delete;
-		Start& operator= (const Start&&) = delete;
+		Start& operator=(const Start&) = delete;
+		Start& operator=(Start&&) = delete;
 	private:
 		Minigin* mpEngine;
 		Scene* mpScene;

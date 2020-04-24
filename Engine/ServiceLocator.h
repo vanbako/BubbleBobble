@@ -13,8 +13,8 @@ namespace ieg
 		~ServiceLocator() = default;
 		ServiceLocator(const ServiceLocator&) = delete;
 		ServiceLocator(ServiceLocator&&) = delete;
-		ServiceLocator& operator= (const ServiceLocator&) = delete;
-		ServiceLocator& operator= (const ServiceLocator&&) = delete;
+		ServiceLocator& operator=(const ServiceLocator&) = delete;
+		ServiceLocator& operator=(ServiceLocator&&) = delete;
 
 		static void init();
 		static Audio* GetAudio();

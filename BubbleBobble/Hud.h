@@ -17,8 +17,8 @@ namespace ieg
 		~Hud();
 		Hud(const Hud&) = delete;
 		Hud(Hud&&) = delete;
-		Hud& operator= (const Hud&) = delete;
-		Hud& operator= (const Hud&&) = delete;
+		Hud& operator=(const Hud&) = delete;
+		Hud& operator=(Hud&&) = delete;
 	private:
 		Minigin* mpEngine;
 		Scene* mpScene;

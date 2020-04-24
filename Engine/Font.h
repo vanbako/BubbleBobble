@@ -11,8 +11,8 @@ namespace ieg
 		~Font();
 		Font(const Font&) = delete;
 		Font(Font&&) = delete;
-		Font& operator= (const Font&) = delete;
-		Font& operator= (const Font&&) = delete;
+		Font& operator=(const Font&) = delete;
+		Font& operator=(Font&&) = delete;
 
 		_TTF_Font* GetFont() const;
 	private:
