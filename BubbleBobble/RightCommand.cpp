@@ -1,10 +1,13 @@
 #include "pch.h"
 #include "RightCommand.h"
 #include "AvatarComponent.h"
+#include "AvatarState.h"
+#include "../Engine/GameObject.h"
 
 using namespace ieg;
 
-void RightCommand::Execute(Component* pAvatar)
+void RightCommand::Execute(ModelComponent* pAvatar)
 {
-	((AvatarComponent*)pAvatar)->Right();
+	GameObject* pGameObject{ pAvatar->GetGameObject() };
+	pGameObject->ReplaceState(((AvatarState*)pGameObject->GetState())->Right());
 }

@@ -1,12 +1,12 @@
 #include "pch.h"
 #include "InputAction.h"
 #include "Command.h"
-#include "Component.h"
+#include "ModelComponent.h"
 
 using namespace ieg;
 
 // Only InputManager can create InputAction
-InputAction::InputAction(WORD code, int key, Command* pCommand, Component* pActor)
+InputAction::InputAction(WORD code, int key, Command* pCommand, ModelComponent* pActor)
 	: mGamepadButtonCode{ code }
 	, mKeyboardKey{ key }
 	, mpCommand{ pCommand }
@@ -29,7 +29,7 @@ void InputAction::SetCommand(Command* pCommand)
 	mpCommand = pCommand;
 }
 
-void InputAction::SetActor(Component* pComponent)
+void InputAction::SetActor(ModelComponent* pComponent)
 {
 	mpActor = pComponent;
 }
@@ -44,12 +44,12 @@ const int InputAction::GetKeyboardKey() const
 	return mKeyboardKey;
 }
 
-ieg::Command* InputAction::GetCommand()
+Command* InputAction::GetCommand()
 {
 	return mpCommand;
 }
 
-ieg::Component* InputAction::GetActor()
+ModelComponent* InputAction::GetActor()
 {
 	return mpActor;
 }

@@ -5,8 +5,6 @@
 namespace ieg
 {
 	class InputAction;
-	class Command;
-	class Component;
 
 	class InputManager final
 	{

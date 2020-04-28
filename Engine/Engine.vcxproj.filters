@@ -13,9 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Components">
-      <UniqueIdentifier>{3b9aaa40-1e2d-403d-ae53-e93cce55e01a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Input">
       <UniqueIdentifier>{ee13e25a-f365-4509-a9ac-e58456837693}</UniqueIdentifier>
     </Filter>
@@ -43,25 +40,22 @@
     <Filter Include="Fragment">
       <UniqueIdentifier>{070b57c7-6931-4557-ab4d-d1ea31750559}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object">
+      <UniqueIdentifier>{94b062b4-6dd2-4f73-b85e-d889c2204a65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\ModelComponent">
+      <UniqueIdentifier>{3b9aaa40-1e2d-403d-ae53-e93cce55e01a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\ViewComponent">
+      <UniqueIdentifier>{b416a863-e07a-49a8-9c19-184cac436682}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\State">
+      <UniqueIdentifier>{a0ba7cc4-dc07-4f95-98de-2980a99ef5d4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Component.h">
-      <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="FpsComponent.h">
-      <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="RenderComponent.h">
-      <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="TextComponent.h">
-      <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="TransformComponent.h">
-      <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="Scene.h">
       <Filter>Scene</Filter>
@@ -99,9 +93,6 @@
     <ClInclude Include="Minigin.h">
       <Filter>Minigin</Filter>
     </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>Components</Filter>
-    </ClInclude>
     <ClInclude Include="Audio.h">
       <Filter>ServiceLocator\Audio</Filter>
     </ClInclude>
@@ -117,22 +108,34 @@
     <ClInclude Include="ColorRGBA8.h">
       <Filter>Fragment</Filter>
     </ClInclude>
+    <ClInclude Include="ModelComponent.h">
+      <Filter>Object\ModelComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="TransformModelComponent.h">
+      <Filter>Object\ModelComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderViewComponent.h">
+      <Filter>Object\ViewComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="TextViewComponent.h">
+      <Filter>Object\ViewComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="ViewComponent.h">
+      <Filter>Object\ViewComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="FpsViewComponent.h">
+      <Filter>Object\ViewComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>Object\State</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="FpsComponent.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
-    <ClCompile Include="RenderComponent.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
-    <ClCompile Include="TextComponent.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
-    <ClCompile Include="TransformComponent.cpp">
-      <Filter>Components</Filter>
     </ClCompile>
     <ClCompile Include="Scene.cpp">
       <Filter>Scene</Filter>
@@ -164,23 +167,41 @@
     <ClCompile Include="Minigin.cpp">
       <Filter>Minigin</Filter>
     </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
     <ClCompile Include="MutedAudio.cpp">
       <Filter>ServiceLocator\Audio</Filter>
     </ClCompile>
     <ClCompile Include="RegularAudio.cpp">
       <Filter>ServiceLocator\Audio</Filter>
     </ClCompile>
-    <ClCompile Include="Component.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
     <ClCompile Include="ColorRGBA8.cpp">
       <Filter>Fragment</Filter>
     </ClCompile>
     <ClCompile Include="NullAudio.cpp">
       <Filter>ServiceLocator\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelComponent.cpp">
+      <Filter>Object\ModelComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="TransformModelComponent.cpp">
+      <Filter>Object\ModelComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderViewComponent.cpp">
+      <Filter>Object\ViewComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="TextViewComponent.cpp">
+      <Filter>Object\ViewComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="ViewComponent.cpp">
+      <Filter>Object\ViewComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="FpsViewComponent.cpp">
+      <Filter>Object\ViewComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="State.cpp">
+      <Filter>Object\State</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

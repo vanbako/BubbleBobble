@@ -10,10 +10,10 @@
 #include <SDL.h>
 #include "GameObject.h"
 #include "Scene.h"
-#include "TransformComponent.h"
-#include "RenderComponent.h"
-#include "TextComponent.h"
-#include "FpsComponent.h"
+#include "TransformModelComponent.h"
+#include "RenderViewComponent.h"
+#include "TextViewComponent.h"
+#include "FpsViewComponent.h"
 
 using namespace ieg;
 

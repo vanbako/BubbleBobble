@@ -5,7 +5,8 @@
 #include "../Engine/Minigin.h"
 #include "../Engine/Scene.h"
 #include "../Engine/Renderer.h"
-#include "../Engine/TransformComponent.h"
+#include "../Engine/TransformModelComponent.h"
+#include "../Engine/RenderViewComponent.h"
 #include "AvatarComponent.h"
 #include "../Engine/ColorRGBA8.h"
 #include <SDL.h>
@@ -28,15 +29,15 @@ Avatar::Avatar(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, C
 	BufferAsprites* pAsprites{ (BufferAsprites*)mpBufferManager->GetBuffer(EnumBuffer::Asprites) };
 
 	mpGameObject = mpScene->CreateObject<GameObject>();
-	TransformComponent* pTransformComponent{ mpGameObject->CreateComponent<TransformComponent>(mpEngine) };
+	TransformModelComponent* pTransformComponent{ mpGameObject->CreateModelComponent<TransformModelComponent>(mpEngine) };
 	if (avatarType == AvatarType::Bub)
 		pTransformComponent->SetPosition(16.f, 176.f, 0.f);
 	else
 		pTransformComponent->SetPosition(208.f, 176.f, 0.f);
-	RenderComponent* pRenderComponent{ mpGameObject->CreateComponent<RenderComponent>(mpEngine) };
+	RenderViewComponent* pRenderComponent{ mpGameObject->CreateViewComponent<RenderViewComponent>(mpEngine) };
 	pRenderComponent->SetTransformComponent(pTransformComponent);
-	AvatarComponent* pAvatarComponent{ mpGameObject->CreateComponent<AvatarComponent>(mpEngine) };
-	pAvatarComponent->Initialize(this);
+	AvatarComponent* pAvatarComponent{ mpGameObject->CreateModelComponent<AvatarComponent>(mpEngine) };
+	(pAvatarComponent);
 
 	ColorRGBA8* pSprite{ new ColorRGBA8[mCount * BufferAsprites::GetWidth() * BufferAsprites::GetHeight()] };
 	if (avatarType == AvatarType::Bub)

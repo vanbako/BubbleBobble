@@ -1,19 +1,19 @@
 #include "pch.h"
-#include "FpsComponent.h"
-#include "TextComponent.h"
+#include "FpsViewComponent.h"
+#include "TextViewComponent.h"
 #include "Minigin.h"
 #include <stdio.h>
 
 using namespace ieg;
 
-FpsComponent::FpsComponent(Minigin* pEngine)
-	: Component(pEngine)
+FpsViewComponent::FpsViewComponent(Minigin* pEngine)
+	: ViewComponent(pEngine)
 	, mFps{ 0.f }
 	, mpTextComponent{ nullptr }
 {
 }
 
-void FpsComponent::Update(const float deltaTime)
+void FpsViewComponent::Update(const float deltaTime)
 {
 	if (mpTextComponent != nullptr)
 	{
@@ -26,7 +26,7 @@ void FpsComponent::Update(const float deltaTime)
 	}
 }
 
-void FpsComponent::SetTextComponent(TextComponent* pTextComponent)
+void FpsViewComponent::SetTextComponent(TextViewComponent* pTextComponent)
 {
 	mpTextComponent = pTextComponent;
 	mpTextComponent->SetText(std::to_string(mFps));

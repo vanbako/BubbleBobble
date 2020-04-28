@@ -2,7 +2,6 @@
 #include "InputManager.h"
 #include "InputAction.h"
 #include "Command.h"
-#include "Component.h"
 #include <SDL.h>
 
 using namespace ieg;

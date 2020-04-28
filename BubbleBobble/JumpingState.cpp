@@ -3,11 +3,6 @@
 
 using namespace ieg;
 
-JumpingState::JumpingState(Avatar* pAvatar)
-	: AvatarState(pAvatar)
-{
-}
-
 AvatarState* JumpingState::Left()
 {
 	return nullptr;
@@ -26,9 +21,4 @@ AvatarState* JumpingState::Fire()
 AvatarState* JumpingState::Jump()
 {
 	return nullptr;
-}
-
-void JumpingState::Update(const float deltaTime)
-{
-	(deltaTime);
 }

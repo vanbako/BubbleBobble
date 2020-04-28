@@ -3,15 +3,15 @@
 #include <SDL_ttf.h>
 #include "Renderer.h"
 #include "Font.h"
-#include "TextComponent.h"
-#include "RenderComponent.h"
+#include "TextViewComponent.h"
+#include "RenderViewComponent.h"
 #include "Minigin.h"
 #include "Texture2D.h"
 
 using namespace ieg;
 
-TextComponent::TextComponent(Minigin* pEngine, const Font* pFont)
-	: Component(pEngine)
+TextViewComponent::TextViewComponent(Minigin* pEngine, const Font* pFont)
+	: ViewComponent(pEngine)
 	, mpFont{ pFont }
 	, mNeedsUpdate{ true }
 	, mText{}
@@ -19,7 +19,7 @@ TextComponent::TextComponent(Minigin* pEngine, const Font* pFont)
 {
 }
 
-void TextComponent::Update(const float deltaTime)
+void TextViewComponent::Update(const float deltaTime)
 {
 	(deltaTime);
 	if (mNeedsUpdate && mpRenderComponent != nullptr)
@@ -38,12 +38,12 @@ void TextComponent::Update(const float deltaTime)
 	}
 }
 
-void TextComponent::SetRenderComponent(RenderComponent* pRenderComponent)
+void TextViewComponent::SetRenderComponent(RenderViewComponent* pRenderComponent)
 {
 	mpRenderComponent = pRenderComponent;
 }
 
-void TextComponent::SetText(const std::string& text)
+void TextViewComponent::SetText(const std::string& text)
 {
 	mText = text;
 	mNeedsUpdate = true;

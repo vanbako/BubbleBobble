@@ -11,6 +11,8 @@
 #include "../Engine/Renderer.h"
 #include "../Engine/Texture2D.h"
 #include "../Engine/ResourceManager.h"
+#include "../Engine/TransformModelComponent.h"
+#include "../Engine/RenderViewComponent.h"
 #include <SDL.h>
 
 using namespace ieg;
@@ -39,9 +41,9 @@ Hud::Hud(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager)
 	BufferAblocks* pAblocks{ (BufferAblocks*)mpBufferManager->GetBuffer(EnumBuffer::Ablocks) };
 
 	mpGameObject = mpScene->CreateObject<GameObject>();
-	TransformComponent* pTransformComponent{ mpGameObject->CreateComponent<TransformComponent>(mpEngine) };
+	TransformModelComponent* pTransformComponent{ mpGameObject->CreateModelComponent<TransformModelComponent>(mpEngine) };
 	pTransformComponent->SetPosition(mPosX, mPosY, 0.f);
-	RenderComponent* pRenderComponent{ mpGameObject->CreateComponent<RenderComponent>(mpEngine) };
+	RenderViewComponent* pRenderComponent{ mpGameObject->CreateViewComponent<RenderViewComponent>(mpEngine) };
 	pRenderComponent->SetTransformComponent(pTransformComponent);
 
 	std::memcpy(mpColorPalette, mpLevel->GetColorPalette(), 16 * sizeof(ColorRGBA8));

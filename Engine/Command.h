@@ -2,7 +2,7 @@
 
 namespace ieg
 {
-	class Component;
+	class ModelComponent;
 
 	class Command
 	{
@@ -14,6 +14,6 @@ namespace ieg
 		Command& operator=(const Command&) = delete;
 		Command& operator=(Command&&) = delete;
 
-		virtual void Execute(Component* pActor) = 0;
+		virtual void Execute(ModelComponent* pActor) = 0;
 	};
 }

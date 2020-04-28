@@ -4,12 +4,12 @@
 namespace ieg
 {
 	class Command;
-	class Component;
+	class ModelComponent;
 
 	class InputAction final
 	{
 	public:
-		explicit InputAction(WORD code = 0, int key = 0, Command* pCommand = nullptr, Component* pActor = nullptr);
+		explicit InputAction(WORD code = 0, int key = 0, Command* pCommand = nullptr, ModelComponent* pActor = nullptr);
 		~InputAction() = default;
 		InputAction(const InputAction&) = delete;
 		InputAction(InputAction&&) = delete;
@@ -19,15 +19,15 @@ namespace ieg
 		void SetGamepadButtonCode(const WORD code);
 		void SetKeyboardKey(const int key);
 		void SetCommand(Command* pCommand);
-		void SetActor(Component* pComponent);
+		void SetActor(ModelComponent* pComponent);
 		const WORD GetGamepadButtonCode() const;
 		const int GetKeyboardKey() const;
 		Command* GetCommand();
-		Component* GetActor();
+		ModelComponent* GetActor();
 	private:
 		WORD mGamepadButtonCode;
 		int mKeyboardKey;
 		Command* mpCommand;
-		Component* mpActor;
+		ModelComponent* mpActor;
 	};
 }

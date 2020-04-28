@@ -31,7 +31,7 @@
     <Filter Include="Game">
       <UniqueIdentifier>{293f5462-bf7d-49a6-a9bd-b2c08c4db186}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameObjects">
+    <Filter Include="Prefabs">
       <UniqueIdentifier>{5067143d-99e5-4394-b72b-f672f0a19a4d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -58,7 +58,7 @@
       <Filter>Command</Filter>
     </ClCompile>
     <ClCompile Include="Level.cpp">
-      <Filter>GameObjects</Filter>
+      <Filter>Prefabs</Filter>
     </ClCompile>
     <ClCompile Include="Buffer.cpp">
       <Filter>Buffer</Filter>
@@ -100,16 +100,16 @@
       <Filter>Buffer</Filter>
     </ClCompile>
     <ClCompile Include="Hud.cpp">
-      <Filter>GameObjects</Filter>
+      <Filter>Prefabs</Filter>
     </ClCompile>
     <ClCompile Include="Intro.cpp">
-      <Filter>GameObjects</Filter>
+      <Filter>Prefabs</Filter>
     </ClCompile>
     <ClCompile Include="IntroComponent.cpp">
       <Filter>Component</Filter>
     </ClCompile>
     <ClCompile Include="Start.cpp">
-      <Filter>GameObjects</Filter>
+      <Filter>Prefabs</Filter>
     </ClCompile>
     <ClCompile Include="StartComponent.cpp">
       <Filter>Component</Filter>
@@ -120,16 +120,16 @@
     <ClCompile Include="StandingState.cpp">
       <Filter>State</Filter>
     </ClCompile>
-    <ClCompile Include="AvatarState.cpp">
-      <Filter>State</Filter>
-    </ClCompile>
     <ClCompile Include="AvatarComponent.cpp">
       <Filter>Component</Filter>
     </ClCompile>
     <ClCompile Include="Avatar.cpp">
-      <Filter>GameObjects</Filter>
+      <Filter>Prefabs</Filter>
     </ClCompile>
     <ClCompile Include="JumpingState.cpp">
+      <Filter>State</Filter>
+    </ClCompile>
+    <ClCompile Include="AvatarState.cpp">
       <Filter>State</Filter>
     </ClCompile>
   </ItemGroup>
@@ -156,7 +156,7 @@
       <Filter>Component</Filter>
     </ClInclude>
     <ClInclude Include="Level.h">
-      <Filter>GameObjects</Filter>
+      <Filter>Prefabs</Filter>
     </ClInclude>
     <ClInclude Include="Buffer.h">
       <Filter>Buffer</Filter>
@@ -198,19 +198,16 @@
       <Filter>Buffer</Filter>
     </ClInclude>
     <ClInclude Include="Hud.h">
-      <Filter>GameObjects</Filter>
+      <Filter>Prefabs</Filter>
     </ClInclude>
     <ClInclude Include="Intro.h">
-      <Filter>GameObjects</Filter>
+      <Filter>Prefabs</Filter>
     </ClInclude>
     <ClInclude Include="Start.h">
-      <Filter>GameObjects</Filter>
+      <Filter>Prefabs</Filter>
     </ClInclude>
     <ClInclude Include="StartComponent.h">
       <Filter>Component</Filter>
-    </ClInclude>
-    <ClInclude Include="AvatarState.h">
-      <Filter>State</Filter>
     </ClInclude>
     <ClInclude Include="BubbleBobble.h">
       <Filter>Game</Filter>
@@ -222,9 +219,12 @@
       <Filter>State</Filter>
     </ClInclude>
     <ClInclude Include="Avatar.h">
-      <Filter>GameObjects</Filter>
+      <Filter>Prefabs</Filter>
     </ClInclude>
     <ClInclude Include="JumpingState.h">
+      <Filter>State</Filter>
+    </ClInclude>
+    <ClInclude Include="AvatarState.h">
       <Filter>State</Filter>
     </ClInclude>
   </ItemGroup>

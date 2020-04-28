@@ -3,23 +3,20 @@
 
 namespace ieg
 {
-	class Avatar;
-
 	class StandingState final
 		: public AvatarState
 	{
 	public:
-		StandingState(Avatar* pAvatar);
+		explicit StandingState() = default;
 		~StandingState() = default;
 		StandingState(const StandingState&) = delete;
 		StandingState(StandingState&&) = delete;
 		StandingState& operator=(const StandingState&) = delete;
 		StandingState& operator=(StandingState&&) = delete;
 
-		AvatarState* Left();
-		AvatarState* Right();
-		AvatarState* Fire();
-		AvatarState* Jump();
-		void Update(const float deltaTime);
+		AvatarState* Left() override;
+		AvatarState* Right() override;
+		AvatarState* Fire() override;
+		AvatarState* Jump() override;
 	};
 }

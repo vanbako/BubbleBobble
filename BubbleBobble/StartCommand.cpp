@@ -4,7 +4,7 @@
 
 using namespace ieg;
 
-void StartCommand::Execute(Component* pActor)
+void StartCommand::Execute(ModelComponent* pActor)
 {
 	((IntroComponent*)pActor)->Start();
 }

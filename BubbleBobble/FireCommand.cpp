@@ -1,10 +1,13 @@
 #include "pch.h"
 #include "FireCommand.h"
 #include "AvatarComponent.h"
+#include "AvatarState.h"
+#include "../Engine/GameObject.h"
 
 using namespace ieg;
 
-void FireCommand::Execute(Component* pAvatar)
+void FireCommand::Execute(ModelComponent* pAvatar)
 {
-	((AvatarComponent*)pAvatar)->Fire();
+	GameObject* pGameObject{ pAvatar->GetGameObject() };
+	pGameObject->ReplaceState(((AvatarState*)pGameObject->GetState())->Fire());
 }

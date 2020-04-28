@@ -4,6 +4,7 @@
 #include "../Engine/SceneManager.h"
 #include "../Engine/Scene.h"
 #include "../Engine/ServiceLocator.h"
+#include "../Engine/RenderViewComponent.h"
 
 using namespace ieg;
 
@@ -11,7 +12,7 @@ const float StartComponent::mStartWaitVal{ 8.917f };
 const float StartComponent::mSwapWaitVal{ 0.15f };
 
 StartComponent::StartComponent(Minigin* pEngine)
-	: Component(pEngine)
+	: ModelComponent(pEngine)
 	, mpStartScene{ nullptr }
 	, mpAudio{ pEngine->GetServiceLocator()->GetAudio() }
 	, mStartSoundId{ 0 }
@@ -56,7 +57,7 @@ void StartComponent::SetStartScene(Scene* pScene)
 	mpStartScene = pScene;
 }
 
-void ieg::StartComponent::SetRenderComponent(RenderComponent* pRenderComponent)
+void ieg::StartComponent::SetRenderComponent(RenderViewComponent* pRenderComponent)
 {
 	mpRenderComponent = pRenderComponent;
 }

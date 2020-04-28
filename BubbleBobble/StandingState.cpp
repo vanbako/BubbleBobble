@@ -1,13 +1,10 @@
 #include "pch.h"
 #include "StandingState.h"
 #include "JumpingState.h"
+#include "AvatarComponent.h"
+#include "../Engine/GameObject.h"
 
 using namespace ieg;
-
-StandingState::StandingState(Avatar* pAvatar)
-	: AvatarState(pAvatar)
-{
-}
 
 AvatarState* StandingState::Left()
 {
@@ -21,15 +18,11 @@ AvatarState* StandingState::Right()
 
 AvatarState* StandingState::Fire()
 {
+	mpGameObject->GetModelComponent<AvatarComponent>()->SetFiring(true);
 	return nullptr;
 }
 
 AvatarState* StandingState::Jump()
 {
-	return new JumpingState{ mpAvatar };
-}
-
-void StandingState::Update(const float deltaTime)
-{
-	(deltaTime);
+	return new JumpingState{};
 }

@@ -1,14 +1,14 @@
 #include "pch.h"
-#include "RenderComponent.h"
-#include "TransformComponent.h"
+#include "RenderViewComponent.h"
+#include "TransformModelComponent.h"
 #include "ResourceManager.h"
 #include "Renderer.h"
 #include "Minigin.h"
 
 using namespace ieg;
 
-RenderComponent::RenderComponent(Minigin* pEngine)
-	: Component(pEngine)
+RenderViewComponent::RenderViewComponent(Minigin* pEngine)
+	: ViewComponent(pEngine)
 	, mpTransformComponent{ nullptr }
 	, mpTexture{ nullptr }
 	, mWidth{ 0.f }
@@ -17,7 +17,7 @@ RenderComponent::RenderComponent(Minigin* pEngine)
 {
 }
 
-void RenderComponent::Render() const
+void RenderViewComponent::Render() const
 {
 	if (mpTransformComponent != nullptr && mpTexture != nullptr)
 	{
@@ -29,35 +29,35 @@ void RenderComponent::Render() const
 	}
 }
 
-void RenderComponent::SetTransformComponent(TransformComponent* pTransformComponent)
+void RenderViewComponent::SetTransformComponent(TransformModelComponent* pTransformComponent)
 {
 	mpTransformComponent = pTransformComponent;
 }
 
-void RenderComponent::SetTexture(const std::string& file)
+void RenderViewComponent::SetTexture(const std::string& file)
 {
 	mpTexture = mpEngine->GetResourceManager()->LoadTexture(file, mpEngine->GetRenderer());
 }
 
 // When Texture2D is used, we don't remove the old one from ResourceManager
 // as it might be used for other RenderComponents
-void RenderComponent::SetTexture(Texture2D* pTexture)
+void RenderViewComponent::SetTexture(Texture2D* pTexture)
 {
 	mpTexture = pTexture;
 }
 
-void RenderComponent::SetSize(float width, float height)
+void RenderViewComponent::SetSize(float width, float height)
 {
 	mWidth = width;
 	mHeight = height;
 }
 
-void RenderComponent::SetIndex(size_t index)
+void RenderViewComponent::SetIndex(size_t index)
 {
 	mIndex = index;
 }
 
-Texture2D* RenderComponent::SetTexture(SDL_Texture* pSDLTexture)
+Texture2D* RenderViewComponent::SetTexture(SDL_Texture* pSDLTexture)
 {
 	mpTexture = mpEngine->GetResourceManager()->CreateTexture(pSDLTexture);
 	return mpTexture;
@@ -66,7 +66,7 @@ Texture2D* RenderComponent::SetTexture(SDL_Texture* pSDLTexture)
 // When SDL_Texture is used, it's a new one, so we remove the old
 // Removing the old is mainly used for changing text textures
 // as this is way too confusing, I changed this to ReplaceTexture
-Texture2D* RenderComponent::ReplaceTexture(SDL_Texture* pSDLTexture)
+Texture2D* RenderViewComponent::ReplaceTexture(SDL_Texture* pSDLTexture)
 {
 	if (mpTexture != nullptr)
 		mpEngine->GetResourceManager()->RemoveTexture(mpTexture);

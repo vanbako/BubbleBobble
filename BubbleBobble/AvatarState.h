@@ -1,25 +1,22 @@
 #pragma once
+#include "../Engine/State.h"
 
 namespace ieg
 {
-	class Avatar;
-
 	class AvatarState
+		: public State
 	{
 	public:
-		AvatarState(Avatar* pAvatar);
+		explicit AvatarState() = default;
 		virtual ~AvatarState() = default;
 		AvatarState(const AvatarState&) = delete;
 		AvatarState(AvatarState&&) = delete;
 		AvatarState& operator=(const AvatarState&) = delete;
 		AvatarState& operator=(AvatarState&&) = delete;
 
-		virtual AvatarState* Left() = 0;
-		virtual AvatarState* Right() = 0;
-		virtual AvatarState* Fire() = 0;
-		virtual AvatarState* Jump() = 0;
-		virtual void Update(const float deltaTime) = 0;
-	protected:
-		Avatar* mpAvatar;
+		virtual State* Left() = 0;
+		virtual State* Right() = 0;
+		virtual State* Fire() = 0;
+		virtual State* Jump() = 0;
 	};
 }

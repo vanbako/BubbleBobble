@@ -1,5 +1,5 @@
 #pragma once
-#include "../Engine/Component.h"
+#include "../Engine/ModelComponent.h"
 
 namespace ieg
 {
@@ -9,7 +9,7 @@ namespace ieg
 	class Scene;
 
 	class IntroComponent final
-		: public Component
+		: public ModelComponent
 	{
 	public:
 		explicit IntroComponent(Minigin* pEngine);
@@ -20,7 +20,6 @@ namespace ieg
 		IntroComponent& operator=(IntroComponent&&) = delete;
 
 		virtual void Update(const float deltaTime) override;
-		virtual void Render() const override {};
 
 		void SetStartScene(Scene* pScene);
 

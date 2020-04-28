@@ -15,6 +15,8 @@
 #include "../Engine/InputManager.h"
 #include "../Engine/InputAction.h"
 #include "../Engine/ServiceLocator.h"
+#include "../Engine/TransformModelComponent.h"
+#include "../Engine/RenderViewComponent.h"
 #include <SDL.h>
 
 using namespace ieg;
@@ -32,13 +34,12 @@ Intro::Intro(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, Sce
 	, mpStartCommand{ new StartCommand{} }
 	, mpTexture2D{ nullptr }
 {
-
 	mpGameObject = mpScene->CreateObject<GameObject>();
-	TransformComponent* pTransformComponent{ mpGameObject->CreateComponent<TransformComponent>(mpEngine) };
+	TransformModelComponent* pTransformComponent{ mpGameObject->CreateModelComponent<TransformModelComponent>(mpEngine) };
 	pTransformComponent->SetPosition(0.f, 0.f, 0.f);
-	RenderComponent* pRenderComponent{ mpGameObject->CreateComponent<RenderComponent>(mpEngine) };
+	RenderViewComponent* pRenderComponent{ mpGameObject->CreateViewComponent<RenderViewComponent>(mpEngine) };
 	pRenderComponent->SetTransformComponent(pTransformComponent);
-	IntroComponent* pIntroComponent{ mpGameObject->CreateComponent<IntroComponent>(mpEngine) };
+	IntroComponent* pIntroComponent{ mpGameObject->CreateModelComponent<IntroComponent>(mpEngine) };
 	pIntroComponent->SetStartScene(pGameScene);
 	InputAction* pInputAction{ mpScene->GetInputManager()->CreateInputAction() };
 	pInputAction->SetKeyboardKey(VK_SPACE);

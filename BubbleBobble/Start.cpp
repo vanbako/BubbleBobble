@@ -15,6 +15,8 @@
 #include "../Engine/InputManager.h"
 #include "../Engine/InputAction.h"
 #include "../Engine/ServiceLocator.h"
+#include "../Engine/TransformModelComponent.h"
+#include "../Engine/RenderViewComponent.h"
 #include <SDL.h>
 
 using namespace ieg;
@@ -40,14 +42,14 @@ Start::Start(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, Sce
 	BufferAblocks* pAblocks{ (BufferAblocks*)mpBufferManager->GetBuffer(EnumBuffer::Ablocks) };
 
 	mpGameObject = mpScene->CreateObject<GameObject>();
-	TransformComponent* pTransformComponent{ mpGameObject->CreateComponent<TransformComponent>(mpEngine) };
+	TransformModelComponent* pTransformComponent{ mpGameObject->CreateModelComponent<TransformModelComponent>(mpEngine) };
 	pTransformComponent->SetPosition(0.f, 0.f, 0.f);
-	RenderComponent* pRenderComponent0{ mpGameObject->CreateComponent<RenderComponent>(mpEngine) };
+	RenderViewComponent* pRenderComponent0{ mpGameObject->CreateViewComponent<RenderViewComponent>(mpEngine) };
 	pRenderComponent0->SetTransformComponent(pTransformComponent);
-	StartComponent* pStartComponent{ mpGameObject->CreateComponent<StartComponent>(mpEngine) };
+	StartComponent* pStartComponent{ mpGameObject->CreateModelComponent<StartComponent>(mpEngine) };
 	pStartComponent->SetStartScene(pGameScene);
 	pStartComponent->SetRenderComponent(pRenderComponent0);
-	RenderComponent* pRenderComponent1{ mpGameObject->CreateComponent<RenderComponent>(mpEngine) };
+	RenderViewComponent* pRenderComponent1{ mpGameObject->CreateViewComponent<RenderViewComponent>(mpEngine) };
 	pRenderComponent1->SetTransformComponent(pTransformComponent);
 
 	pBubble->GetLevelColors(mpColorPalette, 0);

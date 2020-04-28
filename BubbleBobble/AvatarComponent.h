@@ -1,14 +1,12 @@
 #pragma once
-#include "../Engine/Component.h"
+#include "../Engine/ModelComponent.h"
 
 namespace ieg
 {
 	class Minigin;
-	class Avatar;
-	class AvatarState;
 
 	class AvatarComponent final
-		: public Component
+		: public ModelComponent
 	{
 	public:
 		explicit AvatarComponent(Minigin* pEngine);
@@ -18,19 +16,13 @@ namespace ieg
 		AvatarComponent& operator=(const AvatarComponent&) = delete;
 		AvatarComponent& operator=(AvatarComponent&&) = delete;
 
-		void Initialize(Avatar* pAvatar);
-
 		virtual void Update(const float deltaTime) override;
-		virtual void Render() const override {};
 
-		void Left();
-		void Right();
-		void Fire();
-		void Jump();
+		void SetFiring(bool isFiring);
 	private:
-		Avatar* mpAvatar;
-		AvatarState* mpState;
-
-		void ReplaceState(AvatarState* pState);
+		// State member variables
+		// Left = true, right = false
+		bool mLookDirection;
+		bool mIsFiring;
 	};
 }

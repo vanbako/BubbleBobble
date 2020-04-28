@@ -14,6 +14,6 @@ namespace ieg
 		LeftCommand& operator=(const LeftCommand&) = delete;
 		LeftCommand& operator=(LeftCommand&&) = delete;
 
-		virtual void Execute(Component* pAvatar) override;
+		virtual void Execute(ModelComponent* pActor) override;
 	};
 }

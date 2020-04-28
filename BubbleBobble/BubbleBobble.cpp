@@ -5,7 +5,6 @@
 #include "../Engine/SceneManager.h"
 #include "../Engine/Scene.h"
 #include "../Engine/GameObject.h"
-#include "../Engine/FpsComponent.h"
 #include "../Engine/InputManager.h"
 #include "../Engine/InputAction.h"
 #include "BufferManager.h"

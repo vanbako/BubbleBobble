@@ -14,6 +14,6 @@ namespace ieg
 		StartCommand& operator=(const StartCommand&) = delete;
 		StartCommand& operator=(StartCommand&&) = delete;
 
-		virtual void Execute(Component* pActor) override;
+		virtual void Execute(ModelComponent* pAvatar) override;
 	};
 }

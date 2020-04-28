@@ -1,5 +1,5 @@
 #pragma once
-#include "../Engine/Component.h"
+#include "../Engine/ModelComponent.h"
 
 namespace ieg
 {
@@ -8,10 +8,10 @@ namespace ieg
 	class SceneManager;
 	class Scene;
 	class Texture2D;
-	class RenderComponent;
+	class RenderViewComponent;
 
 	class StartComponent final
-		: public Component
+		: public ModelComponent
 	{
 	public:
 		explicit StartComponent(Minigin* pEngine);
@@ -22,10 +22,9 @@ namespace ieg
 		StartComponent& operator=(StartComponent&&) = delete;
 
 		virtual void Update(const float deltaTime) override;
-		virtual void Render() const override {};
 
 		void SetStartScene(Scene* pScene);
-		void SetRenderComponent(RenderComponent* pRenderComponent);
+		void SetRenderComponent(RenderViewComponent* pRenderComponent);
 		void SetTexture(Texture2D* pTexture, size_t num);
 	private:
 		Scene* mpStartScene;
@@ -36,7 +35,7 @@ namespace ieg
 		size_t mScreen;
 		float mSwapWait;
 		Texture2D* mpTexture2D[2];
-		RenderComponent* mpRenderComponent;
+		RenderViewComponent* mpRenderComponent;
 
 		static const float mStartWaitVal;
 		static const float mSwapWaitVal;

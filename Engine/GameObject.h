@@ -1,9 +1,9 @@
 #pragma once
 #include "SceneObject.h"
-#include "Component.h"
-#include "TransformComponent.h"
-#include "RenderComponent.h"
-#include "TextComponent.h"
+#include "ModelComponent.h"
+#include "ViewComponent.h"
+#include "TextViewComponent.h"
+#include "State.h"
 #include <cstdarg>
 
 namespace ieg
@@ -22,45 +22,100 @@ namespace ieg
 		GameObject& operator=(GameObject&& other) = delete;
 
 		template<class T>
-		T* CreateComponent(Minigin* pEngine...)
+		T* CreateModelComponent(Minigin* pEngine...)
 		{
-			T* pComponent{ new T{ pEngine } };
-			if (pComponent != nullptr)
-				mpComponents.push_back(pComponent);
-			return pComponent;
+			T* pModelComponent{ new T{ pEngine } };
+			if (pModelComponent != nullptr)
+			{
+				pModelComponent->SetGameObject(this);
+				mpModelComponents.push_back(pModelComponent);
+			}
+			return pModelComponent;
+		}
+
+		template<class T>
+		T* CreateViewComponent(Minigin* pEngine...)
+		{
+			T* pViewComponent{ new T{ pEngine } };
+			if (pViewComponent != nullptr)
+				mpViewComponents.push_back(pViewComponent);
+			return pViewComponent;
 		}
 		template<>
-		TextComponent* CreateComponent(Minigin* pEngine...)
+		TextViewComponent* CreateViewComponent(Minigin* pEngine...)
 		{
 			std::va_list args;
 			va_start(args, pEngine);
 			Font* pFont{ va_arg(args, Font*) };
 			va_end(args);
-			TextComponent* pComponent{ new TextComponent{ pEngine, pFont } };
-			if (pComponent != nullptr)
-				mpComponents.push_back(pComponent);
-			return pComponent;
+			TextViewComponent* pViewComponent{ new TextViewComponent{ pEngine, pFont } };
+			if (pViewComponent != nullptr)
+				mpViewComponents.push_back(pViewComponent);
+			return pViewComponent;
 		}
+
 		template<class T>
-		const T* GetComponent() const
+		T* CreateOrReplaceState()
 		{
-			for (const auto pComponent : mpComponents)
-				if (typeid(*pComponent).hash_code() == typeid(T).hash_code())
-					return (T*)pComponent;
+			if (mpState != nullptr)
+				delete mpState;
+			T* mpState{ new T{} };
+			if (mpState != nullptr)
+				mpState->SetGameObject(this);
+			return mpState;
+		}
+
+		void ReplaceState(State* pState)
+		{
+			if (pState == nullptr)
+				return;
+			if (mpState != nullptr)
+				delete mpState;
+			mpState = pState;
+			mpState->SetGameObject(this);
+		}
+
+		template<class T>
+		const T* GetModelComponent() const
+		{
+			for (const auto pModelComponent : mpModelComponents)
+				if (typeid(*pModelComponent).hash_code() == typeid(T).hash_code())
+					return (T*)pModelComponent;
 			return nullptr;
 		};
 		template<class T>
-		T* GetComponent()
+		T* GetModelComponent()
 		{
-			for (auto pComponent : mpComponents)
-				if (typeid(*pComponent).hash_code() == typeid(T).hash_code())
-					return pComponent;
+			for (auto pModelComponent : mpModelComponents)
+				if (typeid(*pModelComponent).hash_code() == typeid(T).hash_code())
+					return pModelComponent;
 			return nullptr;
 		};
+
+		template<class T>
+		const T* GetViewComponent() const
+		{
+			for (const auto pViewComponent : mpViewComponents)
+				if (typeid(*pViewComponent).hash_code() == typeid(T).hash_code())
+					return (T*)pViewComponent;
+			return nullptr;
+		};
+		template<class T>
+		T* GetViewComponent()
+		{
+			for (auto pViewComponent : mpViewComponents)
+				if (typeid(*pViewComponent).hash_code() == typeid(T).hash_code())
+					return pViewComponent;
+			return nullptr;
+		};
+
+		State* GetState();
 
 		void Update(const float deltaTime) override;
 		void Render() const override;
 	private:
-		std::vector<Component*> mpComponents;
+		std::vector<ModelComponent*> mpModelComponents;
+		std::vector<ViewComponent*> mpViewComponents;
+		State* mpState;
 	};
 }

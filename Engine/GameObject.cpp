@@ -1,30 +1,38 @@
 #include "pch.h"
 #include "GameObject.h"
-#include "TransformComponent.h"
-#include "RenderComponent.h"
 
 using namespace ieg;
 
 GameObject::GameObject()
-	: mpComponents{}
+	: mpModelComponents{}
+	, mpViewComponents{}
+	, mpState{ nullptr }
 {
 }
 
 GameObject::~GameObject()
 {
-	for (Component* pComponent : mpComponents)
-		delete pComponent;
+	for (ModelComponent* pModelComponent : mpModelComponents)
+		delete pModelComponent;
+	for (ViewComponent* pViewComponent : mpViewComponents)
+		delete pViewComponent;
+}
+
+State* ieg::GameObject::GetState()
+{
+	return mpState;
 }
 
 void GameObject::Update(const float deltaTime)
 {
-	(deltaTime);
-	for (Component* pComponent : mpComponents)
-		pComponent->Update(deltaTime);
+	for (ModelComponent* pModelComponent : mpModelComponents)
+		pModelComponent->Update(deltaTime);
+	for (ViewComponent* pViewComponent : mpViewComponents)
+		pViewComponent->Update(deltaTime);
 }
 
 void GameObject::Render() const
 {
-	for (Component* pComponent : mpComponents)
-		pComponent->Render();
+	for (ViewComponent* pViewComponent : mpViewComponents)
+		pViewComponent->Render();
 }
