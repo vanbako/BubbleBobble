@@ -21,13 +21,8 @@ namespace ieg
 		Intro& operator=(Intro&&) = delete;
 	private:
 		Minigin* mpEngine;
-		Scene* mpScene;
-		BufferManager* mpBufferManager;
 		GameObject* mpGameObject;
-		ColorRGBA8* mpPixels;
-		ColorRGBA8* mpColorPalette;
 		StartCommand* mpStartCommand;
-		Texture2D* mpTexture2D;
 
 		static const size_t mWidth;
 		static const size_t mHeight;

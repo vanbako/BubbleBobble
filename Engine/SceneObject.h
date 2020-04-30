@@ -2,10 +2,15 @@
 
 namespace ieg
 {
+	class Scene;
+
 	class SceneObject
 	{
 	public:
-		explicit SceneObject() = default;
+		explicit SceneObject(Scene* pScene)
+			: mpScene{ pScene }
+		{
+		};
 		virtual ~SceneObject() = default;
 		SceneObject(const SceneObject& other) = delete;
 		SceneObject(SceneObject&& other) = delete;
@@ -14,5 +19,12 @@ namespace ieg
 
 		virtual void Update(const float deltaTime) = 0;
 		virtual void Render() const = 0;
+
+		Scene* GetScene()
+		{
+			return mpScene;
+		};
+	protected:
+		Scene* mpScene;
 	};
 }

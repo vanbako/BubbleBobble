@@ -19,6 +19,18 @@ Scene::~Scene()
 		delete pObject;
 }
 
+void Scene::RemoveObject(GameObject* pGameObject)
+{
+	auto it{ mpObjects.begin() };
+	while ((it != mpObjects.end()) && (*it != pGameObject))
+		++it;
+	if (it != mpObjects.end())
+	{
+		delete *it;
+		mpObjects.erase(it);
+	}
+}
+
 void Scene::Update(const float deltaTime)
 {
 	for (auto& pObject : mpObjects)

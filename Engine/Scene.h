@@ -22,11 +22,14 @@ namespace ieg
 		template <class T>
 		T* CreateObject()
 		{
-			T* pSceneObject{ new T{} };
+			T* pSceneObject{ new T{ this } };
 			if (pSceneObject != nullptr)
+			{
 				mpObjects.push_back(pSceneObject);
+			}
 			return pSceneObject;
 		}
+		void RemoveObject(GameObject* pGameObject);
 		void Update(const float deltaTime);
 		void Render() const;
 

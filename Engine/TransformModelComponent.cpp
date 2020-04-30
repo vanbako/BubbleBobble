@@ -3,8 +3,8 @@
 
 using namespace ieg;
 
-TransformModelComponent::TransformModelComponent(Minigin* pEngine)
-	: ModelComponent(pEngine)
+TransformModelComponent::TransformModelComponent(GameObject* pGameObject, Minigin* pEngine,...)
+	: ModelComponent(pGameObject, pEngine)
 	, mPosition{}
 {
 }

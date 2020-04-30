@@ -3,9 +3,9 @@
 
 using namespace ieg;
 
-AvatarComponent::AvatarComponent(Minigin* pEngine)
-	: ModelComponent(pEngine)
-	, mLookDirection{ false }
+AvatarComponent::AvatarComponent(GameObject* pGameObject, Minigin* pEngine,...)
+	: ModelComponent(pGameObject, pEngine)
+	, mIsLookingLeft{ false }
 	, mIsFiring{ false }
 {
 }
@@ -19,7 +19,7 @@ void AvatarComponent::Update(const float deltaTime)
 	(deltaTime);
 }
 
-void ieg::AvatarComponent::SetFiring(bool isFiring)
+void AvatarComponent::SetFiring(bool isFiring)
 {
 	mIsFiring = isFiring;
 }

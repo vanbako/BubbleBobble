@@ -7,8 +7,8 @@
 
 using namespace ieg;
 
-IntroComponent::IntroComponent(Minigin* pEngine)
-	: ModelComponent(pEngine)
+IntroComponent::IntroComponent(GameObject* pGameObject, Minigin* pEngine,...)
+	: ModelComponent(pGameObject, pEngine)
 	, mpStartScene{ nullptr }
 	, mpAudio{ pEngine->GetServiceLocator()->GetAudio() }
 	, mStartSoundId{ 0 }

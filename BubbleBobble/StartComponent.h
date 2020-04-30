@@ -14,7 +14,7 @@ namespace ieg
 		: public ModelComponent
 	{
 	public:
-		explicit StartComponent(Minigin* pEngine);
+		explicit StartComponent(GameObject* pGameObject, Minigin* pEngine,...);
 		~StartComponent() = default;
 		StartComponent(const StartComponent&) = delete;
 		StartComponent(StartComponent&&) = delete;

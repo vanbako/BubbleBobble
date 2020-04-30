@@ -221,12 +221,14 @@ xcopy "$(SolutionDir)3rdParty\Fmod\lib\x64\fmod.dll" "$(OutputPath)" /R /Y</Comm
     <ClInclude Include="ColorXRGB4.h" />
     <ClInclude Include="FireCommand.h" />
     <ClInclude Include="Hud.h" />
+    <ClInclude Include="HudComponent.h" />
     <ClInclude Include="Intro.h" />
     <ClInclude Include="IntroComponent.h" />
     <ClInclude Include="JumpCommand.h" />
     <ClInclude Include="JumpingState.h" />
     <ClInclude Include="LeftCommand.h" />
     <ClInclude Include="Level.h" />
+    <ClInclude Include="LevelComponent.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="RightCommand.h" />
     <ClInclude Include="StandingState.h" />
@@ -254,12 +256,14 @@ xcopy "$(SolutionDir)3rdParty\Fmod\lib\x64\fmod.dll" "$(OutputPath)" /R /Y</Comm
     <ClCompile Include="ColorXRGB4.cpp" />
     <ClCompile Include="FireCommand.cpp" />
     <ClCompile Include="Hud.cpp" />
+    <ClCompile Include="HudComponent.cpp" />
     <ClCompile Include="Intro.cpp" />
     <ClCompile Include="IntroComponent.cpp" />
     <ClCompile Include="JumpCommand.cpp" />
     <ClCompile Include="JumpingState.cpp" />
     <ClCompile Include="LeftCommand.cpp" />
     <ClCompile Include="Level.cpp" />
+    <ClCompile Include="LevelComponent.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

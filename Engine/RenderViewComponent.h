@@ -26,6 +26,7 @@ namespace ieg
 		void SetTransformComponent(TransformModelComponent* pTransformComponent);
 		void SetTexture(const std::string& file);
 		void SetTexture(Texture2D* pTexture);
+		Texture2D* GetTexture();
 		void SetSize(float width, float height);
 		void SetIndex(size_t index);
 		Texture2D* SetTexture(SDL_Texture* pSDLTexture);

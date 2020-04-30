@@ -12,7 +12,7 @@ namespace ieg
 		: public ModelComponent
 	{
 	public:
-		explicit IntroComponent(Minigin* pEngine);
+		explicit IntroComponent(GameObject* pGameObject, Minigin* pEngine,...);
 		~IntroComponent() = default;
 		IntroComponent(const IntroComponent&) = delete;
 		IntroComponent(IntroComponent&&) = delete;

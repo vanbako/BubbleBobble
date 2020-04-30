@@ -18,26 +18,22 @@ const size_t Avatar::mHeight{ 16 };
 const size_t Avatar::mCount{ 16 };
 
 Avatar::Avatar(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, ColorRGBA8* pPalette, AvatarType avatarType)
-	: mpEngine{ pEngine }
-	, mpScene{ pScene }
-	, mpBufferManager{ pBufferManager }
-	, mAvatarType{ avatarType }
-	, mpGameObject{ nullptr }
-	, mpPixels{ new ColorRGBA8[mCount * mWidth * mHeight] }
-	, mpTexture2D{ nullptr }
+	: mAvatarType{ avatarType }
 {
-	BufferAsprites* pAsprites{ (BufferAsprites*)mpBufferManager->GetBuffer(EnumBuffer::Asprites) };
+	BufferAsprites* pAsprites{ (BufferAsprites*)pBufferManager->GetBuffer(EnumBuffer::Asprites) };
 
-	mpGameObject = mpScene->CreateObject<GameObject>();
-	TransformModelComponent* pTransformComponent{ mpGameObject->CreateModelComponent<TransformModelComponent>(mpEngine) };
+	mpGOAvatar = pScene->CreateObject<GameObject>();
+	TransformModelComponent* pTransformComponent{ mpGOAvatar->CreateModelComponent<TransformModelComponent>(pEngine) };
 	if (avatarType == AvatarType::Bub)
 		pTransformComponent->SetPosition(16.f, 176.f, 0.f);
 	else
 		pTransformComponent->SetPosition(208.f, 176.f, 0.f);
-	RenderViewComponent* pRenderComponent{ mpGameObject->CreateViewComponent<RenderViewComponent>(mpEngine) };
+	RenderViewComponent* pRenderComponent{ mpGOAvatar->CreateViewComponent<RenderViewComponent>(pEngine) };
 	pRenderComponent->SetTransformComponent(pTransformComponent);
-	AvatarComponent* pAvatarComponent{ mpGameObject->CreateModelComponent<AvatarComponent>(mpEngine) };
+	AvatarComponent* pAvatarComponent{ mpGOAvatar->CreateModelComponent<AvatarComponent>(pEngine) };
 	(pAvatarComponent);
+
+	ColorRGBA8* pPixels{ new ColorRGBA8[mCount * mWidth * mHeight] };
 
 	ColorRGBA8* pSprite{ new ColorRGBA8[mCount * BufferAsprites::GetWidth() * BufferAsprites::GetHeight()] };
 	if (avatarType == AvatarType::Bub)
@@ -45,36 +41,37 @@ Avatar::Avatar(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, C
 	else
 		pAsprites->GetSprites(pSprite, 16, Sprite::Bob, pPalette);
 	for (size_t sprite{ 0 }; sprite < mCount; ++sprite)
-		DrawSprite(pSprite, sprite, sprite);
+		DrawSprite(pSprite, pPixels, sprite, sprite);
 	delete[] pSprite;
 
 	SDL_Surface* pSurface{
 	SDL_CreateRGBSurfaceWithFormatFrom(
-		mpPixels,
+		pPixels,
 		mCount * mWidth,
 		mHeight,
 		sizeof(ColorRGBA8),
 		mCount * mWidth * sizeof(ColorRGBA8),
 		SDL_PIXELFORMAT_RGBA32) };
-	SDL_Texture* pSDLTexture{ SDL_CreateTextureFromSurface(mpEngine->GetRenderer()->GetSDLRenderer(), pSurface) };
-	mpTexture2D = pRenderComponent->SetTexture(pSDLTexture);
+	SDL_Texture* pSDLTexture{ SDL_CreateTextureFromSurface(pEngine->GetRenderer()->GetSDLRenderer(), pSurface) };
+	pRenderComponent->SetTexture(pSDLTexture);
 	pRenderComponent->SetSize(mWidth, mHeight);
 	if (avatarType == AvatarType::Bub)
 		pRenderComponent->SetIndex(0);
 	else
 		pRenderComponent->SetIndex(15);
+	delete[] pPixels;
 }
 
-Avatar::~Avatar()
+GameObject* Avatar::GetGameObject()
 {
-	delete[] mpPixels;
+	return mpGOAvatar;
 }
 
-void Avatar::DrawSprite(ColorRGBA8* pSprite, size_t offset, size_t loc)
+void Avatar::DrawSprite(ColorRGBA8* pSprite, ColorRGBA8* pPixels, size_t offset, size_t loc)
 {
 	const size_t
 		width{ BufferAsprites::GetWidth() },
 		height{ BufferAsprites::GetHeight() };
 	for (size_t row{ 0 }; row < height; ++row)
-		memcpy(&mpPixels[row * mCount * mWidth + (loc % width) * mWidth + (loc / width) * mCount * mWidth * height], &pSprite[offset * width * height + row * width], width * sizeof(ColorRGBA8));
+		memcpy(&pPixels[row * mCount * mWidth + (loc % width) * mWidth + (loc / width) * mCount * mWidth * height], &pSprite[offset * width * height + row * width], width * sizeof(ColorRGBA8));
 }

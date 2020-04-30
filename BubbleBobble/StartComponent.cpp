@@ -11,8 +11,8 @@ using namespace ieg;
 const float StartComponent::mStartWaitVal{ 8.917f };
 const float StartComponent::mSwapWaitVal{ 0.15f };
 
-StartComponent::StartComponent(Minigin* pEngine)
-	: ModelComponent(pEngine)
+StartComponent::StartComponent(GameObject* pGameObject, Minigin* pEngine,...)
+	: ModelComponent(pGameObject, pEngine)
 	, mpStartScene{ nullptr }
 	, mpAudio{ pEngine->GetServiceLocator()->GetAudio() }
 	, mStartSoundId{ 0 }

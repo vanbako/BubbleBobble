@@ -16,23 +16,16 @@ namespace ieg
 	{
 	public:
 		explicit Level(size_t level, Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager);
-		~Level();
+		~Level() = default;
 		Level(const Level&) = delete;
 		Level(Level&&) = delete;
 		Level& operator=(const Level&) = delete;
 		Level& operator=(Level&&) = delete;
 
-		ColorRGBA8* GetColorPalette();
+		GameObject* GetGameObject();
 	private:
 		size_t mLevel;
-		Minigin* mpEngine;
-		Scene* mpScene;
-		BufferManager* mpBufferManager;
-		GameObject* mpGameObject;
-		ColorRGBA8* mpPixels;
-		ColorRGBA8* mpLevelColorPalette;
-		Texture2D* mpTexture2D;
-		Avatar* mpAvatar[2];
+		GameObject* mpGOLevel;
 
 		static const size_t mBlockCount;
 		static const size_t mWidthInBlocks;
@@ -40,10 +33,11 @@ namespace ieg
 		static const size_t mWidth;
 		static const size_t mHeight;
 
-		void DrawBlocks(BufferAblocks* pAblocks, char* pLayout);
-		void DrawBigBlocks(BufferAblocks* pAblocks, BufferBubble* pBubble);
-		void DrawBlock(ColorRGBA8* pBlock, size_t pos);
-		void DrawBigBlock(ColorRGBA8* pBlock, size_t pos);
-		void DrawFalse3D(ColorRGBA8* pFalse3D, size_t pos, size_t type);
+		void DrawFalse3DBlocks(BufferAblocks* pAblocks, ColorRGBA8* pPixels, ColorRGBA8* pLevelPalette, char* pLayout);
+		void DrawBlocks(BufferAblocks* pAblocks, ColorRGBA8* pPixels, ColorRGBA8* pLevelPalette, char* pLayout);
+		void DrawBigBlocks(BufferAblocks* pAblocks, ColorRGBA8* pPixels, ColorRGBA8* pLevelPalette, BufferBubble* pBubble);
+		void DrawBlock(ColorRGBA8* pBlock, ColorRGBA8* pPixels, size_t pos);
+		void DrawBigBlock(ColorRGBA8* pBlock, ColorRGBA8* pPixels, size_t pos);
+		void DrawFalse3D(ColorRGBA8* pFalse3D, ColorRGBA8* pPixels, size_t pos, size_t type);
 	};
 }

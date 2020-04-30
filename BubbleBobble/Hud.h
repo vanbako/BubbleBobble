@@ -14,23 +14,12 @@ namespace ieg
 	{
 	public:
 		explicit Hud(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager);
-		~Hud();
+		~Hud() = default;
 		Hud(const Hud&) = delete;
 		Hud(Hud&&) = delete;
 		Hud& operator=(const Hud&) = delete;
 		Hud& operator=(Hud&&) = delete;
 	private:
-		Minigin* mpEngine;
-		Scene* mpScene;
-		BufferManager* mpBufferManager;
-		GameObject* mpGameObject;
-		ColorRGBA8* mpColorPalette;
-		ColorRGBA8* mpPixels;
-		Level
-			*mpOldLevel,
-			*mpLevel;
-		Texture2D* mpTexture2D;
-
 		static const float mPosX;
 		static const float mPosY;
 		static const size_t mWidth;
@@ -40,8 +29,8 @@ namespace ieg
 		static const size_t mChrWidth;
 		static const size_t mChrHeight;
 
-		void DrawSprite(ColorRGBA8* pSprite, size_t offset, size_t loc);
-		void DrawChr(ColorRGBA8* pChr, size_t loc);
-		void DrawStr(ColorRGBA8* pFont, size_t loc, const std::string& str);
+		void DrawSprite(ColorRGBA8* pSprite, ColorRGBA8* pPixels, size_t offset, size_t loc);
+		void DrawChr(ColorRGBA8* pChr, ColorRGBA8* pPixels, size_t loc);
+		void DrawStr(ColorRGBA8* pFont, ColorRGBA8* pPixels, size_t loc, const std::string& str);
 	};
 }

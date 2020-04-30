@@ -46,6 +46,11 @@ void RenderViewComponent::SetTexture(Texture2D* pTexture)
 	mpTexture = pTexture;
 }
 
+Texture2D* ieg::RenderViewComponent::GetTexture()
+{
+	return mpTexture;
+}
+
 void RenderViewComponent::SetSize(float width, float height)
 {
 	mWidth = width;

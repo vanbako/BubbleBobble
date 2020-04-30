@@ -9,7 +9,7 @@ namespace ieg
 	class ModelComponent
 	{
 	public:
-		explicit ModelComponent(Minigin* pEngine);
+		explicit ModelComponent(GameObject* pGameObject, Minigin* pEngine);
 		virtual ~ModelComponent() = default;
 		ModelComponent(const ModelComponent& other) = delete;
 		ModelComponent(ModelComponent&& other) = delete;
@@ -17,7 +17,6 @@ namespace ieg
 		ModelComponent& operator=(ModelComponent&& other) = delete;
 
 		virtual void Update(const float deltaTime) = 0;
-		void SetGameObject(GameObject* pGameObject);
 		GameObject* GetGameObject();
 	protected:
 		Minigin* mpEngine;

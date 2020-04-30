@@ -9,7 +9,7 @@ namespace ieg
 		: public ModelComponent
 	{
 	public:
-		explicit AvatarComponent(Minigin* pEngine);
+		explicit AvatarComponent(GameObject* pGameObject, Minigin* pEngine,...);
 		~AvatarComponent();
 		AvatarComponent(const AvatarComponent&) = delete;
 		AvatarComponent(AvatarComponent&&) = delete;
@@ -20,9 +20,7 @@ namespace ieg
 
 		void SetFiring(bool isFiring);
 	private:
-		// State member variables
-		// Left = true, right = false
-		bool mLookDirection;
+		bool mIsLookingLeft;
 		bool mIsFiring;
 	};
 }

@@ -13,7 +13,7 @@ namespace ieg
 		: public ModelComponent
 	{
 	public:
-		explicit TransformModelComponent(Minigin* pEngine);
+		explicit TransformModelComponent(GameObject* pGameObject, Minigin* pEngine,...);
 		~TransformModelComponent() = default;
 		TransformModelComponent(const TransformModelComponent&) = delete;
 		TransformModelComponent(TransformModelComponent&&) = delete;

@@ -20,25 +20,22 @@ namespace ieg
 	{
 	public:
 		explicit Avatar(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, ColorRGBA8* pPalette, AvatarType avatarType);
-		~Avatar();
+		~Avatar() = default;
 		Avatar(const Avatar&) = delete;
 		Avatar(Avatar&&) = delete;
 		Avatar& operator=(const Avatar&) = delete;
 		Avatar& operator=(Avatar&&) = delete;
+
+		GameObject* GetGameObject();
 	private:
-		Minigin* mpEngine;
-		Scene* mpScene;
-		BufferManager* mpBufferManager;
 		AvatarType mAvatarType;
-		GameObject* mpGameObject;
-		ColorRGBA8* mpPixels;
-		Texture2D* mpTexture2D;
+		GameObject* mpGOAvatar;
 
 		static const size_t mWidth;
 		static const size_t mHeight;
 		static const size_t mCount;
 
-		void DrawSprite(ColorRGBA8* pSprite, size_t offset, size_t loc);
+		void DrawSprite(ColorRGBA8* pSprite, ColorRGBA8* pPixels, size_t offset, size_t loc);
 	};
 }
 

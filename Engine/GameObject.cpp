@@ -3,8 +3,9 @@
 
 using namespace ieg;
 
-GameObject::GameObject()
-	: mpModelComponents{}
+GameObject::GameObject(Scene* pScene)
+	: SceneObject(pScene)
+	, mpModelComponents{}
 	, mpViewComponents{}
 	, mpState{ nullptr }
 {

@@ -14,7 +14,7 @@ namespace ieg
 		: public SceneObject
 	{
 	public:
-		explicit GameObject();
+		explicit GameObject(Scene* pScene);
 		virtual ~GameObject();
 		GameObject(const GameObject& other) = delete;
 		GameObject(GameObject&& other) = delete;
@@ -22,19 +22,19 @@ namespace ieg
 		GameObject& operator=(GameObject&& other) = delete;
 
 		template<class T>
-		T* CreateModelComponent(Minigin* pEngine...)
+		T* CreateModelComponent(Minigin* pEngine,...)
 		{
-			T* pModelComponent{ new T{ pEngine } };
+			std::va_list args{};
+			va_start(args, pEngine);
+			T* pModelComponent{ new T{ this, pEngine, args } };
+			va_end(args);
 			if (pModelComponent != nullptr)
-			{
-				pModelComponent->SetGameObject(this);
 				mpModelComponents.push_back(pModelComponent);
-			}
 			return pModelComponent;
 		}
 
 		template<class T>
-		T* CreateViewComponent(Minigin* pEngine...)
+		T* CreateViewComponent(Minigin* pEngine,...)
 		{
 			T* pViewComponent{ new T{ pEngine } };
 			if (pViewComponent != nullptr)
@@ -42,9 +42,9 @@ namespace ieg
 			return pViewComponent;
 		}
 		template<>
-		TextViewComponent* CreateViewComponent(Minigin* pEngine...)
+		TextViewComponent* CreateViewComponent(Minigin* pEngine,...)
 		{
-			std::va_list args;
+			std::va_list args{};
 			va_start(args, pEngine);
 			Font* pFont{ va_arg(args, Font*) };
 			va_end(args);
@@ -88,7 +88,7 @@ namespace ieg
 		{
 			for (auto pModelComponent : mpModelComponents)
 				if (typeid(*pModelComponent).hash_code() == typeid(T).hash_code())
-					return pModelComponent;
+					return (T*)pModelComponent;
 			return nullptr;
 		};
 
@@ -105,7 +105,7 @@ namespace ieg
 		{
 			for (auto pViewComponent : mpViewComponents)
 				if (typeid(*pViewComponent).hash_code() == typeid(T).hash_code())
-					return pViewComponent;
+					return (T*)pViewComponent;
 			return nullptr;
 		};
 

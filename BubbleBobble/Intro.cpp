@@ -26,49 +26,47 @@ const size_t Intro::mHeight{ 200 };
 
 Intro::Intro(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, Scene* pGameScene)
 	: mpEngine{ pEngine }
-	, mpScene{ pScene }
-	, mpBufferManager{ pBufferManager }
-	, mpGameObject{ nullptr }
-	, mpPixels{ new ColorRGBA8[mWidth * mHeight] }
-	, mpColorPalette{ new ColorRGBA8[BufferBubble::GetPaletteColorCount()] }
 	, mpStartCommand{ new StartCommand{} }
-	, mpTexture2D{ nullptr }
 {
-	mpGameObject = mpScene->CreateObject<GameObject>();
-	TransformModelComponent* pTransformComponent{ mpGameObject->CreateModelComponent<TransformModelComponent>(mpEngine) };
+	mpGameObject = pScene->CreateObject<GameObject>();
+	TransformModelComponent* pTransformComponent{ mpGameObject->CreateModelComponent<TransformModelComponent>(pEngine) };
 	pTransformComponent->SetPosition(0.f, 0.f, 0.f);
-	RenderViewComponent* pRenderComponent{ mpGameObject->CreateViewComponent<RenderViewComponent>(mpEngine) };
+	RenderViewComponent* pRenderComponent{ mpGameObject->CreateViewComponent<RenderViewComponent>(pEngine) };
 	pRenderComponent->SetTransformComponent(pTransformComponent);
-	IntroComponent* pIntroComponent{ mpGameObject->CreateModelComponent<IntroComponent>(mpEngine) };
+	IntroComponent* pIntroComponent{ mpGameObject->CreateModelComponent<IntroComponent>(pEngine) };
 	pIntroComponent->SetStartScene(pGameScene);
-	InputAction* pInputAction{ mpScene->GetInputManager()->CreateInputAction() };
+	InputAction* pInputAction{ pScene->GetInputManager()->CreateInputAction() };
 	pInputAction->SetKeyboardKey(VK_SPACE);
 	pInputAction->SetGamepadButtonCode(XINPUT_GAMEPAD_START);
 	pInputAction->SetCommand(mpStartCommand);
 	pInputAction->SetActor(pIntroComponent);
 
-	BufferBubble* pBubble{ (BufferBubble*)mpBufferManager->GetBuffer(EnumBuffer::Bubble) };
-	BufferApic* pApic{ (BufferApic*)mpBufferManager->GetBuffer(EnumBuffer::Apic) };
+	BufferBubble* pBubble{ (BufferBubble*)pBufferManager->GetBuffer(EnumBuffer::Bubble) };
+	BufferApic* pApic{ (BufferApic*)pBufferManager->GetBuffer(EnumBuffer::Apic) };
 
-	pBubble->GetIntroColors(mpColorPalette);
-	pApic->GetPic(mpPixels, mpColorPalette);
+	ColorRGBA8* pPixels{ new ColorRGBA8[mWidth * mHeight] };
+	ColorRGBA8* pColorPalette{ new ColorRGBA8[BufferBubble::GetPaletteColorCount()] };
+
+	pBubble->GetIntroColors(pColorPalette);
+	pApic->GetPic(pPixels, pColorPalette);
 	
 	SDL_Surface* pSurface{
 	SDL_CreateRGBSurfaceWithFormatFrom(
-		mpPixels,
+		pPixels,
 		mWidth,
 		mHeight,
 		sizeof(ColorRGBA8),
 		mWidth * sizeof(ColorRGBA8),
 		SDL_PIXELFORMAT_RGBA32) };
-	SDL_Texture* pSDLTexture{ SDL_CreateTextureFromSurface(mpEngine->GetRenderer()->GetSDLRenderer(), pSurface) };
-	mpTexture2D = pRenderComponent->SetTexture(pSDLTexture);
+	SDL_Texture* pSDLTexture{ SDL_CreateTextureFromSurface(pEngine->GetRenderer()->GetSDLRenderer(), pSurface) };
+	pRenderComponent->SetTexture(pSDLTexture);
+
+	delete[] pPixels;
+	delete[] pColorPalette; 
 }
 
 Intro::~Intro()
 {
-	mpEngine->GetResourceManager()->RemoveTexture(mpTexture2D);
-	delete[] mpPixels;
-	delete[] mpColorPalette;
+	mpEngine->GetResourceManager()->RemoveTexture(mpGameObject->GetViewComponent<RenderViewComponent>()->GetTexture());
 	delete mpStartCommand;
 }

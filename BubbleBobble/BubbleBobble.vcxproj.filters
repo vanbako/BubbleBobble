@@ -132,6 +132,12 @@
     <ClCompile Include="AvatarState.cpp">
       <Filter>State</Filter>
     </ClCompile>
+    <ClCompile Include="HudComponent.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelComponent.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FireCommand.h">
@@ -226,6 +232,12 @@
     </ClInclude>
     <ClInclude Include="AvatarState.h">
       <Filter>State</Filter>
+    </ClInclude>
+    <ClInclude Include="HudComponent.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelComponent.h">
+      <Filter>Component</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
