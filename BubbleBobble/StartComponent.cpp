@@ -9,7 +9,6 @@
 using namespace ieg;
 
 const float StartComponent::mStartWaitVal{ 8.917f };
-const float StartComponent::mSwapWaitVal{ 0.15f };
 
 StartComponent::StartComponent(GameObject* pGameObject, Minigin* pEngine,...)
 	: ModelComponent(pGameObject, pEngine)
@@ -18,26 +17,13 @@ StartComponent::StartComponent(GameObject* pGameObject, Minigin* pEngine,...)
 	, mStartSoundId{ 0 }
 	, mStartWait{ mStartWaitVal }
 	, mPlaySound{ false }
-	, mScreen{ 0 }
 	, mSwapWait{ 0.5f }
-	, mpTexture2D{ nullptr, nullptr }
-	, mpRenderComponent{ nullptr }
 {
 	mStartSoundId = mpAudio->AddSound("../Data/Audio/gamestart.wav", false);
 }
 
 void StartComponent::Update(const float deltaTime)
 {
-	if (mSwapWait > 0.f)
-		mSwapWait -= deltaTime;
-	else
-	{
-		mSwapWait += mSwapWaitVal;
-		++mScreen;
-		if (mScreen == 2)
-			mScreen = 0;
-		mpRenderComponent->SetTexture(mpTexture2D[mScreen]);
-	}
 	if (!mPlaySound)
 	{
 		mpAudio->PlaySound(mStartSoundId);
@@ -55,14 +41,4 @@ void StartComponent::Update(const float deltaTime)
 void StartComponent::SetStartScene(Scene* pScene)
 {
 	mpStartScene = pScene;
-}
-
-void ieg::StartComponent::SetRenderComponent(RenderViewComponent* pRenderComponent)
-{
-	mpRenderComponent = pRenderComponent;
-}
-
-void StartComponent::SetTexture(Texture2D* pTexture, size_t num)
-{
-	mpTexture2D[num] = pTexture;
 }

@@ -24,20 +24,14 @@ namespace ieg
 		virtual void Update(const float deltaTime) override;
 
 		void SetStartScene(Scene* pScene);
-		void SetRenderComponent(RenderViewComponent* pRenderComponent);
-		void SetTexture(Texture2D* pTexture, size_t num);
 	private:
 		Scene* mpStartScene;
 		Audio* mpAudio;
 		size_t mStartSoundId;
 		float mStartWait;
 		bool mPlaySound;
-		size_t mScreen;
 		float mSwapWait;
-		Texture2D* mpTexture2D[2];
-		RenderViewComponent* mpRenderComponent;
 
 		static const float mStartWaitVal;
-		static const float mSwapWaitVal;
 	};
 }

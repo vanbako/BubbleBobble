@@ -27,108 +27,112 @@ const size_t Start::mBlockWidth{ 16 };
 const size_t Start::mBlockHeight{ 25 };
 const size_t Start::mChrWidth{ 40 };
 const size_t Start::mChrHeight{ 25 };
+const size_t Start::mSpriteHeight{ 32 };
+const size_t Start::mSpriteAnimCount{ 2 };
 
 Start::Start(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, Scene* pGameScene)
-	: mpEngine{ pEngine }
-	, mpScene{ pScene }
-	, mpBufferManager{ pBufferManager }
-	, mpGameObject{ nullptr }
-	, mpPixels{ new ColorRGBA8[mWidth * mHeight], new ColorRGBA8[mWidth * mHeight], new ColorRGBA8[mWidth * mHeight] }
-	, mpColorPalette{ new ColorRGBA8[BufferBubble::GetPaletteColorCount()] }
-	, mpTexture2D{ nullptr, nullptr, nullptr }
 {
-	BufferBubble* pBubble{ (BufferBubble*)mpBufferManager->GetBuffer(EnumBuffer::Bubble) };
-	BufferAsprites* pAsprites{ (BufferAsprites*)mpBufferManager->GetBuffer(EnumBuffer::Asprites) };
-	BufferAblocks* pAblocks{ (BufferAblocks*)mpBufferManager->GetBuffer(EnumBuffer::Ablocks) };
+	BufferBubble* pBubble{ (BufferBubble*)pBufferManager->GetBuffer(EnumBuffer::Bubble) };
+	BufferAsprites* pAsprites{ (BufferAsprites*)pBufferManager->GetBuffer(EnumBuffer::Asprites) };
+	BufferAblocks* pAblocks{ (BufferAblocks*)pBufferManager->GetBuffer(EnumBuffer::Ablocks) };
 
-	mpGameObject = mpScene->CreateObject<GameObject>();
-	TransformModelComponent* pTransformComponent{ mpGameObject->CreateModelComponent<TransformModelComponent>(mpEngine) };
+	ColorRGBA8* pPalette{ new ColorRGBA8[BufferBubble::GetPaletteColorCount()] };
+	pBubble->GetLevelColors(pPalette, 0);
+
+	CreateBackground(pEngine, pScene, pGameScene, pAblocks, pPalette);
+	CreateBubBobAnim(Sprite::BubBubble, 56, pEngine, pScene, pAsprites, pPalette);
+	CreateBubBobAnim(Sprite::BobBubble, 112, pEngine, pScene, pAsprites, pPalette);
+
+	delete[] pPalette;
+}
+
+void Start::CreateBackground(Minigin* pEngine, Scene* pScene, Scene* pGameScene, BufferAblocks* pAblocks, ColorRGBA8* pPalette)
+{
+	GameObject* pGameObject{ pScene->CreateObject<GameObject>() };
+	TransformModelComponent* pTransformComponent{ pGameObject->CreateModelComponent<TransformModelComponent>(pEngine) };
 	pTransformComponent->SetPosition(0.f, 0.f, 0.f);
-	RenderViewComponent* pRenderComponent0{ mpGameObject->CreateViewComponent<RenderViewComponent>(mpEngine) };
-	pRenderComponent0->SetTransformComponent(pTransformComponent);
-	StartComponent* pStartComponent{ mpGameObject->CreateModelComponent<StartComponent>(mpEngine) };
+	RenderViewComponent* pRenderComponent{ pGameObject->CreateViewComponent<RenderViewComponent>(pEngine) };
+	pRenderComponent->SetTransformComponent(pTransformComponent);
+	StartComponent* pStartComponent{ pGameObject->CreateModelComponent<StartComponent>(pEngine) };
 	pStartComponent->SetStartScene(pGameScene);
-	pStartComponent->SetRenderComponent(pRenderComponent0);
-	RenderViewComponent* pRenderComponent1{ mpGameObject->CreateViewComponent<RenderViewComponent>(mpEngine) };
-	pRenderComponent1->SetTransformComponent(pTransformComponent);
 
-	pBubble->GetLevelColors(mpColorPalette, 0);
-	ColorRGBA8* pSprite{ new ColorRGBA8[4 * BufferAsprites::GetWidth() * BufferAsprites::GetHeight()] };
-	pAsprites->GetSprites(pSprite, 4, Sprite::BubBubble, mpColorPalette);
-	DrawSprite(pSprite, 0, 0, 5 * mBlockWidth + 5);
-	DrawSprite(pSprite, 0, 1, 6 * mBlockWidth + 5);
-	DrawSprite(pSprite, 1, 2, 5 * mBlockWidth + 5);
-	DrawSprite(pSprite, 1, 3, 6 * mBlockWidth + 5);
-	pAsprites->GetSprites(pSprite, 4, Sprite::BobBubble, mpColorPalette);
-	DrawSprite(pSprite, 0, 0, 5 * mBlockWidth + 13);
-	DrawSprite(pSprite, 0, 1, 6 * mBlockWidth + 13);
-	DrawSprite(pSprite, 1, 2, 5 * mBlockWidth + 13);
-	DrawSprite(pSprite, 1, 3, 6 * mBlockWidth + 13);
-	delete[] pSprite;
-
+	ColorRGBA8* pPixels{ new ColorRGBA8[mWidth * mHeight] };
 	ColorRGBA8* pFont{ new ColorRGBA8[BufferAblocks::GetFontChrCount() * BufferAblocks::GetFontWidth() * BufferAblocks::GetFontHeight()] };
-	pAblocks->GetFont(pFont, mpColorPalette, 1);
-	DrawStr(pFont, 2, 1 * mChrWidth + 5, "NOW IT IS THE BEGINNING OF A");
-	DrawStr(pFont, 2, 3 * mChrWidth + 4, "FANTASTIC STORY ;; LETS MAKE A");
-	DrawStr(pFont, 2, 5 * mChrWidth + 4, "JOURNEY TO THE CAVE OF MONSTERS");
-	DrawStr(pFont, 2, 7 * mChrWidth + 15, "GOOD LUCK");
+	pAblocks->GetFont(pFont, pPalette, 1);
+	DrawStr(pFont, pPixels, 1 * mChrWidth + 5, "NOW IT IS THE BEGINNING OF A");
+	DrawStr(pFont, pPixels, 3 * mChrWidth + 4, "FANTASTIC STORY ;; LETS MAKE A");
+	DrawStr(pFont, pPixels, 5 * mChrWidth + 4, "JOURNEY TO THE CAVE OF MONSTERS");
+	DrawStr(pFont, pPixels, 7 * mChrWidth + 15, "GOOD LUCK");
 	delete[] pFont;
-
-	for (size_t i{ 0 }; i < 2; ++i)
-	{
-		SDL_Surface* pSurface{
-		SDL_CreateRGBSurfaceWithFormatFrom(
-			mpPixels[i],
-			mWidth,
-			mHeight,
-			sizeof(ColorRGBA8),
-			mWidth * sizeof(ColorRGBA8),
-			SDL_PIXELFORMAT_RGBA32) };
-		SDL_Texture* pSDLTexture{ SDL_CreateTextureFromSurface(mpEngine->GetRenderer()->GetSDLRenderer(), pSurface) };
-		mpTexture2D[i] = pRenderComponent0->SetTexture(pSDLTexture);
-		pStartComponent->SetTexture(mpTexture2D[i], i);
-	}
 	SDL_Surface* pSurface{
 	SDL_CreateRGBSurfaceWithFormatFrom(
-		mpPixels[2],
+		pPixels,
 		mWidth,
 		mHeight,
 		sizeof(ColorRGBA8),
 		mWidth * sizeof(ColorRGBA8),
 		SDL_PIXELFORMAT_RGBA32) };
-	SDL_Texture* pSDLTexture{ SDL_CreateTextureFromSurface(mpEngine->GetRenderer()->GetSDLRenderer(), pSurface) };
-	mpTexture2D[2] = pRenderComponent1->SetTexture(pSDLTexture);
+	SDL_Texture* pSDLTexture{ SDL_CreateTextureFromSurface(pEngine->GetRenderer()->GetSDLRenderer(), pSurface) };
+	pRenderComponent->SetTexture(pSDLTexture);
+	delete[] pPixels;
 }
 
-Start::~Start()
+void Start::CreateBubBobAnim(Sprite sprite, float x, Minigin* pEngine, Scene* pScene, BufferAsprites* pAsprites, ColorRGBA8* pPalette)
 {
-	mpEngine->GetResourceManager()->RemoveTexture(mpTexture2D[0]);
-	mpEngine->GetResourceManager()->RemoveTexture(mpTexture2D[1]);
-	delete[] mpPixels[0];
-	delete[] mpPixels[1];
-	delete[] mpPixels[2];
-	delete[] mpColorPalette;
+	size_t
+		width{ BufferAsprites::GetWidth() },
+		height{ mSpriteHeight };
+	GameObject* pGameObject{ pScene->CreateObject<GameObject>() };
+	TransformModelComponent* pTransformComponent{ pGameObject->CreateModelComponent<TransformModelComponent>(pEngine) };
+	pTransformComponent->SetPosition(x, 96.f, 0.f);
+	RenderViewComponent* pRenderComponent{ pGameObject->CreateViewComponent<RenderViewComponent>(pEngine) };
+	pRenderComponent->SetTransformComponent(pTransformComponent);
+
+	ColorRGBA8* pPixels{ new ColorRGBA8[width * height * mSpriteAnimCount] };
+	ColorRGBA8* pSprite{ new ColorRGBA8[2 * mSpriteAnimCount * BufferAsprites::GetWidth() * BufferAsprites::GetHeight()] };
+	pAsprites->GetSprites(pSprite, 2 * mSpriteAnimCount, sprite, pPalette);
+	DrawSprite(pSprite, pPixels, 0, 0);
+	DrawSprite(pSprite, pPixels, 2, 4);
+	DrawSprite(pSprite, pPixels, 1, 2 * 8);
+	DrawSprite(pSprite, pPixels, 3, 2 * 8 + 4);
+	delete[] pSprite;
+
+	SDL_Surface* pSurface{
+	SDL_CreateRGBSurfaceWithFormatFrom(
+		pPixels,
+		int(BufferAsprites::GetWidth() * mSpriteAnimCount),
+		mSpriteHeight,
+		sizeof(ColorRGBA8),
+		int(BufferAsprites::GetWidth() * mSpriteAnimCount * sizeof(ColorRGBA8)),
+		SDL_PIXELFORMAT_RGBA32) };
+	SDL_Texture* pSDLTexture{ SDL_CreateTextureFromSurface(pEngine->GetRenderer()->GetSDLRenderer(), pSurface) };
+	pRenderComponent->SetTexture(pSDLTexture);
+	pRenderComponent->SetSize(float(width), float(height));
+	pRenderComponent->SetIndex(0);
+	pRenderComponent->SetAnimation(0.15f, 0, 1);
+	delete[] pPixels;
 }
 
-void Start::DrawSprite(ColorRGBA8* pSprite, size_t screen, size_t offset, size_t loc)
+void Start::DrawSprite(ColorRGBA8* pSprite, ColorRGBA8* pPixels, size_t offset, size_t loc)
 {
 	const size_t
 		width{ BufferAsprites::GetWidth() },
-		height{ BufferAsprites::GetHeight() };
+		height{ BufferAsprites::GetHeight() },
+		pixWidth{ BufferAsprites::GetWidth() * mSpriteAnimCount };
 	for (size_t row{ 0 }; row < height; ++row)
-		memcpy(&mpPixels[screen][row * mWidth + (loc % mBlockWidth) * height + (loc / mBlockWidth) * mWidth * height], &pSprite[offset * width * height + row * width], width * sizeof(ColorRGBA8));
+		memcpy(&pPixels[row * pixWidth + (loc % 8) * 8 + (loc / 8) * pixWidth * 8], &pSprite[offset * width * height + row * width], width * sizeof(ColorRGBA8));
 }
 
-void Start::DrawChr(ColorRGBA8* pChr, size_t screen, size_t loc)
+void Start::DrawChr(ColorRGBA8* pChr, ColorRGBA8* pPixels, size_t loc)
 {
 	const size_t
 		width{ BufferAblocks::GetFontWidth() },
 		height{ BufferAblocks::GetFontHeight() };
 	for (size_t row{ 0 }; row < height; ++row)
-		memcpy(&mpPixels[screen][row * mWidth + (loc % mChrWidth) * height + (loc / mChrWidth) * mWidth * height], &pChr[row * width], width * sizeof(ColorRGBA8));
+		memcpy(&pPixels[row * mWidth + (loc % mChrWidth) * height + (loc / mChrWidth) * mWidth * height], &pChr[row * width], width * sizeof(ColorRGBA8));
 }
 
-void Start::DrawStr(ColorRGBA8* pFont, size_t screen, size_t loc, const std::string& str)
+void Start::DrawStr(ColorRGBA8* pFont, ColorRGBA8* pPixels, size_t loc, const std::string& str)
 {
 	const size_t
 		width{ BufferAblocks::GetFontWidth() },
@@ -139,6 +143,6 @@ void Start::DrawStr(ColorRGBA8* pFont, size_t screen, size_t loc, const std::str
 		chr = str[i];
 		if (chr == ' ')
 			chr = 91;
-		DrawChr(&pFont[(chr - BufferAblocks::GetFontStart()) * width * height], screen, loc + i);
+		DrawChr(&pFont[(chr - BufferAblocks::GetFontStart()) * width * height], pPixels, loc + i);
 	}
 }

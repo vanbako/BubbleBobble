@@ -14,7 +14,24 @@ RenderViewComponent::RenderViewComponent(Minigin* pEngine)
 	, mWidth{ 0.f }
 	, mHeight{ 0.f }
 	, mIndex{ 0 }
+	, mDelay{ 0.f }
+	, mCurrDelay{ 0.f }
+	, mStartIndex{ 0 }
+	, mStopIndex{ 0 }
+	, mIsAnimating{ false }
 {
+}
+
+void ieg::RenderViewComponent::Update(const float deltaTime)
+{
+	mCurrDelay -= deltaTime;
+	if (mCurrDelay <= 0.f)
+	{
+		mCurrDelay += mDelay;
+		mIndex += 1;
+		if (mIndex > mStopIndex)
+			mIndex = mStartIndex;
+	}
 }
 
 void RenderViewComponent::Render() const
@@ -60,6 +77,16 @@ void RenderViewComponent::SetSize(float width, float height)
 void RenderViewComponent::SetIndex(size_t index)
 {
 	mIndex = index;
+}
+
+void ieg::RenderViewComponent::SetAnimation(float delay, size_t startIndex, size_t stopIndex)
+{
+	mDelay = delay;
+	mCurrDelay = delay;
+	mStartIndex = startIndex;
+	mIndex = startIndex;
+	mStopIndex = stopIndex;
+	mIsAnimating = true;
 }
 
 Texture2D* RenderViewComponent::SetTexture(SDL_Texture* pSDLTexture)
