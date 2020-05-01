@@ -22,6 +22,6 @@ namespace ieg
 		ColorRGBA8* mpLevelPalette;
 		std::vector<GameObject*> mpGOAvatars;
 
-		static const size_t mpAvatarMax;
+		static const int mpAvatarMax;
 	};
 }

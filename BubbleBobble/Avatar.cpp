@@ -2,20 +2,24 @@
 #include "Avatar.h"
 #include "BufferManager.h"
 #include "BufferAsprites.h"
+#include "AvatarComponent.h"
+#include "LeftCommand.h"
+#include "RightCommand.h"
 #include "../Engine/Minigin.h"
 #include "../Engine/Scene.h"
 #include "../Engine/Renderer.h"
 #include "../Engine/TransformModelComponent.h"
 #include "../Engine/RenderViewComponent.h"
-#include "AvatarComponent.h"
+#include "../Engine/InputAction.h"
+#include "../Engine/InputManager.h"
 #include "../Engine/ColorRGBA8.h"
 #include <SDL.h>
 
 using namespace ieg;
 
-const size_t Avatar::mWidth{ 32 };
-const size_t Avatar::mHeight{ 16 };
-const size_t Avatar::mCount{ 16 };
+const int Avatar::mWidth{ 32 };
+const int Avatar::mHeight{ 16 };
+const int Avatar::mCount{ 16 };
 
 Avatar::Avatar(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, ColorRGBA8* pPalette, AvatarType avatarType)
 {
@@ -29,8 +33,22 @@ Avatar::Avatar(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, C
 		pTransformComponent->SetPos(208, 176);
 	RenderViewComponent* pRenderComponent{ mpGOAvatar->CreateViewComponent<RenderViewComponent>(pEngine) };
 	pRenderComponent->SetTransformComponent(pTransformComponent);
+	pRenderComponent->SetIsSprite(true);
 	AvatarComponent* pAvatarComponent{ mpGOAvatar->CreateModelComponent<AvatarComponent>(pEngine) };
-	(pAvatarComponent);
+	InputAction* pInputAction{ pScene->GetInputManager()->CreateInputAction() };
+	if (avatarType == AvatarType::Bub)
+		pInputAction->SetKeyboardKey(VK_LEFT);
+	else
+		pInputAction->SetGamepadButtonCode(XINPUT_GAMEPAD_DPAD_LEFT);
+	pInputAction->CreateAndSetCommand<LeftCommand>();
+	pInputAction->SetActor(pAvatarComponent);
+	pInputAction = pScene->GetInputManager()->CreateInputAction();
+	if (avatarType == AvatarType::Bub)
+		pInputAction->SetKeyboardKey(VK_RIGHT);
+	else
+		pInputAction->SetGamepadButtonCode(XINPUT_GAMEPAD_DPAD_RIGHT);
+	pInputAction->CreateAndSetCommand<RightCommand>();
+	pInputAction->SetActor(pAvatarComponent);
 
 	ColorRGBA8* pPixels{ new ColorRGBA8[mCount * mWidth * mHeight] };
 
@@ -39,7 +57,7 @@ Avatar::Avatar(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, C
 		pAsprites->GetSprites(pSprite, 16, Sprite::Bub, pPalette);
 	else
 		pAsprites->GetSprites(pSprite, 16, Sprite::Bob, pPalette);
-	for (size_t sprite{ 0 }; sprite < mCount; ++sprite)
+	for (int sprite{ 0 }; sprite < mCount; ++sprite)
 		DrawSprite(pSprite, pPixels, sprite, sprite);
 	delete[] pSprite;
 
@@ -58,6 +76,7 @@ Avatar::Avatar(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, C
 		pRenderComponent->SetIndex(0);
 	else
 		pRenderComponent->SetIndex(15);
+
 	delete[] pPixels;
 }
 
@@ -66,11 +85,11 @@ GameObject* Avatar::GetGameObject()
 	return mpGOAvatar;
 }
 
-void Avatar::DrawSprite(ColorRGBA8* pSprite, ColorRGBA8* pPixels, size_t offset, size_t loc)
+void Avatar::DrawSprite(ColorRGBA8* pSprite, ColorRGBA8* pPixels, int offset, int loc)
 {
-	const size_t
+	const int
 		width{ BufferAsprites::GetWidth() },
 		height{ BufferAsprites::GetHeight() };
-	for (size_t row{ 0 }; row < height; ++row)
+	for (int row{ 0 }; row < height; ++row)
 		memcpy(&pPixels[row * mCount * mWidth + (loc % width) * mWidth + (loc / width) * mCount * mWidth * height], &pSprite[offset * width * height + row * width], width * sizeof(ColorRGBA8));
 }

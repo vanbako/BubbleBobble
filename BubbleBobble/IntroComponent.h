@@ -27,8 +27,8 @@ namespace ieg
 	private:
 		Scene* mpStartScene;
 		Audio* mpAudio;
-		size_t mStartSoundId;
-		size_t mIntroSoundId;
+		int mStartSoundId;
+		int mIntroSoundId;
 		float mStartWait;
 		bool mStartAudio;
 	};

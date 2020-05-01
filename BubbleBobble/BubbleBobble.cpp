@@ -23,7 +23,7 @@ BubbleBobble::BubbleBobble(Minigin* pEngine)
 	, mpIntro{ nullptr }
 	, mpHud{ nullptr }
 	, mpStart{ nullptr }
-	, mpScenes{ size_t(Scenes::Count), nullptr }
+	, mpScenes{ int(Scenes::Count), nullptr }
 {
 }
 
@@ -45,12 +45,12 @@ void BubbleBobble::Initialize()
 
 void BubbleBobble::AddScenes()
 {
-	mpScenes[size_t(Scenes::Intro)] = mpEngine->GetSceneManager()->CreateScene("Intro");
-	mpScenes[size_t(Scenes::Start)] = mpEngine->GetSceneManager()->CreateScene("Start");
-	mpScenes[size_t(Scenes::Game)] = mpEngine->GetSceneManager()->CreateScene("Game");
-	mpEngine->GetSceneManager()->SetActiveScene(mpScenes[size_t(Scenes::Intro)]);
+	mpScenes[int(Scenes::Intro)] = mpEngine->GetSceneManager()->CreateScene("Intro");
+	mpScenes[int(Scenes::Start)] = mpEngine->GetSceneManager()->CreateScene("Start");
+	mpScenes[int(Scenes::Game)] = mpEngine->GetSceneManager()->CreateScene("Game");
+	mpEngine->GetSceneManager()->SetActiveScene(mpScenes[int(Scenes::Intro)]);
 
-	mpIntro = new Intro{ mpEngine, mpScenes[size_t(Scenes::Intro)], mpBufferManager, mpScenes[size_t(Scenes::Start)] };
-	mpStart = new Start{ mpEngine, mpScenes[size_t(Scenes::Start)], mpBufferManager, mpScenes[size_t(Scenes::Game)] };
-	mpHud = new Hud{ mpEngine, mpScenes[size_t(Scenes::Game)], mpBufferManager };
+	mpIntro = new Intro{ mpEngine, mpScenes[int(Scenes::Intro)], mpBufferManager, mpScenes[int(Scenes::Start)] };
+	mpStart = new Start{ mpEngine, mpScenes[int(Scenes::Start)], mpBufferManager, mpScenes[int(Scenes::Game)] };
+	mpHud = new Hud{ mpEngine, mpScenes[int(Scenes::Game)], mpBufferManager };
 }

@@ -46,19 +46,19 @@ RegularAudio::~RegularAudio()
 		mpFmodSystem->release();
 }
 
-size_t RegularAudio::AddSound(const std::string& filename, bool loop)
+int RegularAudio::AddSound(const std::string& filename, bool loop)
 {
 	FMOD_MODE mode{ FMOD_DEFAULT };
 	if (loop)
 		mode |= FMOD_LOOP_NORMAL;
 	FMOD::Sound* pSound{ nullptr };
-	size_t soundId{ mpSounds.size() };
+	int soundId{ int(mpSounds.size()) };
 	if (mpFmodSystem->createSound(filename.c_str(), mode, nullptr, &pSound) == FMOD_OK)
 		mpSounds.push_back(pSound);
 	return soundId;
 }
 
-void RegularAudio::PlaySound(size_t soundId)
+void RegularAudio::PlaySound(int soundId)
 {
 	if (mpFmodSystem != nullptr && soundId < mpSounds.size())
 	{
@@ -67,7 +67,7 @@ void RegularAudio::PlaySound(size_t soundId)
 	}
 }
 
-void RegularAudio::StopSound(size_t soundId)
+void RegularAudio::StopSound(int soundId)
 {
 	if (mpFmodSystem != nullptr && soundId < mpSounds.size())
 		mpChannelGroup->stop();

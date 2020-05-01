@@ -6,5 +6,5 @@ using namespace ieg;
 
 void RightCommand::Execute(ModelComponent* pAvatar)
 {
-	((AvatarComponent*)(pAvatar))->Left();
+	((AvatarComponent*)(pAvatar))->Right();
 }

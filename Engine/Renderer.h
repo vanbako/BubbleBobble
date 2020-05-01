@@ -22,13 +22,13 @@ namespace ieg
 		void Render(SceneManager* pSceneManager) const;
 		void Destroy();
 
-		void RenderTexture(const Texture2D& texture, Vec2<size_t> pos) const;
-		void RenderTexture(const Texture2D& texture, Vec2<size_t> srcPos, Vec2<size_t> srcSize, Vec2<size_t> dstPos) const;
+		void RenderTexture(const Texture2D& texture, Vec2<int> pos) const;
+		void RenderTexture(const Texture2D& texture, Vec2<int> srcPos, Vec2<int> srcSize, Vec2<int> dstPos) const;
 
 		SDL_Renderer* GetSDLRenderer() const;
 	private:
 		SDL_Renderer* mpSDLRenderer{};
 
-		static const size_t mGlobalScale;
+		static const int mGlobalScale;
 	};
 }

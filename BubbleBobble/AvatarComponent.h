@@ -33,7 +33,10 @@ namespace ieg
 		void Right();
 	private:
 		AvatarState mState;
-		bool mIsLookingLeft;
 		bool mIsFiring;
+		int mIsMoving;
+		float mMoveDelay;
+
+		static const float mMove2PixelsTime;
 	};
 }

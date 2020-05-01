@@ -24,6 +24,7 @@ namespace ieg
 		void SetX(T x) { mX = x; };
 		void SetY(T y) { mY = y; };
 		void SetXY(T x, T y) { mX = x; mY = y; };
+		void Move(T x, T y) { mX += x; mY += y; };
 	private:
 		T mX;
 		T mY;

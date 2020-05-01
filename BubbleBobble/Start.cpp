@@ -21,14 +21,14 @@
 
 using namespace ieg;
 
-const size_t Start::mWidth{ 320 };
-const size_t Start::mHeight{ 200 };
-const size_t Start::mBlockWidth{ 16 };
-const size_t Start::mBlockHeight{ 25 };
-const size_t Start::mChrWidth{ 40 };
-const size_t Start::mChrHeight{ 25 };
-const size_t Start::mSpriteHeight{ 32 };
-const size_t Start::mSpriteAnimCount{ 2 };
+const int Start::mWidth{ 320 };
+const int Start::mHeight{ 200 };
+const int Start::mBlockWidth{ 16 };
+const int Start::mBlockHeight{ 25 };
+const int Start::mChrWidth{ 40 };
+const int Start::mChrHeight{ 25 };
+const int Start::mSpriteHeight{ 32 };
+const int Start::mSpriteAnimCount{ 2 };
 const float Start::mAnimDelay{ 0.15f };
 
 
@@ -79,9 +79,9 @@ void Start::CreateBackground(Minigin* pEngine, Scene* pScene, Scene* pGameScene,
 	delete[] pPixels;
 }
 
-void Start::CreateBubBobAnim(Sprite sprite, size_t x, Minigin* pEngine, Scene* pScene, BufferAsprites* pAsprites, ColorRGBA8* pPalette)
+void Start::CreateBubBobAnim(Sprite sprite, int x, Minigin* pEngine, Scene* pScene, BufferAsprites* pAsprites, ColorRGBA8* pPalette)
 {
-	size_t
+	int
 		width{ BufferAsprites::GetWidth() },
 		height{ mSpriteHeight };
 	GameObject* pGameObject{ pScene->CreateObject<GameObject>() };
@@ -115,32 +115,32 @@ void Start::CreateBubBobAnim(Sprite sprite, size_t x, Minigin* pEngine, Scene* p
 	delete[] pPixels;
 }
 
-void Start::DrawSprite(ColorRGBA8* pSprite, ColorRGBA8* pPixels, size_t offset, size_t loc)
+void Start::DrawSprite(ColorRGBA8* pSprite, ColorRGBA8* pPixels, int offset, int loc)
 {
-	const size_t
+	const int
 		width{ BufferAsprites::GetWidth() },
 		height{ BufferAsprites::GetHeight() },
 		pixWidth{ BufferAsprites::GetWidth() * mSpriteAnimCount };
-	for (size_t row{ 0 }; row < height; ++row)
+	for (int row{ 0 }; row < height; ++row)
 		memcpy(&pPixels[row * pixWidth + (loc % 8) * 8 + (loc / 8) * pixWidth * 8], &pSprite[offset * width * height + row * width], width * sizeof(ColorRGBA8));
 }
 
-void Start::DrawChr(ColorRGBA8* pChr, ColorRGBA8* pPixels, size_t loc)
+void Start::DrawChr(ColorRGBA8* pChr, ColorRGBA8* pPixels, int loc)
 {
-	const size_t
+	const int
 		width{ BufferAblocks::GetFontWidth() },
 		height{ BufferAblocks::GetFontHeight() };
-	for (size_t row{ 0 }; row < height; ++row)
+	for (int row{ 0 }; row < height; ++row)
 		memcpy(&pPixels[row * mWidth + (loc % mChrWidth) * height + (loc / mChrWidth) * mWidth * height], &pChr[row * width], width * sizeof(ColorRGBA8));
 }
 
-void Start::DrawStr(ColorRGBA8* pFont, ColorRGBA8* pPixels, size_t loc, const std::string& str)
+void Start::DrawStr(ColorRGBA8* pFont, ColorRGBA8* pPixels, int loc, const std::string& str)
 {
-	const size_t
+	const int
 		width{ BufferAblocks::GetFontWidth() },
 		height{ BufferAblocks::GetFontHeight() };
 	char chr{};
-	for (size_t i{ 0 }; i < str.size(); ++i)
+	for (int i{ 0 }; i < str.size(); ++i)
 	{
 		chr = str[i];
 		if (chr == ' ')

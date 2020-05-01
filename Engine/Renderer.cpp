@@ -6,7 +6,7 @@
 
 using namespace ieg;
 
-const size_t Renderer::mGlobalScale{ 4 };
+const int Renderer::mGlobalScale{ 4 };
 
 Renderer::Renderer()
 	: mpSDLRenderer{ nullptr }
@@ -36,19 +36,19 @@ void Renderer::Destroy()
 	}
 }
 
-void Renderer::RenderTexture(const Texture2D& texture, Vec2<size_t> pos) const
+void Renderer::RenderTexture(const Texture2D& texture, Vec2<int> pos) const
 {
-	SDL_Rect dst{ int(pos.GetX() * mGlobalScale), int(pos.GetY() * mGlobalScale), 0, 0 };
+	SDL_Rect dst{ pos.GetX() * mGlobalScale, pos.GetY() * mGlobalScale, 0, 0 };
 	SDL_QueryTexture(texture.GetSDLTexture(), nullptr, nullptr, &dst.w, &dst.h);
 	dst.w *= 4;
 	dst.h *= 4;
 	SDL_RenderCopy(GetSDLRenderer(), texture.GetSDLTexture(), nullptr, &dst);
 }
 
-void Renderer::RenderTexture(const Texture2D& texture, Vec2<size_t> srcPos, Vec2<size_t> srcSize, Vec2<size_t> dstPos) const
+void Renderer::RenderTexture(const Texture2D& texture, Vec2<int> srcPos, Vec2<int> srcSize, Vec2<int> dstPos) const
 {
-	SDL_Rect src{ int(srcPos.GetX()), int(srcPos.GetY()), int(srcSize.GetX()), int(srcSize.GetY()) };
-	SDL_Rect dst{ int(dstPos.GetX() * mGlobalScale), int(dstPos.GetY() * mGlobalScale), int(srcSize.GetX() * mGlobalScale), int(srcSize.GetY() * mGlobalScale) };
+	SDL_Rect src{ srcPos.GetX(), srcPos.GetY(), srcSize.GetX(), srcSize.GetY() };
+	SDL_Rect dst{ dstPos.GetX() * mGlobalScale, dstPos.GetY() * mGlobalScale, srcSize.GetX() * mGlobalScale, srcSize.GetY() * mGlobalScale };
 	SDL_RenderCopy(GetSDLRenderer(), texture.GetSDLTexture(), &src, &dst);
 }
 

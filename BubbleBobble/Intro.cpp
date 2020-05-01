@@ -21,8 +21,8 @@
 
 using namespace ieg;
 
-const size_t Intro::mWidth{ 320 };
-const size_t Intro::mHeight{ 200 };
+const int Intro::mWidth{ 320 };
+const int Intro::mHeight{ 200 };
 
 Intro::Intro(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, Scene* pGameScene)
 {

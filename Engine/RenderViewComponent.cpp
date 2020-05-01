@@ -18,6 +18,7 @@ RenderViewComponent::RenderViewComponent(Minigin* pEngine)
 	, mStartIndex{ 0 }
 	, mStopIndex{ 0 }
 	, mIsAnimating{ false }
+	, mIsSprite{ false }
 {
 }
 
@@ -31,17 +32,26 @@ void RenderViewComponent::Update(const float deltaTime)
 		if (mIndex > mStopIndex)
 			mIndex = mStartIndex;
 	}
+	if (mIsSprite)
+	{
+		mIndex = 0;
+		if (mpTransformComponent->GetIsLookingLeft())
+			mIndex += 8;
+		mIndex += (mpTransformComponent->GetPos().GetX() % 16) / 2;
+	}
 }
 
 void RenderViewComponent::Render() const
 {
 	if (mpTransformComponent != nullptr && mpTexture != nullptr)
 	{
-		const Vec2 pos{ mpTransformComponent->GetPos() };
+		Vec2 pos{ mpTransformComponent->GetPos() };
+		if (mIsSprite)
+			pos.SetX((pos.GetX() / 16) * 16);
 		if (mSize.GetX() == 0)
 			mpEngine->GetRenderer()->RenderTexture(*mpTexture, pos);
 		else
-			mpEngine->GetRenderer()->RenderTexture(*mpTexture, Vec2<size_t>{ mSize.GetX() * mIndex, 0 }, mSize, pos);
+			mpEngine->GetRenderer()->RenderTexture(*mpTexture, Vec2<int>{ mSize.GetX() * mIndex, 0 }, mSize, pos);
 	}
 }
 
@@ -67,17 +77,17 @@ Texture2D* RenderViewComponent::GetTexture()
 	return mpTexture;
 }
 
-void RenderViewComponent::SetSize(size_t width, size_t height)
+void RenderViewComponent::SetSize(int width, int height)
 {
 	mSize.SetXY(width, height);
 }
 
-void RenderViewComponent::SetIndex(size_t index)
+void RenderViewComponent::SetIndex(int index)
 {
 	mIndex = index;
 }
 
-void RenderViewComponent::SetAnimation(float delay, size_t startIndex, size_t stopIndex)
+void RenderViewComponent::SetAnimation(float delay, int startIndex, int stopIndex)
 {
 	mDelay = delay;
 	mCurrDelay = delay;
@@ -102,4 +112,9 @@ Texture2D* RenderViewComponent::ReplaceTexture(SDL_Texture* pSDLTexture)
 		mpEngine->GetResourceManager()->RemoveTexture(mpTexture);
 	mpTexture = mpEngine->GetResourceManager()->CreateTexture(pSDLTexture);
 	return mpTexture;
+}
+
+void ieg::RenderViewComponent::SetIsSprite(bool isSprite)
+{
+	mIsSprite = isSprite;
 }

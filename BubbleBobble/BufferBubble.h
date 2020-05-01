@@ -17,19 +17,19 @@ namespace ieg {
 		BufferBubble& operator=(BufferBubble&&) = delete;
 
 		void GetIntroColors(ColorRGBA8* pPalette);
-		void GetLevelColors(ColorRGBA8* pPalette, size_t level);
-		size_t GetLevelBigBlockOffset(size_t level);
+		void GetLevelColors(ColorRGBA8* pPalette, int level);
+		int GetLevelBigBlockOffset(int level);
 
-		static size_t GetPaletteColorCount();
+		static int GetPaletteColorCount();
 	private:
-		static const size_t mIntroPaletteOffset;
-		static const size_t mPaletteColorCount;
-		static const size_t mPaletteOffset;
-		static const size_t mLevelColorCount;
-		static const size_t mLevelColorsOffset;
-		static const size_t mLevelColorsPaletteOffset;
-		static const size_t mLevelBigBlockOffsets;
+		static const int mIntroPaletteOffset;
+		static const int mPaletteColorCount;
+		static const int mPaletteOffset;
+		static const int mLevelColorCount;
+		static const int mLevelColorsOffset;
+		static const int mLevelColorsPaletteOffset;
+		static const int mLevelBigBlockOffsets;
 
-		void GetPalette(ColorRGBA8* pPalette, const size_t offset);
+		void GetPalette(ColorRGBA8* pPalette, const int offset);
 	};
 }

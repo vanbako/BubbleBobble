@@ -8,7 +8,7 @@
 
 using namespace ieg;
 
-const size_t LevelComponent::mpAvatarMax{ 2 };
+const int LevelComponent::mpAvatarMax{ 2 };
 
 LevelComponent::LevelComponent(GameObject* pGameObject, Minigin* pEngine,...)
 	: ModelComponent(pGameObject, pEngine)

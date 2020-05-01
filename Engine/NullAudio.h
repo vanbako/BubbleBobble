@@ -14,8 +14,8 @@ namespace ieg
 		NullAudio& operator=(const NullAudio&) = delete;
 		NullAudio& operator=(const NullAudio&&) = delete;
 
-		virtual size_t AddSound(const std::string& filename, bool loop) override;
-		virtual void PlaySound(size_t soundId) override { (soundId); };
-		virtual void StopSound(size_t soundId) override { (soundId); };
+		virtual int AddSound(const std::string& filename, bool loop) override;
+		virtual void PlaySound(int soundId) override { (soundId); };
+		virtual void StopSound(int soundId) override { (soundId); };
 	};
 }

@@ -3,7 +3,7 @@
 
 using namespace ieg;
 
-size_t NullAudio::AddSound(const std::string& filename, bool loop)
+int NullAudio::AddSound(const std::string& filename, bool loop)
 {
 	(filename);
 	(loop);

@@ -19,13 +19,13 @@
 
 using namespace ieg;
 
-const Vec2<size_t> Hud::mPos{ 256, 0 };
-const size_t Hud::mWidth{ 64 };
-const size_t Hud::mHeight{ 200 };
-const size_t Hud::mBlockWidth{ 4 };
-const size_t Hud::mBlockHeight{ 25 };
-const size_t Hud::mChrWidth{ 8 };
-const size_t Hud::mChrHeight{ 25 };
+const Vec2<int> Hud::mPos{ 256, 0 };
+const int Hud::mWidth{ 64 };
+const int Hud::mHeight{ 200 };
+const int Hud::mBlockWidth{ 4 };
+const int Hud::mBlockHeight{ 25 };
+const int Hud::mChrWidth{ 8 };
+const int Hud::mChrHeight{ 25 };
 
 Hud::Hud(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager)
 {
@@ -82,31 +82,31 @@ Hud::Hud(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager)
 	delete[] pPixels;
 }
 
-void Hud::DrawSprite(ColorRGBA8* pSprite, ColorRGBA8* pPixels, size_t offset, size_t loc)
+void Hud::DrawSprite(ColorRGBA8* pSprite, ColorRGBA8* pPixels, int offset, int loc)
 {
-	const size_t
+	const int
 		width{ BufferAsprites::GetWidth() },
 		height{ BufferAsprites::GetHeight() };
-	for (size_t row{ 0 }; row < height; ++row)
+	for (int row{ 0 }; row < height; ++row)
 		memcpy(&pPixels[row * mWidth + (loc % mBlockWidth) * height + (loc / mBlockWidth) * mWidth * height], &pSprite[offset * width * height + row * width], width * sizeof(ColorRGBA8));
 }
 
-void Hud::DrawChr(ColorRGBA8* pChr, ColorRGBA8* pPixels, size_t loc)
+void Hud::DrawChr(ColorRGBA8* pChr, ColorRGBA8* pPixels, int loc)
 {
-	const size_t
+	const int
 		width{ BufferAblocks::GetFontWidth() },
 		height{ BufferAblocks::GetFontHeight() };
-	for (size_t row{ 0 }; row < height; ++row)
+	for (int row{ 0 }; row < height; ++row)
 		memcpy(&pPixels[row * mWidth + (loc % mChrWidth) * height + (loc / mChrWidth) * mWidth * height], &pChr[row * width], width * sizeof(ColorRGBA8));
 }
 
-void Hud::DrawStr(ColorRGBA8* pFont, ColorRGBA8* pPixels, size_t loc, const std::string& str)
+void Hud::DrawStr(ColorRGBA8* pFont, ColorRGBA8* pPixels, int loc, const std::string& str)
 {
 	char chr{};
-	const size_t
+	const int
 		width{ BufferAblocks::GetFontWidth() },
 		height{ BufferAblocks::GetFontHeight() };
-	for (size_t i{ 0 }; i < str.size(); ++i)
+	for (int i{ 0 }; i < str.size(); ++i)
 	{
 		chr = str[i];
 		if (chr == ' ')

@@ -18,10 +18,15 @@ namespace ieg
 
 		void Update(const float deltaTime) override;
 
-		const Vec2<size_t>& GetPos() const;
-		void SetPos(const size_t x, const size_t y);
-		void SetPos(const Vec2<size_t> pos);
+		const Vec2<int>& GetPos() const;
+		const bool GetIsLookingLeft() const;
+		void SetPos(const int x, const int y);
+		void SetPos(const Vec2<int> pos);
+		void Move(const int deltaX, const int deltaY);
+		void Move(const Vec2<int> delta);
+		void SetIsLookingLeft(bool isLookingLeft);
 	private:
-		Vec2<size_t> mPos;
+		Vec2<int> mPos;
+		bool mIsLookingLeft;
 	};
 }

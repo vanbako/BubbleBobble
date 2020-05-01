@@ -5,7 +5,7 @@ namespace ieg {
 	class ColorRGBA8;
 
 	enum class Sprite
-		: size_t
+		: int
 	{
 		Bub = 0,
 		Bob = 16,
@@ -52,15 +52,15 @@ namespace ieg {
 		BufferAsprites& operator=(const BufferAsprites&) = delete;
 		BufferAsprites& operator=(BufferAsprites&&) = delete;
 
-		void GetSprites(ColorRGBA8* pSprite, size_t count, Sprite sprite, ColorRGBA8* pPalette) const;
+		void GetSprites(ColorRGBA8* pSprite, int count, Sprite sprite, ColorRGBA8* pPalette) const;
 
-		static const size_t GetWidth();
-		static const size_t GetByteWidth();
-		static const size_t GetHeight();
+		static const int GetWidth();
+		static const int GetByteWidth();
+		static const int GetHeight();
 	private:
-		static const size_t mBitplanes;
-		static const size_t mWidth;
-		static const size_t mByteWidth;
-		static const size_t mHeight;
+		static const int mBitplanes;
+		static const int mWidth;
+		static const int mByteWidth;
+		static const int mHeight;
 	};
 }

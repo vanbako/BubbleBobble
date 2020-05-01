@@ -17,10 +17,10 @@ namespace ieg {
 
 		void GetPic(ColorRGBA8* pPic, ColorRGBA8* pPalette) const;
 	private:
-		static const size_t mBitplanes;
-		static const size_t mWidth;
-		static const size_t mByteWidth;
-		static const size_t mHeight;
-		static const size_t mBitplanePitch;
+		static const int mBitplanes;
+		static const int mWidth;
+		static const int mByteWidth;
+		static const int mHeight;
+		static const int mBitplanePitch;
 	};
 }

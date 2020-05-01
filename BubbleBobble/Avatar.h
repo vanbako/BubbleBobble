@@ -30,11 +30,11 @@ namespace ieg
 	private:
 		GameObject* mpGOAvatar;
 
-		static const size_t mWidth;
-		static const size_t mHeight;
-		static const size_t mCount;
+		static const int mWidth;
+		static const int mHeight;
+		static const int mCount;
 
-		void DrawSprite(ColorRGBA8* pSprite, ColorRGBA8* pPixels, size_t offset, size_t loc);
+		void DrawSprite(ColorRGBA8* pSprite, ColorRGBA8* pPixels, int offset, int loc);
 	};
 }
 

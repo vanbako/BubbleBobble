@@ -8,14 +8,14 @@ MutedAudio::MutedAudio()
 {
 }
 
-size_t MutedAudio::AddSound(const std::string& filename, bool loop)
+int MutedAudio::AddSound(const std::string& filename, bool loop)
 {
 	(filename);
 	(loop);
 	return 0;
 }
 
-void MutedAudio::PlaySound(size_t soundId)
+void MutedAudio::PlaySound(int soundId)
 {
 	mLogFile.open("Audio.log", std::ios::out);
 	if (mLogFile)
@@ -26,7 +26,7 @@ void MutedAudio::PlaySound(size_t soundId)
 	}
 }
 
-void MutedAudio::StopSound(size_t soundId)
+void MutedAudio::StopSound(int soundId)
 {
 	mLogFile.open("Audio.log", std::ios::out);
 	if (mLogFile)

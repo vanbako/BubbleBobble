@@ -16,7 +16,7 @@ namespace ieg
 		virtual bool LoadFile();
 		char* GetData();
 	protected:
-		size_t mSize;
+		int mSize;
 		char* mpData;
 	private:
 		const std::string mFilename;

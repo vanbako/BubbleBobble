@@ -12,8 +12,8 @@ namespace ieg
 		Audio& operator=(const Audio&) = delete;
 		Audio& operator=(Audio&&) = delete;
 
-		virtual size_t AddSound(const std::string& filename, bool loop) = 0;
-		virtual void PlaySound(size_t soundId) = 0;
-		virtual void StopSound(size_t soundId) = 0;
+		virtual int AddSound(const std::string& filename, bool loop) = 0;
+		virtual void PlaySound(int soundId) = 0;
+		virtual void StopSound(int soundId) = 0;
 	};
 }

@@ -14,11 +14,11 @@ namespace ieg {
 		BufferBdata& operator=(BufferBdata&&) = delete;
 
 		bool LoadFile() override;
-		void GetLayout(char* pLayout, size_t level);
+		void GetLayout(char* pLayout, int level);
 	private:
-		static const size_t mLevelDataOffset;
-		static const size_t mLevelByteWidth;
-		static const size_t mLevelWidth;
-		static const size_t mLevelHeight;
+		static const int mLevelDataOffset;
+		static const int mLevelByteWidth;
+		static const int mLevelWidth;
+		static const int mLevelHeight;
 	};
 }

@@ -22,20 +22,20 @@ namespace ieg
 		Start& operator=(const Start&) = delete;
 		Start& operator=(Start&&) = delete;
 	private:
-		static const size_t mWidth;
-		static const size_t mHeight;
-		static const size_t mBlockWidth;
-		static const size_t mBlockHeight;
-		static const size_t mChrWidth;
-		static const size_t mChrHeight;
-		static const size_t mSpriteHeight;
-		static const size_t mSpriteAnimCount;
+		static const int mWidth;
+		static const int mHeight;
+		static const int mBlockWidth;
+		static const int mBlockHeight;
+		static const int mChrWidth;
+		static const int mChrHeight;
+		static const int mSpriteHeight;
+		static const int mSpriteAnimCount;
 		static const float mAnimDelay;
 
 		void CreateBackground(Minigin* pEngine, Scene* pScene, Scene* pGameScene, BufferAblocks* pAblocks, ColorRGBA8* pPalette);
-		void CreateBubBobAnim(Sprite sprite, size_t x, Minigin* pEngine, Scene* pScene, BufferAsprites* pAsprites, ColorRGBA8* pPalette);
-		void DrawSprite(ColorRGBA8* pSprite, ColorRGBA8* pPixels, size_t offset, size_t loc);
-		void DrawChr(ColorRGBA8* pChr, ColorRGBA8* pPixels, size_t loc);
-		void DrawStr(ColorRGBA8* pFont, ColorRGBA8* pPixels, size_t loc, const std::string& str);
+		void CreateBubBobAnim(Sprite sprite, int x, Minigin* pEngine, Scene* pScene, BufferAsprites* pAsprites, ColorRGBA8* pPalette);
+		void DrawSprite(ColorRGBA8* pSprite, ColorRGBA8* pPixels, int offset, int loc);
+		void DrawChr(ColorRGBA8* pChr, ColorRGBA8* pPixels, int loc);
+		void DrawStr(ColorRGBA8* pFont, ColorRGBA8* pPixels, int loc, const std::string& str);
 	};
 }

@@ -20,29 +20,31 @@ namespace ieg
 		RenderViewComponent& operator=(const RenderViewComponent&) = delete;
 		RenderViewComponent& operator=(RenderViewComponent&&) = delete;
 
-		void Update(const float deltaTime);
-		void Render() const;
+		void Update(const float deltaTime) override;
+		void Render() const override;
 
 		void SetTransformComponent(TransformModelComponent* pTransformComponent);
 		void SetTexture(const std::string& file);
 		void SetTexture(Texture2D* pTexture);
 		Texture2D* GetTexture();
-		void SetSize(size_t width, size_t height);
-		void SetIndex(size_t index);
-		void SetAnimation(float delay, size_t startIndex, size_t stopIndex);
+		void SetSize(int width, int height);
+		void SetIndex(int index);
+		void SetAnimation(float delay, int startIndex, int stopIndex);
 		Texture2D* SetTexture(SDL_Texture* pSDLTexture);
 		Texture2D* ReplaceTexture(SDL_Texture* pSDLTexture);
+		void SetIsSprite(bool isSprite);
 	private:
 		TransformModelComponent* mpTransformComponent;
 		Texture2D* mpTexture;
-		Vec2<size_t> mSize;
-		size_t mIndex;
+		Vec2<int> mSize;
+		int mIndex;
 		float
 			mDelay,
 			mCurrDelay;
-		size_t
+		int
 			mStartIndex,
 			mStopIndex;
 		bool mIsAnimating;
+		bool mIsSprite;
 	};
 }

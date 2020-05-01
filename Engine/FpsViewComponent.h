@@ -17,8 +17,8 @@ namespace ieg
 		FpsViewComponent& operator=(const FpsViewComponent&) = delete;
 		FpsViewComponent& operator=(FpsViewComponent&&) = delete;
 
-		void Update(const float deltaTime);
-		void Render() const {};
+		void Update(const float deltaTime) override;
+		void Render() const override {};
 
 		void SetTextComponent(TextViewComponent* pTextComponent);
 	private:

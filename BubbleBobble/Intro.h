@@ -20,7 +20,7 @@ namespace ieg
 		Intro& operator=(const Intro&) = delete;
 		Intro& operator=(Intro&&) = delete;
 	private:
-		static const size_t mWidth;
-		static const size_t mHeight;
+		static const int mWidth;
+		static const int mHeight;
 	};
 }

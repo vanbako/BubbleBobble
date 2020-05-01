@@ -19,13 +19,13 @@
 
 using namespace ieg;
 
-const size_t Level::mWidthInBlocks{ 32 };
-const size_t Level::mHeightInBlocks{ 25 };
-const size_t Level::mBlockCount{ 800 };
-const size_t Level::mWidth{ 256 };
-const size_t Level::mHeight{ 200 };
+const int Level::mWidthInBlocks{ 32 };
+const int Level::mHeightInBlocks{ 25 };
+const int Level::mBlockCount{ 800 };
+const int Level::mWidth{ 256 };
+const int Level::mHeight{ 200 };
 
-Level::Level(size_t level, Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager)
+Level::Level(int level, Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager)
 {
 	BufferBubble* pBubble{ (BufferBubble*)pBufferManager->GetBuffer(EnumBuffer::Bubble) };
 	BufferAblocks* pAblocks{ (BufferAblocks*)pBufferManager->GetBuffer(EnumBuffer::Ablocks) };
@@ -78,7 +78,7 @@ void Level::DrawFalse3DBlocks(BufferAblocks* pAblocks, ColorRGBA8* pPixels, Colo
 {
 	ColorRGBA8* pFalse3D{ new ColorRGBA8[BufferAblocks::GetFalse3DCount() * BufferAblocks::GetBlockPixelCount()] };
 	pAblocks->GetLevelFalse3D(pFalse3D, pLevelPalette);
-	for (size_t pos{ 0 }; pos < mBlockCount; ++pos)
+	for (int pos{ 0 }; pos < mBlockCount; ++pos)
 	{
 		if (pLayout[pos] == 1) continue;
 		if (pos % mWidthInBlocks == 0) continue;
@@ -111,27 +111,27 @@ void Level::DrawFalse3DBlocks(BufferAblocks* pAblocks, ColorRGBA8* pPixels, Colo
 	delete[] pFalse3D;
 }
 
-void Level::DrawBlocks(BufferAblocks* pAblocks, ColorRGBA8* pPixels, ColorRGBA8* pLevelPalette, char* pLayout, size_t level)
+void Level::DrawBlocks(BufferAblocks* pAblocks, ColorRGBA8* pPixels, ColorRGBA8* pLevelPalette, char* pLayout, int level)
 {
 	ColorRGBA8* pBlock{ new ColorRGBA8[BufferAblocks::GetBlockPixelCount()] };
 	pAblocks->GetLevelBlock(pBlock, pLevelPalette, level);
 
-	const size_t blockHeight{ BufferAblocks::GetBlockHeight() };
-	const size_t blockWidth{ BufferAblocks::GetBlockWidth() };
-	for (size_t pos{ 0 }; pos < mBlockCount; ++pos)
+	const int blockHeight{ BufferAblocks::GetBlockHeight() };
+	const int blockWidth{ BufferAblocks::GetBlockWidth() };
+	for (int pos{ 0 }; pos < mBlockCount; ++pos)
 		if (pLayout[pos] == 1)
 			DrawBlock(pBlock, pPixels, pos);
 	delete[] pBlock;
 }
 
-void Level::DrawBigBlocks(BufferAblocks* pAblocks, ColorRGBA8* pPixels, ColorRGBA8* pLevelPalette, BufferBubble* pBubble, size_t level)
+void Level::DrawBigBlocks(BufferAblocks* pAblocks, ColorRGBA8* pPixels, ColorRGBA8* pLevelPalette, BufferBubble* pBubble, int level)
 {
-	size_t offset{ pBubble->GetLevelBigBlockOffset(level) };
+	int offset{ pBubble->GetLevelBigBlockOffset(level) };
 	if (offset != 0)
 	{
 		ColorRGBA8* pBigBlock{ new ColorRGBA8[BufferAblocks::GetBigBlockPixelCount()] };
 		pAblocks->GetLevelBigBlock(pBigBlock, pLevelPalette, offset);
-		for (size_t row{ 0 }; row < 13; ++row)
+		for (int row{ 0 }; row < 13; ++row)
 		{
 			DrawBigBlock(pBigBlock, pPixels, row * 16);
 			DrawBigBlock(pBigBlock, pPixels, row * 16 + 15);
@@ -140,11 +140,11 @@ void Level::DrawBigBlocks(BufferAblocks* pAblocks, ColorRGBA8* pPixels, ColorRGB
 	}
 }
 
-void Level::DrawBlock(ColorRGBA8* pBlock, ColorRGBA8* pPixels, size_t pos)
+void Level::DrawBlock(ColorRGBA8* pBlock, ColorRGBA8* pPixels, int pos)
 {
-	const size_t blockHeight{ BufferAblocks::GetBlockHeight() };
-	const size_t blockWidth{ BufferAblocks::GetBlockWidth() };
-	for (size_t row{ 0 }; row < blockHeight; ++row)
+	const int blockHeight{ BufferAblocks::GetBlockHeight() };
+	const int blockWidth{ BufferAblocks::GetBlockWidth() };
+	for (int row{ 0 }; row < blockHeight; ++row)
 		std::memcpy(
 			&pPixels[
 				(pos % mWidthInBlocks) * blockWidth +
@@ -154,14 +154,14 @@ void Level::DrawBlock(ColorRGBA8* pBlock, ColorRGBA8* pPixels, size_t pos)
 			blockWidth * sizeof(ColorRGBA8));
 }
 
-void Level::DrawBigBlock(ColorRGBA8* pBlock, ColorRGBA8* pPixels, size_t pos)
+void Level::DrawBigBlock(ColorRGBA8* pBlock, ColorRGBA8* pPixels, int pos)
 {
-	const size_t blockHeight{ BufferAblocks::GetBigBlockHeight() };
-	const size_t blockWidth{ BufferAblocks::GetBigBlockWidth() };
-	size_t rowCount = blockHeight;
+	const int blockHeight{ BufferAblocks::GetBigBlockHeight() };
+	const int blockWidth{ BufferAblocks::GetBigBlockWidth() };
+	int rowCount = blockHeight;
 	if (pos >= 192)
 		rowCount = blockHeight / 2;
-	for (size_t row{ 0 }; row < rowCount; ++row)
+	for (int row{ 0 }; row < rowCount; ++row)
 		std::memcpy(
 			&pPixels[
 				(pos % 16) * blockWidth +
@@ -171,11 +171,11 @@ void Level::DrawBigBlock(ColorRGBA8* pBlock, ColorRGBA8* pPixels, size_t pos)
 			blockWidth * sizeof(ColorRGBA8));
 }
 
-void Level::DrawFalse3D(ColorRGBA8* pFalse3D, ColorRGBA8* pPixels, size_t pos, size_t type)
+void Level::DrawFalse3D(ColorRGBA8* pFalse3D, ColorRGBA8* pPixels, int pos, int type)
 {
-	const size_t blockHeight{ BufferAblocks::GetBlockHeight() };
-	const size_t blockWidth{ BufferAblocks::GetBlockWidth() };
-	for (size_t row{ 0 }; row < blockHeight; ++row)
+	const int blockHeight{ BufferAblocks::GetBlockHeight() };
+	const int blockWidth{ BufferAblocks::GetBlockWidth() };
+	for (int row{ 0 }; row < blockHeight; ++row)
 		std::memcpy(
 			&pPixels[
 				(pos % mWidthInBlocks) * blockWidth +

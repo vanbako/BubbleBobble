@@ -19,8 +19,8 @@ namespace ieg
 		TextViewComponent& operator=(const TextViewComponent&) = delete;
 		TextViewComponent& operator=(TextViewComponent&&) = delete;
 
-		void Update(const float deltaTime);
-		void Render() const {};
+		void Update(const float deltaTime) override;
+		void Render() const override {};
 
 		void SetRenderComponent(RenderViewComponent * pRenderComponent);
 		void SetText(const std::string& text);

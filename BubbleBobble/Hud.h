@@ -20,16 +20,16 @@ namespace ieg
 		Hud& operator=(const Hud&) = delete;
 		Hud& operator=(Hud&&) = delete;
 	private:
-		static const Vec2<size_t> mPos;
-		static const size_t mWidth;
-		static const size_t mHeight;
-		static const size_t mBlockWidth;
-		static const size_t mBlockHeight;
-		static const size_t mChrWidth;
-		static const size_t mChrHeight;
+		static const Vec2<int> mPos;
+		static const int mWidth;
+		static const int mHeight;
+		static const int mBlockWidth;
+		static const int mBlockHeight;
+		static const int mChrWidth;
+		static const int mChrHeight;
 
-		void DrawSprite(ColorRGBA8* pSprite, ColorRGBA8* pPixels, size_t offset, size_t loc);
-		void DrawChr(ColorRGBA8* pChr, ColorRGBA8* pPixels, size_t loc);
-		void DrawStr(ColorRGBA8* pFont, ColorRGBA8* pPixels, size_t loc, const std::string& str);
+		void DrawSprite(ColorRGBA8* pSprite, ColorRGBA8* pPixels, int offset, int loc);
+		void DrawChr(ColorRGBA8* pChr, ColorRGBA8* pPixels, int loc);
+		void DrawStr(ColorRGBA8* pFont, ColorRGBA8* pPixels, int loc, const std::string& str);
 	};
 }
