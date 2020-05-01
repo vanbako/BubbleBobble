@@ -1,8 +1,4 @@
 #pragma once
-#pragma warning(push)
-#pragma warning (disable:4201)
-#include <vec3.hpp>
-#pragma warning(pop)
 #include "ModelComponent.h"
 
 namespace ieg
@@ -20,12 +16,12 @@ namespace ieg
 		TransformModelComponent& operator=(const TransformModelComponent&) = delete;
 		TransformModelComponent& operator=(TransformModelComponent&&) = delete;
 
-		void Update(const float deltaTime) { (deltaTime);  };
-		void Render() const {};
+		void Update(const float deltaTime) override;
 
-		const glm::vec3& GetPosition() const;
-		void SetPosition(const float x, const float y, const float z);
+		const Vec2<size_t>& GetPos() const;
+		void SetPos(const size_t x, const size_t y);
+		void SetPos(const Vec2<size_t> pos);
 	private:
-		glm::vec3 mPosition;
+		Vec2<size_t> mPos;
 	};
 }

@@ -11,8 +11,7 @@ RenderViewComponent::RenderViewComponent(Minigin* pEngine)
 	: ViewComponent(pEngine)
 	, mpTransformComponent{ nullptr }
 	, mpTexture{ nullptr }
-	, mWidth{ 0.f }
-	, mHeight{ 0.f }
+	, mSize{}
 	, mIndex{ 0 }
 	, mDelay{ 0.f }
 	, mCurrDelay{ 0.f }
@@ -38,11 +37,11 @@ void RenderViewComponent::Render() const
 {
 	if (mpTransformComponent != nullptr && mpTexture != nullptr)
 	{
-		const auto pos{ mpTransformComponent->GetPosition() };
-		if (mWidth == 0.f)
-			mpEngine->GetRenderer()->RenderTexture(*mpTexture, pos.x, pos.y);
+		const Vec2 pos{ mpTransformComponent->GetPos() };
+		if (mSize.GetX() == 0)
+			mpEngine->GetRenderer()->RenderTexture(*mpTexture, pos);
 		else
-			mpEngine->GetRenderer()->RenderTexture(*mpTexture, mWidth * float(mIndex), 0.f, mWidth, mHeight, pos.x, pos.y);
+			mpEngine->GetRenderer()->RenderTexture(*mpTexture, Vec2<size_t>{ mSize.GetX() * mIndex, 0 }, mSize, pos);
 	}
 }
 
@@ -68,10 +67,9 @@ Texture2D* RenderViewComponent::GetTexture()
 	return mpTexture;
 }
 
-void RenderViewComponent::SetSize(float width, float height)
+void RenderViewComponent::SetSize(size_t width, size_t height)
 {
-	mWidth = width;
-	mHeight = height;
+	mSize.SetXY(width, height);
 }
 
 void RenderViewComponent::SetIndex(size_t index)

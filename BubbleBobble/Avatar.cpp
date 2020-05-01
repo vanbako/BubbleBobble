@@ -24,9 +24,9 @@ Avatar::Avatar(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, C
 	mpGOAvatar = pScene->CreateObject<GameObject>();
 	TransformModelComponent* pTransformComponent{ mpGOAvatar->CreateModelComponent<TransformModelComponent>(pEngine) };
 	if (avatarType == AvatarType::Bub)
-		pTransformComponent->SetPosition(16.f, 176.f, 0.f);
+		pTransformComponent->SetPos(16, 176);
 	else
-		pTransformComponent->SetPosition(208.f, 176.f, 0.f);
+		pTransformComponent->SetPos(208, 176);
 	RenderViewComponent* pRenderComponent{ mpGOAvatar->CreateViewComponent<RenderViewComponent>(pEngine) };
 	pRenderComponent->SetTransformComponent(pTransformComponent);
 	AvatarComponent* pAvatarComponent{ mpGOAvatar->CreateModelComponent<AvatarComponent>(pEngine) };

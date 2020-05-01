@@ -27,7 +27,7 @@ namespace ieg
 		void SetTexture(const std::string& file);
 		void SetTexture(Texture2D* pTexture);
 		Texture2D* GetTexture();
-		void SetSize(float width, float height);
+		void SetSize(size_t width, size_t height);
 		void SetIndex(size_t index);
 		void SetAnimation(float delay, size_t startIndex, size_t stopIndex);
 		Texture2D* SetTexture(SDL_Texture* pSDLTexture);
@@ -35,8 +35,7 @@ namespace ieg
 	private:
 		TransformModelComponent* mpTransformComponent;
 		Texture2D* mpTexture;
-		float mWidth;
-		float mHeight;
+		Vec2<size_t> mSize;
 		size_t mIndex;
 		float
 			mDelay,

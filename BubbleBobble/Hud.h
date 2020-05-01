@@ -20,8 +20,7 @@ namespace ieg
 		Hud& operator=(const Hud&) = delete;
 		Hud& operator=(Hud&&) = delete;
 	private:
-		static const float mPosX;
-		static const float mPosY;
+		static const Vec2<size_t> mPos;
 		static const size_t mWidth;
 		static const size_t mHeight;
 		static const size_t mBlockWidth;

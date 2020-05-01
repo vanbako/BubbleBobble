@@ -30,9 +30,10 @@ namespace ieg
 		static const size_t mChrHeight;
 		static const size_t mSpriteHeight;
 		static const size_t mSpriteAnimCount;
+		static const float mAnimDelay;
 
 		void CreateBackground(Minigin* pEngine, Scene* pScene, Scene* pGameScene, BufferAblocks* pAblocks, ColorRGBA8* pPalette);
-		void CreateBubBobAnim(Sprite sprite, float x, Minigin* pEngine, Scene* pScene, BufferAsprites* pAsprites, ColorRGBA8* pPalette);
+		void CreateBubBobAnim(Sprite sprite, size_t x, Minigin* pEngine, Scene* pScene, BufferAsprites* pAsprites, ColorRGBA8* pPalette);
 		void DrawSprite(ColorRGBA8* pSprite, ColorRGBA8* pPixels, size_t offset, size_t loc);
 		void DrawChr(ColorRGBA8* pChr, ColorRGBA8* pPixels, size_t loc);
 		void DrawStr(ColorRGBA8* pFont, ColorRGBA8* pPixels, size_t loc, const std::string& str);

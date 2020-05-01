@@ -29,6 +29,8 @@ const size_t Start::mChrWidth{ 40 };
 const size_t Start::mChrHeight{ 25 };
 const size_t Start::mSpriteHeight{ 32 };
 const size_t Start::mSpriteAnimCount{ 2 };
+const float Start::mAnimDelay{ 0.15f };
+
 
 Start::Start(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, Scene* pGameScene)
 {
@@ -40,8 +42,8 @@ Start::Start(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, Sce
 	pBubble->GetLevelColors(pPalette, 0);
 
 	CreateBackground(pEngine, pScene, pGameScene, pAblocks, pPalette);
-	CreateBubBobAnim(Sprite::BubBubble, 56, pEngine, pScene, pAsprites, pPalette);
-	CreateBubBobAnim(Sprite::BobBubble, 112, pEngine, pScene, pAsprites, pPalette);
+	CreateBubBobAnim(Sprite::BubBubble, 64, pEngine, pScene, pAsprites, pPalette);
+	CreateBubBobAnim(Sprite::BobBubble, 192, pEngine, pScene, pAsprites, pPalette);
 
 	delete[] pPalette;
 }
@@ -50,7 +52,7 @@ void Start::CreateBackground(Minigin* pEngine, Scene* pScene, Scene* pGameScene,
 {
 	GameObject* pGameObject{ pScene->CreateObject<GameObject>() };
 	TransformModelComponent* pTransformComponent{ pGameObject->CreateModelComponent<TransformModelComponent>(pEngine) };
-	pTransformComponent->SetPosition(0.f, 0.f, 0.f);
+	pTransformComponent->SetPos(0, 0);
 	RenderViewComponent* pRenderComponent{ pGameObject->CreateViewComponent<RenderViewComponent>(pEngine) };
 	pRenderComponent->SetTransformComponent(pTransformComponent);
 	StartComponent* pStartComponent{ pGameObject->CreateModelComponent<StartComponent>(pEngine) };
@@ -77,14 +79,14 @@ void Start::CreateBackground(Minigin* pEngine, Scene* pScene, Scene* pGameScene,
 	delete[] pPixels;
 }
 
-void Start::CreateBubBobAnim(Sprite sprite, float x, Minigin* pEngine, Scene* pScene, BufferAsprites* pAsprites, ColorRGBA8* pPalette)
+void Start::CreateBubBobAnim(Sprite sprite, size_t x, Minigin* pEngine, Scene* pScene, BufferAsprites* pAsprites, ColorRGBA8* pPalette)
 {
 	size_t
 		width{ BufferAsprites::GetWidth() },
 		height{ mSpriteHeight };
 	GameObject* pGameObject{ pScene->CreateObject<GameObject>() };
 	TransformModelComponent* pTransformComponent{ pGameObject->CreateModelComponent<TransformModelComponent>(pEngine) };
-	pTransformComponent->SetPosition(x, 96.f, 0.f);
+	pTransformComponent->SetPos(x, 96);
 	RenderViewComponent* pRenderComponent{ pGameObject->CreateViewComponent<RenderViewComponent>(pEngine) };
 	pRenderComponent->SetTransformComponent(pTransformComponent);
 
@@ -107,9 +109,9 @@ void Start::CreateBubBobAnim(Sprite sprite, float x, Minigin* pEngine, Scene* pS
 		SDL_PIXELFORMAT_RGBA32) };
 	SDL_Texture* pSDLTexture{ SDL_CreateTextureFromSurface(pEngine->GetRenderer()->GetSDLRenderer(), pSurface) };
 	pRenderComponent->SetTexture(pSDLTexture);
-	pRenderComponent->SetSize(float(width), float(height));
+	pRenderComponent->SetSize(width, height);
 	pRenderComponent->SetIndex(0);
-	pRenderComponent->SetAnimation(0.15f, 0, 1);
+	pRenderComponent->SetAnimation(mAnimDelay, 0, 1);
 	delete[] pPixels;
 }
 

@@ -33,7 +33,7 @@ Level::Level(size_t level, Minigin* pEngine, Scene* pScene, BufferManager* pBuff
 
 	mpGOLevel = pScene->CreateObject<GameObject>();
 	TransformModelComponent* pTransformComponent{ mpGOLevel->CreateModelComponent<TransformModelComponent>(pEngine) };
-	pTransformComponent->SetPosition(0.f, 0.f, 0.f);
+	pTransformComponent->SetPos(0, 0);
 	RenderViewComponent* pRenderComponent{ mpGOLevel->CreateViewComponent<RenderViewComponent>(pEngine) };
 	pRenderComponent->SetTransformComponent(pTransformComponent);
 

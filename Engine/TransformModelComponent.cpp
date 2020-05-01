@@ -5,18 +5,26 @@ using namespace ieg;
 
 TransformModelComponent::TransformModelComponent(GameObject* pGameObject, Minigin* pEngine,...)
 	: ModelComponent(pGameObject, pEngine)
-	, mPosition{}
+	, mPos{}
 {
 }
 
-const glm::vec3& TransformModelComponent::GetPosition() const
+void ieg::TransformModelComponent::Update(const float deltaTime)
 {
-	return mPosition;
+	(deltaTime);
 }
 
-void TransformModelComponent::SetPosition(const float x, const float y, const float z)
+const Vec2<size_t>& TransformModelComponent::GetPos() const
 {
-	mPosition.x = x;
-	mPosition.y = y;
-	mPosition.z = z;
+	return mPos;
+}
+
+void TransformModelComponent::SetPos(const size_t x, const size_t y)
+{
+	mPos.SetXY(x, y);
+}
+
+void TransformModelComponent::SetPos(const Vec2<size_t> pos)
+{
+	mPos = pos;
 }

@@ -19,8 +19,7 @@
 
 using namespace ieg;
 
-const float Hud::mPosX{ 256.f };
-const float Hud::mPosY{ 0.f };
+const Vec2<size_t> Hud::mPos{ 256, 0 };
 const size_t Hud::mWidth{ 64 };
 const size_t Hud::mHeight{ 200 };
 const size_t Hud::mBlockWidth{ 4 };
@@ -36,7 +35,7 @@ Hud::Hud(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager)
 
 	GameObject* pGameObject{ pScene->CreateObject<GameObject>() };
 	TransformModelComponent* pTransformComponent{ pGameObject->CreateModelComponent<TransformModelComponent>(pEngine) };
-	pTransformComponent->SetPosition(mPosX, mPosY, 0.f);
+	pTransformComponent->SetPos(mPos);
 	RenderViewComponent* pRenderComponent{ pGameObject->CreateViewComponent<RenderViewComponent>(pEngine) };
 	pRenderComponent->SetTransformComponent(pTransformComponent);
 	pGameObject->CreateModelComponent<HudComponent>(pEngine, pBufferManager);

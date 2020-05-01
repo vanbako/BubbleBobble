@@ -28,7 +28,7 @@ Intro::Intro(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, Sce
 {
 	GameObject* pGameObject = pScene->CreateObject<GameObject>();
 	TransformModelComponent* pTransformComponent{ pGameObject->CreateModelComponent<TransformModelComponent>(pEngine) };
-	pTransformComponent->SetPosition(0.f, 0.f, 0.f);
+	pTransformComponent->SetPos(0, 0);
 	RenderViewComponent* pRenderComponent{ pGameObject->CreateViewComponent<RenderViewComponent>(pEngine) };
 	pRenderComponent->SetTransformComponent(pTransformComponent);
 	IntroComponent* pIntroComponent{ pGameObject->CreateModelComponent<IntroComponent>(pEngine) };
