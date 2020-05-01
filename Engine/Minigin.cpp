@@ -51,7 +51,7 @@ Renderer* Minigin::GetRenderer()
 	return mpRenderer;
 }
 
-ServiceLocator* ieg::Minigin::GetServiceLocator()
+ServiceLocator* Minigin::GetServiceLocator()
 {
 	return mpServiceLocator;
 }

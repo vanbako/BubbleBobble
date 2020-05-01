@@ -8,7 +8,7 @@ BufferAirflow::BufferAirflow(const std::string& filename)
 {
 }
 
-bool ieg::BufferAirflow::LoadFile()
+bool BufferAirflow::LoadFile()
 {
 	if (!Buffer::LoadFile())
 		return false;

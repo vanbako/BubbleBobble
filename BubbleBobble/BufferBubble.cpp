@@ -18,12 +18,12 @@ BufferBubble::BufferBubble(const std::string& filename)
 {
 }
 
-size_t ieg::BufferBubble::GetPaletteColorCount()
+size_t BufferBubble::GetPaletteColorCount()
 {
 	return mPaletteColorCount;
 }
 
-void ieg::BufferBubble::GetPalette(ColorRGBA8* pPalette, const size_t offset)
+void BufferBubble::GetPalette(ColorRGBA8* pPalette, const size_t offset)
 {
 	ColorXRGB4* pColor{};
 	for (size_t i{ 0 }; i < mPaletteColorCount; ++i)
@@ -33,7 +33,7 @@ void ieg::BufferBubble::GetPalette(ColorRGBA8* pPalette, const size_t offset)
 	}
 }
 
-void ieg::BufferBubble::GetIntroColors(ColorRGBA8* pPalette)
+void BufferBubble::GetIntroColors(ColorRGBA8* pPalette)
 {
 	GetPalette(pPalette, mIntroPaletteOffset);
 }
@@ -49,7 +49,7 @@ void BufferBubble::GetLevelColors(ColorRGBA8* pPalette, size_t level)
 	}
 }
 
-size_t ieg::BufferBubble::GetLevelBigBlockOffset(size_t level)
+size_t BufferBubble::GetLevelBigBlockOffset(size_t level)
 {
 	unsigned int offset{ *(((unsigned int*)(mpData + mLevelBigBlockOffsets)) + level) };
 	offset = _byteswap_ulong(offset);

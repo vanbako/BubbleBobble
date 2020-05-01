@@ -15,7 +15,7 @@ BufferApic::BufferApic(const std::string& filename)
 {
 }
 
-void ieg::BufferApic::GetPic(ColorRGBA8* pPic, ColorRGBA8* pPalette) const
+void BufferApic::GetPic(ColorRGBA8* pPic, ColorRGBA8* pPalette) const
 {
 	unsigned char byte[mBitplanes];
 	unsigned char pixels[mWidth * mHeight];

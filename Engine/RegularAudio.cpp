@@ -46,7 +46,7 @@ RegularAudio::~RegularAudio()
 		mpFmodSystem->release();
 }
 
-size_t ieg::RegularAudio::AddSound(const std::string& filename, bool loop)
+size_t RegularAudio::AddSound(const std::string& filename, bool loop)
 {
 	FMOD_MODE mode{ FMOD_DEFAULT };
 	if (loop)

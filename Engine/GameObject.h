@@ -55,27 +55,6 @@ namespace ieg
 		}
 
 		template<class T>
-		T* CreateOrReplaceState()
-		{
-			if (mpState != nullptr)
-				delete mpState;
-			T* mpState{ new T{} };
-			if (mpState != nullptr)
-				mpState->SetGameObject(this);
-			return mpState;
-		}
-
-		void ReplaceState(State* pState)
-		{
-			if (pState == nullptr)
-				return;
-			if (mpState != nullptr)
-				delete mpState;
-			mpState = pState;
-			mpState->SetGameObject(this);
-		}
-
-		template<class T>
 		const T* GetModelComponent() const
 		{
 			for (const auto pModelComponent : mpModelComponents)
@@ -109,13 +88,10 @@ namespace ieg
 			return nullptr;
 		};
 
-		State* GetState();
-
 		void Update(const float deltaTime) override;
 		void Render() const override;
 	private:
 		std::vector<ModelComponent*> mpModelComponents;
 		std::vector<ViewComponent*> mpViewComponents;
-		State* mpState;
 	};
 }

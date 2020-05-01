@@ -22,7 +22,7 @@ RenderViewComponent::RenderViewComponent(Minigin* pEngine)
 {
 }
 
-void ieg::RenderViewComponent::Update(const float deltaTime)
+void RenderViewComponent::Update(const float deltaTime)
 {
 	mCurrDelay -= deltaTime;
 	if (mCurrDelay <= 0.f)
@@ -63,7 +63,7 @@ void RenderViewComponent::SetTexture(Texture2D* pTexture)
 	mpTexture = pTexture;
 }
 
-Texture2D* ieg::RenderViewComponent::GetTexture()
+Texture2D* RenderViewComponent::GetTexture()
 {
 	return mpTexture;
 }
@@ -79,7 +79,7 @@ void RenderViewComponent::SetIndex(size_t index)
 	mIndex = index;
 }
 
-void ieg::RenderViewComponent::SetAnimation(float delay, size_t startIndex, size_t stopIndex)
+void RenderViewComponent::SetAnimation(float delay, size_t startIndex, size_t stopIndex)
 {
 	mDelay = delay;
 	mCurrDelay = delay;

@@ -25,9 +25,6 @@
     <Filter Include="Component">
       <UniqueIdentifier>{33caf348-596f-4c32-b75c-d22d9cd28916}</UniqueIdentifier>
     </Filter>
-    <Filter Include="State">
-      <UniqueIdentifier>{129dc4a5-b196-4661-9f5a-ebb1021dcfff}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Game">
       <UniqueIdentifier>{293f5462-bf7d-49a6-a9bd-b2c08c4db186}</UniqueIdentifier>
     </Filter>
@@ -117,20 +114,11 @@
     <ClCompile Include="BubbleBobble.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="StandingState.cpp">
-      <Filter>State</Filter>
-    </ClCompile>
     <ClCompile Include="AvatarComponent.cpp">
       <Filter>Component</Filter>
     </ClCompile>
     <ClCompile Include="Avatar.cpp">
       <Filter>Prefabs</Filter>
-    </ClCompile>
-    <ClCompile Include="JumpingState.cpp">
-      <Filter>State</Filter>
-    </ClCompile>
-    <ClCompile Include="AvatarState.cpp">
-      <Filter>State</Filter>
     </ClCompile>
     <ClCompile Include="HudComponent.cpp">
       <Filter>Component</Filter>
@@ -221,17 +209,8 @@
     <ClInclude Include="AvatarComponent.h">
       <Filter>Component</Filter>
     </ClInclude>
-    <ClInclude Include="StandingState.h">
-      <Filter>State</Filter>
-    </ClInclude>
     <ClInclude Include="Avatar.h">
       <Filter>Prefabs</Filter>
-    </ClInclude>
-    <ClInclude Include="JumpingState.h">
-      <Filter>State</Filter>
-    </ClInclude>
-    <ClInclude Include="AvatarState.h">
-      <Filter>State</Filter>
     </ClInclude>
     <ClInclude Include="HudComponent.h">
       <Filter>Component</Filter>

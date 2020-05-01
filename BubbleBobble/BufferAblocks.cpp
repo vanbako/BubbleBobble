@@ -199,7 +199,7 @@ const size_t BufferAblocks::GetFontHeight()
 	return mFontHeight;
 }
 
-const size_t ieg::BufferAblocks::GetFontStart()
+const size_t BufferAblocks::GetFontStart()
 {
 	return mFontStart;
 }

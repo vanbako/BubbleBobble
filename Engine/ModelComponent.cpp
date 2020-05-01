@@ -10,7 +10,7 @@ ModelComponent::ModelComponent(GameObject* pGameObject, Minigin* pEngine)
 {
 }
 
-GameObject* ieg::ModelComponent::GetGameObject()
+GameObject* ModelComponent::GetGameObject()
 {
 	return mpGameObject;
 }

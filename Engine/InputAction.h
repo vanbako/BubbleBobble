@@ -22,6 +22,8 @@ namespace ieg
 		template <class T>
 		void CreateAndSetCommand()
 		{
+			if (mpCommand != nullptr)
+				delete mpCommand;
 			mpCommand = new T;
 		}
 		void SetActor(ModelComponent* pComponent);

@@ -3,12 +3,12 @@
 
 using namespace ieg;
 
-ieg::MutedAudio::MutedAudio()
+MutedAudio::MutedAudio()
 	: mLogFile{}
 {
 }
 
-size_t ieg::MutedAudio::AddSound(const std::string& filename, bool loop)
+size_t MutedAudio::AddSound(const std::string& filename, bool loop)
 {
 	(filename);
 	(loop);

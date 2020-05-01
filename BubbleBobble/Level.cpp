@@ -69,12 +69,12 @@ Level::Level(size_t level, Minigin* pEngine, Scene* pScene, BufferManager* pBuff
 	delete[] pLevelPalette;
 }
 
-GameObject* ieg::Level::GetGameObject()
+GameObject* Level::GetGameObject()
 {
 	return mpGOLevel;
 }
 
-void ieg::Level::DrawFalse3DBlocks(BufferAblocks* pAblocks, ColorRGBA8* pPixels, ColorRGBA8* pLevelPalette, char* pLayout)
+void Level::DrawFalse3DBlocks(BufferAblocks* pAblocks, ColorRGBA8* pPixels, ColorRGBA8* pLevelPalette, char* pLayout)
 {
 	ColorRGBA8* pFalse3D{ new ColorRGBA8[BufferAblocks::GetFalse3DCount() * BufferAblocks::GetBlockPixelCount()] };
 	pAblocks->GetLevelFalse3D(pFalse3D, pLevelPalette);

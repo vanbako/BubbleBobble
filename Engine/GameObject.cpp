@@ -7,7 +7,6 @@ GameObject::GameObject(Scene* pScene)
 	: SceneObject(pScene)
 	, mpModelComponents{}
 	, mpViewComponents{}
-	, mpState{ nullptr }
 {
 }
 
@@ -17,11 +16,6 @@ GameObject::~GameObject()
 		delete pModelComponent;
 	for (ViewComponent* pViewComponent : mpViewComponents)
 		delete pViewComponent;
-}
-
-State* ieg::GameObject::GetState()
-{
-	return mpState;
 }
 
 void GameObject::Update(const float deltaTime)

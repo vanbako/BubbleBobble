@@ -14,7 +14,7 @@ InputAction::InputAction(WORD code, int key, ModelComponent* pActor)
 {
 }
 
-ieg::InputAction::~InputAction()
+InputAction::~InputAction()
 {
 	if (mpCommand != nullptr)
 		delete mpCommand;

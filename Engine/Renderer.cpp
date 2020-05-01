@@ -6,7 +6,7 @@
 
 using namespace ieg;
 
-ieg::Renderer::Renderer()
+Renderer::Renderer()
 	: mpSDLRenderer{ nullptr }
 {
 }

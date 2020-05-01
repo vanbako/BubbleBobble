@@ -204,7 +204,6 @@ xcopy "$(SolutionDir)3rdParty\Fmod\lib\x64\fmod.dll" "$(OutputPath)" /R /Y</Comm
   <ItemGroup>
     <ClInclude Include="Avatar.h" />
     <ClInclude Include="AvatarComponent.h" />
-    <ClInclude Include="AvatarState.h" />
     <ClInclude Include="BubbleBobble.h" />
     <ClInclude Include="Buffer.h" />
     <ClInclude Include="BufferAblocks.h" />
@@ -225,13 +224,11 @@ xcopy "$(SolutionDir)3rdParty\Fmod\lib\x64\fmod.dll" "$(OutputPath)" /R /Y</Comm
     <ClInclude Include="Intro.h" />
     <ClInclude Include="IntroComponent.h" />
     <ClInclude Include="JumpCommand.h" />
-    <ClInclude Include="JumpingState.h" />
     <ClInclude Include="LeftCommand.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="LevelComponent.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="RightCommand.h" />
-    <ClInclude Include="StandingState.h" />
     <ClInclude Include="Start.h" />
     <ClInclude Include="StartCommand.h" />
     <ClInclude Include="StartComponent.h" />
@@ -239,7 +236,6 @@ xcopy "$(SolutionDir)3rdParty\Fmod\lib\x64\fmod.dll" "$(OutputPath)" /R /Y</Comm
   <ItemGroup>
     <ClCompile Include="Avatar.cpp" />
     <ClCompile Include="AvatarComponent.cpp" />
-    <ClCompile Include="AvatarState.cpp" />
     <ClCompile Include="BubbleBobble.cpp" />
     <ClCompile Include="Buffer.cpp" />
     <ClCompile Include="BufferAblocks.cpp" />
@@ -260,7 +256,6 @@ xcopy "$(SolutionDir)3rdParty\Fmod\lib\x64\fmod.dll" "$(OutputPath)" /R /Y</Comm
     <ClCompile Include="Intro.cpp" />
     <ClCompile Include="IntroComponent.cpp" />
     <ClCompile Include="JumpCommand.cpp" />
-    <ClCompile Include="JumpingState.cpp" />
     <ClCompile Include="LeftCommand.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="LevelComponent.cpp" />
@@ -272,7 +267,6 @@ xcopy "$(SolutionDir)3rdParty\Fmod\lib\x64\fmod.dll" "$(OutputPath)" /R /Y</Comm
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="RightCommand.cpp" />
-    <ClCompile Include="StandingState.cpp" />
     <ClCompile Include="Start.cpp" />
     <ClCompile Include="StartCommand.cpp" />
     <ClCompile Include="StartComponent.cpp" />

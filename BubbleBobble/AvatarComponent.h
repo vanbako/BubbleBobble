@@ -5,6 +5,13 @@ namespace ieg
 {
 	class Minigin;
 
+	enum class AvatarState
+	{
+		Standing,
+		Jumping,
+		Falling
+	};
+
 	class AvatarComponent final
 		: public ModelComponent
 	{
@@ -19,7 +26,13 @@ namespace ieg
 		virtual void Update(const float deltaTime) override;
 
 		void SetFiring(bool isFiring);
+
+		void Fire();
+		void Jump();
+		void Left();
+		void Right();
 	private:
+		AvatarState mState;
 		bool mIsLookingLeft;
 		bool mIsFiring;
 	};
