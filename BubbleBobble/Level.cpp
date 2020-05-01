@@ -26,7 +26,6 @@ const size_t Level::mWidth{ 256 };
 const size_t Level::mHeight{ 200 };
 
 Level::Level(size_t level, Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager)
-	: mLevel{ level }
 {
 	BufferBubble* pBubble{ (BufferBubble*)pBufferManager->GetBuffer(EnumBuffer::Bubble) };
 	BufferAblocks* pAblocks{ (BufferAblocks*)pBufferManager->GetBuffer(EnumBuffer::Ablocks) };
@@ -42,16 +41,16 @@ Level::Level(size_t level, Minigin* pEngine, Scene* pScene, BufferManager* pBuff
 	std::memset(pPixels, 0, mWidth * mHeight * sizeof(ColorRGBA8));
 
 	ColorRGBA8* pLevelPalette{ new ColorRGBA8[BufferBubble::GetPaletteColorCount()] };
-	pBubble->GetLevelColors(pLevelPalette, mLevel);
+	pBubble->GetLevelColors(pLevelPalette, level);
 
 	mpGOLevel->CreateModelComponent<LevelComponent>(pEngine, pBufferManager, pLevelPalette);
 
 	char pLayout[mBlockCount];
 	std::memset(pLayout, 0, mBlockCount);
-	pBdata->GetLayout(pLayout, mLevel);
+	pBdata->GetLayout(pLayout, level);
 
-	DrawBlocks(pAblocks, pPixels, pLevelPalette, pLayout);
-	DrawBigBlocks(pAblocks, pPixels, pLevelPalette, pBubble);
+	DrawBlocks(pAblocks, pPixels, pLevelPalette, pLayout, level);
+	DrawBigBlocks(pAblocks, pPixels, pLevelPalette, pBubble, level);
 
 	DrawFalse3DBlocks(pAblocks, pPixels, pLevelPalette, pLayout);
 
@@ -112,10 +111,10 @@ void ieg::Level::DrawFalse3DBlocks(BufferAblocks* pAblocks, ColorRGBA8* pPixels,
 	delete[] pFalse3D;
 }
 
-void Level::DrawBlocks(BufferAblocks* pAblocks, ColorRGBA8* pPixels, ColorRGBA8* pLevelPalette, char* pLayout)
+void Level::DrawBlocks(BufferAblocks* pAblocks, ColorRGBA8* pPixels, ColorRGBA8* pLevelPalette, char* pLayout, size_t level)
 {
 	ColorRGBA8* pBlock{ new ColorRGBA8[BufferAblocks::GetBlockPixelCount()] };
-	pAblocks->GetLevelBlock(pBlock, pLevelPalette, mLevel);
+	pAblocks->GetLevelBlock(pBlock, pLevelPalette, level);
 
 	const size_t blockHeight{ BufferAblocks::GetBlockHeight() };
 	const size_t blockWidth{ BufferAblocks::GetBlockWidth() };
@@ -125,9 +124,9 @@ void Level::DrawBlocks(BufferAblocks* pAblocks, ColorRGBA8* pPixels, ColorRGBA8*
 	delete[] pBlock;
 }
 
-void Level::DrawBigBlocks(BufferAblocks* pAblocks, ColorRGBA8* pPixels, ColorRGBA8* pLevelPalette, BufferBubble* pBubble)
+void Level::DrawBigBlocks(BufferAblocks* pAblocks, ColorRGBA8* pPixels, ColorRGBA8* pLevelPalette, BufferBubble* pBubble, size_t level)
 {
-	size_t offset{ pBubble->GetLevelBigBlockOffset(mLevel) };
+	size_t offset{ pBubble->GetLevelBigBlockOffset(level) };
 	if (offset != 0)
 	{
 		ColorRGBA8* pBigBlock{ new ColorRGBA8[BufferAblocks::GetBigBlockPixelCount()] };

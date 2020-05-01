@@ -1,4 +1,5 @@
 #pragma once
+#include "Command.h"
 
 // Only InputManager can create InputAction
 namespace ieg
@@ -9,8 +10,8 @@ namespace ieg
 	class InputAction final
 	{
 	public:
-		explicit InputAction(WORD code = 0, int key = 0, Command* pCommand = nullptr, ModelComponent* pActor = nullptr);
-		~InputAction() = default;
+		explicit InputAction(WORD code = 0, int key = 0, ModelComponent* pActor = nullptr);
+		~InputAction();
 		InputAction(const InputAction&) = delete;
 		InputAction(InputAction&&) = delete;
 		InputAction& operator=(const InputAction&) = delete;
@@ -18,7 +19,11 @@ namespace ieg
 
 		void SetGamepadButtonCode(const WORD code);
 		void SetKeyboardKey(const int key);
-		void SetCommand(Command* pCommand);
+		template <class T>
+		void CreateAndSetCommand()
+		{
+			mpCommand = new T;
+		}
 		void SetActor(ModelComponent* pComponent);
 		const WORD GetGamepadButtonCode() const;
 		const int GetKeyboardKey() const;

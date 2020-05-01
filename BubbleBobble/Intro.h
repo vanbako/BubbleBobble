@@ -14,16 +14,12 @@ namespace ieg
 	{
 	public:
 		explicit Intro(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, Scene* pGameScene);
-		~Intro();
+		~Intro() = default;
 		Intro(const Intro&) = delete;
 		Intro(Intro&&) = delete;
 		Intro& operator=(const Intro&) = delete;
 		Intro& operator=(Intro&&) = delete;
 	private:
-		Minigin* mpEngine;
-		GameObject* mpGameObject;
-		StartCommand* mpStartCommand;
-
 		static const size_t mWidth;
 		static const size_t mHeight;
 	};

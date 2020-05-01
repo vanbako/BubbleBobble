@@ -25,20 +25,18 @@ const size_t Intro::mWidth{ 320 };
 const size_t Intro::mHeight{ 200 };
 
 Intro::Intro(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, Scene* pGameScene)
-	: mpEngine{ pEngine }
-	, mpStartCommand{ new StartCommand{} }
 {
-	mpGameObject = pScene->CreateObject<GameObject>();
-	TransformModelComponent* pTransformComponent{ mpGameObject->CreateModelComponent<TransformModelComponent>(pEngine) };
+	GameObject* pGameObject = pScene->CreateObject<GameObject>();
+	TransformModelComponent* pTransformComponent{ pGameObject->CreateModelComponent<TransformModelComponent>(pEngine) };
 	pTransformComponent->SetPosition(0.f, 0.f, 0.f);
-	RenderViewComponent* pRenderComponent{ mpGameObject->CreateViewComponent<RenderViewComponent>(pEngine) };
+	RenderViewComponent* pRenderComponent{ pGameObject->CreateViewComponent<RenderViewComponent>(pEngine) };
 	pRenderComponent->SetTransformComponent(pTransformComponent);
-	IntroComponent* pIntroComponent{ mpGameObject->CreateModelComponent<IntroComponent>(pEngine) };
+	IntroComponent* pIntroComponent{ pGameObject->CreateModelComponent<IntroComponent>(pEngine) };
 	pIntroComponent->SetStartScene(pGameScene);
 	InputAction* pInputAction{ pScene->GetInputManager()->CreateInputAction() };
 	pInputAction->SetKeyboardKey(VK_SPACE);
 	pInputAction->SetGamepadButtonCode(XINPUT_GAMEPAD_START);
-	pInputAction->SetCommand(mpStartCommand);
+	pInputAction->CreateAndSetCommand<StartCommand>();
 	pInputAction->SetActor(pIntroComponent);
 
 	BufferBubble* pBubble{ (BufferBubble*)pBufferManager->GetBuffer(EnumBuffer::Bubble) };
@@ -63,10 +61,4 @@ Intro::Intro(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, Sce
 
 	delete[] pPixels;
 	delete[] pColorPalette; 
-}
-
-Intro::~Intro()
-{
-	mpEngine->GetResourceManager()->RemoveTexture(mpGameObject->GetViewComponent<RenderViewComponent>()->GetTexture());
-	delete mpStartCommand;
 }

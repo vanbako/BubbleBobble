@@ -18,7 +18,6 @@ const size_t Avatar::mHeight{ 16 };
 const size_t Avatar::mCount{ 16 };
 
 Avatar::Avatar(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, ColorRGBA8* pPalette, AvatarType avatarType)
-	: mAvatarType{ avatarType }
 {
 	BufferAsprites* pAsprites{ (BufferAsprites*)pBufferManager->GetBuffer(EnumBuffer::Asprites) };
 

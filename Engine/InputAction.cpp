@@ -6,12 +6,18 @@
 using namespace ieg;
 
 // Only InputManager can create InputAction
-InputAction::InputAction(WORD code, int key, Command* pCommand, ModelComponent* pActor)
+InputAction::InputAction(WORD code, int key, ModelComponent* pActor)
 	: mGamepadButtonCode{ code }
 	, mKeyboardKey{ key }
-	, mpCommand{ pCommand }
+	, mpCommand{ nullptr }
 	, mpActor{ pActor }
 {
+}
+
+ieg::InputAction::~InputAction()
+{
+	if (mpCommand != nullptr)
+		delete mpCommand;
 }
 
 void InputAction::SetGamepadButtonCode(const WORD code)
@@ -22,11 +28,6 @@ void InputAction::SetGamepadButtonCode(const WORD code)
 void InputAction::SetKeyboardKey(const int key)
 {
 	mKeyboardKey = key;
-}
-
-void InputAction::SetCommand(Command* pCommand)
-{
-	mpCommand = pCommand;
 }
 
 void InputAction::SetActor(ModelComponent* pComponent)

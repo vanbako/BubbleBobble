@@ -28,7 +28,6 @@ namespace ieg
 
 		GameObject* GetGameObject();
 	private:
-		AvatarType mAvatarType;
 		GameObject* mpGOAvatar;
 
 		static const size_t mWidth;

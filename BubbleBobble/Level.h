@@ -24,7 +24,6 @@ namespace ieg
 
 		GameObject* GetGameObject();
 	private:
-		size_t mLevel;
 		GameObject* mpGOLevel;
 
 		static const size_t mBlockCount;
@@ -34,8 +33,8 @@ namespace ieg
 		static const size_t mHeight;
 
 		void DrawFalse3DBlocks(BufferAblocks* pAblocks, ColorRGBA8* pPixels, ColorRGBA8* pLevelPalette, char* pLayout);
-		void DrawBlocks(BufferAblocks* pAblocks, ColorRGBA8* pPixels, ColorRGBA8* pLevelPalette, char* pLayout);
-		void DrawBigBlocks(BufferAblocks* pAblocks, ColorRGBA8* pPixels, ColorRGBA8* pLevelPalette, BufferBubble* pBubble);
+		void DrawBlocks(BufferAblocks* pAblocks, ColorRGBA8* pPixels, ColorRGBA8* pLevelPalette, char* pLayout, size_t level);
+		void DrawBigBlocks(BufferAblocks* pAblocks, ColorRGBA8* pPixels, ColorRGBA8* pLevelPalette, BufferBubble* pBubble, size_t level);
 		void DrawBlock(ColorRGBA8* pBlock, ColorRGBA8* pPixels, size_t pos);
 		void DrawBigBlock(ColorRGBA8* pBlock, ColorRGBA8* pPixels, size_t pos);
 		void DrawFalse3D(ColorRGBA8* pFalse3D, ColorRGBA8* pPixels, size_t pos, size_t type);
