@@ -23,6 +23,8 @@ namespace ieg
 		Level& operator=(Level&&) = delete;
 
 		GameObject* GetGameObject();
+
+		static const int& GetBlockCount();
 	private:
 		GameObject* mpGOLevel;
 

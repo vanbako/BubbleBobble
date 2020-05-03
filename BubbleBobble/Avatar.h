@@ -19,7 +19,7 @@ namespace ieg
 	class Avatar final
 	{
 	public:
-		explicit Avatar(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, ColorRGBA8* pPalette, AvatarType avatarType);
+		explicit Avatar(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, GameObject* pLevel, ColorRGBA8* pPalette, AvatarType avatarType);
 		~Avatar() = default;
 		Avatar(const Avatar&) = delete;
 		Avatar(Avatar&&) = delete;

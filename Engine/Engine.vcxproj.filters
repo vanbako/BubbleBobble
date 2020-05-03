@@ -135,6 +135,9 @@
     <ClInclude Include="Vec2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ColliderModelComponent.h">
+      <Filter>Object\ModelComponent</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -205,6 +208,9 @@
     </ClCompile>
     <ClCompile Include="State.cpp">
       <Filter>Object\State</Filter>
+    </ClCompile>
+    <ClCompile Include="ColliderModelComponent.cpp">
+      <Filter>Object\ModelComponent</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

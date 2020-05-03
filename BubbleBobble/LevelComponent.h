@@ -5,6 +5,8 @@ namespace ieg
 {
 	class Minigin;
 	class ColorRGBA8;
+	class TransformModelComponent;
+	class ColliderModelComponent;
 
 	class LevelComponent final
 		: public ModelComponent
@@ -17,8 +19,14 @@ namespace ieg
 		LevelComponent& operator=(const LevelComponent&) = delete;
 		LevelComponent& operator=(LevelComponent&&) = delete;
 
-		virtual void Update(const float deltaTime) override;
+		void Update(const float deltaTime) override;
+		void Collide() override {};
+		void Switch() override {};
+
+		bool CheckCollision(TransformModelComponent *pTransform, ColliderModelComponent* pCollider);
+		bool CheckCollisionPos(int x, int y);
 	private:
+		char* mpLayout;
 		ColorRGBA8* mpLevelPalette;
 		std::vector<GameObject*> mpGOAvatars;
 

@@ -17,7 +17,9 @@ namespace ieg
 		HudComponent& operator=(const HudComponent&) = delete;
 		HudComponent& operator=(HudComponent&&) = delete;
 
-		virtual void Update(const float deltaTime) override;
+		void Update(const float deltaTime) override;
+		void Collide() override {};
+		void Switch() override {};
 	private:
 		GameObject* mpGOLevel;
 	};

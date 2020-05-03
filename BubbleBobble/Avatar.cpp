@@ -9,6 +9,7 @@
 #include "../Engine/Scene.h"
 #include "../Engine/Renderer.h"
 #include "../Engine/TransformModelComponent.h"
+#include "../Engine/ColliderModelComponent.h"
 #include "../Engine/RenderViewComponent.h"
 #include "../Engine/InputAction.h"
 #include "../Engine/InputManager.h"
@@ -21,7 +22,7 @@ const int Avatar::mWidth{ 32 };
 const int Avatar::mHeight{ 16 };
 const int Avatar::mCount{ 16 };
 
-Avatar::Avatar(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, ColorRGBA8* pPalette, AvatarType avatarType)
+Avatar::Avatar(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, GameObject* pLevel, ColorRGBA8* pPalette, AvatarType avatarType)
 {
 	BufferAsprites* pAsprites{ (BufferAsprites*)pBufferManager->GetBuffer(EnumBuffer::Asprites) };
 
@@ -34,7 +35,8 @@ Avatar::Avatar(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, C
 	RenderViewComponent* pRenderComponent{ mpGOAvatar->CreateViewComponent<RenderViewComponent>(pEngine) };
 	pRenderComponent->SetTransformComponent(pTransformComponent);
 	pRenderComponent->SetIsSprite(true);
-	AvatarComponent* pAvatarComponent{ mpGOAvatar->CreateModelComponent<AvatarComponent>(pEngine) };
+	AvatarComponent* pAvatarComponent{ mpGOAvatar->CreateModelComponent<AvatarComponent>(pEngine, pLevel) };
+	mpGOAvatar->CreateModelComponent<ColliderModelComponent>(pEngine, Vec2<int>{ 8, 0 }, Vec2<int>{ 16, 16 });
 	InputAction* pInputAction{ pScene->GetInputManager()->CreateInputAction() };
 	if (avatarType == AvatarType::Bub)
 		pInputAction->SetKeyboardKey(VK_LEFT);

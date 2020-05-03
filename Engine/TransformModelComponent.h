@@ -17,6 +17,8 @@ namespace ieg
 		TransformModelComponent& operator=(TransformModelComponent&&) = delete;
 
 		void Update(const float deltaTime) override;
+		void Collide() override {};
+		void Switch() override;
 
 		const Vec2<int>& GetPos() const;
 		const bool GetIsLookingLeft() const;
@@ -26,7 +28,11 @@ namespace ieg
 		void Move(const Vec2<int> delta);
 		void SetIsLookingLeft(bool isLookingLeft);
 	private:
-		Vec2<int> mPos;
-		bool mIsLookingLeft;
+		Vec2<int>
+			mCurPos,
+			mNewPos;
+		bool
+			mCurIsLookingLeft,
+			mNewIsLookingLeft;
 	};
 }

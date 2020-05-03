@@ -22,6 +22,8 @@ void GameObject::Update(const float deltaTime)
 {
 	for (ModelComponent* pModelComponent : mpModelComponents)
 		pModelComponent->Update(deltaTime);
+	for (ModelComponent* pModelComponent : mpModelComponents)
+		pModelComponent->Switch();
 	for (ViewComponent* pViewComponent : mpViewComponents)
 		pViewComponent->Update(deltaTime);
 }

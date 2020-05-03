@@ -23,7 +23,9 @@ namespace ieg
 		AvatarComponent& operator=(const AvatarComponent&) = delete;
 		AvatarComponent& operator=(AvatarComponent&&) = delete;
 
-		virtual void Update(const float deltaTime) override;
+		void Update(const float deltaTime) override;
+		void Collide() override;
+		void Switch() override;
 
 		void SetFiring(bool isFiring);
 
@@ -32,8 +34,13 @@ namespace ieg
 		void Left();
 		void Right();
 	private:
-		AvatarState mState;
-		bool mIsFiring;
+		GameObject* mpGOLevel;
+		AvatarState
+			mCurState,
+			mNewState;
+		bool
+			mCurIsFiring,
+			mNewIsFiring;
 		int mIsMoving;
 		float mMoveDelay;
 

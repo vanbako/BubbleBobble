@@ -5,47 +5,55 @@ using namespace ieg;
 
 TransformModelComponent::TransformModelComponent(GameObject* pGameObject, Minigin* pEngine,...)
 	: ModelComponent(pGameObject, pEngine)
-	, mPos{}
-	, mIsLookingLeft{ false }
+	, mCurPos{}
+	, mNewPos{}
+	, mCurIsLookingLeft{ false }
+	, mNewIsLookingLeft{ false }
 {
 }
 
-void ieg::TransformModelComponent::Update(const float deltaTime)
+void TransformModelComponent::Update(const float deltaTime)
 {
 	(deltaTime);
 }
 
-const Vec2<int>& TransformModelComponent::GetPos() const
+void TransformModelComponent::Switch()
 {
-	return mPos;
+	mCurPos = mNewPos;
+	mCurIsLookingLeft = mNewIsLookingLeft;
 }
 
-const bool ieg::TransformModelComponent::GetIsLookingLeft() const
+const Vec2<int>& TransformModelComponent::GetPos() const
 {
-	return mIsLookingLeft;
+	return mCurPos;
+}
+
+const bool TransformModelComponent::GetIsLookingLeft() const
+{
+	return mCurIsLookingLeft;
 }
 
 void TransformModelComponent::SetPos(const int x, const int y)
 {
-	mPos.SetXY(x, y);
+	mNewPos.SetXY(x, y);
 }
 
 void TransformModelComponent::SetPos(const Vec2<int> pos)
 {
-	mPos = pos;
+	mNewPos = pos;
 }
 
 void TransformModelComponent::Move(const int deltaX, const int deltaY)
 {
-	mPos.Move(deltaX, deltaY);
+	mNewPos.Move(deltaX, deltaY);
 }
 
 void TransformModelComponent::Move(const Vec2<int> delta)
 {
-	mPos.Move(delta.GetX(), delta.GetY());
+	mNewPos.Move(delta.GetX(), delta.GetY());
 }
 
-void ieg::TransformModelComponent::SetIsLookingLeft(bool isLookingLeft)
+void TransformModelComponent::SetIsLookingLeft(bool isLookingLeft)
 {
-	mIsLookingLeft = isLookingLeft;
+	mNewIsLookingLeft = isLookingLeft;
 }

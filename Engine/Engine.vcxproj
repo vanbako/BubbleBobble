@@ -184,6 +184,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Audio.h" />
+    <ClInclude Include="ColliderModelComponent.h" />
     <ClInclude Include="ColorRGBA8.h" />
     <ClInclude Include="Command.h" />
     <ClInclude Include="ModelComponent.h" />
@@ -212,6 +213,7 @@
     <ClInclude Include="ViewComponent.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ColliderModelComponent.cpp" />
     <ClCompile Include="ColorRGBA8.cpp" />
     <ClCompile Include="ModelComponent.cpp" />
     <ClCompile Include="Font.cpp" />

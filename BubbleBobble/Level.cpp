@@ -43,16 +43,17 @@ Level::Level(int level, Minigin* pEngine, Scene* pScene, BufferManager* pBufferM
 	ColorRGBA8* pLevelPalette{ new ColorRGBA8[BufferBubble::GetPaletteColorCount()] };
 	pBubble->GetLevelColors(pLevelPalette, level);
 
-	mpGOLevel->CreateModelComponent<LevelComponent>(pEngine, pBufferManager, pLevelPalette);
-
-	char pLayout[mBlockCount];
+	char* pLayout{ new char[mBlockCount] };
 	std::memset(pLayout, 0, mBlockCount);
 	pBdata->GetLayout(pLayout, level);
 
+	mpGOLevel->CreateModelComponent<LevelComponent>(pEngine, pBufferManager, pLevelPalette, pLayout);
+
 	DrawBlocks(pAblocks, pPixels, pLevelPalette, pLayout, level);
 	DrawBigBlocks(pAblocks, pPixels, pLevelPalette, pBubble, level);
-
 	DrawFalse3DBlocks(pAblocks, pPixels, pLevelPalette, pLayout);
+
+	delete[] pLayout;
 
 	SDL_Surface* pSurface{
 		SDL_CreateRGBSurfaceWithFormatFrom(
@@ -67,6 +68,11 @@ Level::Level(int level, Minigin* pEngine, Scene* pScene, BufferManager* pBufferM
 	delete[] pPixels;
 
 	delete[] pLevelPalette;
+}
+
+const int& Level::GetBlockCount()
+{
+	return mBlockCount;
 }
 
 GameObject* Level::GetGameObject()

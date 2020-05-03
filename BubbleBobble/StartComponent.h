@@ -21,7 +21,9 @@ namespace ieg
 		StartComponent& operator=(const StartComponent&) = delete;
 		StartComponent& operator=(StartComponent&&) = delete;
 
-		virtual void Update(const float deltaTime) override;
+		void Update(const float deltaTime) override;
+		void Collide() override {};
+		void Switch() override {};
 
 		void SetStartScene(Scene* pScene);
 	private:
