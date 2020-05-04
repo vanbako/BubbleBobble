@@ -7,6 +7,7 @@ GameObject::GameObject(Scene* pScene)
 	: SceneObject(pScene)
 	, mpModelComponents{}
 	, mpViewComponents{}
+	, mIsActive{ true }
 {
 }
 
@@ -20,18 +21,24 @@ GameObject::~GameObject()
 
 void GameObject::Update(const float deltaTime)
 {
-	for (ModelComponent* pModelComponent : mpModelComponents)
-		pModelComponent->Update(deltaTime);
-	for (ModelComponent* pModelComponent : mpModelComponents)
-		pModelComponent->Collision();
-	for (ModelComponent* pModelComponent : mpModelComponents)
-		pModelComponent->Switch();
-	for (ViewComponent* pViewComponent : mpViewComponents)
-		pViewComponent->Update(deltaTime);
+	if (mIsActive)
+	{
+		for (ModelComponent* pModelComponent : mpModelComponents)
+			pModelComponent->Update(deltaTime);
+		for (ModelComponent* pModelComponent : mpModelComponents)
+			pModelComponent->Collision();
+		for (ModelComponent* pModelComponent : mpModelComponents)
+			pModelComponent->Switch();
+		for (ViewComponent* pViewComponent : mpViewComponents)
+			pViewComponent->Update(deltaTime);
+	}
 }
 
 void GameObject::Render() const
 {
-	for (ViewComponent* pViewComponent : mpViewComponents)
-		pViewComponent->Render();
+	if (mIsActive)
+	{
+		for (ViewComponent* pViewComponent : mpViewComponents)
+			pViewComponent->Render();
+	}
 }

@@ -27,7 +27,7 @@ const int Hud::mBlockHeight{ 25 };
 const int Hud::mChrWidth{ 8 };
 const int Hud::mChrHeight{ 25 };
 
-Hud::Hud(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager)
+GameObject* Hud::CreateHud(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager)
 {
 	BufferBubble* pBubble{ (BufferBubble*)pBufferManager->GetBuffer(EnumBuffer::Bubble) };
 	BufferAsprites* pAsprites{ (BufferAsprites*)pBufferManager->GetBuffer(EnumBuffer::Asprites) };
@@ -80,6 +80,7 @@ Hud::Hud(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager)
 	pRenderComponent->SetTexture(pSDLTexture);
 	delete[] pColorPalette;
 	delete[] pPixels;
+	return pGameObject;
 }
 
 void Hud::DrawSprite(ColorRGBA8* pSprite, ColorRGBA8* pPixels, int offset, int loc)

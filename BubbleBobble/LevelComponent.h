@@ -23,13 +23,15 @@ namespace ieg
 		void Collision() override {};
 		void Switch() override {};
 
-		unsigned short CheckCollision(TransformModelComponent *pTransform, ColliderModelComponent* pCollider);
+		unsigned short CheckAvatarCollision(TransformModelComponent *pTransform, ColliderModelComponent* pCollider);
 		bool CheckCollisionPos(int x, int y);
 	private:
 		char* mpLayout;
 		ColorRGBA8* mpLevelPalette;
 		std::vector<GameObject*> mpGOAvatars;
+		std::vector<GameObject*> mpGOBubbles;
 
 		static const int mpAvatarMax;
+		static const int mpBubblesPerAvatarMax;
 	};
 }

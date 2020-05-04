@@ -20,21 +20,12 @@ using namespace ieg;
 BubbleBobble::BubbleBobble(Minigin* pEngine)
 	: mpEngine{ pEngine }
 	, mpBufferManager{ new BufferManager{} }
-	, mpIntro{ nullptr }
-	, mpHud{ nullptr }
-	, mpStart{ nullptr }
 	, mpScenes{ int(Scenes::Count), nullptr }
 {
 }
 
 BubbleBobble::~BubbleBobble()
 {
-	if (mpHud != nullptr)
-		delete mpHud;
-	if (mpStart != nullptr)
-		delete mpStart;
-	if (mpIntro != nullptr)
-		delete mpIntro;
 	delete mpBufferManager;
 }
 
@@ -50,7 +41,7 @@ void BubbleBobble::AddScenes()
 	mpScenes[int(Scenes::Game)] = mpEngine->GetSceneManager()->CreateScene("Game");
 	mpEngine->GetSceneManager()->SetActiveScene(mpScenes[int(Scenes::Intro)]);
 
-	mpIntro = new Intro{ mpEngine, mpScenes[int(Scenes::Intro)], mpBufferManager, mpScenes[int(Scenes::Start)] };
-	mpStart = new Start{ mpEngine, mpScenes[int(Scenes::Start)], mpBufferManager, mpScenes[int(Scenes::Game)] };
-	mpHud = new Hud{ mpEngine, mpScenes[int(Scenes::Game)], mpBufferManager };
+	Intro::CreateIntro(mpEngine, mpScenes[int(Scenes::Intro)], mpBufferManager, mpScenes[int(Scenes::Start)]);
+	Start::CreateStart(mpEngine, mpScenes[int(Scenes::Start)], mpBufferManager, mpScenes[int(Scenes::Game)]);
+	Hud::CreateHud(mpEngine, mpScenes[int(Scenes::Game)], mpBufferManager);
 }

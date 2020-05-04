@@ -12,12 +12,14 @@
 using namespace ieg;
 
 const int LevelComponent::mpAvatarMax{ 2 };
+const int LevelComponent::mpBubblesPerAvatarMax{ 8 };
 
 LevelComponent::LevelComponent(GameObject* pGameObject, Minigin* pEngine, ...)
 	: ModelComponent(pGameObject, pEngine)
 	, mpLayout{ new char[Level::GetBlockCount()] }
 	, mpLevelPalette{ new ColorRGBA8[BufferBubble::GetPaletteColorCount()] }
 	, mpGOAvatars{}
+	, mpGOBubbles{}
 {
 	std::va_list args{};
 	va_start(args, pEngine);
@@ -31,12 +33,8 @@ LevelComponent::LevelComponent(GameObject* pGameObject, Minigin* pEngine, ...)
 	std::memcpy(mpLevelPalette, pLevelPalette, sizeof(ColorRGBA8)* BufferBubble::GetPaletteColorCount());
 	std::memcpy(mpLayout, pLayout, Level::GetBlockCount());
 
-	Avatar* pAvatar{ new Avatar{ pEngine, pScene, pBufferManager, pGameObject, mpLevelPalette, AvatarType::Bub } };
-	mpGOAvatars.push_back(pAvatar->GetGameObject());
-	delete pAvatar;
-	pAvatar = new Avatar{ pEngine, pScene, pBufferManager, pGameObject, mpLevelPalette, AvatarType::Bob };
-	mpGOAvatars.push_back(pAvatar->GetGameObject());
-	delete pAvatar;
+	mpGOAvatars.push_back(Avatar::CreateAvatar(pEngine, pScene, pBufferManager, pGameObject, mpLevelPalette, AvatarType::Bub));
+	mpGOAvatars.push_back(Avatar::CreateAvatar(pEngine, pScene, pBufferManager, pGameObject, mpLevelPalette, AvatarType::Bob));
 }
 
 LevelComponent::~LevelComponent()
@@ -50,7 +48,7 @@ void LevelComponent::Update(const float deltaTime)
 	(deltaTime);
 }
 
-unsigned short LevelComponent::CheckCollision(TransformModelComponent* pTransform, ColliderModelComponent* pCollider)
+unsigned short LevelComponent::CheckAvatarCollision(TransformModelComponent* pTransform, ColliderModelComponent* pCollider)
 {
 	if (pTransform == nullptr || pCollider == nullptr) return false;
 	const Vec2<int> pos{

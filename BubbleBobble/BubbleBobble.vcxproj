@@ -204,6 +204,7 @@ xcopy "$(SolutionDir)3rdParty\Fmod\lib\x64\fmod.dll" "$(OutputPath)" /R /Y</Comm
   <ItemGroup>
     <ClInclude Include="Avatar.h" />
     <ClInclude Include="AvatarComponent.h" />
+    <ClInclude Include="Bubble.h" />
     <ClInclude Include="BubbleBobble.h" />
     <ClInclude Include="Buffer.h" />
     <ClInclude Include="BufferAblocks.h" />
@@ -236,6 +237,7 @@ xcopy "$(SolutionDir)3rdParty\Fmod\lib\x64\fmod.dll" "$(OutputPath)" /R /Y</Comm
   <ItemGroup>
     <ClCompile Include="Avatar.cpp" />
     <ClCompile Include="AvatarComponent.cpp" />
+    <ClCompile Include="Bubble.cpp" />
     <ClCompile Include="BubbleBobble.cpp" />
     <ClCompile Include="Buffer.cpp" />
     <ClCompile Include="BufferAblocks.cpp" />

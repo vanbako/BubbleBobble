@@ -25,16 +25,16 @@ const int Level::mBlockCount{ 800 };
 const int Level::mWidth{ 256 };
 const int Level::mHeight{ 200 };
 
-Level::Level(int level, Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager)
+GameObject* Level::CreateLevel(int level, Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager)
 {
 	BufferBubble* pBubble{ (BufferBubble*)pBufferManager->GetBuffer(EnumBuffer::Bubble) };
 	BufferAblocks* pAblocks{ (BufferAblocks*)pBufferManager->GetBuffer(EnumBuffer::Ablocks) };
 	BufferBdata* pBdata{ (BufferBdata*)pBufferManager->GetBuffer(EnumBuffer::Bdata) };
 
-	mpGOLevel = pScene->CreateObject<GameObject>();
-	TransformModelComponent* pTransformComponent{ mpGOLevel->CreateModelComponent<TransformModelComponent>(pEngine) };
+	GameObject* pGOLevel{ pScene->CreateObject<GameObject>() };
+	TransformModelComponent* pTransformComponent{ pGOLevel->CreateModelComponent<TransformModelComponent>(pEngine) };
 	pTransformComponent->SetPos(0, 0);
-	RenderViewComponent* pRenderComponent{ mpGOLevel->CreateViewComponent<RenderViewComponent>(pEngine) };
+	RenderViewComponent* pRenderComponent{ pGOLevel->CreateViewComponent<RenderViewComponent>(pEngine) };
 	pRenderComponent->SetTransformComponent(pTransformComponent);
 
 	ColorRGBA8* pPixels{ new ColorRGBA8[mWidth * mHeight] };
@@ -47,7 +47,7 @@ Level::Level(int level, Minigin* pEngine, Scene* pScene, BufferManager* pBufferM
 	std::memset(pLayout, 0, mBlockCount);
 	pBdata->GetLayout(pLayout, level);
 
-	mpGOLevel->CreateModelComponent<LevelComponent>(pEngine, pBufferManager, pLevelPalette, pLayout);
+	pGOLevel->CreateModelComponent<LevelComponent>(pEngine, pBufferManager, pLevelPalette, pLayout);
 
 	DrawBlocks(pAblocks, pPixels, pLevelPalette, pLayout, level);
 	DrawBigBlocks(pAblocks, pPixels, pLevelPalette, pBubble, level);
@@ -68,16 +68,13 @@ Level::Level(int level, Minigin* pEngine, Scene* pScene, BufferManager* pBufferM
 	delete[] pPixels;
 
 	delete[] pLevelPalette;
+
+	return pGOLevel;
 }
 
 const int& Level::GetBlockCount()
 {
 	return mBlockCount;
-}
-
-GameObject* Level::GetGameObject()
-{
-	return mpGOLevel;
 }
 
 void Level::DrawFalse3DBlocks(BufferAblocks* pAblocks, ColorRGBA8* pPixels, ColorRGBA8* pLevelPalette, char* pLayout)

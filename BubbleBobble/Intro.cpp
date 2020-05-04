@@ -24,7 +24,7 @@ using namespace ieg;
 const int Intro::mWidth{ 320 };
 const int Intro::mHeight{ 200 };
 
-Intro::Intro(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, Scene* pGameScene)
+GameObject* Intro::CreateIntro(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, Scene* pGameScene)
 {
 	GameObject* pGameObject = pScene->CreateObject<GameObject>();
 	TransformModelComponent* pTransformComponent{ pGameObject->CreateModelComponent<TransformModelComponent>(pEngine) };
@@ -61,4 +61,6 @@ Intro::Intro(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, Sce
 
 	delete[] pPixels;
 	delete[] pColorPalette; 
+
+	return pGameObject;
 }

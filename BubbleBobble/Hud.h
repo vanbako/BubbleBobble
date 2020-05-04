@@ -13,12 +13,14 @@ namespace ieg
 	class Hud final
 	{
 	public:
-		explicit Hud(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager);
-		~Hud() = default;
+		explicit Hud() = delete;
+		~Hud() = delete;
 		Hud(const Hud&) = delete;
 		Hud(Hud&&) = delete;
 		Hud& operator=(const Hud&) = delete;
 		Hud& operator=(Hud&&) = delete;
+
+		static GameObject* CreateHud(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager);
 	private:
 		static const Vec2<int> mPos;
 		static const int mWidth;
@@ -28,8 +30,8 @@ namespace ieg
 		static const int mChrWidth;
 		static const int mChrHeight;
 
-		void DrawSprite(ColorRGBA8* pSprite, ColorRGBA8* pPixels, int offset, int loc);
-		void DrawChr(ColorRGBA8* pChr, ColorRGBA8* pPixels, int loc);
-		void DrawStr(ColorRGBA8* pFont, ColorRGBA8* pPixels, int loc, const std::string& str);
+		static void DrawSprite(ColorRGBA8* pSprite, ColorRGBA8* pPixels, int offset, int loc);
+		static void DrawChr(ColorRGBA8* pChr, ColorRGBA8* pPixels, int loc);
+		static void DrawStr(ColorRGBA8* pFont, ColorRGBA8* pPixels, int loc, const std::string& str);
 	};
 }

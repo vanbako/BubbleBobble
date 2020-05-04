@@ -23,22 +23,22 @@ const int Avatar::mWidth{ 32 };
 const int Avatar::mHeight{ 16 };
 const int Avatar::mCount{ 16 };
 
-Avatar::Avatar(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, GameObject* pLevel, ColorRGBA8* pPalette, AvatarType avatarType)
+GameObject* Avatar::CreateAvatar(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, GameObject* pLevel, ColorRGBA8* pPalette, AvatarType avatarType)
 {
 	BufferAsprites* pAsprites{ (BufferAsprites*)pBufferManager->GetBuffer(EnumBuffer::Asprites) };
 
-	mpGOAvatar = pScene->CreateObject<GameObject>();
-	TransformModelComponent* pTransformComponent{ mpGOAvatar->CreateModelComponent<TransformModelComponent>(pEngine) };
+	GameObject* pGOAvatar{ pScene->CreateObject<GameObject>() };
+	TransformModelComponent* pTransformComponent{ pGOAvatar->CreateModelComponent<TransformModelComponent>(pEngine) };
 	if (avatarType == AvatarType::Bub)
 		pTransformComponent->SetPos(16, 176);
 	else
 		pTransformComponent->SetPos(208, 176);
 	pTransformComponent->Switch();
-	RenderViewComponent* pRenderComponent{ mpGOAvatar->CreateViewComponent<RenderViewComponent>(pEngine) };
+	RenderViewComponent* pRenderComponent{ pGOAvatar->CreateViewComponent<RenderViewComponent>(pEngine) };
 	pRenderComponent->SetTransformComponent(pTransformComponent);
 	pRenderComponent->SetIsSprite(true);
-	AvatarComponent* pAvatarComponent{ mpGOAvatar->CreateModelComponent<AvatarComponent>(pEngine, pLevel) };
-	mpGOAvatar->CreateModelComponent<ColliderModelComponent>(pEngine, Vec2<int>{ 0, 8 }, Vec2<int>{ 15, 7 });
+	AvatarComponent* pAvatarComponent{ pGOAvatar->CreateModelComponent<AvatarComponent>(pEngine, pLevel) };
+	pGOAvatar->CreateModelComponent<ColliderModelComponent>(pEngine, Vec2<int>{ 0, 8 }, Vec2<int>{ 15, 7 });
 
 	InputAction* pInputAction{ pScene->GetInputManager()->CreateInputAction() };
 	if (avatarType == AvatarType::Bub)
@@ -92,11 +92,7 @@ Avatar::Avatar(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, G
 		pRenderComponent->SetIndex(15);
 
 	delete[] pPixels;
-}
-
-GameObject* Avatar::GetGameObject()
-{
-	return mpGOAvatar;
+	return pGOAvatar;
 }
 
 void Avatar::DrawSprite(ColorRGBA8* pSprite, ColorRGBA8* pPixels, int offset, int loc)

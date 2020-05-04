@@ -87,14 +87,14 @@ void AvatarComponent::Update(const float deltaTime)
 
 void AvatarComponent::Collision()
 {
-	unsigned short collision{ mpGOLevel->GetModelComponent<LevelComponent>()->CheckCollision(
+	unsigned short collision{ mpGOLevel->GetModelComponent<LevelComponent>()->CheckAvatarCollision(
 	mpGameObject->GetModelComponent<TransformModelComponent>(),
 	mpGameObject->GetModelComponent<ColliderModelComponent>()) };
 	if (mNewState == AvatarState::Standing)
 		if ((collision & 1) != 0)
 		{
 			mpGameObject->GetModelComponent<TransformModelComponent>()->ResetNewPosY();
-			collision = mpGOLevel->GetModelComponent<LevelComponent>()->CheckCollision(
+			collision = mpGOLevel->GetModelComponent<LevelComponent>()->CheckAvatarCollision(
 				mpGameObject->GetModelComponent<TransformModelComponent>(),
 				mpGameObject->GetModelComponent<ColliderModelComponent>());
 		}

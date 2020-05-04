@@ -31,8 +31,7 @@ const int Start::mSpriteHeight{ 32 };
 const int Start::mSpriteAnimCount{ 2 };
 const float Start::mAnimDelay{ 0.15f };
 
-
-Start::Start(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, Scene* pGameScene)
+GameObject* Start::CreateStart(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, Scene* pGameScene)
 {
 	BufferBubble* pBubble{ (BufferBubble*)pBufferManager->GetBuffer(EnumBuffer::Bubble) };
 	BufferAsprites* pAsprites{ (BufferAsprites*)pBufferManager->GetBuffer(EnumBuffer::Asprites) };
@@ -41,14 +40,15 @@ Start::Start(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, Sce
 	ColorRGBA8* pPalette{ new ColorRGBA8[BufferBubble::GetPaletteColorCount()] };
 	pBubble->GetLevelColors(pPalette, 0);
 
-	CreateBackground(pEngine, pScene, pGameScene, pAblocks, pPalette);
+	GameObject* pGameObject{ CreateBackground(pEngine, pScene, pGameScene, pAblocks, pPalette) };
 	CreateBubBobAnim(Sprite::BubBubble, 64, pEngine, pScene, pAsprites, pPalette);
 	CreateBubBobAnim(Sprite::BobBubble, 192, pEngine, pScene, pAsprites, pPalette);
 
 	delete[] pPalette;
+	return pGameObject;
 }
 
-void Start::CreateBackground(Minigin* pEngine, Scene* pScene, Scene* pGameScene, BufferAblocks* pAblocks, ColorRGBA8* pPalette)
+GameObject* Start::CreateBackground(Minigin* pEngine, Scene* pScene, Scene* pGameScene, BufferAblocks* pAblocks, ColorRGBA8* pPalette)
 {
 	GameObject* pGameObject{ pScene->CreateObject<GameObject>() };
 	TransformModelComponent* pTransformComponent{ pGameObject->CreateModelComponent<TransformModelComponent>(pEngine) };
@@ -77,6 +77,7 @@ void Start::CreateBackground(Minigin* pEngine, Scene* pScene, Scene* pGameScene,
 	SDL_Texture* pSDLTexture{ SDL_CreateTextureFromSurface(pEngine->GetRenderer()->GetSDLRenderer(), pSurface) };
 	pRenderComponent->SetTexture(pSDLTexture);
 	delete[] pPixels;
+	return pGameObject;
 }
 
 void Start::CreateBubBobAnim(Sprite sprite, int x, Minigin* pEngine, Scene* pScene, BufferAsprites* pAsprites, ColorRGBA8* pPalette)

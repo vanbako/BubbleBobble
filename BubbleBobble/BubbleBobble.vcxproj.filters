@@ -126,6 +126,9 @@
     <ClCompile Include="LevelComponent.cpp">
       <Filter>Component</Filter>
     </ClCompile>
+    <ClCompile Include="Bubble.cpp">
+      <Filter>Prefabs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FireCommand.h">
@@ -217,6 +220,9 @@
     </ClInclude>
     <ClInclude Include="LevelComponent.h">
       <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Bubble.h">
+      <Filter>Prefabs</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

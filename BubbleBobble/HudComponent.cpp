@@ -22,9 +22,7 @@ HudComponent::HudComponent(GameObject* pGameObject, Minigin* pEngine,...)
 	BufferManager* pBufferManager{ va_arg(vaList, BufferManager*) };
 	va_end(args);
 	Scene* pScene{ mpGameObject->GetScene() };
-	Level* pLevel{ new Level{ 5, pEngine, pScene, pBufferManager } };
-	mpGOLevel = pLevel->GetGameObject();
-	delete pLevel;
+	mpGOLevel = Level::CreateLevel(5, pEngine, pScene, pBufferManager);
 	mSoundId = mpAudio->AddSound("../Data/Audio/gameloop.wav", true);
 }
 

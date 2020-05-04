@@ -90,7 +90,11 @@ namespace ieg
 
 		void Update(const float deltaTime) override;
 		void Render() const override;
+
+		const bool& IsActive() const { return mIsActive; };
+		void SetIsActive(bool isActive) { mIsActive = isActive; };
 	private:
+		bool mIsActive;
 		std::vector<ModelComponent*> mpModelComponents;
 		std::vector<ViewComponent*> mpViewComponents;
 	};
