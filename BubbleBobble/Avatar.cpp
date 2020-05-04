@@ -5,6 +5,7 @@
 #include "AvatarComponent.h"
 #include "LeftCommand.h"
 #include "RightCommand.h"
+#include "JumpCommand.h"
 #include "../Engine/Minigin.h"
 #include "../Engine/Scene.h"
 #include "../Engine/Renderer.h"
@@ -32,11 +33,13 @@ Avatar::Avatar(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, G
 		pTransformComponent->SetPos(16, 176);
 	else
 		pTransformComponent->SetPos(208, 176);
+	pTransformComponent->Switch();
 	RenderViewComponent* pRenderComponent{ mpGOAvatar->CreateViewComponent<RenderViewComponent>(pEngine) };
 	pRenderComponent->SetTransformComponent(pTransformComponent);
 	pRenderComponent->SetIsSprite(true);
 	AvatarComponent* pAvatarComponent{ mpGOAvatar->CreateModelComponent<AvatarComponent>(pEngine, pLevel) };
-	mpGOAvatar->CreateModelComponent<ColliderModelComponent>(pEngine, Vec2<int>{ 8, 0 }, Vec2<int>{ 16, 16 });
+	mpGOAvatar->CreateModelComponent<ColliderModelComponent>(pEngine, Vec2<int>{ 0, 8 }, Vec2<int>{ 15, 7 });
+
 	InputAction* pInputAction{ pScene->GetInputManager()->CreateInputAction() };
 	if (avatarType == AvatarType::Bub)
 		pInputAction->SetKeyboardKey(VK_LEFT);
@@ -44,12 +47,21 @@ Avatar::Avatar(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, G
 		pInputAction->SetGamepadButtonCode(XINPUT_GAMEPAD_DPAD_LEFT);
 	pInputAction->CreateAndSetCommand<LeftCommand>();
 	pInputAction->SetActor(pAvatarComponent);
+
 	pInputAction = pScene->GetInputManager()->CreateInputAction();
 	if (avatarType == AvatarType::Bub)
 		pInputAction->SetKeyboardKey(VK_RIGHT);
 	else
 		pInputAction->SetGamepadButtonCode(XINPUT_GAMEPAD_DPAD_RIGHT);
 	pInputAction->CreateAndSetCommand<RightCommand>();
+	pInputAction->SetActor(pAvatarComponent);
+
+	pInputAction = pScene->GetInputManager()->CreateInputAction();
+	if (avatarType == AvatarType::Bub)
+		pInputAction->SetKeyboardKey(VK_UP);
+	else
+		pInputAction->SetGamepadButtonCode(XINPUT_GAMEPAD_DPAD_UP);
+	pInputAction->CreateAndSetCommand<JumpCommand>();
 	pInputAction->SetActor(pAvatarComponent);
 
 	ColorRGBA8* pPixels{ new ColorRGBA8[mCount * mWidth * mHeight] };

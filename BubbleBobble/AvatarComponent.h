@@ -24,7 +24,7 @@ namespace ieg
 		AvatarComponent& operator=(AvatarComponent&&) = delete;
 
 		void Update(const float deltaTime) override;
-		void Collide() override;
+		void Collision() override;
 		void Switch() override;
 
 		void SetFiring(bool isFiring);
@@ -38,12 +38,19 @@ namespace ieg
 		AvatarState
 			mCurState,
 			mNewState;
+		int mJumpHeight;
 		bool
 			mCurIsFiring,
 			mNewIsFiring;
-		int mIsMoving;
-		float mMoveDelay;
+		int
+			mIsHorMoving,
+			mIsVerMoving;
+		float
+			mMoveHorDelay,
+			mMoveVerDelay;
 
-		static const float mMove2PixelsTime;
+		static const float mMoveHor2PixelsTime;
+		static const float mMoveVer2PixelsTime;
+		static const int mMaxJumpHeight;
 	};
 }

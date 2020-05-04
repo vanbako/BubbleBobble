@@ -57,3 +57,23 @@ void TransformModelComponent::SetIsLookingLeft(bool isLookingLeft)
 {
 	mNewIsLookingLeft = isLookingLeft;
 }
+
+const Vec2<int>& ieg::TransformModelComponent::GetNewPos() const
+{
+	return mNewPos;
+}
+
+void ieg::TransformModelComponent::ResetNewPos()
+{
+	mNewPos = mCurPos;
+}
+
+void ieg::TransformModelComponent::ResetNewPosX()
+{
+	mNewPos.SetX(mCurPos.GetX());
+}
+
+void ieg::TransformModelComponent::ResetNewPosY()
+{
+	mNewPos.SetY(mCurPos.GetY());
+}

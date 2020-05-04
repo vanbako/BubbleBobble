@@ -13,7 +13,7 @@ using namespace ieg;
 
 const int LevelComponent::mpAvatarMax{ 2 };
 
-LevelComponent::LevelComponent(GameObject* pGameObject, Minigin* pEngine,...)
+LevelComponent::LevelComponent(GameObject* pGameObject, Minigin* pEngine, ...)
 	: ModelComponent(pGameObject, pEngine)
 	, mpLayout{ new char[Level::GetBlockCount()] }
 	, mpLevelPalette{ new ColorRGBA8[BufferBubble::GetPaletteColorCount()] }
@@ -28,7 +28,7 @@ LevelComponent::LevelComponent(GameObject* pGameObject, Minigin* pEngine,...)
 	va_end(args);
 	Scene* pScene{ mpGameObject->GetScene() };
 
-	std::memcpy(mpLevelPalette, pLevelPalette, sizeof(ColorRGBA8) * BufferBubble::GetPaletteColorCount());
+	std::memcpy(mpLevelPalette, pLevelPalette, sizeof(ColorRGBA8)* BufferBubble::GetPaletteColorCount());
 	std::memcpy(mpLayout, pLayout, Level::GetBlockCount());
 
 	Avatar* pAvatar{ new Avatar{ pEngine, pScene, pBufferManager, pGameObject, mpLevelPalette, AvatarType::Bub } };
@@ -42,6 +42,7 @@ LevelComponent::LevelComponent(GameObject* pGameObject, Minigin* pEngine,...)
 LevelComponent::~LevelComponent()
 {
 	delete[] mpLevelPalette;
+	delete[] mpLayout;
 }
 
 void LevelComponent::Update(const float deltaTime)
@@ -49,25 +50,42 @@ void LevelComponent::Update(const float deltaTime)
 	(deltaTime);
 }
 
-bool LevelComponent::CheckCollision(TransformModelComponent* pTransform, ColliderModelComponent* pCollider)
+unsigned short LevelComponent::CheckCollision(TransformModelComponent* pTransform, ColliderModelComponent* pCollider)
 {
 	if (pTransform == nullptr || pCollider == nullptr) return false;
 	const Vec2<int> pos{
-		pTransform->GetPos().GetX() + pCollider->GetRelPos().GetX(),
-		pTransform->GetPos().GetY() + pCollider->GetRelPos().GetY()
+		pTransform->GetNewPos().GetX() + pCollider->GetRelPos().GetX(),
+		pTransform->GetNewPos().GetY() + pCollider->GetRelPos().GetY()
 	};
 	const Vec2<int>& size{ pCollider->GetSize() };
-	if (CheckCollisionPos(pos.GetX(), pos.GetY())) return true;
-	if (CheckCollisionPos(pos.GetX() + size.GetX(), pos.GetY())) return true;
-	if (CheckCollisionPos(pos.GetX(), pos.GetY() + size.GetY())) return true;
-	if (CheckCollisionPos(pos.GetX() + size.GetX(), pos.GetY() + size.GetY())) return true;
-	return false;
+	unsigned short collision{ 0 };
+	if (CheckCollisionPos(pos.GetX(), pos.GetY())) { collision |= 10; };
+	if (CheckCollisionPos(pos.GetX() + size.GetX(), pos.GetY())) { collision |= 6; };
+	if (CheckCollisionPos(pos.GetX(), pos.GetY() + size.GetY() - 8))
+	{
+		if (CheckCollisionPos(pos.GetX(), pos.GetY() + size.GetY())) { collision |= 8; };
+	}
+	else
+		if (CheckCollisionPos(pos.GetX(), pos.GetY() + size.GetY())) { collision |= 9; };
+	if (CheckCollisionPos(pos.GetX() + size.GetX(), pos.GetY() + size.GetY() - 8))
+	{
+		if (CheckCollisionPos(pos.GetX() + size.GetX(), pos.GetY() + size.GetY())) { collision |= 4; };
+	}
+	else
+		if (CheckCollisionPos(pos.GetX() + size.GetX(), pos.GetY() + size.GetY())) { collision |= 5; };
+	if (CheckCollisionPos(pos.GetX() + size.GetX() / 2, pos.GetY() + size.GetY() - 8))
+	{
+		if (CheckCollisionPos(pos.GetX() + size.GetX() / 2, pos.GetY() + size.GetY())) { collision |= 4; };
+	}
+	else
+		if (CheckCollisionPos(pos.GetX() + size.GetX() / 2, pos.GetY() + size.GetY())) { collision |= 5; };
+	return collision;
 }
 
 bool ieg::LevelComponent::CheckCollisionPos(const int x, const int y)
 {
 	if (x < 0 || x > 255) return false;
-	if (y < 0 || y > 199) return false;
+	if (y < 8 || y > 199) return false;
 
 	if (mpLayout[x / 8 + y / 8 * 32] != 0)
 		return true;

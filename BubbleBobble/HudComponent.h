@@ -5,6 +5,7 @@ namespace ieg
 {
 	class Minigin;
 	class GameObject;
+	class Audio;
 
 	class HudComponent final
 		: public ModelComponent
@@ -18,9 +19,12 @@ namespace ieg
 		HudComponent& operator=(HudComponent&&) = delete;
 
 		void Update(const float deltaTime) override;
-		void Collide() override {};
+		void Collision() override {};
 		void Switch() override {};
 	private:
 		GameObject* mpGOLevel;
+		Audio* mpAudio;
+		int mSoundId;
+		bool mIsSoundPlaying;
 	};
 }

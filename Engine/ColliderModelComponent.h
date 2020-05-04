@@ -17,7 +17,7 @@ namespace ieg
 		ColliderModelComponent& operator=(ColliderModelComponent&&) = delete;
 
 		void Update(const float deltaTime) override { (deltaTime); };
-		void Collide() override {};
+		void Collision() override {};
 		void Switch() override {};
 
 		const Vec2<int>& GetRelPos();

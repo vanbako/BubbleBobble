@@ -22,7 +22,7 @@ namespace ieg
 		StartComponent& operator=(StartComponent&&) = delete;
 
 		void Update(const float deltaTime) override;
-		void Collide() override {};
+		void Collision() override {};
 		void Switch() override {};
 
 		void SetStartScene(Scene* pScene);

@@ -20,10 +20,10 @@ namespace ieg
 		LevelComponent& operator=(LevelComponent&&) = delete;
 
 		void Update(const float deltaTime) override;
-		void Collide() override {};
+		void Collision() override {};
 		void Switch() override {};
 
-		bool CheckCollision(TransformModelComponent *pTransform, ColliderModelComponent* pCollider);
+		unsigned short CheckCollision(TransformModelComponent *pTransform, ColliderModelComponent* pCollider);
 		bool CheckCollisionPos(int x, int y);
 	private:
 		char* mpLayout;

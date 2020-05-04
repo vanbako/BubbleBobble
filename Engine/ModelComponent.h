@@ -17,7 +17,7 @@ namespace ieg
 		ModelComponent& operator=(ModelComponent&& other) = delete;
 
 		virtual void Update(const float deltaTime) = 0;
-		virtual void Collide() = 0;
+		virtual void Collision() = 0;
 		virtual void Switch() = 0;
 
 		GameObject* GetGameObject();
