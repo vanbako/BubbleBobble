@@ -27,6 +27,7 @@ namespace ieg
 		Bubble& operator=(Bubble&&) = delete;
 
 		static GameObject* CreateBubble(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, ColorRGBA8* pPalette, BubbleType avatarType);
+		static GameObject* CopyBubble(Minigin* pEngine, GameObject* pGOBubble);
 	private:
 		static const int mWidth;
 		static const int mHeight;

@@ -9,6 +9,7 @@ namespace ieg
 	public:
 		explicit SceneObject(Scene* pScene)
 			: mpScene{ pScene }
+			, mIsToBeDeleted{ false }
 		{
 		};
 		virtual ~SceneObject() = default;
@@ -20,11 +21,15 @@ namespace ieg
 		virtual void Update(const float deltaTime) = 0;
 		virtual void Render() const = 0;
 
+		bool IsToBeDeleted() const { return mIsToBeDeleted; };
+		void SetIsToBeDeleted(bool isToBeDeleted) { mIsToBeDeleted = isToBeDeleted; };
+
 		Scene* GetScene()
 		{
 			return mpScene;
 		};
 	protected:
 		Scene* mpScene;
+		bool mIsToBeDeleted;
 	};
 }

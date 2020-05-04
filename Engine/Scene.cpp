@@ -35,6 +35,15 @@ void Scene::Update(const float deltaTime)
 {
 	for (auto& pObject : mpObjects)
 		pObject->Update(deltaTime);
+	for (auto& pObject : mpObjects)
+		if (pObject->IsToBeDeleted())
+			delete pObject;
+	mpObjects.erase(
+		std::remove_if(mpObjects.begin(), mpObjects.end(),
+			[](SceneObject* sceneObject) { return sceneObject->IsToBeDeleted(); }
+		),
+		mpObjects.end()
+	);
 }
 
 void Scene::Render() const

@@ -38,33 +38,34 @@ GameObject* Hud::CreateHud(Minigin* pEngine, Scene* pScene, BufferManager* pBuff
 	pTransformComponent->SetPos(mPos);
 	RenderViewComponent* pRenderComponent{ pGameObject->CreateViewComponent<RenderViewComponent>(pEngine) };
 	pRenderComponent->SetTransformComponent(pTransformComponent);
-	pGameObject->CreateModelComponent<HudComponent>(pEngine, pBufferManager);
 
 	ColorRGBA8* pPixels{ new ColorRGBA8[mWidth * mHeight] };
-	ColorRGBA8* pColorPalette{ new ColorRGBA8[BufferBubble::GetPaletteColorCount()] };
+	ColorRGBA8* pPalette{ new ColorRGBA8[BufferBubble::GetPaletteColorCount()] };
 
-	pBubble->GetLevelColors(pColorPalette, 0);
+	pBubble->GetLevelColors(pPalette, 0);
+
+	pGameObject->CreateModelComponent<HudComponent>(pEngine, pBufferManager, pPalette);
 
 	ColorRGBA8* pSprite{ new ColorRGBA8[ BufferAsprites::GetWidth() * BufferAsprites::GetHeight() * 2] };
-	pAsprites->GetSprites(pSprite, 1, Sprite::HudBUB, pColorPalette);
+	pAsprites->GetSprites(pSprite, 1, Sprite::HudBUB, pPalette);
 	DrawSprite(pSprite, pPixels, 0, 0);
-	pAsprites->GetSprites(pSprite, 1, Sprite::HudBLE, pColorPalette);
+	pAsprites->GetSprites(pSprite, 1, Sprite::HudBLE, pPalette);
 	DrawSprite(pSprite, pPixels, 0, 2);
 	DrawSprite(pSprite, pPixels, 0, 1 * mBlockWidth + 2);
-	pAsprites->GetSprites(pSprite, 1, Sprite::HudBOB, pColorPalette);
+	pAsprites->GetSprites(pSprite, 1, Sprite::HudBOB, pPalette);
 	DrawSprite(pSprite, pPixels, 0, 1 * mBlockWidth);
-	pAsprites->GetSprites(pSprite, 2, Sprite::HudBub1Up, pColorPalette);
+	pAsprites->GetSprites(pSprite, 2, Sprite::HudBub1Up, pPalette);
 	DrawSprite(pSprite, pPixels, 0, 3 * mBlockWidth);
 	DrawSprite(pSprite, pPixels, 1, 3 * mBlockWidth + 2);
-	pAsprites->GetSprites(pSprite, 2, Sprite::HudBob1Up, pColorPalette);
+	pAsprites->GetSprites(pSprite, 2, Sprite::HudBob1Up, pPalette);
 	DrawSprite(pSprite, pPixels, 0, 6 * mBlockWidth);
 	DrawSprite(pSprite, pPixels, 1, 6 * mBlockWidth + 2);
 	delete[] pSprite;
 
 	ColorRGBA8* pFont{ new ColorRGBA8[BufferAblocks::GetFontChrCount() * BufferAblocks::GetFontWidth() * BufferAblocks::GetFontHeight()] };
-	pAblocks->GetFont(pFont, pColorPalette, 14);
+	pAblocks->GetFont(pFont, pPalette, 14);
 	DrawStr(pFont, pPixels, 20 * mChrWidth, "HI SCORE");
-	pAblocks->GetFont(pFont, pColorPalette, 15);
+	pAblocks->GetFont(pFont, pPalette, 15);
 	DrawStr(pFont, pPixels, 23 * mChrWidth, "CREDITS");
 	delete[] pFont;
 
@@ -78,7 +79,7 @@ GameObject* Hud::CreateHud(Minigin* pEngine, Scene* pScene, BufferManager* pBuff
 		SDL_PIXELFORMAT_RGBA32) };
 	SDL_Texture* pSDLTexture{ SDL_CreateTextureFromSurface(pEngine->GetRenderer()->GetSDLRenderer(), pSurface) };
 	pRenderComponent->SetTexture(pSDLTexture);
-	delete[] pColorPalette;
+	delete[] pPalette;
 	delete[] pPixels;
 	return pGameObject;
 }

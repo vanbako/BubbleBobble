@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "LevelComponent.h"
+#include "HudComponent.h"
 #include "Level.h"
 #include "BufferManager.h"
 #include "BufferBubble.h"
@@ -8,18 +9,18 @@
 #include "../Engine/ColorRGBA8.h"
 #include "../Engine/ColliderModelComponent.h"
 #include "../Engine/TransformModelComponent.h"
+#include "../Engine/Scene.h"
 
 using namespace ieg;
-
-const int LevelComponent::mpAvatarMax{ 2 };
-const int LevelComponent::mpBubblesPerAvatarMax{ 8 };
 
 LevelComponent::LevelComponent(GameObject* pGameObject, Minigin* pEngine, ...)
 	: ModelComponent(pGameObject, pEngine)
 	, mpLayout{ new char[Level::GetBlockCount()] }
 	, mpLevelPalette{ new ColorRGBA8[BufferBubble::GetPaletteColorCount()] }
+	, mpHudComponent{ nullptr }
+	, mppGOBubbles{ nullptr }
 	, mpGOAvatars{}
-	, mpGOBubbles{}
+	, mTest{ 10.f }
 {
 	std::va_list args{};
 	va_start(args, pEngine);
@@ -27,6 +28,8 @@ LevelComponent::LevelComponent(GameObject* pGameObject, Minigin* pEngine, ...)
 	BufferManager* pBufferManager{ va_arg(vaList, BufferManager*) };
 	ColorRGBA8* pLevelPalette{ va_arg(vaList, ColorRGBA8*) };
 	char* pLayout{ va_arg(vaList, char*) };
+	mppGOBubbles = va_arg(vaList, GameObject**);
+	mpHudComponent = va_arg(vaList, HudComponent*);
 	va_end(args);
 	Scene* pScene{ mpGameObject->GetScene() };
 
@@ -46,6 +49,13 @@ LevelComponent::~LevelComponent()
 void LevelComponent::Update(const float deltaTime)
 {
 	(deltaTime);
+	mTest -= deltaTime;
+	if (mTest <= 0.f)
+	{
+		mpHudComponent->EndLevel();
+		mpGOAvatars[0]->SetIsToBeDeleted(true);
+		mpGOAvatars[1]->SetIsToBeDeleted(true);
+	}
 }
 
 unsigned short LevelComponent::CheckAvatarCollision(TransformModelComponent* pTransform, ColliderModelComponent* pCollider)

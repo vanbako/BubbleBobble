@@ -7,6 +7,7 @@ namespace ieg
 	class ColorRGBA8;
 	class TransformModelComponent;
 	class ColliderModelComponent;
+	class HudComponent;
 
 	class LevelComponent final
 		: public ModelComponent
@@ -26,12 +27,11 @@ namespace ieg
 		unsigned short CheckAvatarCollision(TransformModelComponent *pTransform, ColliderModelComponent* pCollider);
 		bool CheckCollisionPos(int x, int y);
 	private:
+		float mTest;
+		HudComponent* mpHudComponent;
 		char* mpLayout;
 		ColorRGBA8* mpLevelPalette;
+		GameObject** mppGOBubbles;
 		std::vector<GameObject*> mpGOAvatars;
-		std::vector<GameObject*> mpGOBubbles;
-
-		static const int mpAvatarMax;
-		static const int mpBubblesPerAvatarMax;
 	};
 }

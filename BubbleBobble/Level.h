@@ -11,6 +11,7 @@ namespace ieg
 	class ColorRGBA8;
 	class Texture2D;
 	class Avatar;
+	class HudComponent;
 
 	class Level final
 	{
@@ -22,7 +23,7 @@ namespace ieg
 		Level& operator=(const Level&) = delete;
 		Level& operator=(Level&&) = delete;
 
-		static GameObject* CreateLevel(int level, Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager);
+		static GameObject* CreateLevel(int level, Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, GameObject** ppGOBubbles, HudComponent* pHudComponent);
 		static const int& GetBlockCount();
 	private:
 		static const int mBlockCount;

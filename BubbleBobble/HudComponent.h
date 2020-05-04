@@ -6,6 +6,9 @@ namespace ieg
 	class Minigin;
 	class GameObject;
 	class Audio;
+	class BufferManager;
+	class Scene;
+	class ColorRGBA8;
 
 	class HudComponent final
 		: public ModelComponent
@@ -21,10 +24,21 @@ namespace ieg
 		void Update(const float deltaTime) override;
 		void Collision() override {};
 		void Switch() override {};
+
+		void EndLevel();
 	private:
+		BufferManager* mpBufferManager;
+		int mLevel;
+		GameObject** mppGOBubbles;
 		GameObject* mpGOLevel;
 		Audio* mpAudio;
 		int mSoundId;
 		bool mIsSoundPlaying;
+		bool mEndLevel;
+
+		void CreateBubbles(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, ColorRGBA8* pPalette);
+
+		static const int mpAvatarMax;
+		static const int mpBubblesPerAvatarMax;
 	};
 }
