@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "LevelComponent.h"
+#include "AvatarComponent.h"
 #include "HudComponent.h"
 #include "Level.h"
 #include "BufferManager.h"
@@ -16,33 +17,35 @@ using namespace ieg;
 LevelComponent::LevelComponent(GameObject* pGameObject, Minigin* pEngine, ...)
 	: ModelComponent(pGameObject, pEngine)
 	, mpLayout{ new char[Level::GetBlockCount()] }
-	, mpLevelPalette{ new ColorRGBA8[BufferBubble::GetPaletteColorCount()] }
+	, mpPalette{ new ColorRGBA8[BufferBubble::GetPaletteColorCount()] }
 	, mpHudComponent{ nullptr }
 	, mppGOBubbles{ nullptr }
-	, mpGOAvatars{}
+	, mppGOAvatars{ nullptr }
 	, mTest{ 10.f }
 {
 	std::va_list args{};
 	va_start(args, pEngine);
 	std::va_list vaList{ va_arg(args, std::va_list) };
 	BufferManager* pBufferManager{ va_arg(vaList, BufferManager*) };
+	(pBufferManager);
 	ColorRGBA8* pLevelPalette{ va_arg(vaList, ColorRGBA8*) };
 	char* pLayout{ va_arg(vaList, char*) };
+	mppGOAvatars = va_arg(vaList, GameObject**);
 	mppGOBubbles = va_arg(vaList, GameObject**);
 	mpHudComponent = va_arg(vaList, HudComponent*);
 	va_end(args);
-	Scene* pScene{ mpGameObject->GetScene() };
 
-	std::memcpy(mpLevelPalette, pLevelPalette, sizeof(ColorRGBA8)* BufferBubble::GetPaletteColorCount());
+	std::memcpy(mpPalette, pLevelPalette, sizeof(ColorRGBA8)* BufferBubble::GetPaletteColorCount());
 	std::memcpy(mpLayout, pLayout, Level::GetBlockCount());
-
-	mpGOAvatars.push_back(Avatar::CreateAvatar(pEngine, pScene, pBufferManager, pGameObject, mpLevelPalette, AvatarType::Bub));
-	mpGOAvatars.push_back(Avatar::CreateAvatar(pEngine, pScene, pBufferManager, pGameObject, mpLevelPalette, AvatarType::Bob));
+	mppGOAvatars[0]->GetModelComponent<AvatarComponent>()->SetLevel(mpGameObject);
+	mppGOAvatars[0]->SetIsActive(true);
+	mppGOAvatars[1]->GetModelComponent<AvatarComponent>()->SetLevel(mpGameObject);
+	mppGOAvatars[1]->SetIsActive(true);
 }
 
 LevelComponent::~LevelComponent()
 {
-	delete[] mpLevelPalette;
+	delete[] mpPalette;
 	delete[] mpLayout;
 }
 
@@ -53,8 +56,8 @@ void LevelComponent::Update(const float deltaTime)
 	if (mTest <= 0.f)
 	{
 		mpHudComponent->EndLevel();
-		mpGOAvatars[0]->SetIsToBeDeleted(true);
-		mpGOAvatars[1]->SetIsToBeDeleted(true);
+		mppGOAvatars[0]->SetIsActive(false);
+		mppGOAvatars[1]->SetIsActive(false);
 	}
 }
 
@@ -90,7 +93,7 @@ unsigned short LevelComponent::CheckAvatarCollision(TransformModelComponent* pTr
 	return collision;
 }
 
-bool ieg::LevelComponent::CheckCollisionPos(const int x, const int y)
+bool LevelComponent::CheckCollisionPos(const int x, const int y)
 {
 	if (x < 0 || x > 255) return false;
 	if (y < 8 || y > 199) return false;

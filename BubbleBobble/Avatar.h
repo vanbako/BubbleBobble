@@ -26,7 +26,7 @@ namespace ieg
 		Avatar& operator=(const Avatar&) = delete;
 		Avatar& operator=(Avatar&&) = delete;
 
-		static GameObject* CreateAvatar(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, GameObject* pLevel, ColorRGBA8* pPalette, AvatarType avatarType);
+		static GameObject* CreateAvatar(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, ColorRGBA8* pPalette, AvatarType avatarType);
 	private:
 		static const int mWidth;
 		static const int mHeight;

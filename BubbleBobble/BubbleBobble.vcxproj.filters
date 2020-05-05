@@ -51,9 +51,6 @@
     <ClCompile Include="RightCommand.cpp">
       <Filter>Command</Filter>
     </ClCompile>
-    <ClCompile Include="StartCommand.cpp">
-      <Filter>Command</Filter>
-    </ClCompile>
     <ClCompile Include="Level.cpp">
       <Filter>Prefabs</Filter>
     </ClCompile>
@@ -129,6 +126,18 @@
     <ClCompile Include="Bubble.cpp">
       <Filter>Prefabs</Filter>
     </ClCompile>
+    <ClCompile Include="Npc.cpp">
+      <Filter>Prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="NpcComponent.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Start1Command.cpp">
+      <Filter>Command</Filter>
+    </ClCompile>
+    <ClCompile Include="Start2Command.cpp">
+      <Filter>Command</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FireCommand.h">
@@ -144,9 +153,6 @@
       <Filter>Command</Filter>
     </ClInclude>
     <ClInclude Include="RightCommand.h">
-      <Filter>Command</Filter>
-    </ClInclude>
-    <ClInclude Include="StartCommand.h">
       <Filter>Command</Filter>
     </ClInclude>
     <ClInclude Include="IntroComponent.h">
@@ -223,6 +229,18 @@
     </ClInclude>
     <ClInclude Include="Bubble.h">
       <Filter>Prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="Npc.h">
+      <Filter>Prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="NpcComponent.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Start1Command.h">
+      <Filter>Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Start2Command.h">
+      <Filter>Command</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

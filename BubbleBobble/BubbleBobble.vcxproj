@@ -228,10 +228,13 @@ xcopy "$(SolutionDir)3rdParty\Fmod\lib\x64\fmod.dll" "$(OutputPath)" /R /Y</Comm
     <ClInclude Include="LeftCommand.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="LevelComponent.h" />
+    <ClInclude Include="Npc.h" />
+    <ClInclude Include="NpcComponent.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="RightCommand.h" />
     <ClInclude Include="Start.h" />
-    <ClInclude Include="StartCommand.h" />
+    <ClInclude Include="Start1Command.h" />
+    <ClInclude Include="Start2Command.h" />
     <ClInclude Include="StartComponent.h" />
   </ItemGroup>
   <ItemGroup>
@@ -262,6 +265,8 @@ xcopy "$(SolutionDir)3rdParty\Fmod\lib\x64\fmod.dll" "$(OutputPath)" /R /Y</Comm
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="LevelComponent.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Npc.cpp" />
+    <ClCompile Include="NpcComponent.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
@@ -270,7 +275,8 @@ xcopy "$(SolutionDir)3rdParty\Fmod\lib\x64\fmod.dll" "$(OutputPath)" /R /Y</Comm
     </ClCompile>
     <ClCompile Include="RightCommand.cpp" />
     <ClCompile Include="Start.cpp" />
-    <ClCompile Include="StartCommand.cpp" />
+    <ClCompile Include="Start1Command.cpp" />
+    <ClCompile Include="Start2Command.cpp" />
     <ClCompile Include="StartComponent.cpp" />
   </ItemGroup>
   <ItemGroup>

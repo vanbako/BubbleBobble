@@ -3,6 +3,7 @@
 #include "BufferManager.h"
 #include "BufferBubble.h"
 #include "Level.h"
+#include "Avatar.h"
 #include "Bubble.h"
 #include "../Engine/ColorRGBA8.h"
 #include "../Engine/Minigin.h"
@@ -18,6 +19,7 @@ const int HudComponent::mpBubblesPerAvatarMax{ 8 };
 
 HudComponent::HudComponent(GameObject* pGameObject, Minigin* pEngine,...)
 	: ModelComponent(pGameObject, pEngine)
+	, mppGOAvatars{ new GameObject*[mpAvatarMax] }
 	, mppGOBubbles{ new GameObject*[mpAvatarMax * mpBubblesPerAvatarMax] }
 	, mpAudio{ pEngine->GetServiceLocator()->GetAudio() }
 	, mSoundId{ 0 }
@@ -30,16 +32,20 @@ HudComponent::HudComponent(GameObject* pGameObject, Minigin* pEngine,...)
 	std::va_list vaList{ va_arg(args, std::va_list) };
 	mpBufferManager = va_arg(vaList, BufferManager*);
 	ColorRGBA8* pPalette{ va_arg(vaList, ColorRGBA8*) };
-	(pPalette);
 	va_end(args);
 	Scene* pScene{ mpGameObject->GetScene() };
+	mppGOAvatars[0] = Avatar::CreateAvatar(pEngine, pScene, mpBufferManager, pPalette, AvatarType::Bub);
+	mppGOAvatars[0]->SetIsActive(false);
+	mppGOAvatars[1] = Avatar::CreateAvatar(pEngine, pScene, mpBufferManager, pPalette, AvatarType::Bob);
+	mppGOAvatars[1]->SetIsActive(false);
 	CreateBubbles(pEngine, pScene, mpBufferManager, pPalette);
-	mpGOLevel = Level::CreateLevel(mLevel, pEngine, pScene, mpBufferManager, mppGOBubbles , this);
+	mpGOLevel = Level::CreateLevel(mLevel, pEngine, pScene, mpBufferManager, mppGOAvatars, mppGOBubbles , this);
 	mSoundId = mpAudio->AddSound("../Data/Audio/gameloop.wav", true);
 }
 
 HudComponent::~HudComponent()
 {
+	delete[] mppGOAvatars;
 	delete[] mppGOBubbles;
 	mpAudio->StopSound(mSoundId);
 }
@@ -55,7 +61,7 @@ void HudComponent::Update(const float deltaTime)
 	if (mEndLevel)
 	{
 		mpGameObject->GetScene();
-		mpGOLevel = Level::CreateLevel(mLevel, mpEngine, mpGameObject->GetScene(), mpBufferManager, mppGOBubbles, this);
+		mpGOLevel = Level::CreateLevel(mLevel, mpEngine, mpGameObject->GetScene(), mpBufferManager, mppGOAvatars, mppGOBubbles, this);
 		mEndLevel = false;
 	}
 }

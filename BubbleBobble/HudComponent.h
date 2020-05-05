@@ -29,6 +29,7 @@ namespace ieg
 	private:
 		BufferManager* mpBufferManager;
 		int mLevel;
+		GameObject** mppGOAvatars;
 		GameObject** mppGOBubbles;
 		GameObject* mpGOLevel;
 		Audio* mpAudio;

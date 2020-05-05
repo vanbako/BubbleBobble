@@ -7,6 +7,7 @@ const int BufferBdata::mLevelDataOffset{ 0 };
 const int BufferBdata::mLevelByteWidth{ 4 };
 const int BufferBdata::mLevelWidth{ 32 };
 const int BufferBdata::mLevelHeight{ 25 };
+const int BufferBdata::mLevelEnemyOffset{ 0x271a };
 
 BufferBdata::BufferBdata(const std::string& filename)
 	: Buffer(filename)
@@ -54,4 +55,28 @@ void BufferBdata::GetLayout(char* pLayout, int level)
 		pLayout[row * mLevelWidth + 30] = 1;
 		pLayout[row * mLevelWidth + 31] = 1;
 	}
+}
+
+void ieg::BufferBdata::GetEnemies(char* pEnemies, int level)
+{
+	char* pOffset{ GetEnemiesOffset(level) };
+	char* pLoop{ pOffset };
+	while (*pLoop != char(0))
+		pLoop += 3;
+	int size{ int(pLoop - pOffset) + 1 };
+	std::memcpy(pEnemies, pOffset, size);
+}
+
+char* BufferBdata::GetEnemiesOffset(int level) const
+{
+	int curLevel{ 0 };
+	char* pOffset{ &mpData[mLevelEnemyOffset] };
+	while (curLevel < level)
+	{
+		while (*pOffset != char(0))
+			pOffset += 3;
+		++pOffset;
+		++curLevel;
+	}
+	return pOffset;
 }

@@ -5,30 +5,29 @@ namespace ieg
 {
 	class Minigin;
 
-	enum class AvatarState
+	enum class NpcState
 	{
 		Standing,
 		Jumping,
 		Falling
 	};
 
-	class AvatarComponent final
+	class NpcComponent final
 		: public ModelComponent
 	{
 	public:
-		explicit AvatarComponent(GameObject* pGameObject, Minigin* pEngine,...);
-		~AvatarComponent();
-		AvatarComponent(const AvatarComponent&) = delete;
-		AvatarComponent(AvatarComponent&&) = delete;
-		AvatarComponent& operator=(const AvatarComponent&) = delete;
-		AvatarComponent& operator=(AvatarComponent&&) = delete;
+		explicit NpcComponent(GameObject* pGameObject, Minigin* pEngine,...);
+		~NpcComponent() = default;
+		NpcComponent(const NpcComponent&) = delete;
+		NpcComponent(NpcComponent&&) = delete;
+		NpcComponent& operator=(const NpcComponent&) = delete;
+		NpcComponent& operator=(NpcComponent&&) = delete;
 
 		void Update(const float deltaTime) override;
 		void Collision() override;
 		void Switch() override;
 
 		void SetFiring(bool isFiring);
-		void SetLevel(GameObject* pLevel);
 
 		void Fire();
 		void Jump();
@@ -36,7 +35,7 @@ namespace ieg
 		void Right();
 	private:
 		GameObject* mpGOLevel;
-		AvatarState
+		NpcState
 			mCurState,
 			mNewState;
 		int mJumpHeight;

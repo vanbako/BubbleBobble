@@ -14,9 +14,9 @@ Scene::Scene(const std::string& name)
 
 Scene::~Scene()
 {
-	delete mpInputManager;
 	for (auto pObject : mpObjects)
 		delete pObject;
+	delete mpInputManager;
 }
 
 void Scene::RemoveObject(GameObject* pGameObject)
@@ -33,14 +33,17 @@ void Scene::RemoveObject(GameObject* pGameObject)
 
 void Scene::Update(const float deltaTime)
 {
-	for (auto& pObject : mpObjects)
+	for (SceneObject*& pObject : mpObjects)
 		pObject->Update(deltaTime);
-	for (auto& pObject : mpObjects)
+	for (SceneObject*& pObject : mpObjects)
 		if (pObject->IsToBeDeleted())
+		{
 			delete pObject;
+			pObject = nullptr;
+		}
 	mpObjects.erase(
 		std::remove_if(mpObjects.begin(), mpObjects.end(),
-			[](SceneObject* sceneObject) { return sceneObject->IsToBeDeleted(); }
+			[](SceneObject* sceneObject) { return sceneObject == nullptr; }
 		),
 		mpObjects.end()
 	);
@@ -48,7 +51,7 @@ void Scene::Update(const float deltaTime)
 
 void Scene::Render() const
 {
-	for (const auto& pObject : mpObjects)
+	for (SceneObject* const& pObject : mpObjects)
 		pObject->Render();
 }
 

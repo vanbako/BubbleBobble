@@ -38,8 +38,9 @@ void IntroComponent::SetStartScene(Scene* pScene)
 	mpStartScene = pScene;
 }
 
-void IntroComponent::Start() const
+void IntroComponent::Start(int players) const
 {
+	(players);
 	if (mpStartScene != nullptr)
 	{
 		if (mStartAudio)

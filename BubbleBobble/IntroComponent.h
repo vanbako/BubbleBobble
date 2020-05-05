@@ -25,7 +25,7 @@ namespace ieg
 
 		void SetStartScene(Scene* pScene);
 
-		void Start() const;
+		void Start(int players) const;
 	private:
 		Scene* mpStartScene;
 		Audio* mpAudio;

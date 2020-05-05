@@ -2,6 +2,7 @@
 #include "InputManager.h"
 #include "InputAction.h"
 #include "Command.h"
+#include "ModelComponent.h"
 #include <SDL.h>
 
 using namespace ieg;
@@ -69,15 +70,18 @@ InputAction* InputManager::CreateInputAction()
 	return pInputAction;
 }
 
-void InputManager::DeleteInputAction(InputAction* pInputAction)
+void ieg::InputManager::DeleteInputActions(ModelComponent* pModelComponent)
 {
-	auto itInputAction{ mpInputActions.begin() };
-	while (itInputAction != mpInputActions.end())
-	{
-		if ((*itInputAction) == pInputAction)
+	for (InputAction*& pIA : mpInputActions)
+		if (pIA->GetActor() == pModelComponent)
 		{
-			mpInputActions.erase(itInputAction);
-			break;
+			delete pIA;
+			pIA = nullptr;
 		}
-	}
+	mpInputActions.erase(
+		std::remove_if(mpInputActions.begin(), mpInputActions.end(),
+			[](InputAction* pIA) { return pIA == nullptr; }
+		),
+		mpInputActions.end()
+	);
 }

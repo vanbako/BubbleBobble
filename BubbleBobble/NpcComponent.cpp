@@ -1,23 +1,21 @@
 #include "pch.h"
-#include "AvatarComponent.h"
+#include "NpcComponent.h"
 #include "LevelComponent.h"
-#include "../Engine/Scene.h"
-#include "../Engine/InputManager.h"
 #include "../Engine/GameObject.h"
 #include "../Engine/TransformModelComponent.h"
 #include "../Engine/ColliderModelComponent.h"
 
 using namespace ieg;
 
-const float AvatarComponent::mMoveHor2PixelsTime{ 0.04f };
-const float AvatarComponent::mMoveVer2PixelsTime{ 0.02f };
-const int AvatarComponent::mMaxJumpHeight{ 42 };
+const float NpcComponent::mMoveHor2PixelsTime{ 0.04f };
+const float NpcComponent::mMoveVer2PixelsTime{ 0.02f };
+const int NpcComponent::mMaxJumpHeight{ 42 };
 
-AvatarComponent::AvatarComponent(GameObject* pGameObject, Minigin* pEngine, ...)
+NpcComponent::NpcComponent(GameObject* pGameObject, Minigin* pEngine, ...)
 	: ModelComponent(pGameObject, pEngine)
 	, mpGOLevel{ nullptr }
-	, mCurState{ AvatarState::Standing }
-	, mNewState{ AvatarState::Standing }
+	, mCurState{ NpcState::Standing }
+	, mNewState{ NpcState::Standing }
 	, mCurIsFiring{ false }
 	, mNewIsFiring{ false }
 	, mIsHorMoving{ 0 }
@@ -26,23 +24,18 @@ AvatarComponent::AvatarComponent(GameObject* pGameObject, Minigin* pEngine, ...)
 	, mMoveVerDelay{ mMoveVer2PixelsTime }
 	, mJumpHeight{ 0 }
 {
-	//std::va_list args{};
-	//va_start(args, pEngine);
-	//std::va_list vaList{ va_arg(args, std::va_list) };
-	//mpGOLevel = va_arg(vaList, GameObject*);
-	//va_end(args);
+	std::va_list args{};
+	va_start(args, pEngine);
+	std::va_list vaList{ va_arg(args, std::va_list) };
+	mpGOLevel = va_arg(vaList, GameObject*);
+	va_end(args);
 }
 
-AvatarComponent::~AvatarComponent()
-{
-	mpGameObject->GetScene()->GetInputManager()->DeleteInputActions(this);
-}
-
-void AvatarComponent::Update(const float deltaTime)
+void NpcComponent::Update(const float deltaTime)
 {
 	switch (mNewState)
 	{
-	case AvatarState::Falling:
+	case NpcState::Falling:
 		if (mMoveVerDelay <= 0)
 		{
 			TransformModelComponent* pTransform{ mpGameObject->GetModelComponent<TransformModelComponent>() };
@@ -54,11 +47,11 @@ void AvatarComponent::Update(const float deltaTime)
 		}
 		mIsVerMoving = 2;
 		break;
-	case AvatarState::Jumping:
+	case NpcState::Jumping:
 		if (mJumpHeight >= mMaxJumpHeight)
 		{
 			mJumpHeight = 0;
-			mNewState = AvatarState::Falling;
+			mNewState = NpcState::Falling;
 		}
 		else
 		{
@@ -71,7 +64,7 @@ void AvatarComponent::Update(const float deltaTime)
 			mIsVerMoving = 2;
 		}
 		break;
-	case AvatarState::Standing:
+	case NpcState::Standing:
 		mpGameObject->GetModelComponent<TransformModelComponent>()->Move(0, 2);
 		break;
 	}
@@ -88,12 +81,12 @@ void AvatarComponent::Update(const float deltaTime)
 	}
 }
 
-void AvatarComponent::Collision()
+void NpcComponent::Collision()
 {
 	unsigned short collision{ mpGOLevel->GetModelComponent<LevelComponent>()->CheckAvatarCollision(
 	mpGameObject->GetModelComponent<TransformModelComponent>(),
 	mpGameObject->GetModelComponent<ColliderModelComponent>()) };
-	if (mNewState == AvatarState::Standing)
+	if (mNewState == NpcState::Standing)
 		if ((collision & 1) != 0)
 		{
 			mpGameObject->GetModelComponent<TransformModelComponent>()->ResetNewPosY();
@@ -102,67 +95,68 @@ void AvatarComponent::Collision()
 				mpGameObject->GetModelComponent<ColliderModelComponent>());
 		}
 		else
-			mNewState = AvatarState::Falling;
+			mNewState = NpcState::Falling;
 	if ((collision & 12) != 0)
 		mpGameObject->GetModelComponent<TransformModelComponent>()->ResetNewPosX();
-	if ((collision & 2) != 0 && mNewState == AvatarState::Standing)
+	if ((collision & 2) != 0 && mNewState == NpcState::Standing)
 		mpGameObject->GetModelComponent<TransformModelComponent>()->ResetNewPosY();
-	if ((collision & 1) != 0 && mNewState == AvatarState::Falling)
+	if ((collision & 1) != 0 && mNewState == NpcState::Falling)
 	{
 		mpGameObject->GetModelComponent<TransformModelComponent>()->ResetNewPosY();
-		mNewState = AvatarState::Standing;
+		mNewState = NpcState::Standing;
 	}
 }
 
-void AvatarComponent::Switch()
+void NpcComponent::Switch()
 {
 	mCurState = mNewState;
 	mCurIsFiring = mNewIsFiring;
 }
 
-void AvatarComponent::SetFiring(bool isFiring)
+void NpcComponent::SetFiring(bool isFiring)
 {
 	mNewIsFiring = isFiring;
 }
 
-void ieg::AvatarComponent::SetLevel(GameObject* pLevel)
-{
-	mpGOLevel = pLevel;
-}
-
-void AvatarComponent::Fire()
+void NpcComponent::Fire()
 {
 }
 
-void AvatarComponent::Jump()
+void NpcComponent::Jump()
 {
-	if (mCurState == AvatarState::Standing)
+	if (mCurState == NpcState::Standing)
 	{
 		mJumpHeight = 0;
-		mNewState = AvatarState::Jumping;
+		mNewState = NpcState::Jumping;
 	}
 }
 
-void AvatarComponent::Left()
+void NpcComponent::Left()
 {
-	if (mMoveHorDelay <= 0)
+	if (mNewState == NpcState::Standing)
 	{
-		TransformModelComponent* pTransform{ mpGameObject->GetModelComponent<TransformModelComponent>() };
-		pTransform->SetIsLookingLeft(true);
-		pTransform->Move(-2, 0);
-		mMoveHorDelay += mMoveHor2PixelsTime;
+		if (mMoveHorDelay <= 0)
+		{
+			TransformModelComponent* pTransform{ mpGameObject->GetModelComponent<TransformModelComponent>() };
+			pTransform->SetIsLookingLeft(true);
+			pTransform->Move(-2, 0);
+			mMoveHorDelay += mMoveHor2PixelsTime;
+		}
+		mIsHorMoving = 2;
 	}
-	mIsHorMoving = 2;
 }
 
-void AvatarComponent::Right()
+void NpcComponent::Right()
 {
-	if (mMoveHorDelay <= 0)
+	if (mNewState == NpcState::Standing)
 	{
-		TransformModelComponent* pTransform{ mpGameObject->GetModelComponent<TransformModelComponent>() };
-		pTransform->SetIsLookingLeft(false);
-		pTransform->Move(2, 0);
-		mMoveHorDelay += mMoveHor2PixelsTime;
+		if (mMoveHorDelay <= 0)
+		{
+			TransformModelComponent* pTransform{ mpGameObject->GetModelComponent<TransformModelComponent>() };
+			pTransform->SetIsLookingLeft(false);
+			pTransform->Move(2, 0);
+			mMoveHorDelay += mMoveHor2PixelsTime;
+		}
+		mIsHorMoving = 2;
 	}
-	mIsHorMoving = 2;
 }

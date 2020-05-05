@@ -5,7 +5,8 @@
 #include "BufferApic.h"
 #include "../Engine/ColorRGBA8.h"
 #include "IntroComponent.h"
-#include "StartCommand.h"
+#include "Start1Command.h"
+#include "Start2Command.h"
 #include "../Engine/GameObject.h"
 #include "../Engine/Scene.h"
 #include "../Engine/Minigin.h"
@@ -33,10 +34,17 @@ GameObject* Intro::CreateIntro(Minigin* pEngine, Scene* pScene, BufferManager* p
 	pRenderComponent->SetTransformComponent(pTransformComponent);
 	IntroComponent* pIntroComponent{ pGameObject->CreateModelComponent<IntroComponent>(pEngine) };
 	pIntroComponent->SetStartScene(pGameScene);
+
 	InputAction* pInputAction{ pScene->GetInputManager()->CreateInputAction() };
-	pInputAction->SetKeyboardKey(VK_SPACE);
+	pInputAction->SetKeyboardKey('1');
 	pInputAction->SetGamepadButtonCode(XINPUT_GAMEPAD_START);
-	pInputAction->CreateAndSetCommand<StartCommand>();
+	pInputAction->CreateAndSetCommand<Start1Command>();
+	pInputAction->SetActor(pIntroComponent);
+
+	pInputAction = pScene->GetInputManager()->CreateInputAction();
+	pInputAction->SetKeyboardKey('2');
+	pInputAction->SetGamepadButtonCode(XINPUT_GAMEPAD_START);
+	pInputAction->CreateAndSetCommand<Start1Command>();
 	pInputAction->SetActor(pIntroComponent);
 
 	BufferBubble* pBubble{ (BufferBubble*)pBufferManager->GetBuffer(EnumBuffer::Bubble) };

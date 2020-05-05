@@ -5,6 +5,7 @@
 namespace ieg
 {
 	class InputAction;
+	class ModelComponent;
 
 	class InputManager final
 	{
@@ -21,7 +22,7 @@ namespace ieg
 		bool IsGamepadButtonPressed(WORD gamepadButtonCode) const;
 		void HandleInput();
 		InputAction* CreateInputAction();
-		void DeleteInputAction(InputAction* pInputAction);
+		void DeleteInputActions(ModelComponent* pModelComponent);
 	private:
 		static XINPUT_STATE mState;
 		static BYTE mKeyboardState[256];

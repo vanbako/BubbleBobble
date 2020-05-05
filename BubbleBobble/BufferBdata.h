@@ -15,10 +15,14 @@ namespace ieg {
 
 		bool LoadFile() override;
 		void GetLayout(char* pLayout, int level);
+		void GetEnemies(char* pEnemies, int level);
 	private:
+		char* GetEnemiesOffset(int level) const;
+
 		static const int mLevelDataOffset;
 		static const int mLevelByteWidth;
 		static const int mLevelWidth;
 		static const int mLevelHeight;
+		static const int mLevelEnemyOffset;
 	};
 }

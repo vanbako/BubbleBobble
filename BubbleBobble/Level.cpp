@@ -25,7 +25,7 @@ const int Level::mBlockCount{ 800 };
 const int Level::mWidth{ 256 };
 const int Level::mHeight{ 200 };
 
-GameObject* Level::CreateLevel(int level, Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, GameObject** ppGOBubbles, HudComponent* pHudComponent)
+GameObject* Level::CreateLevel(int level, Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, GameObject** ppGOAvatars, GameObject** ppGOBubbles, HudComponent* pHudComponent)
 {
 	BufferBubble* pBubble{ (BufferBubble*)pBufferManager->GetBuffer(EnumBuffer::Bubble) };
 	BufferAblocks* pAblocks{ (BufferAblocks*)pBufferManager->GetBuffer(EnumBuffer::Ablocks) };
@@ -47,7 +47,7 @@ GameObject* Level::CreateLevel(int level, Minigin* pEngine, Scene* pScene, Buffe
 	std::memset(pLayout, 0, mBlockCount);
 	pBdata->GetLayout(pLayout, level);
 
-	pGOLevel->CreateModelComponent<LevelComponent>(pEngine, pBufferManager, pLevelPalette, pLayout, ppGOBubbles, pHudComponent);
+	pGOLevel->CreateModelComponent<LevelComponent>(pEngine, pBufferManager, pLevelPalette, pLayout, ppGOAvatars, ppGOBubbles, pHudComponent);
 
 	DrawBlocks(pAblocks, pPixels, pLevelPalette, pLayout, level);
 	DrawBigBlocks(pAblocks, pPixels, pLevelPalette, pBubble, level);

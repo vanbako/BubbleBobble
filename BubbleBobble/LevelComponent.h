@@ -30,8 +30,8 @@ namespace ieg
 		float mTest;
 		HudComponent* mpHudComponent;
 		char* mpLayout;
-		ColorRGBA8* mpLevelPalette;
+		ColorRGBA8* mpPalette;
 		GameObject** mppGOBubbles;
-		std::vector<GameObject*> mpGOAvatars;
+		GameObject** mppGOAvatars;
 	};
 }
