@@ -19,8 +19,6 @@ LevelComponent::LevelComponent(GameObject* pGameObject, Minigin* pEngine, ...)
 	, mpLayout{ new char[Level::GetBlockCount()] }
 	, mpPalette{ new ColorRGBA8[BufferBubble::GetPaletteColorCount()] }
 	, mpHudComponent{ nullptr }
-	, mppGOBubbles{ nullptr }
-	, mppGOAvatars{ nullptr }
 	, mTest{ 10.f }
 {
 	std::va_list args{};
@@ -30,17 +28,12 @@ LevelComponent::LevelComponent(GameObject* pGameObject, Minigin* pEngine, ...)
 	(pBufferManager);
 	ColorRGBA8* pLevelPalette{ va_arg(vaList, ColorRGBA8*) };
 	char* pLayout{ va_arg(vaList, char*) };
-	mppGOAvatars = va_arg(vaList, GameObject**);
-	mppGOBubbles = va_arg(vaList, GameObject**);
 	mpHudComponent = va_arg(vaList, HudComponent*);
 	va_end(args);
 
 	std::memcpy(mpPalette, pLevelPalette, sizeof(ColorRGBA8)* BufferBubble::GetPaletteColorCount());
 	std::memcpy(mpLayout, pLayout, Level::GetBlockCount());
-	mppGOAvatars[0]->GetModelComponent<AvatarComponent>()->SetLevel(mpGameObject);
-	mppGOAvatars[0]->SetIsActive(true);
-	mppGOAvatars[1]->GetModelComponent<AvatarComponent>()->SetLevel(mpGameObject);
-	mppGOAvatars[1]->SetIsActive(true);
+	mpHudComponent->InitGameObjects(mpGameObject);
 }
 
 LevelComponent::~LevelComponent()
@@ -52,13 +45,11 @@ LevelComponent::~LevelComponent()
 void LevelComponent::Update(const float deltaTime)
 {
 	(deltaTime);
+	// Temporary end level after x seconds
 	mTest -= deltaTime;
 	if (mTest <= 0.f)
-	{
-		mpHudComponent->EndLevel();
-		mppGOAvatars[0]->SetIsActive(false);
-		mppGOAvatars[1]->SetIsActive(false);
-	}
+		mpHudComponent->NextLevel();
+	// End temporary
 }
 
 unsigned short LevelComponent::CheckAvatarCollision(TransformModelComponent* pTransform, ColliderModelComponent* pCollider)

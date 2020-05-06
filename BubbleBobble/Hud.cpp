@@ -33,10 +33,10 @@ GameObject* Hud::CreateHud(Minigin* pEngine, Scene* pScene, BufferManager* pBuff
 	BufferAsprites* pAsprites{ (BufferAsprites*)pBufferManager->GetBuffer(EnumBuffer::Asprites) };
 	BufferAblocks* pAblocks{ (BufferAblocks*)pBufferManager->GetBuffer(EnumBuffer::Ablocks) };
 
-	GameObject* pGameObject{ pScene->CreateObject<GameObject>() };
-	TransformModelComponent* pTransformComponent{ pGameObject->CreateModelComponent<TransformModelComponent>(pEngine) };
+	GameObject* pGOHud{ pScene->CreateObject<GameObject>() };
+	TransformModelComponent* pTransformComponent{ pGOHud->CreateModelComponent<TransformModelComponent>(pEngine) };
 	pTransformComponent->SetPos(mPos);
-	RenderViewComponent* pRenderComponent{ pGameObject->CreateViewComponent<RenderViewComponent>(pEngine) };
+	RenderViewComponent* pRenderComponent{ pGOHud->CreateViewComponent<RenderViewComponent>(pEngine) };
 	pRenderComponent->SetTransformComponent(pTransformComponent);
 
 	ColorRGBA8* pPixels{ new ColorRGBA8[mWidth * mHeight] };
@@ -44,7 +44,7 @@ GameObject* Hud::CreateHud(Minigin* pEngine, Scene* pScene, BufferManager* pBuff
 
 	pBubble->GetLevelColors(pPalette, 0);
 
-	pGameObject->CreateModelComponent<HudComponent>(pEngine, pBufferManager, pPalette);
+	pGOHud->CreateModelComponent<HudComponent>(pEngine, pBufferManager, pPalette);
 
 	ColorRGBA8* pSprite{ new ColorRGBA8[ BufferAsprites::GetWidth() * BufferAsprites::GetHeight() * 2] };
 	pAsprites->GetSprites(pSprite, 1, Sprite::HudBUB, pPalette);
@@ -81,7 +81,8 @@ GameObject* Hud::CreateHud(Minigin* pEngine, Scene* pScene, BufferManager* pBuff
 	pRenderComponent->SetTexture(pSDLTexture);
 	delete[] pPalette;
 	delete[] pPixels;
-	return pGameObject;
+	pGOHud->SetIsActive(true);
+	return pGOHud;
 }
 
 void Hud::DrawSprite(ColorRGBA8* pSprite, ColorRGBA8* pPixels, int offset, int loc)

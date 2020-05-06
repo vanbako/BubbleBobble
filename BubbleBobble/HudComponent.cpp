@@ -4,6 +4,7 @@
 #include "BufferBubble.h"
 #include "Level.h"
 #include "Avatar.h"
+#include "AvatarComponent.h"
 #include "Bubble.h"
 #include "../Engine/ColorRGBA8.h"
 #include "../Engine/Minigin.h"
@@ -11,16 +12,20 @@
 #include "../Engine/Scene.h"
 #include "../Engine/ServiceLocator.h"
 #include "../Engine/Audio.h"
+#include "../Engine/TransformModelComponent.h"
 
 using namespace ieg;
 
-const int HudComponent::mpAvatarMax{ 2 };
 const int HudComponent::mpBubblesPerAvatarMax{ 8 };
+const Vec2<int> HudComponent::mpAvatarInitialPos[mpAvatarMax]{
+	Vec2<int>{ 24, 176 },
+	Vec2<int>{ 208, 176 }
+};
 
-HudComponent::HudComponent(GameObject* pGameObject, Minigin* pEngine,...)
+HudComponent::HudComponent(GameObject* pGameObject, Minigin* pEngine, ...)
 	: ModelComponent(pGameObject, pEngine)
-	, mppGOAvatars{ new GameObject*[mpAvatarMax] }
-	, mppGOBubbles{ new GameObject*[mpAvatarMax * mpBubblesPerAvatarMax] }
+	, mppGOAvatars{ new GameObject * [mpAvatarMax] }
+	, mppGOBubbles{ new GameObject * [mpAvatarMax * mpBubblesPerAvatarMax] }
 	, mpAudio{ pEngine->GetServiceLocator()->GetAudio() }
 	, mSoundId{ 0 }
 	, mIsSoundPlaying{ false }
@@ -34,12 +39,9 @@ HudComponent::HudComponent(GameObject* pGameObject, Minigin* pEngine,...)
 	ColorRGBA8* pPalette{ va_arg(vaList, ColorRGBA8*) };
 	va_end(args);
 	Scene* pScene{ mpGameObject->GetScene() };
-	mppGOAvatars[0] = Avatar::CreateAvatar(pEngine, pScene, mpBufferManager, pPalette, AvatarType::Bub);
-	mppGOAvatars[0]->SetIsActive(false);
-	mppGOAvatars[1] = Avatar::CreateAvatar(pEngine, pScene, mpBufferManager, pPalette, AvatarType::Bob);
-	mppGOAvatars[1]->SetIsActive(false);
-	CreateBubbles(pEngine, pScene, mpBufferManager, pPalette);
-	mpGOLevel = Level::CreateLevel(mLevel, pEngine, pScene, mpBufferManager, mppGOAvatars, mppGOBubbles , this);
+	CreateAvatars(pEngine, pScene, pPalette);
+	CreateBubbles(pEngine, pScene, pPalette);
+	mpGOLevel = Level::CreateLevel(mLevel, pEngine, pScene, mpBufferManager, this);
 	mSoundId = mpAudio->AddSound("../Data/Audio/gameloop.wav", true);
 }
 
@@ -61,24 +63,66 @@ void HudComponent::Update(const float deltaTime)
 	if (mEndLevel)
 	{
 		mpGameObject->GetScene();
-		mpGOLevel = Level::CreateLevel(mLevel, mpEngine, mpGameObject->GetScene(), mpBufferManager, mppGOAvatars, mppGOBubbles, this);
+		mpGOLevel = Level::CreateLevel(mLevel, mpEngine, mpGameObject->GetScene(), mpBufferManager, this);
 		mEndLevel = false;
 	}
 }
 
-void HudComponent::EndLevel()
+void HudComponent::InitGameObjects(GameObject* pGOLevel)
 {
+	for (int avatar{ 0 }; avatar < mpAvatarMax; ++avatar)
+	{
+		mppGOAvatars[avatar]->GetModelComponent<AvatarComponent>()->SetLevel(pGOLevel);
+		mppGOAvatars[avatar]->GetModelComponent<TransformModelComponent>()->SetPos(mpAvatarInitialPos[avatar]);
+		mppGOAvatars[avatar]->GetModelComponent<TransformModelComponent>()->Switch();
+		mppGOAvatars[avatar]->SetIsActive(true);
+	}
+	for (int bubble{ 0 }; bubble < mpAvatarMax * mpBubblesPerAvatarMax; ++bubble)
+	{
+		//mppGOBubbles[bubble]->GetModelComponent<BubbleComponent>()->SetLevel(pGOLevel);
+		mppGOBubbles[bubble]->SetIsActive(false);
+	}
+}
+
+GameObject* HudComponent::GetAvatar(int avatar)
+{
+	return mppGOAvatars[avatar];
+}
+
+GameObject** HudComponent::GetBubbles(int avatar)
+{
+	return &mppGOBubbles[avatar * mpBubblesPerAvatarMax];
+}
+
+GameObject* HudComponent::GetLevel()
+{
+	return mpGOLevel;
+}
+
+void HudComponent::NextLevel()
+{
+	for (int avatar{ 0 }; avatar < mpAvatarMax; ++avatar)
+		mppGOAvatars[avatar]->SetIsActive(false);
 	mEndLevel = true;
 	mLevel += 1;
 	mpGOLevel->SetIsToBeDeleted(true);
 }
 
-void HudComponent::CreateBubbles(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, ColorRGBA8* pPalette)
+void HudComponent::CreateAvatars(Minigin* pEngine, Scene* pScene, ColorRGBA8* pPalette)
 {
-	mppGOBubbles[0] = Bubble::CreateBubble(pEngine, pScene, pBufferManager, pPalette, BubbleType::Bub);
-	for (int bubble{ 1 }; bubble < mpBubblesPerAvatarMax; ++bubble)
-		mppGOBubbles[bubble] = Bubble::CopyBubble(pEngine, mppGOBubbles[0]);
-	mppGOBubbles[mpBubblesPerAvatarMax] = Bubble::CreateBubble(pEngine, pScene, pBufferManager, pPalette, BubbleType::Bob);
-	for (int bubble{ 1 }; bubble < mpBubblesPerAvatarMax; ++bubble)
-		mppGOBubbles[bubble + mpBubblesPerAvatarMax] = Bubble::CopyBubble(pEngine, mppGOBubbles[mpBubblesPerAvatarMax]);
+	for (int avatar{ 0 }; avatar < mpAvatarMax; ++avatar)
+	{
+		mppGOAvatars[avatar] = Avatar::CreateAvatar(pEngine, pScene, mpBufferManager, pPalette, AvatarType(avatar));
+		mppGOAvatars[avatar]->SetIsActive(false);
+	}
+}
+
+void HudComponent::CreateBubbles(Minigin* pEngine, Scene* pScene, ColorRGBA8* pPalette)
+{
+	for (int avatar{ 0 }; avatar < mpAvatarMax; ++avatar)
+	{
+		mppGOBubbles[avatar * mpBubblesPerAvatarMax] = Bubble::CreateBubble(pEngine, pScene, mpBufferManager, pPalette, BubbleType(avatar));
+		for (int bubble{ 1 }; bubble < mpBubblesPerAvatarMax; ++bubble)
+			mppGOBubbles[avatar * mpBubblesPerAvatarMax + bubble] = Bubble::CopyBubble(pEngine, mppGOBubbles[avatar * mpBubblesPerAvatarMax]);
+	}
 }

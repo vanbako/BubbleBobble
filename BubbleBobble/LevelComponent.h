@@ -31,7 +31,5 @@ namespace ieg
 		HudComponent* mpHudComponent;
 		char* mpLayout;
 		ColorRGBA8* mpPalette;
-		GameObject** mppGOBubbles;
-		GameObject** mppGOAvatars;
 	};
 }

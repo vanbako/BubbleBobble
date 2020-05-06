@@ -25,7 +25,14 @@ namespace ieg
 		void Collision() override {};
 		void Switch() override {};
 
-		void EndLevel();
+		void InitGameObjects(GameObject* pGOLevel);
+		GameObject* GetAvatar(int avatar);
+		GameObject** GetBubbles(int avatar);
+		GameObject* GetLevel();
+		void NextLevel();
+
+		static const int GetAvatarMax() { return mpAvatarMax; };
+		static const int GetBubblesPerAvatarMax() { return mpBubblesPerAvatarMax; };
 	private:
 		BufferManager* mpBufferManager;
 		int mLevel;
@@ -37,9 +44,11 @@ namespace ieg
 		bool mIsSoundPlaying;
 		bool mEndLevel;
 
-		void CreateBubbles(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, ColorRGBA8* pPalette);
+		void CreateAvatars(Minigin* pEngine, Scene* pScene, ColorRGBA8* pPalette);
+		void CreateBubbles(Minigin* pEngine, Scene* pScene, ColorRGBA8* pPalette);
 
-		static const int mpAvatarMax;
+		static const int mpAvatarMax{ 2 };
 		static const int mpBubblesPerAvatarMax;
+		static const Vec2<int> mpAvatarInitialPos[mpAvatarMax];
 	};
 }

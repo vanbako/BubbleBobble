@@ -114,7 +114,7 @@ Texture2D* RenderViewComponent::ReplaceTexture(SDL_Texture* pSDLTexture)
 	return mpTexture;
 }
 
-void ieg::RenderViewComponent::SetIsSprite(bool isSprite)
+void RenderViewComponent::SetIsSprite(bool isSprite)
 {
 	mIsSprite = isSprite;
 }

@@ -57,7 +57,7 @@ GameObject* Bubble::CreateBubble(Minigin* pEngine, Scene* pScene, BufferManager*
 	return pGOBubble;
 }
 
-GameObject* ieg::Bubble::CopyBubble(Minigin* pEngine, GameObject* pGOBubble)
+GameObject* Bubble::CopyBubble(Minigin* pEngine, GameObject* pGOBubble)
 {
 	GameObject* pGOBubbleCopy{ pGOBubble->GetScene()->CreateObject<GameObject>() };
 	pGOBubbleCopy->SetIsActive(false);

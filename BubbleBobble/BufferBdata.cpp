@@ -57,7 +57,7 @@ void BufferBdata::GetLayout(char* pLayout, int level)
 	}
 }
 
-void ieg::BufferBdata::GetEnemies(char* pEnemies, int level)
+void BufferBdata::GetEnemies(char* pEnemies, int level)
 {
 	char* pOffset{ GetEnemiesOffset(level) };
 	char* pLoop{ pOffset };

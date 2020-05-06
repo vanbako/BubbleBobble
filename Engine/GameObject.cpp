@@ -7,7 +7,7 @@ GameObject::GameObject(Scene* pScene)
 	: SceneObject(pScene)
 	, mpModelComponents{}
 	, mpViewComponents{}
-	, mIsActive{ true }
+	, mIsActive{ false }
 {
 }
 

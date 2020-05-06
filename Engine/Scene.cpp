@@ -51,8 +51,8 @@ void Scene::Update(const float deltaTime)
 
 void Scene::Render() const
 {
-	for (SceneObject* const& pObject : mpObjects)
-		pObject->Render();
+	for (auto pObject{ mpObjects.crbegin() }; pObject != mpObjects.crend(); ++pObject)
+		(*pObject)->Render();
 }
 
 InputManager* Scene::GetInputManager()

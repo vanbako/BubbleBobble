@@ -70,7 +70,7 @@ InputAction* InputManager::CreateInputAction()
 	return pInputAction;
 }
 
-void ieg::InputManager::DeleteInputActions(ModelComponent* pModelComponent)
+void InputManager::DeleteInputActions(ModelComponent* pModelComponent)
 {
 	for (InputAction*& pIA : mpInputActions)
 		if (pIA->GetActor() == pModelComponent)

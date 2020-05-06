@@ -27,12 +27,12 @@ const int Intro::mHeight{ 200 };
 
 GameObject* Intro::CreateIntro(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, Scene* pGameScene)
 {
-	GameObject* pGameObject = pScene->CreateObject<GameObject>();
-	TransformModelComponent* pTransformComponent{ pGameObject->CreateModelComponent<TransformModelComponent>(pEngine) };
+	GameObject* pGOIntro = pScene->CreateObject<GameObject>();
+	TransformModelComponent* pTransformComponent{ pGOIntro->CreateModelComponent<TransformModelComponent>(pEngine) };
 	pTransformComponent->SetPos(0, 0);
-	RenderViewComponent* pRenderComponent{ pGameObject->CreateViewComponent<RenderViewComponent>(pEngine) };
+	RenderViewComponent* pRenderComponent{ pGOIntro->CreateViewComponent<RenderViewComponent>(pEngine) };
 	pRenderComponent->SetTransformComponent(pTransformComponent);
-	IntroComponent* pIntroComponent{ pGameObject->CreateModelComponent<IntroComponent>(pEngine) };
+	IntroComponent* pIntroComponent{ pGOIntro->CreateModelComponent<IntroComponent>(pEngine) };
 	pIntroComponent->SetStartScene(pGameScene);
 
 	InputAction* pInputAction{ pScene->GetInputManager()->CreateInputAction() };
@@ -70,5 +70,6 @@ GameObject* Intro::CreateIntro(Minigin* pEngine, Scene* pScene, BufferManager* p
 	delete[] pPixels;
 	delete[] pColorPalette; 
 
-	return pGameObject;
+	pGOIntro->SetIsActive(true);
+	return pGOIntro;
 }

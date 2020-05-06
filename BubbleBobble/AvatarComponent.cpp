@@ -125,7 +125,7 @@ void AvatarComponent::SetFiring(bool isFiring)
 	mNewIsFiring = isFiring;
 }
 
-void ieg::AvatarComponent::SetLevel(GameObject* pLevel)
+void AvatarComponent::SetLevel(GameObject* pLevel)
 {
 	mpGOLevel = pLevel;
 }

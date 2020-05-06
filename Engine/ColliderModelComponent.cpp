@@ -17,12 +17,12 @@ ColliderModelComponent::ColliderModelComponent(GameObject* pGameObject, Minigin*
 	va_end(args);
 }
 
-const Vec2<int>& ieg::ColliderModelComponent::GetRelPos()
+const Vec2<int>& ColliderModelComponent::GetRelPos()
 {
 	return mRelPos;
 }
 
-const Vec2<int>& ieg::ColliderModelComponent::GetSize()
+const Vec2<int>& ColliderModelComponent::GetSize()
 {
 	return mSize;
 }

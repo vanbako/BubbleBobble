@@ -50,12 +50,12 @@ GameObject* Start::CreateStart(Minigin* pEngine, Scene* pScene, BufferManager* p
 
 GameObject* Start::CreateBackground(Minigin* pEngine, Scene* pScene, Scene* pGameScene, BufferAblocks* pAblocks, ColorRGBA8* pPalette)
 {
-	GameObject* pGameObject{ pScene->CreateObject<GameObject>() };
-	TransformModelComponent* pTransformComponent{ pGameObject->CreateModelComponent<TransformModelComponent>(pEngine) };
+	GameObject* pGOStart{ pScene->CreateObject<GameObject>() };
+	TransformModelComponent* pTransformComponent{ pGOStart->CreateModelComponent<TransformModelComponent>(pEngine) };
 	pTransformComponent->SetPos(0, 0);
-	RenderViewComponent* pRenderComponent{ pGameObject->CreateViewComponent<RenderViewComponent>(pEngine) };
+	RenderViewComponent* pRenderComponent{ pGOStart->CreateViewComponent<RenderViewComponent>(pEngine) };
 	pRenderComponent->SetTransformComponent(pTransformComponent);
-	StartComponent* pStartComponent{ pGameObject->CreateModelComponent<StartComponent>(pEngine) };
+	StartComponent* pStartComponent{ pGOStart->CreateModelComponent<StartComponent>(pEngine) };
 	pStartComponent->SetStartScene(pGameScene);
 
 	ColorRGBA8* pPixels{ new ColorRGBA8[mWidth * mHeight] };
@@ -77,7 +77,9 @@ GameObject* Start::CreateBackground(Minigin* pEngine, Scene* pScene, Scene* pGam
 	SDL_Texture* pSDLTexture{ SDL_CreateTextureFromSurface(pEngine->GetRenderer()->GetSDLRenderer(), pSurface) };
 	pRenderComponent->SetTexture(pSDLTexture);
 	delete[] pPixels;
-	return pGameObject;
+
+	pGOStart->SetIsActive(true);
+	return pGOStart;
 }
 
 void Start::CreateBubBobAnim(Sprite sprite, int x, Minigin* pEngine, Scene* pScene, BufferAsprites* pAsprites, ColorRGBA8* pPalette)
