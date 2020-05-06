@@ -1,18 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="Input">
       <UniqueIdentifier>{ee13e25a-f365-4509-a9ac-e58456837693}</UniqueIdentifier>
     </Filter>
@@ -37,9 +25,6 @@
     <Filter Include="ServiceLocator\Log">
       <UniqueIdentifier>{a6e87cd6-595a-4fc7-912f-aa82d07ddec5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Fragment">
-      <UniqueIdentifier>{070b57c7-6931-4557-ab4d-d1ea31750559}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Object">
       <UniqueIdentifier>{94b062b4-6dd2-4f73-b85e-d889c2204a65}</UniqueIdentifier>
     </Filter>
@@ -52,11 +37,20 @@
     <Filter Include="Object\State">
       <UniqueIdentifier>{a0ba7cc4-dc07-4f95-98de-2980a99ef5d4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Precompiled Header">
+      <UniqueIdentifier>{9f4f4cca-3ef3-425d-aa17-528c83b7d760}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Color">
+      <UniqueIdentifier>{070b57c7-6931-4557-ab4d-d1ea31750559}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Command">
+      <UniqueIdentifier>{1fb1b639-b1d0-4e89-90d6-63a5017086f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Vector">
+      <UniqueIdentifier>{c8ace604-df54-4c75-b1ee-c9c781659dc6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="pch.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Scene.h">
       <Filter>Scene</Filter>
     </ClInclude>
@@ -65,9 +59,6 @@
     </ClInclude>
     <ClInclude Include="SceneObject.h">
       <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Command.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="InputAction.h">
       <Filter>Input</Filter>
@@ -106,7 +97,7 @@
       <Filter>ServiceLocator\Audio</Filter>
     </ClInclude>
     <ClInclude Include="ColorRGBA8.h">
-      <Filter>Fragment</Filter>
+      <Filter>Color</Filter>
     </ClInclude>
     <ClInclude Include="ModelComponent.h">
       <Filter>Object\ModelComponent</Filter>
@@ -132,17 +123,20 @@
     <ClInclude Include="State.h">
       <Filter>Object\State</Filter>
     </ClInclude>
-    <ClInclude Include="Vec2.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ColliderModelComponent.h">
       <Filter>Object\ModelComponent</Filter>
     </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>Precompiled Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Command.h">
+      <Filter>Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Vec2.h">
+      <Filter>Vector</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="pch.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Scene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
@@ -180,7 +174,7 @@
       <Filter>ServiceLocator\Audio</Filter>
     </ClCompile>
     <ClCompile Include="ColorRGBA8.cpp">
-      <Filter>Fragment</Filter>
+      <Filter>Color</Filter>
     </ClCompile>
     <ClCompile Include="NullAudio.cpp">
       <Filter>ServiceLocator\Audio</Filter>
@@ -211,6 +205,9 @@
     </ClCompile>
     <ClCompile Include="ColliderModelComponent.cpp">
       <Filter>Object\ModelComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>Precompiled Header</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
