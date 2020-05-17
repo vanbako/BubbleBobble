@@ -52,6 +52,11 @@ void LevelComponent::Update(const float deltaTime)
 	// End temporary
 }
 
+void LevelComponent::FireBubble(const Vec2<int>& pos)
+{
+	mpHudComponent->FireBubble(pos);
+}
+
 unsigned short LevelComponent::CheckAvatarCollision(TransformModelComponent* pTransform, ColliderModelComponent* pCollider)
 {
 	if (pTransform == nullptr || pCollider == nullptr) return false;

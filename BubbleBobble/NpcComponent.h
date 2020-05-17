@@ -28,6 +28,7 @@ namespace ieg
 		void Switch() override;
 
 		void SetFiring(bool isFiring);
+		void SetLevel(GameObject* pLevel);
 
 		void Fire();
 		void Jump();

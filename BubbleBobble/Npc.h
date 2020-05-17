@@ -1,4 +1,5 @@
 #pragma once
+#include "BufferAsprites.h"
 
 namespace ieg
 {
@@ -8,6 +9,12 @@ namespace ieg
 	class BufferManager;
 	class ColorRGBA8;
 	class Texture2D;
+
+	struct NpcData
+	{
+		Sprite sprite;
+		bool isLeftRightDiff;
+	};
 
 	enum class NpcType
 	{
@@ -32,11 +39,13 @@ namespace ieg
 		Npc& operator=(const Npc&) = delete;
 		Npc& operator=(Npc&&) = delete;
 
-		static GameObject* CreateNpc(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, GameObject* pLevel, ColorRGBA8* pPalette, NpcType npcType, int col, int row);
+		static GameObject* CreateNpc(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, ColorRGBA8* pPalette);
+		static GameObject* CopyNpc(Minigin* pEngine, GameObject* pGONpc);
 	private:
 		static const int mWidth;
 		static const int mHeight;
 		static const int mCount;
+		static const NpcData mNpcData[];
 
 		static void DrawSprite(ColorRGBA8* pSprite, ColorRGBA8* pPixels, int offset, int loc);
 	};

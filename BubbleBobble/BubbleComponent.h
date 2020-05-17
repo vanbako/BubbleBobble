@@ -5,53 +5,30 @@ namespace ieg
 {
 	class Minigin;
 
-	enum class AvatarState
-	{
-		Standing,
-		Jumping,
-		Falling
-	};
-
-	class AvatarComponent final
+	class BubbleComponent final
 		: public ModelComponent
 	{
 	public:
-		explicit AvatarComponent(GameObject* pGameObject, Minigin* pEngine,...);
-		~AvatarComponent();
-		AvatarComponent(const AvatarComponent&) = delete;
-		AvatarComponent(AvatarComponent&&) = delete;
-		AvatarComponent& operator=(const AvatarComponent&) = delete;
-		AvatarComponent& operator=(AvatarComponent&&) = delete;
+		explicit BubbleComponent(GameObject* pGameObject, Minigin* pEngine,...);
+		~BubbleComponent() = default;
+		BubbleComponent(const BubbleComponent&) = delete;
+		BubbleComponent(BubbleComponent&&) = delete;
+		BubbleComponent& operator=(const BubbleComponent&) = delete;
+		BubbleComponent& operator=(BubbleComponent&&) = delete;
 
 		void Update(const float deltaTime) override;
 		void Collision() override;
-		void Switch() override;
+		void Switch() override {};
 
-		void SetFiring(bool isFiring);
 		void SetLevel(GameObject* pLevel);
 
-		void Fire();
-		void Jump();
-		void Left();
-		void Right();
 	private:
 		GameObject* mpGOLevel;
-		AvatarState
-			mCurState,
-			mNewState;
-		int mJumpHeight;
-		bool
-			mCurIsFiring,
-			mNewIsFiring;
-		int
-			mIsHorMoving,
-			mIsVerMoving;
 		float
 			mMoveHorDelay,
 			mMoveVerDelay;
 
 		static const float mMoveHor2PixelsTime;
 		static const float mMoveVer2PixelsTime;
-		static const int mMaxJumpHeight;
 	};
 }

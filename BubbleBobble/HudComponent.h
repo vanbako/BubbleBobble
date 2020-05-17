@@ -30,6 +30,7 @@ namespace ieg
 		GameObject** GetBubbles(int avatar);
 		GameObject* GetLevel();
 		void NextLevel();
+		void FireBubble(const Vec2<int>& pos);
 
 		static const int GetAvatarMax() { return mpAvatarMax; };
 		static const int GetBubblesPerAvatarMax() { return mpBubblesPerAvatarMax; };
@@ -38,6 +39,7 @@ namespace ieg
 		int mLevel;
 		GameObject** mppGOAvatars;
 		GameObject** mppGOBubbles;
+		GameObject** mppGONpcs;
 		GameObject* mpGOLevel;
 		Audio* mpAudio;
 		int mSoundId;
@@ -46,9 +48,11 @@ namespace ieg
 
 		void CreateAvatars(Minigin* pEngine, Scene* pScene, ColorRGBA8* pPalette);
 		void CreateBubbles(Minigin* pEngine, Scene* pScene, ColorRGBA8* pPalette);
+		void CreateNpcs(Minigin* pEngine, Scene* pScene, ColorRGBA8* pPalette);
 
 		static const int mpAvatarMax{ 2 };
 		static const int mpBubblesPerAvatarMax;
 		static const Vec2<int> mpAvatarInitialPos[mpAvatarMax];
+		static const int mpNpcMax;
 	};
 }

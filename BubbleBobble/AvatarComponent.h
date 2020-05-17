@@ -47,9 +47,11 @@ namespace ieg
 			mIsHorMoving,
 			mIsVerMoving;
 		float
+			mFireDelay,
 			mMoveHorDelay,
 			mMoveVerDelay;
 
+		static const float mFireWaitTime;
 		static const float mMoveHor2PixelsTime;
 		static const float mMoveVer2PixelsTime;
 		static const int mMaxJumpHeight;

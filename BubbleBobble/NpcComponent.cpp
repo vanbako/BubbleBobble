@@ -24,11 +24,6 @@ NpcComponent::NpcComponent(GameObject* pGameObject, Minigin* pEngine, ...)
 	, mMoveVerDelay{ mMoveVer2PixelsTime }
 	, mJumpHeight{ 0 }
 {
-	std::va_list args{};
-	va_start(args, pEngine);
-	std::va_list vaList{ va_arg(args, std::va_list) };
-	mpGOLevel = va_arg(vaList, GameObject*);
-	va_end(args);
 }
 
 void NpcComponent::Update(const float deltaTime)
@@ -116,6 +111,11 @@ void NpcComponent::Switch()
 void NpcComponent::SetFiring(bool isFiring)
 {
 	mNewIsFiring = isFiring;
+}
+
+void ieg::NpcComponent::SetLevel(GameObject* pLevel)
+{
+	mpGOLevel = pLevel;
 }
 
 void NpcComponent::Fire()

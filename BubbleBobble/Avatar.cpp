@@ -6,6 +6,7 @@
 #include "LeftCommand.h"
 #include "RightCommand.h"
 #include "JumpCommand.h"
+#include "FireCommand.h"
 #include "../Engine/Minigin.h"
 #include "../Engine/Scene.h"
 #include "../Engine/Renderer.h"
@@ -62,6 +63,14 @@ GameObject* Avatar::CreateAvatar(Minigin* pEngine, Scene* pScene, BufferManager*
 	else
 		pInputAction->SetGamepadButtonCode(XINPUT_GAMEPAD_DPAD_UP);
 	pInputAction->CreateAndSetCommand<JumpCommand>();
+	pInputAction->SetActor(pAvatarComponent);
+
+	pInputAction = pScene->GetInputManager()->CreateInputAction();
+	if (avatarType == AvatarType::Bub)
+		pInputAction->SetKeyboardKey(VK_SPACE);
+	else
+		pInputAction->SetGamepadButtonCode(XINPUT_GAMEPAD_A);
+	pInputAction->CreateAndSetCommand<FireCommand>();
 	pInputAction->SetActor(pAvatarComponent);
 
 	ColorRGBA8* pPixels{ new ColorRGBA8[mCount * mWidth * mHeight] };

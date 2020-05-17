@@ -22,54 +22,45 @@ using namespace ieg;
 const int Npc::mWidth{ 32 };
 const int Npc::mHeight{ 16 };
 const int Npc::mCount{ 16 };
+const NpcData Npc::mNpcData[]{
+	NpcData{ Sprite::ZenChan, true },
+	NpcData{ Sprite::Hidegons, true },
+	NpcData{ Sprite::Banebou, true },
+	NpcData{ Sprite::PulPul, false },
+	NpcData{ Sprite::Monsta, true },
+	NpcData{ Sprite::Drunk, true },
+	NpcData{ Sprite::Maita, true },
+	NpcData{ Sprite::Invader, false }
+};
 
-GameObject* Npc::CreateNpc(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, GameObject* pLevel, ColorRGBA8* pPalette, NpcType npcType, int col, int row)
+GameObject* Npc::CreateNpc(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, ColorRGBA8* pPalette)
 {
 	BufferAsprites* pAsprites{ (BufferAsprites*)pBufferManager->GetBuffer(EnumBuffer::Asprites) };
 
 	GameObject* pGONpc{ pScene->CreateObject<GameObject>() };
 	TransformModelComponent* pTransformComponent{ pGONpc->CreateModelComponent<TransformModelComponent>(pEngine) };
-	pTransformComponent->SetPos(col, row);
-	pTransformComponent->Switch();
 	RenderViewComponent* pRenderComponent{ pGONpc->CreateViewComponent<RenderViewComponent>(pEngine) };
 	pRenderComponent->SetTransformComponent(pTransformComponent);
 	pRenderComponent->SetIsSprite(true);
-	NpcComponent* pNpcComponent{ pGONpc->CreateModelComponent<NpcComponent>(pEngine, pLevel) };
+	NpcComponent* pNpcComponent{ pGONpc->CreateModelComponent<NpcComponent>(pEngine) };
 	(pNpcComponent);
 	pGONpc->CreateModelComponent<ColliderModelComponent>(pEngine, Vec2<int>{ 0, 8 }, Vec2<int>{ 15, 7 });
 
-	ColorRGBA8* pPixels{ new ColorRGBA8[mCount * mWidth * mHeight] };
+	ColorRGBA8* pPixels{ new ColorRGBA8[int(NpcType::Count) * mCount * mWidth * mHeight] };
 
 	ColorRGBA8* pSprite{ new ColorRGBA8[mCount * BufferAsprites::GetWidth() * BufferAsprites::GetHeight()] };
-	switch (npcType)
+	int spriteCount{ 16 };
+	for (int npcType{ 0 }; npcType < int(NpcType::Count); ++npcType)
 	{
-	case NpcType::ZenChan:
-		pAsprites->GetSprites(pSprite, 16, Sprite::ZenChan, pPalette);
-		break;
-	case NpcType::Hidegons:
-		pAsprites->GetSprites(pSprite, 16, Sprite::Hidegons, pPalette);
-		break;
-	case NpcType::Banebou:
-		pAsprites->GetSprites(pSprite, 16, Sprite::Banebou, pPalette);
-		break;
-	case NpcType::PulPul:
-		pAsprites->GetSprites(pSprite, 8, Sprite::PulPul, pPalette);
-		break;
-	case NpcType::Monsta:
-		pAsprites->GetSprites(pSprite, 16, Sprite::Monsta, pPalette);
-		break;
-	case NpcType::Drunk:
-		pAsprites->GetSprites(pSprite, 16, Sprite::Drunk, pPalette);
-		break;
-	case NpcType::Maita:
-		pAsprites->GetSprites(pSprite, 16, Sprite::Maita, pPalette);
-		break;
-	case NpcType::Invader:
-		pAsprites->GetSprites(pSprite, 8, Sprite::Invader, pPalette);
-		break;
+		if (mNpcData[npcType].isLeftRightDiff)
+			spriteCount = 16;
+		else
+			spriteCount = 8;
+		std::memset(pSprite, 0, size_t(mCount) * size_t(BufferAsprites::GetWidth()) * size_t(BufferAsprites::GetHeight()) * sizeof(ColorRGBA8));
+			pAsprites->GetSprites(pSprite, spriteCount, mNpcData[npcType].sprite, pPalette);
+		for (int sprite{ 0 }; sprite < spriteCount; ++sprite)
+			DrawSprite(pSprite, pPixels, sprite, npcType * mCount + sprite);
 	}
-	for (int sprite{ 0 }; sprite < mCount; ++sprite)
-		DrawSprite(pSprite, pPixels, sprite, sprite);
 	delete[] pSprite;
 
 	SDL_Surface* pSurface{
@@ -87,6 +78,20 @@ GameObject* Npc::CreateNpc(Minigin* pEngine, Scene* pScene, BufferManager* pBuff
 
 	delete[] pPixels;
 	return pGONpc;
+}
+
+GameObject* Npc::CopyNpc(Minigin* pEngine, GameObject* pGONpc)
+{
+	GameObject* pGONpcCopy{ pGONpc->GetScene()->CreateObject<GameObject>() };
+	TransformModelComponent* pTransformComponent{ pGONpcCopy->CreateModelComponent<TransformModelComponent>(pEngine) };
+	RenderViewComponent* pRenderComponent{ pGONpcCopy->CreateViewComponent<RenderViewComponent>(pEngine) };
+	pRenderComponent->SetTransformComponent(pTransformComponent);
+	pRenderComponent->SetIsSprite(true);
+	pRenderComponent->SetTexture(pGONpc->GetViewComponent<RenderViewComponent>()->GetTexture());
+	pRenderComponent->SetSize(mWidth, mHeight);
+	pGONpcCopy->CreateModelComponent<NpcComponent>(pEngine);
+	pGONpcCopy->CreateModelComponent<ColliderModelComponent>(pEngine, Vec2<int>{ 0, 8 }, Vec2<int>{ 15, 7 });
+	return pGONpcCopy;
 }
 
 void Npc::DrawSprite(ColorRGBA8* pSprite, ColorRGBA8* pPixels, int offset, int loc)

@@ -9,6 +9,7 @@
 
 using namespace ieg;
 
+const float AvatarComponent::mFireWaitTime{ 0.4f };
 const float AvatarComponent::mMoveHor2PixelsTime{ 0.04f };
 const float AvatarComponent::mMoveVer2PixelsTime{ 0.02f };
 const int AvatarComponent::mMaxJumpHeight{ 42 };
@@ -22,15 +23,11 @@ AvatarComponent::AvatarComponent(GameObject* pGameObject, Minigin* pEngine, ...)
 	, mNewIsFiring{ false }
 	, mIsHorMoving{ 0 }
 	, mIsVerMoving{ 0 }
+	, mFireDelay{ mFireWaitTime }
 	, mMoveHorDelay{ mMoveHor2PixelsTime }
 	, mMoveVerDelay{ mMoveVer2PixelsTime }
 	, mJumpHeight{ 0 }
 {
-	//std::va_list args{};
-	//va_start(args, pEngine);
-	//std::va_list vaList{ va_arg(args, std::va_list) };
-	//mpGOLevel = va_arg(vaList, GameObject*);
-	//va_end(args);
 }
 
 AvatarComponent::~AvatarComponent()
@@ -86,6 +83,26 @@ void AvatarComponent::Update(const float deltaTime)
 		--mIsVerMoving;
 		mMoveVerDelay -= deltaTime;
 	}
+	if (mCurIsFiring && mFireDelay == mFireWaitTime)
+	{
+		TransformModelComponent* pTransform{ mpGameObject->GetModelComponent<TransformModelComponent>() };
+		Vec2<int> pos{};
+		pos = pTransform->GetNewPos();
+		if (pTransform->GetIsLookingLeft())
+			pos.Move(-16, 0);
+		else
+			pos.Move(16, 0);
+		mpGOLevel->GetModelComponent<LevelComponent>()->FireBubble(pos);
+	}
+	if (mCurIsFiring)
+	{
+		mFireDelay -= deltaTime;
+		if (mFireDelay <= 0.f)
+		{
+			mFireDelay = mFireWaitTime;
+			mNewIsFiring = false;
+		}
+	}
 }
 
 void AvatarComponent::Collision()
@@ -132,6 +149,7 @@ void AvatarComponent::SetLevel(GameObject* pLevel)
 
 void AvatarComponent::Fire()
 {
+	mNewIsFiring = true;
 }
 
 void AvatarComponent::Jump()

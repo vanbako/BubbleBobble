@@ -24,6 +24,8 @@ namespace ieg
 		void Collision() override {};
 		void Switch() override {};
 
+		HudComponent* GetHudComponent() { return mpHudComponent;  };
+		void FireBubble(const Vec2<int>& pos);
 		unsigned short CheckAvatarCollision(TransformModelComponent *pTransform, ColliderModelComponent* pCollider);
 		bool CheckCollisionPos(int x, int y);
 	private:

@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "Bubble.h"
+#include "BubbleComponent.h"
 #include "BufferManager.h"
 #include "BufferAsprites.h"
 #include "../Engine/Minigin.h"
@@ -27,6 +28,7 @@ GameObject* Bubble::CreateBubble(Minigin* pEngine, Scene* pScene, BufferManager*
 	RenderViewComponent* pRenderComponent{ pGOBubble->CreateViewComponent<RenderViewComponent>(pEngine) };
 	pRenderComponent->SetTransformComponent(pTransformComponent);
 	pRenderComponent->SetIsSprite(true);
+	pGOBubble->CreateModelComponent<BubbleComponent>(pEngine);
 	pGOBubble->CreateModelComponent<ColliderModelComponent>(pEngine, Vec2<int>{ 0, 0 }, Vec2<int>{ 15, 15 });
 
 	ColorRGBA8* pPixels{ new ColorRGBA8[mCount * mWidth * mHeight] };
@@ -66,6 +68,8 @@ GameObject* Bubble::CopyBubble(Minigin* pEngine, GameObject* pGOBubble)
 	pRenderComponent->SetTransformComponent(pTransformComponent);
 	pRenderComponent->SetIsSprite(true);
 	pRenderComponent->SetTexture(pGOBubble->GetViewComponent<RenderViewComponent>()->GetTexture());
+	pRenderComponent->SetSize(mWidth, mHeight);
+	pGOBubbleCopy->CreateModelComponent<BubbleComponent>(pEngine);
 	pGOBubbleCopy->CreateModelComponent<ColliderModelComponent>(pEngine, Vec2<int>{ 0, 0 }, Vec2<int>{ 15, 15 });
 	return pGOBubbleCopy;
 }
