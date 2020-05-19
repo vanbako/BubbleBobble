@@ -8,6 +8,12 @@ namespace ieg
 	class TransformModelComponent;
 	class ColliderModelComponent;
 	class HudComponent;
+	class ObsSubject;
+
+	enum class LevelEvent
+	{
+		End
+	};
 
 	class LevelComponent final
 		: public ModelComponent
@@ -24,14 +30,17 @@ namespace ieg
 		void Collision() override {};
 		void Switch() override {};
 
+		ObsSubject* GetObsSubject();
 		HudComponent* GetHudComponent() { return mpHudComponent;  };
-		void FireBubble(const Vec2<int>& pos);
 		unsigned short CheckAvatarCollision(TransformModelComponent *pTransform, ColliderModelComponent* pCollider);
 		bool CheckCollisionPos(int x, int y);
 	private:
 		float mTest;
 		HudComponent* mpHudComponent;
-		char* mpLayout;
+		char
+			*mpLayout,
+			*mpEnemyData;
 		ColorRGBA8* mpPalette;
+		ObsSubject* mpObsSubject;
 	};
 }

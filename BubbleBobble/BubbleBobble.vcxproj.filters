@@ -25,6 +25,9 @@
     <Filter Include="Main">
       <UniqueIdentifier>{420ba68e-960a-4d9a-9c47-c97416d7ad6b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Observer">
+      <UniqueIdentifier>{7b93cec5-d6ad-4db2-90cd-bd7763212b57}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FireCommand.cpp">
@@ -135,6 +138,9 @@
     <ClCompile Include="Main.cpp">
       <Filter>Main</Filter>
     </ClCompile>
+    <ClCompile Include="HudObserver.cpp">
+      <Filter>Observer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FireCommand.h">
@@ -241,6 +247,9 @@
     </ClInclude>
     <ClInclude Include="pch.h">
       <Filter>Precompiled Header</Filter>
+    </ClInclude>
+    <ClInclude Include="HudObserver.h">
+      <Filter>Observer</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

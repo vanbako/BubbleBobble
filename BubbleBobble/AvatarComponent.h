@@ -4,12 +4,19 @@
 namespace ieg
 {
 	class Minigin;
+	class ObsSubject;
 
 	enum class AvatarState
 	{
 		Standing,
 		Jumping,
 		Falling
+	};
+
+	enum class AvatarEvent
+	{
+		Score,
+		Die
 	};
 
 	class AvatarComponent final
@@ -27,6 +34,7 @@ namespace ieg
 		void Collision() override;
 		void Switch() override;
 
+		ObsSubject* GetObsSubject();
 		void SetFiring(bool isFiring);
 		void SetLevel(GameObject* pLevel);
 
@@ -36,6 +44,7 @@ namespace ieg
 		void Right();
 	private:
 		GameObject* mpGOLevel;
+		ObsSubject* mpObsSubject;
 		AvatarState
 			mCurState,
 			mNewState;

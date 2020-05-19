@@ -49,6 +49,9 @@
     <Filter Include="Vector">
       <UniqueIdentifier>{c8ace604-df54-4c75-b1ee-c9c781659dc6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Observer">
+      <UniqueIdentifier>{91050a83-1e1a-43d7-96ee-ec11c47bc9d4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene.h">
@@ -135,6 +138,12 @@
     <ClInclude Include="Vec2.h">
       <Filter>Vector</Filter>
     </ClInclude>
+    <ClInclude Include="Observer.h">
+      <Filter>Observer</Filter>
+    </ClInclude>
+    <ClInclude Include="ObsSubject.h">
+      <Filter>Observer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Scene.cpp">
@@ -208,6 +217,9 @@
     </ClCompile>
     <ClCompile Include="pch.cpp">
       <Filter>Precompiled Header</Filter>
+    </ClCompile>
+    <ClCompile Include="ObsSubject.cpp">
+      <Filter>Observer</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -2,24 +2,29 @@
 #include "LevelComponent.h"
 #include "AvatarComponent.h"
 #include "HudComponent.h"
+#include "HudObserver.h"
 #include "Level.h"
 #include "BufferManager.h"
 #include "BufferBubble.h"
 #include "Avatar.h"
+#include "NpcComponent.h"
 #include "../Engine/GameObject.h"
 #include "../Engine/ColorRGBA8.h"
 #include "../Engine/ColliderModelComponent.h"
 #include "../Engine/TransformModelComponent.h"
 #include "../Engine/Scene.h"
+#include "../Engine/ObsSubject.h"
 
 using namespace ieg;
 
 LevelComponent::LevelComponent(GameObject* pGameObject, Minigin* pEngine, ...)
 	: ModelComponent(pGameObject, pEngine)
 	, mpLayout{ new char[Level::GetBlockCount()] }
+	, mpEnemyData{ new char[Level::GetEnemyDataBytes()] }
 	, mpPalette{ new ColorRGBA8[BufferBubble::GetPaletteColorCount()] }
 	, mpHudComponent{ nullptr }
-	, mTest{ 10.f }
+	, mTest{ 15.f }
+	, mpObsSubject{ new ObsSubject{} }
 {
 	std::va_list args{};
 	va_start(args, pEngine);
@@ -28,16 +33,33 @@ LevelComponent::LevelComponent(GameObject* pGameObject, Minigin* pEngine, ...)
 	(pBufferManager);
 	ColorRGBA8* pLevelPalette{ va_arg(vaList, ColorRGBA8*) };
 	char* pLayout{ va_arg(vaList, char*) };
+	char* pEnemyData{ va_arg(vaList, char*) };
 	mpHudComponent = va_arg(vaList, HudComponent*);
 	va_end(args);
 
 	std::memcpy(mpPalette, pLevelPalette, sizeof(ColorRGBA8)* BufferBubble::GetPaletteColorCount());
 	std::memcpy(mpLayout, pLayout, Level::GetBlockCount());
+	std::memcpy(mpEnemyData, pEnemyData, Level::GetEnemyDataBytes());
 	mpHudComponent->InitGameObjects(mpGameObject);
+	// NPC data from Bdata
+	//  byte1           byte2           byte3
+	//  7 6 5 4 3 2 1 0 7 6 5 4 3 2 1 0 7 6 5 4 3 2 1 0
+	// |Column   |Type |Row      |Bools  | |Wait Time   0|
+	char* pLoop{ mpEnemyData };
+	while (pLoop[0] != char(0))
+	{
+		int npcType{ int(pLoop[0] & 0x07) };
+		Vec2<int> pos{ int(pLoop[0] & 0xf8), int(pLoop[1] & 0xf8) };
+		int wait{ int((pLoop[2] & 0x3f) << 1) };
+		mpHudComponent->SpawnNpc(NpcType(npcType), pos, wait);
+		pLoop += 3;
+	}
 }
 
 LevelComponent::~LevelComponent()
 {
+	delete mpObsSubject;
+	delete[] mpEnemyData;
 	delete[] mpPalette;
 	delete[] mpLayout;
 }
@@ -48,13 +70,13 @@ void LevelComponent::Update(const float deltaTime)
 	// Temporary end level after x seconds
 	mTest -= deltaTime;
 	if (mTest <= 0.f)
-		mpHudComponent->NextLevel();
+		mpObsSubject->Notify(typeid(this).hash_code(), int(LevelEvent::End), 0);
 	// End temporary
 }
 
-void LevelComponent::FireBubble(const Vec2<int>& pos)
+ObsSubject* LevelComponent::GetObsSubject()
 {
-	mpHudComponent->FireBubble(pos);
+	return mpObsSubject;
 }
 
 unsigned short LevelComponent::CheckAvatarCollision(TransformModelComponent* pTransform, ColliderModelComponent* pCollider)

@@ -4,6 +4,7 @@
 #include "../Engine/GameObject.h"
 #include "../Engine/TransformModelComponent.h"
 #include "../Engine/ColliderModelComponent.h"
+#include "../Engine/ObsSubject.h"
 
 using namespace ieg;
 
@@ -14,6 +15,7 @@ const int NpcComponent::mMaxJumpHeight{ 42 };
 NpcComponent::NpcComponent(GameObject* pGameObject, Minigin* pEngine, ...)
 	: ModelComponent(pGameObject, pEngine)
 	, mpGOLevel{ nullptr }
+	, mNpcType{ NpcType::ZenChan }
 	, mCurState{ NpcState::Standing }
 	, mNewState{ NpcState::Standing }
 	, mCurIsFiring{ false }
@@ -23,7 +25,13 @@ NpcComponent::NpcComponent(GameObject* pGameObject, Minigin* pEngine, ...)
 	, mMoveHorDelay{ mMoveHor2PixelsTime }
 	, mMoveVerDelay{ mMoveVer2PixelsTime }
 	, mJumpHeight{ 0 }
+	, mpObsSubject{ new ObsSubject{} }
 {
+}
+
+NpcComponent::~NpcComponent()
+{
+	delete mpObsSubject;
 }
 
 void NpcComponent::Update(const float deltaTime)
@@ -108,14 +116,29 @@ void NpcComponent::Switch()
 	mCurIsFiring = mNewIsFiring;
 }
 
+ObsSubject* ieg::NpcComponent::GetObsSubject()
+{
+	return mpObsSubject;
+}
+
 void NpcComponent::SetFiring(bool isFiring)
 {
 	mNewIsFiring = isFiring;
 }
 
-void ieg::NpcComponent::SetLevel(GameObject* pLevel)
+void NpcComponent::SetLevel(GameObject* pLevel)
 {
 	mpGOLevel = pLevel;
+}
+
+void NpcComponent::SetNpcType(NpcType npcType)
+{
+	mNpcType = npcType;
+}
+
+NpcType NpcComponent::GetNpcType()
+{
+	return mNpcType;
 }
 
 void NpcComponent::Fire()

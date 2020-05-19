@@ -4,6 +4,20 @@
 namespace ieg
 {
 	class Minigin;
+	class ObsSubject;
+
+	enum class NpcType
+	{
+		ZenChan = 0,
+		Hidegons,
+		Banebou,
+		PulPul,
+		Monsta,
+		Drunk,
+		Maita,
+		Invader,
+		Count
+	};
 
 	enum class NpcState
 	{
@@ -12,12 +26,17 @@ namespace ieg
 		Falling
 	};
 
+	enum class NpcEvent
+	{
+		Die
+	};
+
 	class NpcComponent final
 		: public ModelComponent
 	{
 	public:
 		explicit NpcComponent(GameObject* pGameObject, Minigin* pEngine,...);
-		~NpcComponent() = default;
+		~NpcComponent();
 		NpcComponent(const NpcComponent&) = delete;
 		NpcComponent(NpcComponent&&) = delete;
 		NpcComponent& operator=(const NpcComponent&) = delete;
@@ -27,8 +46,11 @@ namespace ieg
 		void Collision() override;
 		void Switch() override;
 
+		ObsSubject* GetObsSubject();
 		void SetFiring(bool isFiring);
 		void SetLevel(GameObject* pLevel);
+		void SetNpcType(NpcType npcType);
+		NpcType GetNpcType();
 
 		void Fire();
 		void Jump();
@@ -36,6 +58,8 @@ namespace ieg
 		void Right();
 	private:
 		GameObject* mpGOLevel;
+		ObsSubject* mpObsSubject;
+		NpcType mNpcType;
 		NpcState
 			mCurState,
 			mNewState;

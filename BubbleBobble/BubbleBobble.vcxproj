@@ -223,6 +223,7 @@ xcopy "$(SolutionDir)3rdParty\Fmod\lib\x64\fmod.dll" "$(OutputPath)" /R /Y</Comm
     <ClInclude Include="FireCommand.h" />
     <ClInclude Include="Hud.h" />
     <ClInclude Include="HudComponent.h" />
+    <ClInclude Include="HudObserver.h" />
     <ClInclude Include="Intro.h" />
     <ClInclude Include="IntroComponent.h" />
     <ClInclude Include="JumpCommand.h" />
@@ -260,6 +261,7 @@ xcopy "$(SolutionDir)3rdParty\Fmod\lib\x64\fmod.dll" "$(OutputPath)" /R /Y</Comm
     <ClCompile Include="FireCommand.cpp" />
     <ClCompile Include="Hud.cpp" />
     <ClCompile Include="HudComponent.cpp" />
+    <ClCompile Include="HudObserver.cpp" />
     <ClCompile Include="Intro.cpp" />
     <ClCompile Include="IntroComponent.cpp" />
     <ClCompile Include="JumpCommand.cpp" />

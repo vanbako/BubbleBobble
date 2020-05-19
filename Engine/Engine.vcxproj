@@ -196,6 +196,8 @@
     <ClInclude Include="Minigin.h" />
     <ClInclude Include="MutedAudio.h" />
     <ClInclude Include="NullAudio.h" />
+    <ClInclude Include="Observer.h" />
+    <ClInclude Include="ObsSubject.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="RegularAudio.h" />
     <ClInclude Include="RenderViewComponent.h" />
@@ -224,6 +226,7 @@
     <ClCompile Include="Minigin.cpp" />
     <ClCompile Include="MutedAudio.cpp" />
     <ClCompile Include="NullAudio.cpp" />
+    <ClCompile Include="ObsSubject.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

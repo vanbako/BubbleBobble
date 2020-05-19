@@ -1,11 +1,13 @@
 #include "pch.h"
 #include "AvatarComponent.h"
 #include "LevelComponent.h"
+#include "HudComponent.h"
 #include "../Engine/Scene.h"
 #include "../Engine/InputManager.h"
 #include "../Engine/GameObject.h"
 #include "../Engine/TransformModelComponent.h"
 #include "../Engine/ColliderModelComponent.h"
+#include "../Engine/ObsSubject.h"
 
 using namespace ieg;
 
@@ -27,11 +29,13 @@ AvatarComponent::AvatarComponent(GameObject* pGameObject, Minigin* pEngine, ...)
 	, mMoveHorDelay{ mMoveHor2PixelsTime }
 	, mMoveVerDelay{ mMoveVer2PixelsTime }
 	, mJumpHeight{ 0 }
+	, mpObsSubject{ new ObsSubject{} }
 {
 }
 
 AvatarComponent::~AvatarComponent()
 {
+	delete mpObsSubject;
 	mpGameObject->GetScene()->GetInputManager()->DeleteInputActions(this);
 }
 
@@ -92,7 +96,7 @@ void AvatarComponent::Update(const float deltaTime)
 			pos.Move(-16, 0);
 		else
 			pos.Move(16, 0);
-		mpGOLevel->GetModelComponent<LevelComponent>()->FireBubble(pos);
+		mpGOLevel->GetModelComponent<LevelComponent>()->GetHudComponent()->FireBubble(pos);
 	}
 	if (mCurIsFiring)
 	{
@@ -135,6 +139,11 @@ void AvatarComponent::Switch()
 {
 	mCurState = mNewState;
 	mCurIsFiring = mNewIsFiring;
+}
+
+ObsSubject* AvatarComponent::GetObsSubject()
+{
+	return mpObsSubject;
 }
 
 void AvatarComponent::SetFiring(bool isFiring)

@@ -24,6 +24,8 @@ const int Level::mHeightInBlocks{ 25 };
 const int Level::mBlockCount{ 800 };
 const int Level::mWidth{ 256 };
 const int Level::mHeight{ 200 };
+const int Level::mEnemyDataSize{ 3 };
+const int Level::mMaxEnemies{ 6 };
 
 GameObject* Level::CreateLevel(int level, Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, HudComponent* pHudComponent)
 {
@@ -47,12 +49,17 @@ GameObject* Level::CreateLevel(int level, Minigin* pEngine, Scene* pScene, Buffe
 	std::memset(pLayout, 0, mBlockCount);
 	pBdata->GetLayout(pLayout, level);
 
-	pGOLevel->CreateModelComponent<LevelComponent>(pEngine, pBufferManager, pLevelPalette, pLayout, pHudComponent);
+	char* pEnemyData{ new char[GetEnemyDataBytes()] };
+	std::memset(pEnemyData, 0, GetEnemyDataBytes());
+	pBdata->GetEnemies(pEnemyData, level);
+
+	pGOLevel->CreateModelComponent<LevelComponent>(pEngine, pBufferManager, pLevelPalette, pLayout, pEnemyData, pHudComponent);
 
 	DrawBlocks(pAblocks, pPixels, pLevelPalette, pLayout, level);
 	DrawBigBlocks(pAblocks, pPixels, pLevelPalette, pBubble, level);
 	DrawFalse3DBlocks(pAblocks, pPixels, pLevelPalette, pLayout);
 
+	delete[] pEnemyData;
 	delete[] pLayout;
 
 	SDL_Surface* pSurface{
@@ -73,9 +80,25 @@ GameObject* Level::CreateLevel(int level, Minigin* pEngine, Scene* pScene, Buffe
 	return pGOLevel;
 }
 
-const int& Level::GetBlockCount()
+const int Level::GetBlockCount()
 {
 	return mBlockCount;
+}
+
+const int Level::GetEnemyDataBytes()
+{
+	// + 1 for null-termination
+	return mEnemyDataSize * mMaxEnemies + 1;
+}
+
+const int Level::GetEnemyDataSize()
+{
+	return mEnemyDataSize;
+}
+
+const int Level::GetMaxEnemies()
+{
+	return mMaxEnemies;
 }
 
 void Level::DrawFalse3DBlocks(BufferAblocks* pAblocks, ColorRGBA8* pPixels, ColorRGBA8* pLevelPalette, char* pLayout)

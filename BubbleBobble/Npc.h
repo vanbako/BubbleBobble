@@ -1,5 +1,6 @@
 #pragma once
 #include "BufferAsprites.h"
+#include "NpcComponent.h"
 
 namespace ieg
 {
@@ -14,19 +15,6 @@ namespace ieg
 	{
 		Sprite sprite;
 		bool isLeftRightDiff;
-	};
-
-	enum class NpcType
-	{
-		ZenChan = 0,
-		Hidegons,
-		Banebou,
-		PulPul,
-		Monsta,
-		Drunk,
-		Maita,
-		Invader,
-		Count
 	};
 
 	class Npc final

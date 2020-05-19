@@ -24,13 +24,18 @@ namespace ieg
 		Level& operator=(Level&&) = delete;
 
 		static GameObject* CreateLevel(int level, Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, HudComponent* pHudComponent);
-		static const int& GetBlockCount();
+		static const int GetBlockCount();
+		static const int GetEnemyDataBytes();
+		static const int GetEnemyDataSize();
+		static const int GetMaxEnemies();
 	private:
 		static const int mBlockCount;
 		static const int mWidthInBlocks;
 		static const int mHeightInBlocks;
 		static const int mWidth;
 		static const int mHeight;
+		static const int mEnemyDataSize;
+		static const int mMaxEnemies;
 
 		static void DrawFalse3DBlocks(BufferAblocks* pAblocks, ColorRGBA8* pPixels, ColorRGBA8* pLevelPalette, char* pLayout);
 		static void DrawBlocks(BufferAblocks* pAblocks, ColorRGBA8* pPixels, ColorRGBA8* pLevelPalette, char* pLayout, int level);
