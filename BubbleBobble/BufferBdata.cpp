@@ -20,6 +20,8 @@ bool BufferBdata::LoadFile()
 		return false;
 	else
 	{
+		// These are corrections on the original data
+		// found in the disassembly of the Amiga version
 		mpData[0x0383] = unsigned char(0xfc);
 		mpData[0x057b] = unsigned char(0xfe);
 		memcpy(&mpData[0x0730], &mpData[0x0734], 4);

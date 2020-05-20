@@ -28,6 +28,9 @@
     <Filter Include="Observer">
       <UniqueIdentifier>{7b93cec5-d6ad-4db2-90cd-bd7763212b57}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Manager">
+      <UniqueIdentifier>{56611d31-7a33-4b61-afef-2c0afcad7894}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FireCommand.cpp">
@@ -141,6 +144,9 @@
     <ClCompile Include="HudObserver.cpp">
       <Filter>Observer</Filter>
     </ClCompile>
+    <ClCompile Include="NpcManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FireCommand.h">
@@ -250,6 +256,9 @@
     </ClInclude>
     <ClInclude Include="HudObserver.h">
       <Filter>Observer</Filter>
+    </ClInclude>
+    <ClInclude Include="NpcManager.h">
+      <Filter>Manager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

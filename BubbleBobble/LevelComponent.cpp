@@ -42,16 +42,17 @@ LevelComponent::LevelComponent(GameObject* pGameObject, Minigin* pEngine, ...)
 	std::memcpy(mpEnemyData, pEnemyData, Level::GetEnemyDataBytes());
 	mpHudComponent->InitGameObjects(mpGameObject);
 	// NPC data from Bdata
-	//  byte1           byte2           byte3
+	//  byte0           byte1           byte2
 	//  7 6 5 4 3 2 1 0 7 6 5 4 3 2 1 0 7 6 5 4 3 2 1 0
 	// |Column   |Type |Row      |Bools  | |Wait Time   0|
 	char* pLoop{ mpEnemyData };
 	while (pLoop[0] != char(0))
 	{
 		int npcType{ int(pLoop[0] & 0x07) };
-		Vec2<int> pos{ int(pLoop[0] & 0xf8), int(pLoop[1] & 0xf8) };
+		Vec2<int> pos{ int(pLoop[0] & 0xf8), int(pLoop[1] & 0xf8) - 32 };
 		int wait{ int((pLoop[2] & 0x3f) << 1) };
-		mpHudComponent->SpawnNpc(NpcType(npcType), pos, wait);
+		bool isLookingLeft{ ((pLoop[2] & 0x80) > 0) ? true : false};
+		mpHudComponent->SpawnNpc(NpcType(npcType), pos, isLookingLeft, wait);
 		pLoop += 3;
 	}
 }

@@ -125,14 +125,17 @@ void HudComponent::InitGameObjects(GameObject* pGOLevel)
 	}
 }
 
-void HudComponent::SpawnNpc(NpcType npcType, Vec2<int>& pos, int wait)
+void HudComponent::SpawnNpc(NpcType npcType, Vec2<int>& pos, bool isLookingLeft, int wait)
 {
 	int npc{ GetIdleNpc() };
 	if (npc < 0)
 		return;
 	mppGONpcs[npc]->GetModelComponent<NpcComponent>()->SetNpcType(npcType);
 	mSpawnWait[npc] = float(wait) / 20.f;
-	mppGONpcs[npc]->GetModelComponent<TransformModelComponent>()->SetPos(pos);
+	TransformModelComponent* pTransform{ mppGONpcs[npc]->GetModelComponent<TransformModelComponent>() };
+	pTransform->SetPos(pos);
+	pTransform->SetIsLookingLeft(isLookingLeft);
+	pTransform->Switch();
 }
 
 GameObject* HudComponent::GetAvatar(int avatar)

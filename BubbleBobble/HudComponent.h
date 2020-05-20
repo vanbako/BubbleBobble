@@ -29,7 +29,7 @@ namespace ieg
 
 		HudObserver* GetObserver();
 		void InitGameObjects(GameObject* pGOLevel);
-		void SpawnNpc(NpcType npcType, Vec2<int>& pos, int wait);
+		void SpawnNpc(NpcType npcType, Vec2<int>& pos, bool isLookingLeft, int wait);
 		GameObject* GetAvatar(int avatar);
 		GameObject** GetBubbles(int avatar);
 		GameObject* GetLevel();
