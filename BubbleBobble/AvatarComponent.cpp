@@ -96,7 +96,7 @@ void AvatarComponent::Update(const float deltaTime)
 			pos.Move(-16, 0);
 		else
 			pos.Move(16, 0);
-		mpGOLevel->GetModelComponent<LevelComponent>()->GetHudComponent()->FireBubble(pos);
+		mpGOLevel->GetModelComponent<LevelComponent>()->FireBubble(pos);
 	}
 	if (mCurIsFiring)
 	{

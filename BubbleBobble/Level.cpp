@@ -5,6 +5,7 @@
 #include "BufferBubble.h"
 #include "BufferBdata.h"
 #include "LevelComponent.h"
+#include "NpcManager.h"
 #include "../Engine/ColorRGBA8.h"
 #include "Avatar.h"
 #include "../Engine/GameObject.h"
@@ -27,7 +28,7 @@ const int Level::mHeight{ 200 };
 const int Level::mEnemyDataSize{ 3 };
 const int Level::mMaxEnemies{ 6 };
 
-GameObject* Level::CreateLevel(int level, Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, HudComponent* pHudComponent)
+GameObject* Level::CreateLevel(int level, Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, ObjectsManager* pObjectsManager)
 {
 	BufferBubble* pBubble{ (BufferBubble*)pBufferManager->GetBuffer(EnumBuffer::Bubble) };
 	BufferAblocks* pAblocks{ (BufferAblocks*)pBufferManager->GetBuffer(EnumBuffer::Ablocks) };
@@ -53,7 +54,7 @@ GameObject* Level::CreateLevel(int level, Minigin* pEngine, Scene* pScene, Buffe
 	std::memset(pEnemyData, 0, GetEnemyDataBytes());
 	pBdata->GetEnemies(pEnemyData, level);
 
-	pGOLevel->CreateModelComponent<LevelComponent>(pEngine, pBufferManager, pLevelPalette, pLayout, pEnemyData, pHudComponent);
+	pGOLevel->CreateModelComponent<LevelComponent>(pEngine, pBufferManager, pLevelPalette, pLayout, pEnemyData, pObjectsManager);
 
 	DrawBlocks(pAblocks, pPixels, pLevelPalette, pLayout, level);
 	DrawBigBlocks(pAblocks, pPixels, pLevelPalette, pBubble, level);

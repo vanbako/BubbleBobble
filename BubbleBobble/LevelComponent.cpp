@@ -8,6 +8,9 @@
 #include "BufferBubble.h"
 #include "Avatar.h"
 #include "NpcComponent.h"
+#include "ObjectsManager.h"
+#include "BubbleManager.h"
+#include "NpcManager.h"
 #include "../Engine/GameObject.h"
 #include "../Engine/ColorRGBA8.h"
 #include "../Engine/ColliderModelComponent.h"
@@ -22,7 +25,7 @@ LevelComponent::LevelComponent(GameObject* pGameObject, Minigin* pEngine, ...)
 	, mpLayout{ new char[Level::GetBlockCount()] }
 	, mpEnemyData{ new char[Level::GetEnemyDataBytes()] }
 	, mpPalette{ new ColorRGBA8[BufferBubble::GetPaletteColorCount()] }
-	, mpHudComponent{ nullptr }
+	, mpObjectsManager{ nullptr }
 	, mTest{ 15.f }
 	, mpObsSubject{ new ObsSubject{} }
 {
@@ -34,13 +37,13 @@ LevelComponent::LevelComponent(GameObject* pGameObject, Minigin* pEngine, ...)
 	ColorRGBA8* pLevelPalette{ va_arg(vaList, ColorRGBA8*) };
 	char* pLayout{ va_arg(vaList, char*) };
 	char* pEnemyData{ va_arg(vaList, char*) };
-	mpHudComponent = va_arg(vaList, HudComponent*);
+	mpObjectsManager = va_arg(vaList, ObjectsManager*);
 	va_end(args);
 
-	std::memcpy(mpPalette, pLevelPalette, sizeof(ColorRGBA8)* BufferBubble::GetPaletteColorCount());
+	std::memcpy(mpPalette, pLevelPalette, sizeof(ColorRGBA8) * BufferBubble::GetPaletteColorCount());
 	std::memcpy(mpLayout, pLayout, Level::GetBlockCount());
 	std::memcpy(mpEnemyData, pEnemyData, Level::GetEnemyDataBytes());
-	mpHudComponent->InitGameObjects(mpGameObject);
+	mpObjectsManager->InitGameObjects(mpGameObject);
 	// NPC data from Bdata
 	//  byte0           byte1           byte2
 	//  7 6 5 4 3 2 1 0 7 6 5 4 3 2 1 0 7 6 5 4 3 2 1 0
@@ -52,7 +55,7 @@ LevelComponent::LevelComponent(GameObject* pGameObject, Minigin* pEngine, ...)
 		Vec2<int> pos{ int(pLoop[0] & 0xf8), int(pLoop[1] & 0xf8) - 32 };
 		int wait{ int((pLoop[2] & 0x3f) << 1) };
 		bool isLookingLeft{ ((pLoop[2] & 0x80) > 0) ? true : false};
-		mpHudComponent->SpawnNpc(NpcType(npcType), pos, isLookingLeft, wait);
+		mpObjectsManager->GetNpcManager()->SpawnNpc(NpcType(npcType), pos, isLookingLeft, wait);
 		pLoop += 3;
 	}
 }
@@ -121,4 +124,9 @@ bool LevelComponent::CheckCollisionPos(const int x, const int y)
 		return true;
 	else
 		return false;
+}
+
+void LevelComponent::FireBubble(Vec2<int>& pos)
+{
+	mpObjectsManager->GetBubbleManager()->FireBubble(pos);
 }

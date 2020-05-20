@@ -7,8 +7,8 @@ namespace ieg
 	class ColorRGBA8;
 	class TransformModelComponent;
 	class ColliderModelComponent;
-	class HudComponent;
 	class ObsSubject;
+	class ObjectsManager;
 
 	enum class LevelEvent
 	{
@@ -31,12 +31,12 @@ namespace ieg
 		void Switch() override {};
 
 		ObsSubject* GetObsSubject();
-		HudComponent* GetHudComponent() { return mpHudComponent;  };
 		unsigned short CheckAvatarCollision(TransformModelComponent *pTransform, ColliderModelComponent* pCollider);
 		bool CheckCollisionPos(int x, int y);
+		void FireBubble(Vec2<int>& pos);
 	private:
 		float mTest;
-		HudComponent* mpHudComponent;
+		ObjectsManager* mpObjectsManager;
 		char
 			*mpLayout,
 			*mpEnemyData;

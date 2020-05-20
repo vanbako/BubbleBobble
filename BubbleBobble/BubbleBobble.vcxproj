@@ -204,9 +204,11 @@ xcopy "$(SolutionDir)3rdParty\Fmod\lib\x64\fmod.dll" "$(OutputPath)" /R /Y</Comm
   <ItemGroup>
     <ClInclude Include="Avatar.h" />
     <ClInclude Include="AvatarComponent.h" />
+    <ClInclude Include="AvatarManager.h" />
     <ClInclude Include="Bubble.h" />
     <ClInclude Include="BubbleBobble.h" />
     <ClInclude Include="BubbleComponent.h" />
+    <ClInclude Include="BubbleManager.h" />
     <ClInclude Include="Buffer.h" />
     <ClInclude Include="BufferAblocks.h" />
     <ClInclude Include="BufferAdwarf.h" />
@@ -233,6 +235,7 @@ xcopy "$(SolutionDir)3rdParty\Fmod\lib\x64\fmod.dll" "$(OutputPath)" /R /Y</Comm
     <ClInclude Include="Npc.h" />
     <ClInclude Include="NpcComponent.h" />
     <ClInclude Include="NpcManager.h" />
+    <ClInclude Include="ObjectsManager.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="RightCommand.h" />
     <ClInclude Include="Start.h" />
@@ -243,9 +246,11 @@ xcopy "$(SolutionDir)3rdParty\Fmod\lib\x64\fmod.dll" "$(OutputPath)" /R /Y</Comm
   <ItemGroup>
     <ClCompile Include="Avatar.cpp" />
     <ClCompile Include="AvatarComponent.cpp" />
+    <ClCompile Include="AvatarManager.cpp" />
     <ClCompile Include="Bubble.cpp" />
     <ClCompile Include="BubbleBobble.cpp" />
     <ClCompile Include="BubbleComponent.cpp" />
+    <ClCompile Include="BubbleManager.cpp" />
     <ClCompile Include="Buffer.cpp" />
     <ClCompile Include="BufferAblocks.cpp" />
     <ClCompile Include="BufferAdwarf.cpp" />
@@ -273,6 +278,7 @@ xcopy "$(SolutionDir)3rdParty\Fmod\lib\x64\fmod.dll" "$(OutputPath)" /R /Y</Comm
     <ClCompile Include="Npc.cpp" />
     <ClCompile Include="NpcComponent.cpp" />
     <ClCompile Include="NpcManager.cpp" />
+    <ClCompile Include="ObjectsManager.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>

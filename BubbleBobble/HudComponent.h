@@ -11,6 +11,7 @@ namespace ieg
 	class Scene;
 	class ColorRGBA8;
 	class HudObserver;
+	class ObjectsManager;
 
 	class HudComponent final
 		: public ModelComponent
@@ -28,38 +29,18 @@ namespace ieg
 		void Switch() override {};
 
 		HudObserver* GetObserver();
-		void InitGameObjects(GameObject* pGOLevel);
-		void SpawnNpc(NpcType npcType, Vec2<int>& pos, bool isLookingLeft, int wait);
-		GameObject* GetAvatar(int avatar);
-		GameObject** GetBubbles(int avatar);
 		GameObject* GetLevel();
 		void NextLevel();
-		void FireBubble(const Vec2<int>& pos);
-
-		static const int GetAvatarMax() { return mpAvatarMax; };
-		static const int GetBubblesPerAvatarMax() { return mpBubblesPerAvatarMax; };
 	private:
-		static const int mNpcMax{ 6 };
 		BufferManager* mpBufferManager;
 		int mLevel;
 		GameObject** mppGOAvatars;
-		GameObject** mppGOBubbles;
-		GameObject** mppGONpcs;
-		float mSpawnWait[mNpcMax];
+		ObjectsManager* mpObjectsManager;
 		GameObject* mpGOLevel;
 		Audio* mpAudio;
 		HudObserver* mpHudObserver;
 		int mSoundId;
 		bool mIsSoundPlaying;
 		bool mEndLevel;
-
-		void CreateAvatars(Minigin* pEngine, Scene* pScene, ColorRGBA8* pPalette);
-		void CreateBubbles(Minigin* pEngine, Scene* pScene, ColorRGBA8* pPalette);
-		void CreateNpcs(Minigin* pEngine, Scene* pScene, ColorRGBA8* pPalette);
-		int GetIdleNpc();
-
-		static const int mpAvatarMax{ 2 };
-		static const int mpBubblesPerAvatarMax;
-		static const Vec2<int> mpAvatarInitialPos[mpAvatarMax];
 	};
 }
