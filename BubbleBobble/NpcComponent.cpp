@@ -3,6 +3,7 @@
 #include "LevelComponent.h"
 #include "../Engine/GameObject.h"
 #include "../Engine/TransformModelComponent.h"
+#include "../Engine/RenderViewComponent.h"
 #include "../Engine/ColliderModelComponent.h"
 #include "../Engine/ObsSubject.h"
 
@@ -134,6 +135,7 @@ void NpcComponent::SetLevel(GameObject* pLevel)
 void NpcComponent::SetNpcType(NpcType npcType)
 {
 	mNpcType = npcType;
+	mpGameObject->GetViewComponent<RenderViewComponent>()->SetType(int(mNpcType) * 16);
 }
 
 NpcType NpcComponent::GetNpcType()

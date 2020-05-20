@@ -34,7 +34,7 @@ GameObject* Candy::CreateCandy(Minigin* pEngine, Scene* pScene, BufferManager* p
 	ColorRGBA8* pPixels{ new ColorRGBA8[mCount * mWidth * mHeight] };
 
 	ColorRGBA8* pSprite{ new ColorRGBA8[mCount * BufferAsprites::GetWidth() * BufferAsprites::GetHeight()] };
-	pAsprites->GetSprites(pSprite, mCount, Sprite::BubBalloon, pPalette);
+	pAsprites->GetSprites(pSprite, mCount, Sprite::SmallCandy, pPalette);
 	for (int sprite{ 0 }; sprite < mCount; ++sprite)
 		DrawSprite(pSprite, pPixels, sprite, sprite);
 	delete[] pSprite;

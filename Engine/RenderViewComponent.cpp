@@ -13,6 +13,7 @@ RenderViewComponent::RenderViewComponent(Minigin* pEngine)
 	, mpTexture{ nullptr }
 	, mSize{}
 	, mIndex{ 0 }
+	, mType{ 0 }
 	, mDelay{ 0.f }
 	, mCurrDelay{ 0.f }
 	, mStartIndex{ 0 }
@@ -34,7 +35,7 @@ void RenderViewComponent::Update(const float deltaTime)
 	}
 	if (mIsSprite)
 	{
-		mIndex = 0;
+		mIndex = mType;
 		if (mpTransformComponent->GetIsLookingLeft())
 			mIndex += 8;
 		mIndex += (mpTransformComponent->GetPos().GetX() % 16) / 2;
@@ -85,6 +86,11 @@ void RenderViewComponent::SetSize(int width, int height)
 void RenderViewComponent::SetIndex(int index)
 {
 	mIndex = index;
+}
+
+void RenderViewComponent::SetType(int type)
+{
+	mType = type;
 }
 
 void RenderViewComponent::SetAnimation(float delay, int startIndex, int stopIndex)

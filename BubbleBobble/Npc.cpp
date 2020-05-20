@@ -57,7 +57,7 @@ GameObject* Npc::CreateNpc(Minigin* pEngine, Scene* pScene, BufferManager* pBuff
 		else
 			spriteCount = 8;
 		std::memset(pSprite, 0, size_t(mCount) * size_t(BufferAsprites::GetWidth()) * size_t(BufferAsprites::GetHeight()) * sizeof(ColorRGBA8));
-			pAsprites->GetSprites(pSprite, spriteCount, mNpcData[npcType].sprite, pPalette);
+		pAsprites->GetSprites(pSprite, spriteCount, mNpcData[npcType].sprite, pPalette);
 		for (int sprite{ 0 }; sprite < spriteCount; ++sprite)
 			DrawSprite(pSprite, pPixels, sprite, npcType * mCount + sprite);
 	}
@@ -66,11 +66,13 @@ GameObject* Npc::CreateNpc(Minigin* pEngine, Scene* pScene, BufferManager* pBuff
 	SDL_Surface* pSurface{
 	SDL_CreateRGBSurfaceWithFormatFrom(
 		pPixels,
-		mCount * mWidth,
+		int(NpcType::Count) * mCount * mWidth,
 		mHeight,
 		sizeof(ColorRGBA8),
-		mCount * mWidth * sizeof(ColorRGBA8),
+		int(NpcType::Count) * mCount * mWidth * sizeof(ColorRGBA8),
 		SDL_PIXELFORMAT_RGBA32) };
+	// Debug
+	//SDL_SaveBMP(pSurface, "Npcs.bmp");
 	SDL_Texture* pSDLTexture{ SDL_CreateTextureFromSurface(pEngine->GetRenderer()->GetSDLRenderer(), pSurface) };
 	pRenderComponent->SetTexture(pSDLTexture);
 	pRenderComponent->SetSize(mWidth, mHeight);
@@ -100,5 +102,8 @@ void Npc::DrawSprite(ColorRGBA8* pSprite, ColorRGBA8* pPixels, int offset, int l
 		width{ BufferAsprites::GetWidth() },
 		height{ BufferAsprites::GetHeight() };
 	for (int row{ 0 }; row < height; ++row)
-		memcpy(&pPixels[row * mCount * mWidth + (loc % width) * mWidth + (loc / width) * mCount * mWidth * height], &pSprite[offset * width * height + row * width], width * sizeof(ColorRGBA8));
+		memcpy(
+			&pPixels[row * int(NpcType::Count) * mCount * mWidth + loc * mWidth],
+			&pSprite[offset * width * height + row * width],
+			width * sizeof(ColorRGBA8));
 }

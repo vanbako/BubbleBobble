@@ -29,6 +29,7 @@ namespace ieg
 		Texture2D* GetTexture();
 		void SetSize(int width, int height);
 		void SetIndex(int index);
+		void SetType(int type);
 		void SetAnimation(float delay, int startIndex, int stopIndex);
 		Texture2D* SetTexture(SDL_Texture* pSDLTexture);
 		Texture2D* ReplaceTexture(SDL_Texture* pSDLTexture);
@@ -38,6 +39,7 @@ namespace ieg
 		Texture2D* mpTexture;
 		Vec2<int> mSize;
 		int mIndex;
+		int mType;
 		float
 			mDelay,
 			mCurrDelay;

@@ -34,6 +34,7 @@ namespace ieg {
 		BobBubble = 420,
 		BubDieAnim = 424,
 		BobDieAnim = 428,
+		SmallCandy = 481,
 		HudBub1Up = 652,
 		HudBob1Up = 654,
 		HudBUB = 541,
