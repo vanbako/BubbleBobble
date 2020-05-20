@@ -6,6 +6,12 @@ namespace ieg
 	class AvatarManager;
 	class NpcManager;
 	class BubbleManager;
+	class CandyManager;
+	class Minigin;
+	class BufferManager;
+	class Scene;
+	class ColorRGBA8;
+	class Observer;
 
 	class ObjectsManager
 	{
@@ -20,11 +26,14 @@ namespace ieg
 		AvatarManager* GetAvatarManager();
 		BubbleManager* GetBubbleManager();
 		NpcManager* GetNpcManager();
+		CandyManager* GetCandyManager();
 
+		void CreateGameObjects(Minigin* pEngine, BufferManager* pBufferManager, Scene* pScene, ColorRGBA8* pPalette, Observer* pObserver);
 		void InitGameObjects(GameObject* pGOLevel);
 	private:
 		AvatarManager* mpAvatarManager;
 		BubbleManager* mpBubbleManager;
 		NpcManager* mpNpcManager;
+		CandyManager* mpCandyManager;
 	};
 }

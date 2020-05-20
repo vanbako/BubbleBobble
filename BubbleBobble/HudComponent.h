@@ -34,10 +34,8 @@ namespace ieg
 	private:
 		BufferManager* mpBufferManager;
 		int mLevel;
-		GameObject** mppGOAvatars;
 		ObjectsManager* mpObjectsManager;
 		GameObject* mpGOLevel;
-		Audio* mpAudio;
 		HudObserver* mpHudObserver;
 		int mSoundId;
 		bool mIsSoundPlaying;

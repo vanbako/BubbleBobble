@@ -2,12 +2,15 @@
 #include "AvatarComponent.h"
 #include "LevelComponent.h"
 #include "HudComponent.h"
+#include "../Engine/Minigin.h"
 #include "../Engine/Scene.h"
 #include "../Engine/InputManager.h"
 #include "../Engine/GameObject.h"
 #include "../Engine/TransformModelComponent.h"
 #include "../Engine/ColliderModelComponent.h"
 #include "../Engine/ObsSubject.h"
+#include "../Engine/ServiceLocator.h"
+#include "../Engine/Audio.h"
 
 using namespace ieg;
 
@@ -31,6 +34,7 @@ AvatarComponent::AvatarComponent(GameObject* pGameObject, Minigin* pEngine, ...)
 	, mJumpHeight{ 0 }
 	, mpObsSubject{ new ObsSubject{} }
 {
+	mJumpSoundId = pEngine->GetServiceLocator()->GetAudio()->AddSound("../Data/Audio/jump.wav", false);
 }
 
 AvatarComponent::~AvatarComponent()
@@ -167,6 +171,7 @@ void AvatarComponent::Jump()
 	{
 		mJumpHeight = 0;
 		mNewState = AvatarState::Jumping;
+		mpEngine->GetServiceLocator()->GetAudio()->PlaySound(mJumpSoundId);
 	}
 }
 

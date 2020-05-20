@@ -5,16 +5,16 @@ namespace ieg
 {
 	class Minigin;
 
-	class BubbleComponent final
+	class CandyComponent final
 		: public ModelComponent
 	{
 	public:
-		explicit BubbleComponent(GameObject* pGameObject, Minigin* pEngine,...);
-		~BubbleComponent() = default;
-		BubbleComponent(const BubbleComponent&) = delete;
-		BubbleComponent(BubbleComponent&&) = delete;
-		BubbleComponent& operator=(const BubbleComponent&) = delete;
-		BubbleComponent& operator=(BubbleComponent&&) = delete;
+		explicit CandyComponent(GameObject* pGameObject, Minigin* pEngine, ...);
+		~CandyComponent() = default;
+		CandyComponent(const CandyComponent&) = delete;
+		CandyComponent(CandyComponent&&) = delete;
+		CandyComponent& operator=(const CandyComponent&) = delete;
+		CandyComponent& operator=(CandyComponent&&) = delete;
 
 		void Update(const float deltaTime) override;
 		void Collision() override;

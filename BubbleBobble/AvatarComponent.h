@@ -59,6 +59,7 @@ namespace ieg
 			mFireDelay,
 			mMoveHorDelay,
 			mMoveVerDelay;
+		int mJumpSoundId;
 
 		static const float mFireWaitTime;
 		static const float mMoveHor2PixelsTime;

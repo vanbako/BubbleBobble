@@ -29,7 +29,6 @@ using namespace ieg;
 HudComponent::HudComponent(GameObject* pGameObject, Minigin* pEngine, ...)
 	: ModelComponent(pGameObject, pEngine)
 	, mpObjectsManager{ new ObjectsManager{} }
-	, mpAudio{ pEngine->GetServiceLocator()->GetAudio() }
 	, mSoundId{ 0 }
 	, mIsSoundPlaying{ false }
 	, mLevel{ 0 }
@@ -43,21 +42,19 @@ HudComponent::HudComponent(GameObject* pGameObject, Minigin* pEngine, ...)
 	ColorRGBA8* pPalette{ va_arg(vaList, ColorRGBA8*) };
 	va_end(args);
 	Scene* pScene{ mpGameObject->GetScene() };
-	mpObjectsManager->GetAvatarManager()->CreateAvatars(pEngine, mpBufferManager, pScene, pPalette, mpHudObserver);
-	mpObjectsManager->GetBubbleManager()->CreateBubbles(pEngine, mpBufferManager, pScene, pPalette);
-	mpObjectsManager->GetNpcManager()->CreateNpcs(pEngine, mpBufferManager, pScene, pPalette, mpHudObserver);
+	mpObjectsManager->CreateGameObjects(pEngine, mpBufferManager, pScene, pPalette, mpHudObserver);
 	// Level has to be created last
 	// It will Initialise the Avatars, Bubbles and Enemies
 	mpGOLevel = Level::CreateLevel(mLevel, pEngine, pScene, mpBufferManager, mpObjectsManager);
 	mpGOLevel->GetModelComponent<LevelComponent>()->GetObsSubject()->AddObserver(mpHudObserver);
-	mSoundId = mpAudio->AddSound("../Data/Audio/gameloop.wav", true);
+	mSoundId = pEngine->GetServiceLocator()->GetAudio()->AddSound("../Data/Audio/gameloop.wav", true);
 }
 
 HudComponent::~HudComponent()
 {
 	delete mpHudObserver;
 	delete mpObjectsManager;
-	mpAudio->StopSound(mSoundId);
+	mpEngine->GetServiceLocator()->GetAudio()->StopSound(mSoundId);
 }
 
 void HudComponent::Update(const float deltaTime)
@@ -65,7 +62,7 @@ void HudComponent::Update(const float deltaTime)
 	mpObjectsManager->GetNpcManager()->SpawnWaitUpdate(deltaTime);
 	if (!mIsSoundPlaying)
 	{
-		mpAudio->PlaySound(mSoundId);
+		mpEngine->GetServiceLocator()->GetAudio()->PlaySound(mSoundId);
 		mIsSoundPlaying = true;
 	}
 	if (mEndLevel)

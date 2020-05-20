@@ -153,7 +153,18 @@
     <ClCompile Include="ObjectsManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
-    <ClCompile Include="AvatarManager.cpp" />
+    <ClCompile Include="AvatarManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Candy.cpp">
+      <Filter>Prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="CandyComponent.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="CandyManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FireCommand.h">
@@ -273,6 +284,17 @@
     <ClInclude Include="ObjectsManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
-    <ClInclude Include="AvatarManager.h" />
+    <ClInclude Include="AvatarManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Candy.h">
+      <Filter>Prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="CandyComponent.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="CandyManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
