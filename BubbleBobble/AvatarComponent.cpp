@@ -2,6 +2,9 @@
 #include "AvatarComponent.h"
 #include "LevelComponent.h"
 #include "HudComponent.h"
+#include "StandingState.h"
+#include "JumpingState.h"
+#include "FallingState.h"
 #include "../Engine/Minigin.h"
 #include "../Engine/Scene.h"
 #include "../Engine/InputManager.h"
@@ -17,79 +20,43 @@ using namespace ieg;
 const float AvatarComponent::mFireWaitTime{ 0.4f };
 const float AvatarComponent::mMoveHor2PixelsTime{ 0.04f };
 const float AvatarComponent::mMoveVer2PixelsTime{ 0.02f };
-const int AvatarComponent::mMaxJumpHeight{ 42 };
 
 AvatarComponent::AvatarComponent(GameObject* pGameObject, Minigin* pEngine, ...)
 	: ModelComponent(pGameObject, pEngine)
 	, mpGOLevel{ nullptr }
-	, mCurState{ AvatarState::Standing }
-	, mNewState{ AvatarState::Standing }
+	, mpStandingState{ new StandingState{ this } }
+	, mpJumpingState{ new JumpingState{ this } }
+	, mpFallingState{ new FallingState{ this } }
+	, mpCurState{ nullptr }
+	, mpNewState{ nullptr }
 	, mCurIsFiring{ false }
 	, mNewIsFiring{ false }
 	, mIsHorMoving{ 0 }
-	, mIsVerMoving{ 0 }
 	, mFireDelay{ mFireWaitTime }
 	, mMoveHorDelay{ mMoveHor2PixelsTime }
-	, mMoveVerDelay{ mMoveVer2PixelsTime }
-	, mJumpHeight{ 0 }
 	, mpObsSubject{ new ObsSubject{} }
 {
+	mpCurState = mpStandingState;
+	mpNewState = mpStandingState;
 	mJumpSoundId = pEngine->GetServiceLocator()->GetAudio()->AddSound("../Data/Audio/jump.wav", false);
 }
 
 AvatarComponent::~AvatarComponent()
 {
+	delete mpFallingState;
+	delete mpJumpingState;
+	delete mpStandingState;
 	delete mpObsSubject;
 	mpGameObject->GetScene()->GetInputManager()->DeleteInputActions(this);
 }
 
 void AvatarComponent::Update(const float deltaTime)
 {
-	switch (mNewState)
-	{
-	case AvatarState::Falling:
-		if (mMoveVerDelay <= 0)
-		{
-			TransformModelComponent* pTransform{ mpGameObject->GetModelComponent<TransformModelComponent>() };
-			if (pTransform->GetNewPos().GetY() > 200)
-				pTransform->Move(0, -220);
-			else
-				pTransform->Move(0, 2);
-			mMoveVerDelay += mMoveVer2PixelsTime;
-		}
-		mIsVerMoving = 2;
-		break;
-	case AvatarState::Jumping:
-		if (mJumpHeight >= mMaxJumpHeight)
-		{
-			mJumpHeight = 0;
-			mNewState = AvatarState::Falling;
-		}
-		else
-		{
-			if (mMoveVerDelay <= 0)
-			{
-				mpGameObject->GetModelComponent<TransformModelComponent>()->Move(0, -2);
-				mJumpHeight += 2;
-				mMoveVerDelay += mMoveVer2PixelsTime;
-			}
-			mIsVerMoving = 2;
-		}
-		break;
-	case AvatarState::Standing:
-		mpGameObject->GetModelComponent<TransformModelComponent>()->Move(0, 2);
-		break;
-	}
-
+	mpCurState->Update(deltaTime);
 	if (mIsHorMoving > 0)
 	{
 		--mIsHorMoving;
 		mMoveHorDelay -= deltaTime;
-	}
-	if (mIsVerMoving > 0)
-	{
-		--mIsVerMoving;
-		mMoveVerDelay -= deltaTime;
 	}
 	if (mCurIsFiring && mFireDelay == mFireWaitTime)
 	{
@@ -118,7 +85,7 @@ void AvatarComponent::Collision()
 	unsigned short collision{ mpGOLevel->GetModelComponent<LevelComponent>()->CheckAvatarCollision(
 	mpGameObject->GetModelComponent<TransformModelComponent>(),
 	mpGameObject->GetModelComponent<ColliderModelComponent>()) };
-	if (mNewState == AvatarState::Standing)
+	if (mpNewState == mpStandingState)
 		if ((collision & 1) != 0)
 		{
 			mpGameObject->GetModelComponent<TransformModelComponent>()->ResetNewPosY();
@@ -127,21 +94,21 @@ void AvatarComponent::Collision()
 				mpGameObject->GetModelComponent<ColliderModelComponent>());
 		}
 		else
-			mNewState = AvatarState::Falling;
+			mpNewState = mpFallingState;
 	if ((collision & 12) != 0)
 		mpGameObject->GetModelComponent<TransformModelComponent>()->ResetNewPosX();
-	if ((collision & 2) != 0 && mNewState == AvatarState::Standing)
+	if ((collision & 2) != 0 && mpNewState == mpStandingState)
 		mpGameObject->GetModelComponent<TransformModelComponent>()->ResetNewPosY();
-	if ((collision & 1) != 0 && mNewState == AvatarState::Falling)
+	if ((collision & 1) != 0 && mpNewState == mpFallingState)
 	{
 		mpGameObject->GetModelComponent<TransformModelComponent>()->ResetNewPosY();
-		mNewState = AvatarState::Standing;
+		mpNewState = mpStandingState;
 	}
 }
 
 void AvatarComponent::Switch()
 {
-	mCurState = mNewState;
+	mpCurState = mpNewState;
 	mCurIsFiring = mNewIsFiring;
 }
 
@@ -160,6 +127,11 @@ void AvatarComponent::SetLevel(GameObject* pLevel)
 	mpGOLevel = pLevel;
 }
 
+void AvatarComponent::SetFallingState()
+{
+	mpNewState = mpFallingState;
+}
+
 void AvatarComponent::Fire()
 {
 	mNewIsFiring = true;
@@ -167,10 +139,10 @@ void AvatarComponent::Fire()
 
 void AvatarComponent::Jump()
 {
-	if (mCurState == AvatarState::Standing)
+	if (mpCurState == mpStandingState)
 	{
-		mJumpHeight = 0;
-		mNewState = AvatarState::Jumping;
+		((JumpingState*)mpJumpingState)->ResetJumpHeight();
+		mpNewState = mpJumpingState;
 		mpEngine->GetServiceLocator()->GetAudio()->PlaySound(mJumpSoundId);
 	}
 }
@@ -197,4 +169,9 @@ void AvatarComponent::Right()
 		mMoveHorDelay += mMoveHor2PixelsTime;
 	}
 	mIsHorMoving = 2;
+}
+
+float AvatarComponent::GetMoveVer2PixelsTime()
+{
+	return mMoveVer2PixelsTime;
 }

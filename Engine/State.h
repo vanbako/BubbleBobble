@@ -2,22 +2,20 @@
 
 namespace ieg
 {
-	class GameObject;
+	class ModelComponent;
 
 	class State
 	{
 	public:
-		explicit State() = default;
+		explicit State(ModelComponent* pModelComponent);
 		virtual ~State() = default;
 		State(const State& other) = delete;
 		State(State&& other) = delete;
 		State& operator=(const State& other) = delete;
 		State& operator=(State&& other) = delete;
-		void SetGameObject(GameObject* pGameObject)
-		{
-			mpGameObject = pGameObject;
-		}
+
+		virtual void Update(const float deltaTime) = 0;
 	protected:
-		GameObject* mpGameObject;
+		ModelComponent* mpModelComponent;
 	};
 }

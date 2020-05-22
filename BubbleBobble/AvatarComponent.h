@@ -5,13 +5,14 @@ namespace ieg
 {
 	class Minigin;
 	class ObsSubject;
+	class AvatarState;
 
-	enum class AvatarState
-	{
-		Standing,
-		Jumping,
-		Falling
-	};
+	//enum class AvatarState
+	//{
+	//	Standing,
+	//	Jumping,
+	//	Falling
+	//};
 
 	enum class AvatarEvent
 	{
@@ -37,33 +38,35 @@ namespace ieg
 		ObsSubject* GetObsSubject();
 		void SetFiring(bool isFiring);
 		void SetLevel(GameObject* pLevel);
+		void SetFallingState();
 
 		void Fire();
 		void Jump();
 		void Left();
 		void Right();
+
+		static float GetMoveVer2PixelsTime();
 	private:
 		GameObject* mpGOLevel;
 		ObsSubject* mpObsSubject;
 		AvatarState
-			mCurState,
-			mNewState;
-		int mJumpHeight;
+			*mpStandingState,
+			*mpJumpingState,
+			*mpFallingState,
+			*mpCurState,
+			*mpNewState;
 		bool
 			mCurIsFiring,
 			mNewIsFiring;
-		int
-			mIsHorMoving,
-			mIsVerMoving;
+		int mIsHorMoving;
 		float
 			mFireDelay,
-			mMoveHorDelay,
-			mMoveVerDelay;
+			mMoveHorDelay;
 		int mJumpSoundId;
 
 		static const float mFireWaitTime;
 		static const float mMoveHor2PixelsTime;
 		static const float mMoveVer2PixelsTime;
-		static const int mMaxJumpHeight;
+
 	};
 }

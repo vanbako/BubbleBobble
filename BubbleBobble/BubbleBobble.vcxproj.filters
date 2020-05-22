@@ -31,6 +31,9 @@
     <Filter Include="Manager">
       <UniqueIdentifier>{56611d31-7a33-4b61-afef-2c0afcad7894}</UniqueIdentifier>
     </Filter>
+    <Filter Include="State">
+      <UniqueIdentifier>{f5381d56-29bf-48aa-9b19-4032bb8f76bb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FireCommand.cpp">
@@ -165,6 +168,18 @@
     <ClCompile Include="CandyManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
+    <ClCompile Include="AvatarState.cpp">
+      <Filter>State</Filter>
+    </ClCompile>
+    <ClCompile Include="StandingState.cpp">
+      <Filter>State</Filter>
+    </ClCompile>
+    <ClCompile Include="FallingState.cpp">
+      <Filter>State</Filter>
+    </ClCompile>
+    <ClCompile Include="JumpingState.cpp">
+      <Filter>State</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FireCommand.h">
@@ -295,6 +310,18 @@
     </ClInclude>
     <ClInclude Include="CandyManager.h">
       <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="AvatarState.h">
+      <Filter>State</Filter>
+    </ClInclude>
+    <ClInclude Include="StandingState.h">
+      <Filter>State</Filter>
+    </ClInclude>
+    <ClInclude Include="FallingState.h">
+      <Filter>State</Filter>
+    </ClInclude>
+    <ClInclude Include="JumpingState.h">
+      <Filter>State</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
