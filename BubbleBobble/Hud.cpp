@@ -109,7 +109,7 @@ void Hud::DrawStr(ColorRGBA8* pFont, ColorRGBA8* pPixels, int loc, const std::st
 	const int
 		width{ BufferAblocks::GetFontWidth() },
 		height{ BufferAblocks::GetFontHeight() };
-	for (int i{ 0 }; i < str.size(); ++i)
+	for (int i{ 0 }; i < int(str.size()); ++i)
 	{
 		chr = str[i];
 		if (chr == ' ')

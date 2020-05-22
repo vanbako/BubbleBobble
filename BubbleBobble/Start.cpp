@@ -143,7 +143,7 @@ void Start::DrawStr(ColorRGBA8* pFont, ColorRGBA8* pPixels, int loc, const std::
 		width{ BufferAblocks::GetFontWidth() },
 		height{ BufferAblocks::GetFontHeight() };
 	char chr{};
-	for (int i{ 0 }; i < str.size(); ++i)
+	for (int i{ 0 }; i < int(str.size()); ++i)
 	{
 		chr = str[i];
 		if (chr == ' ')

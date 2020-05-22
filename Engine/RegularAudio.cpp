@@ -60,7 +60,7 @@ int RegularAudio::AddSound(const std::string& filename, bool loop)
 
 void RegularAudio::PlaySound(int soundId)
 {
-	if (mpFmodSystem != nullptr && soundId < mpSounds.size())
+	if (mpFmodSystem != nullptr && soundId < int(mpSounds.size()))
 	{
 		FMOD::Channel* pChannel{ nullptr };
 		mpFmodSystem->playSound(mpSounds[soundId], mpChannelGroup, false, &pChannel);
@@ -69,6 +69,6 @@ void RegularAudio::PlaySound(int soundId)
 
 void RegularAudio::StopSound(int soundId)
 {
-	if (mpFmodSystem != nullptr && soundId < mpSounds.size())
+	if (mpFmodSystem != nullptr && soundId < int(mpSounds.size()))
 		mpChannelGroup->stop();
 }

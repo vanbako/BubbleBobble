@@ -67,6 +67,5 @@ namespace ieg
 		static const float mFireWaitTime;
 		static const float mMoveHor2PixelsTime;
 		static const float mMoveVer2PixelsTime;
-
 	};
 }
