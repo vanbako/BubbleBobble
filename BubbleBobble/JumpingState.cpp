@@ -10,7 +10,7 @@ using namespace ieg;
 const int JumpingState::mMaxJumpHeight{ 42 };
 
 JumpingState::JumpingState(ModelComponent* pModelComponent)
-	: AvatarState(pModelComponent)
+	: AvatarKineticState(pModelComponent)
 	, mIsVerMoving{ 0 }
 	, mJumpHeight{ 0 }
 	, mMoveVerDelay{ AvatarComponent::GetMoveVer2PixelsTime() }
@@ -25,10 +25,7 @@ void JumpingState::ResetJumpHeight()
 void JumpingState::Update(const float deltaTime)
 {
 	if (mJumpHeight >= mMaxJumpHeight)
-	{
-		mJumpHeight = 0;
-		((AvatarComponent*)mpModelComponent)->SetFallingState();
-	}
+		Fall();
 	else
 	{
 		if (mMoveVerDelay <= 0.f)
@@ -44,4 +41,10 @@ void JumpingState::Update(const float deltaTime)
 		--mIsVerMoving;
 		mMoveVerDelay -= deltaTime;
 	}
+}
+
+void JumpingState::Fall()
+{
+	mJumpHeight = 0;
+	((AvatarComponent*)mpModelComponent)->SetFallingState();
 }

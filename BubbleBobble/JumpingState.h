@@ -1,10 +1,10 @@
 #pragma once
-#include "AvatarState.h"
+#include "AvatarKineticState.h"
 
 namespace ieg
 {
 	class JumpingState final
-		: public AvatarState
+		: public AvatarKineticState
 	{
 	public:
 		explicit JumpingState(ModelComponent* pModelComponent);
@@ -16,6 +16,9 @@ namespace ieg
 
 		void ResetJumpHeight();
 		virtual void Update(const float deltaTime) override;
+		virtual void Jump() override {};
+		virtual void Fall() override;
+		virtual void Land() override {};
 	private:
 		int	mIsVerMoving;
 		int mJumpHeight;

@@ -5,6 +5,9 @@
 #include "StandingState.h"
 #include "JumpingState.h"
 #include "FallingState.h"
+#include "ReadyState.h"
+#include "FiringState.h"
+#include "ReloadingState.h"
 #include "../Engine/Minigin.h"
 #include "../Engine/Scene.h"
 #include "../Engine/InputManager.h"
@@ -17,7 +20,6 @@
 
 using namespace ieg;
 
-const float AvatarComponent::mFireWaitTime{ 0.4f };
 const float AvatarComponent::mMoveHor2PixelsTime{ 0.04f };
 const float AvatarComponent::mMoveVer2PixelsTime{ 0.02f };
 
@@ -27,22 +29,29 @@ AvatarComponent::AvatarComponent(GameObject* pGameObject, Minigin* pEngine, ...)
 	, mpStandingState{ new StandingState{ this } }
 	, mpJumpingState{ new JumpingState{ this } }
 	, mpFallingState{ new FallingState{ this } }
-	, mpCurState{ nullptr }
-	, mpNewState{ nullptr }
-	, mCurIsFiring{ false }
-	, mNewIsFiring{ false }
+	, mpCurKineticState{ nullptr }
+	, mpNewKineticState{ nullptr }
+	, mpReadyState{ new ReadyState{ this } }
+	, mpFiringState{ new FiringState{ this } }
+	, mpReloadingState{ new ReloadingState{ this } }
+	, mpCurWeaponState{ nullptr }
+	, mpNewWeaponState{ nullptr }
 	, mIsHorMoving{ 0 }
-	, mFireDelay{ mFireWaitTime }
 	, mMoveHorDelay{ mMoveHor2PixelsTime }
 	, mpObsSubject{ new ObsSubject{} }
 {
-	mpCurState = mpStandingState;
-	mpNewState = mpStandingState;
+	mpCurKineticState = mpStandingState;
+	mpNewKineticState = mpStandingState;
+	mpCurWeaponState = mpReadyState;
+	mpNewWeaponState = mpReadyState;
 	mJumpSoundId = pEngine->GetServiceLocator()->GetAudio()->AddSound("../Data/Audio/jump.wav", false);
 }
 
 AvatarComponent::~AvatarComponent()
 {
+	delete mpReloadingState;
+	delete mpFiringState;
+	delete mpReadyState;
 	delete mpFallingState;
 	delete mpJumpingState;
 	delete mpStandingState;
@@ -52,31 +61,12 @@ AvatarComponent::~AvatarComponent()
 
 void AvatarComponent::Update(const float deltaTime)
 {
-	mpCurState->Update(deltaTime);
+	mpCurKineticState->Update(deltaTime);
+	mpCurWeaponState->Update(deltaTime);
 	if (mIsHorMoving > 0)
 	{
 		--mIsHorMoving;
 		mMoveHorDelay -= deltaTime;
-	}
-	if (mCurIsFiring && mFireDelay == mFireWaitTime)
-	{
-		TransformModelComponent* pTransform{ mpGameObject->GetModelComponent<TransformModelComponent>() };
-		Vec2<int> pos{};
-		pos = pTransform->GetNewPos();
-		if (pTransform->GetIsLookingLeft())
-			pos.Move(-16, 0);
-		else
-			pos.Move(16, 0);
-		mpGOLevel->GetModelComponent<LevelComponent>()->FireBubble(pos);
-	}
-	if (mCurIsFiring)
-	{
-		mFireDelay -= deltaTime;
-		if (mFireDelay <= 0.f)
-		{
-			mFireDelay = mFireWaitTime;
-			mNewIsFiring = false;
-		}
 	}
 }
 
@@ -85,7 +75,7 @@ void AvatarComponent::Collision()
 	unsigned short collision{ mpGOLevel->GetModelComponent<LevelComponent>()->CheckAvatarCollision(
 	mpGameObject->GetModelComponent<TransformModelComponent>(),
 	mpGameObject->GetModelComponent<ColliderModelComponent>()) };
-	if (mpNewState == mpStandingState)
+	if (mpNewKineticState == mpStandingState)
 		if ((collision & 1) != 0)
 		{
 			mpGameObject->GetModelComponent<TransformModelComponent>()->ResetNewPosY();
@@ -94,32 +84,27 @@ void AvatarComponent::Collision()
 				mpGameObject->GetModelComponent<ColliderModelComponent>());
 		}
 		else
-			mpNewState = mpFallingState;
+			mpCurKineticState->Fall();
 	if ((collision & 12) != 0)
 		mpGameObject->GetModelComponent<TransformModelComponent>()->ResetNewPosX();
-	if ((collision & 2) != 0 && mpNewState == mpStandingState)
+	if ((collision & 2) != 0 && mpNewKineticState == mpStandingState)
 		mpGameObject->GetModelComponent<TransformModelComponent>()->ResetNewPosY();
-	if ((collision & 1) != 0 && mpNewState == mpFallingState)
+	if ((collision & 1) != 0 && mpNewKineticState == mpFallingState)
 	{
 		mpGameObject->GetModelComponent<TransformModelComponent>()->ResetNewPosY();
-		mpNewState = mpStandingState;
+		mpCurKineticState->Land();
 	}
 }
 
 void AvatarComponent::Switch()
 {
-	mpCurState = mpNewState;
-	mCurIsFiring = mNewIsFiring;
+	mpCurKineticState = mpNewKineticState;
+	mpCurWeaponState = mpNewWeaponState;
 }
 
 ObsSubject* AvatarComponent::GetObsSubject()
 {
 	return mpObsSubject;
-}
-
-void AvatarComponent::SetFiring(bool isFiring)
-{
-	mNewIsFiring = isFiring;
 }
 
 void AvatarComponent::SetLevel(GameObject* pLevel)
@@ -129,22 +114,56 @@ void AvatarComponent::SetLevel(GameObject* pLevel)
 
 void AvatarComponent::SetFallingState()
 {
-	mpNewState = mpFallingState;
+	mpNewKineticState = mpFallingState;
+}
+
+void ieg::AvatarComponent::SetJumpingState()
+{
+	((JumpingState*)mpJumpingState)->ResetJumpHeight();
+	mpNewKineticState = mpJumpingState;
+	mpEngine->GetServiceLocator()->GetAudio()->PlaySound(mJumpSoundId);
+}
+
+void AvatarComponent::SetStandingState()
+{
+	mpNewKineticState = mpStandingState;
+}
+
+void AvatarComponent::SetReadyState()
+{
+	mpNewWeaponState = mpReadyState;
+}
+
+void AvatarComponent::SetFiringState()
+{
+	mpNewWeaponState = mpFiringState;
+}
+
+void AvatarComponent::SetReloadingState()
+{
+	mpNewWeaponState = mpReloadingState;
+}
+
+void AvatarComponent::FireBubble()
+{
+	TransformModelComponent* pTransform{ mpGameObject->GetModelComponent<TransformModelComponent>() };
+	Vec2<int> pos{};
+	pos = pTransform->GetNewPos();
+	if (pTransform->GetIsLookingLeft())
+		pos.Move(-16, 0);
+	else
+		pos.Move(16, 0);
+	mpGOLevel->GetModelComponent<LevelComponent>()->FireBubble(pos);
 }
 
 void AvatarComponent::Fire()
 {
-	mNewIsFiring = true;
+	mpCurWeaponState->Fire();
 }
 
 void AvatarComponent::Jump()
 {
-	if (mpCurState == mpStandingState)
-	{
-		((JumpingState*)mpJumpingState)->ResetJumpHeight();
-		mpNewState = mpJumpingState;
-		mpEngine->GetServiceLocator()->GetAudio()->PlaySound(mJumpSoundId);
-	}
+	mpCurKineticState->Jump();
 }
 
 void AvatarComponent::Left()

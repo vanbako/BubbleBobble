@@ -34,6 +34,12 @@
     <Filter Include="State">
       <UniqueIdentifier>{f5381d56-29bf-48aa-9b19-4032bb8f76bb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="State\AvatarKineticState">
+      <UniqueIdentifier>{624955ad-735c-425a-8481-be6434bd97b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="State\AvatarWeaponState">
+      <UniqueIdentifier>{51ae2f0b-c677-4dea-82e6-175c22c4d4d3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FireCommand.cpp">
@@ -168,17 +174,29 @@
     <ClCompile Include="CandyManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
-    <ClCompile Include="AvatarState.cpp">
-      <Filter>State</Filter>
-    </ClCompile>
-    <ClCompile Include="StandingState.cpp">
-      <Filter>State</Filter>
+    <ClCompile Include="AvatarKineticState.cpp">
+      <Filter>State\AvatarKineticState</Filter>
     </ClCompile>
     <ClCompile Include="FallingState.cpp">
-      <Filter>State</Filter>
+      <Filter>State\AvatarKineticState</Filter>
     </ClCompile>
     <ClCompile Include="JumpingState.cpp">
-      <Filter>State</Filter>
+      <Filter>State\AvatarKineticState</Filter>
+    </ClCompile>
+    <ClCompile Include="StandingState.cpp">
+      <Filter>State\AvatarKineticState</Filter>
+    </ClCompile>
+    <ClCompile Include="AvatarWeaponState.cpp">
+      <Filter>State\AvatarWeaponState</Filter>
+    </ClCompile>
+    <ClCompile Include="ReadyState.cpp">
+      <Filter>State\AvatarWeaponState</Filter>
+    </ClCompile>
+    <ClCompile Include="FiringState.cpp">
+      <Filter>State\AvatarWeaponState</Filter>
+    </ClCompile>
+    <ClCompile Include="ReloadingState.cpp">
+      <Filter>State\AvatarWeaponState</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -311,17 +329,29 @@
     <ClInclude Include="CandyManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
-    <ClInclude Include="AvatarState.h">
-      <Filter>State</Filter>
-    </ClInclude>
-    <ClInclude Include="StandingState.h">
-      <Filter>State</Filter>
+    <ClInclude Include="AvatarKineticState.h">
+      <Filter>State\AvatarKineticState</Filter>
     </ClInclude>
     <ClInclude Include="FallingState.h">
-      <Filter>State</Filter>
+      <Filter>State\AvatarKineticState</Filter>
     </ClInclude>
     <ClInclude Include="JumpingState.h">
-      <Filter>State</Filter>
+      <Filter>State\AvatarKineticState</Filter>
+    </ClInclude>
+    <ClInclude Include="StandingState.h">
+      <Filter>State\AvatarKineticState</Filter>
+    </ClInclude>
+    <ClInclude Include="AvatarWeaponState.h">
+      <Filter>State\AvatarWeaponState</Filter>
+    </ClInclude>
+    <ClInclude Include="ReadyState.h">
+      <Filter>State\AvatarWeaponState</Filter>
+    </ClInclude>
+    <ClInclude Include="FiringState.h">
+      <Filter>State\AvatarWeaponState</Filter>
+    </ClInclude>
+    <ClInclude Include="ReloadingState.h">
+      <Filter>State\AvatarWeaponState</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

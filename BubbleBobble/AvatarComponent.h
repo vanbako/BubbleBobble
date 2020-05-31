@@ -5,14 +5,8 @@ namespace ieg
 {
 	class Minigin;
 	class ObsSubject;
-	class AvatarState;
-
-	//enum class AvatarState
-	//{
-	//	Standing,
-	//	Jumping,
-	//	Falling
-	//};
+	class AvatarKineticState;
+	class AvatarWeaponState;
 
 	enum class AvatarEvent
 	{
@@ -36,9 +30,15 @@ namespace ieg
 		void Switch() override;
 
 		ObsSubject* GetObsSubject();
-		void SetFiring(bool isFiring);
 		void SetLevel(GameObject* pLevel);
 		void SetFallingState();
+		void SetJumpingState();
+		void SetStandingState();
+		void SetReadyState();
+		void SetFiringState();
+		void SetReloadingState();
+
+		void FireBubble();
 
 		void Fire();
 		void Jump();
@@ -49,22 +49,22 @@ namespace ieg
 	private:
 		GameObject* mpGOLevel;
 		ObsSubject* mpObsSubject;
-		AvatarState
+		AvatarKineticState
 			*mpStandingState,
 			*mpJumpingState,
 			*mpFallingState,
-			*mpCurState,
-			*mpNewState;
-		bool
-			mCurIsFiring,
-			mNewIsFiring;
+			*mpCurKineticState,
+			*mpNewKineticState;
+		AvatarWeaponState
+			* mpReadyState,
+			* mpFiringState,
+			* mpReloadingState,
+			* mpCurWeaponState,
+			* mpNewWeaponState;
 		int mIsHorMoving;
-		float
-			mFireDelay,
-			mMoveHorDelay;
+		float mMoveHorDelay;
 		int mJumpSoundId;
 
-		static const float mFireWaitTime;
 		static const float mMoveHor2PixelsTime;
 		static const float mMoveVer2PixelsTime;
 	};

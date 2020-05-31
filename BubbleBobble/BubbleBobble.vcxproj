@@ -205,7 +205,8 @@ xcopy "$(SolutionDir)3rdParty\Fmod\lib\x64\fmod.dll" "$(OutputPath)" /R /Y</Comm
     <ClInclude Include="Avatar.h" />
     <ClInclude Include="AvatarComponent.h" />
     <ClInclude Include="AvatarManager.h" />
-    <ClInclude Include="AvatarState.h" />
+    <ClInclude Include="AvatarKineticState.h" />
+    <ClInclude Include="AvatarWeaponState.h" />
     <ClInclude Include="Bubble.h" />
     <ClInclude Include="BubbleBobble.h" />
     <ClInclude Include="BubbleComponent.h" />
@@ -228,6 +229,7 @@ xcopy "$(SolutionDir)3rdParty\Fmod\lib\x64\fmod.dll" "$(OutputPath)" /R /Y</Comm
     <ClInclude Include="ColorXRGB4.h" />
     <ClInclude Include="FallingState.h" />
     <ClInclude Include="FireCommand.h" />
+    <ClInclude Include="FiringState.h" />
     <ClInclude Include="Hud.h" />
     <ClInclude Include="HudComponent.h" />
     <ClInclude Include="HudObserver.h" />
@@ -243,6 +245,8 @@ xcopy "$(SolutionDir)3rdParty\Fmod\lib\x64\fmod.dll" "$(OutputPath)" /R /Y</Comm
     <ClInclude Include="NpcManager.h" />
     <ClInclude Include="ObjectsManager.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="ReadyState.h" />
+    <ClInclude Include="ReloadingState.h" />
     <ClInclude Include="RightCommand.h" />
     <ClInclude Include="StandingState.h" />
     <ClInclude Include="Start.h" />
@@ -254,7 +258,8 @@ xcopy "$(SolutionDir)3rdParty\Fmod\lib\x64\fmod.dll" "$(OutputPath)" /R /Y</Comm
     <ClCompile Include="Avatar.cpp" />
     <ClCompile Include="AvatarComponent.cpp" />
     <ClCompile Include="AvatarManager.cpp" />
-    <ClCompile Include="AvatarState.cpp" />
+    <ClCompile Include="AvatarKineticState.cpp" />
+    <ClCompile Include="AvatarWeaponState.cpp" />
     <ClCompile Include="Bubble.cpp" />
     <ClCompile Include="BubbleBobble.cpp" />
     <ClCompile Include="BubbleComponent.cpp" />
@@ -277,6 +282,7 @@ xcopy "$(SolutionDir)3rdParty\Fmod\lib\x64\fmod.dll" "$(OutputPath)" /R /Y</Comm
     <ClCompile Include="ColorXRGB4.cpp" />
     <ClCompile Include="FallingState.cpp" />
     <ClCompile Include="FireCommand.cpp" />
+    <ClCompile Include="FiringState.cpp" />
     <ClCompile Include="Hud.cpp" />
     <ClCompile Include="HudComponent.cpp" />
     <ClCompile Include="HudObserver.cpp" />
@@ -298,6 +304,8 @@ xcopy "$(SolutionDir)3rdParty\Fmod\lib\x64\fmod.dll" "$(OutputPath)" /R /Y</Comm
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="ReadyState.cpp" />
+    <ClCompile Include="ReloadingState.cpp" />
     <ClCompile Include="RightCommand.cpp" />
     <ClCompile Include="StandingState.cpp" />
     <ClCompile Include="Start.cpp" />
