@@ -46,7 +46,7 @@ NpcManager* ObjectsManager::GetNpcManager()
 	return mpNpcManager;
 }
 
-CandyManager* ieg::ObjectsManager::GetCandyManager()
+CandyManager* ObjectsManager::GetCandyManager()
 {
 	return mpCandyManager;
 }

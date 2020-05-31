@@ -115,6 +115,18 @@ unsigned short LevelComponent::CheckAvatarCollision(TransformModelComponent* pTr
 	return collision;
 }
 
+bool LevelComponent::CheckNpcCollision(TransformModelComponent* pTransform, ColliderModelComponent* pCollider)
+{
+	GameObject* pGONpc{ mpObjectsManager->GetNpcManager()->GetNextActiveNpc(nullptr) };
+	while (pGONpc != nullptr)
+	{
+		if (pGONpc->GetModelComponent<ColliderModelComponent>()->DoesCollide(pGONpc->GetModelComponent<TransformModelComponent>(), pTransform, pCollider))
+			return true;
+		pGONpc = mpObjectsManager->GetNpcManager()->GetNextActiveNpc(pGONpc);
+	}
+	return false;
+}
+
 bool LevelComponent::CheckCollisionPos(const int x, const int y)
 {
 	if (x < 0 || x > 255) return false;

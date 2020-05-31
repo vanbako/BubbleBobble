@@ -42,9 +42,8 @@ GameObject* Npc::CreateNpc(Minigin* pEngine, Scene* pScene, BufferManager* pBuff
 	RenderViewComponent* pRenderComponent{ pGONpc->CreateViewComponent<RenderViewComponent>(pEngine) };
 	pRenderComponent->SetTransformComponent(pTransformComponent);
 	pRenderComponent->SetIsSprite(true);
-	NpcComponent* pNpcComponent{ pGONpc->CreateModelComponent<NpcComponent>(pEngine) };
-	(pNpcComponent);
-	pGONpc->CreateModelComponent<ColliderModelComponent>(pEngine, Vec2<int>{ 0, 8 }, Vec2<int>{ 15, 7 });
+	pGONpc->CreateModelComponent<NpcComponent>(pEngine);
+	pGONpc->CreateModelComponent<ColliderModelComponent>(pEngine, Vec2<int>{ 0, 0 }, Vec2<int>{ 15, 15 });
 
 	ColorRGBA8* pPixels{ new ColorRGBA8[int(NpcType::Count) * mCount * mWidth * mHeight] };
 

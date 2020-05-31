@@ -32,6 +32,7 @@ namespace ieg
 
 		ObsSubject* GetObsSubject();
 		unsigned short CheckAvatarCollision(TransformModelComponent *pTransform, ColliderModelComponent* pCollider);
+		bool CheckNpcCollision(TransformModelComponent* pTransform, ColliderModelComponent* pCollider);
 		bool CheckCollisionPos(int x, int y);
 		void FireBubble(Vec2<int>& pos);
 	private:

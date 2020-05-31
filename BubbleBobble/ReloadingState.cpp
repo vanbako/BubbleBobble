@@ -9,7 +9,7 @@ using namespace ieg;
 
 const float ReloadingState::mReloadTime{ 0.1f };
 
-ieg::ReloadingState::ReloadingState(ModelComponent* pModelComponent)
+ReloadingState::ReloadingState(ModelComponent* pModelComponent)
 	: AvatarWeaponState(pModelComponent)
 	, mReloadTimer{ mReloadTime }
 {

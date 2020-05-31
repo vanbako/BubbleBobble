@@ -26,6 +26,7 @@ namespace ieg
 		void SpawnNpc(NpcType npcType, Vec2<int>& pos, bool isLookingLeft, int wait);
 		void SpawnWaitUpdate(const float deltaTime);
 		int GetNpcMax();
+		GameObject* GetNextActiveNpc(GameObject* pGONpc);
 	private:
 		static const int mNpcMax{ 6 };
 		std::vector<GameObject*> mpGONpcs;
@@ -33,5 +34,6 @@ namespace ieg
 
 		void SetLevel(int index, GameObject* pGOLevel);
 		int GetInactiveNpc();
+		GameObject* GetFirstActiveNpc();
 	};
 }

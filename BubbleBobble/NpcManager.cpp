@@ -23,6 +23,31 @@ int NpcManager::GetNpcMax()
 	return mNpcMax;
 }
 
+GameObject* NpcManager::GetNextActiveNpc(GameObject* pGONpc)
+{
+	if (pGONpc == nullptr)
+		return GetFirstActiveNpc();
+	int npc1{ -1 };
+	for (int i{ 0 }; i < mNpcMax; ++i)
+		if (mpGONpcs[i]->IsActive() && mpGONpcs[i] == pGONpc)
+		{
+			npc1 = i;
+			break;
+		}
+	if (npc1 == -1)
+		return nullptr;
+	int npc2{ -1 };
+	for (int i{ npc1 + 1 }; i < mNpcMax; ++i)
+		if (mpGONpcs[i]->IsActive() && mSpawnWait[i] == 0.f)
+		{
+			npc2 = i;
+			break;
+		}
+	if (npc2 == -1)
+		return nullptr;
+	return mpGONpcs[npc2];
+}
+
 void NpcManager::CreateNpcs(Minigin* pEngine, BufferManager* pBufferManager, Scene* pScene, ColorRGBA8* pPalette, Observer* pObserver)
 {
 	if (mpGONpcs.size() != 0)
@@ -95,4 +120,18 @@ int NpcManager::GetInactiveNpc()
 			break;
 		}
 	return npc;
+}
+
+GameObject* NpcManager::GetFirstActiveNpc()
+{
+	int npc{ -1 };
+	for (int i{ 0 }; i < mNpcMax; ++i)
+		if (mpGONpcs[i]->IsActive() && mSpawnWait[i] == 0.f)
+		{
+			npc = i;
+			break;
+		}
+	if (npc == -1)
+		return nullptr;
+	return mpGONpcs[npc];
 }

@@ -24,6 +24,7 @@ namespace ieg
 		void DeactivateAll();
 
 		static const int GetAvatarMax() { return mpAvatarMax; };
+		static const Vec2<int>& GetAvatarInitialPos(int avatar) { return mpAvatarInitialPos[avatar]; };
 	private:
 		static const int mpAvatarMax{ 2 };
 		std::vector<GameObject*> mpGOAvatars;

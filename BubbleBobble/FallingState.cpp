@@ -7,7 +7,7 @@
 
 using namespace ieg;
 
-ieg::FallingState::FallingState(ModelComponent* pModelComponent)
+FallingState::FallingState(ModelComponent* pModelComponent)
 	: AvatarKineticState(pModelComponent)
 	, mIsVerMoving{ 0 }
 	, mMoveVerDelay{ AvatarComponent::GetMoveVer2PixelsTime() }

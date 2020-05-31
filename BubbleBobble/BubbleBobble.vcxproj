@@ -204,6 +204,7 @@ xcopy "$(SolutionDir)3rdParty\Fmod\lib\x64\fmod.dll" "$(OutputPath)" /R /Y</Comm
   <ItemGroup>
     <ClInclude Include="Avatar.h" />
     <ClInclude Include="AvatarComponent.h" />
+    <ClInclude Include="AvatarHealthState.h" />
     <ClInclude Include="AvatarManager.h" />
     <ClInclude Include="AvatarKineticState.h" />
     <ClInclude Include="AvatarWeaponState.h" />
@@ -227,6 +228,7 @@ xcopy "$(SolutionDir)3rdParty\Fmod\lib\x64\fmod.dll" "$(OutputPath)" /R /Y</Comm
     <ClInclude Include="CandyComponent.h" />
     <ClInclude Include="CandyManager.h" />
     <ClInclude Include="ColorXRGB4.h" />
+    <ClInclude Include="DyingState.h" />
     <ClInclude Include="FallingState.h" />
     <ClInclude Include="FireCommand.h" />
     <ClInclude Include="FiringState.h" />
@@ -235,11 +237,13 @@ xcopy "$(SolutionDir)3rdParty\Fmod\lib\x64\fmod.dll" "$(OutputPath)" /R /Y</Comm
     <ClInclude Include="HudObserver.h" />
     <ClInclude Include="Intro.h" />
     <ClInclude Include="IntroComponent.h" />
+    <ClInclude Include="InvincibleState.h" />
     <ClInclude Include="JumpCommand.h" />
     <ClInclude Include="JumpingState.h" />
     <ClInclude Include="LeftCommand.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="LevelComponent.h" />
+    <ClInclude Include="LivingState.h" />
     <ClInclude Include="Npc.h" />
     <ClInclude Include="NpcComponent.h" />
     <ClInclude Include="NpcManager.h" />
@@ -257,6 +261,7 @@ xcopy "$(SolutionDir)3rdParty\Fmod\lib\x64\fmod.dll" "$(OutputPath)" /R /Y</Comm
   <ItemGroup>
     <ClCompile Include="Avatar.cpp" />
     <ClCompile Include="AvatarComponent.cpp" />
+    <ClCompile Include="AvatarHealthState.cpp" />
     <ClCompile Include="AvatarManager.cpp" />
     <ClCompile Include="AvatarKineticState.cpp" />
     <ClCompile Include="AvatarWeaponState.cpp" />
@@ -280,6 +285,7 @@ xcopy "$(SolutionDir)3rdParty\Fmod\lib\x64\fmod.dll" "$(OutputPath)" /R /Y</Comm
     <ClCompile Include="CandyComponent.cpp" />
     <ClCompile Include="CandyManager.cpp" />
     <ClCompile Include="ColorXRGB4.cpp" />
+    <ClCompile Include="DyingState.cpp" />
     <ClCompile Include="FallingState.cpp" />
     <ClCompile Include="FireCommand.cpp" />
     <ClCompile Include="FiringState.cpp" />
@@ -288,11 +294,13 @@ xcopy "$(SolutionDir)3rdParty\Fmod\lib\x64\fmod.dll" "$(OutputPath)" /R /Y</Comm
     <ClCompile Include="HudObserver.cpp" />
     <ClCompile Include="Intro.cpp" />
     <ClCompile Include="IntroComponent.cpp" />
+    <ClCompile Include="InvincibleState.cpp" />
     <ClCompile Include="JumpCommand.cpp" />
     <ClCompile Include="JumpingState.cpp" />
     <ClCompile Include="LeftCommand.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="LevelComponent.cpp" />
+    <ClCompile Include="LivingState.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Npc.cpp" />
     <ClCompile Include="NpcComponent.cpp" />

@@ -4,6 +4,7 @@
 namespace ieg
 {
 	class Minigin;
+	class TransformModelComponent;
 
 	class ColliderModelComponent final
 		: public ModelComponent
@@ -20,10 +21,13 @@ namespace ieg
 		void Collision() override {};
 		void Switch() override {};
 
+		bool DoesCollide(TransformModelComponent* pTransformSelf, TransformModelComponent* pTransformOther, ColliderModelComponent* pColliderOther);
 		const Vec2<int>& GetRelPos();
 		const Vec2<int>& GetSize();
 	private:
 		Vec2<int> mRelPos;
 		Vec2<int> mSize;
+		bool DoesCollideOneWay(Vec2<int> posOne, Vec2<int> sizeOne, Vec2<int> posTwo, Vec2<int> sizeTwo);
+		bool IsClamped(int mid, int one, int two);
 	};
 }

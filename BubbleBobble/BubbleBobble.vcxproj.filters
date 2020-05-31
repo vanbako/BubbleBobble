@@ -40,6 +40,9 @@
     <Filter Include="State\AvatarWeaponState">
       <UniqueIdentifier>{51ae2f0b-c677-4dea-82e6-175c22c4d4d3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="State\AvatarHealthState">
+      <UniqueIdentifier>{94406bc1-66b9-48da-8029-6135bef815a8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FireCommand.cpp">
@@ -198,6 +201,18 @@
     <ClCompile Include="ReloadingState.cpp">
       <Filter>State\AvatarWeaponState</Filter>
     </ClCompile>
+    <ClCompile Include="AvatarHealthState.cpp">
+      <Filter>State\AvatarHealthState</Filter>
+    </ClCompile>
+    <ClCompile Include="LivingState.cpp">
+      <Filter>State\AvatarHealthState</Filter>
+    </ClCompile>
+    <ClCompile Include="DyingState.cpp">
+      <Filter>State\AvatarHealthState</Filter>
+    </ClCompile>
+    <ClCompile Include="InvincibleState.cpp">
+      <Filter>State\AvatarHealthState</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FireCommand.h">
@@ -352,6 +367,18 @@
     </ClInclude>
     <ClInclude Include="ReloadingState.h">
       <Filter>State\AvatarWeaponState</Filter>
+    </ClInclude>
+    <ClInclude Include="AvatarHealthState.h">
+      <Filter>State\AvatarHealthState</Filter>
+    </ClInclude>
+    <ClInclude Include="LivingState.h">
+      <Filter>State\AvatarHealthState</Filter>
+    </ClInclude>
+    <ClInclude Include="DyingState.h">
+      <Filter>State\AvatarHealthState</Filter>
+    </ClInclude>
+    <ClInclude Include="InvincibleState.h">
+      <Filter>State\AvatarHealthState</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

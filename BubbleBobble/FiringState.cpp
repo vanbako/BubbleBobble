@@ -9,7 +9,7 @@ using namespace ieg;
 
 const float FiringState::mFiringTime{ 0.3f };
 
-ieg::FiringState::FiringState(ModelComponent* pModelComponent)
+FiringState::FiringState(ModelComponent* pModelComponent)
 	: AvatarWeaponState(pModelComponent)
 	, mFiringTimer{ mFiringTime }
 {

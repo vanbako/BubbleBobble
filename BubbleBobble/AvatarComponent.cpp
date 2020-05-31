@@ -8,6 +8,10 @@
 #include "ReadyState.h"
 #include "FiringState.h"
 #include "ReloadingState.h"
+#include "LivingState.h"
+#include "DyingState.h"
+#include "InvincibleState.h"
+#include "AvatarManager.h"
 #include "../Engine/Minigin.h"
 #include "../Engine/Scene.h"
 #include "../Engine/InputManager.h"
@@ -36,6 +40,11 @@ AvatarComponent::AvatarComponent(GameObject* pGameObject, Minigin* pEngine, ...)
 	, mpReloadingState{ new ReloadingState{ this } }
 	, mpCurWeaponState{ nullptr }
 	, mpNewWeaponState{ nullptr }
+	, mpLivingState{ new LivingState{ this } }
+	, mpDyingState{ new DyingState{ this } }
+	, mpInvincibleState{ new InvincibleState{ this } }
+	, mpCurHealthState{ nullptr }
+	, mpNewHealthState{ nullptr }
 	, mIsHorMoving{ 0 }
 	, mMoveHorDelay{ mMoveHor2PixelsTime }
 	, mpObsSubject{ new ObsSubject{} }
@@ -44,11 +53,16 @@ AvatarComponent::AvatarComponent(GameObject* pGameObject, Minigin* pEngine, ...)
 	mpNewKineticState = mpStandingState;
 	mpCurWeaponState = mpReadyState;
 	mpNewWeaponState = mpReadyState;
+	mpCurHealthState = mpLivingState;
+	mpNewHealthState = mpLivingState;
 	mJumpSoundId = pEngine->GetServiceLocator()->GetAudio()->AddSound("../Data/Audio/jump.wav", false);
 }
 
 AvatarComponent::~AvatarComponent()
 {
+	delete mpInvincibleState;
+	delete mpDyingState;
+	delete mpLivingState;
 	delete mpReloadingState;
 	delete mpFiringState;
 	delete mpReadyState;
@@ -61,8 +75,12 @@ AvatarComponent::~AvatarComponent()
 
 void AvatarComponent::Update(const float deltaTime)
 {
-	mpCurKineticState->Update(deltaTime);
-	mpCurWeaponState->Update(deltaTime);
+	if (mpCurHealthState != mpDyingState)
+	{
+		mpCurKineticState->Update(deltaTime);
+		mpCurWeaponState->Update(deltaTime);
+	}
+	mpCurHealthState->Update(deltaTime);
 	if (mIsHorMoving > 0)
 	{
 		--mIsHorMoving;
@@ -72,34 +90,37 @@ void AvatarComponent::Update(const float deltaTime)
 
 void AvatarComponent::Collision()
 {
-	unsigned short collision{ mpGOLevel->GetModelComponent<LevelComponent>()->CheckAvatarCollision(
-	mpGameObject->GetModelComponent<TransformModelComponent>(),
-	mpGameObject->GetModelComponent<ColliderModelComponent>()) };
+	// LevelCollision
+	TransformModelComponent* pTransform{ mpGameObject->GetModelComponent<TransformModelComponent>() };
+	ColliderModelComponent* pCollider{ mpGameObject->GetModelComponent<ColliderModelComponent>() };
+	unsigned short collision{ mpGOLevel->GetModelComponent<LevelComponent>()->CheckAvatarCollision(pTransform, pCollider) };
 	if (mpNewKineticState == mpStandingState)
 		if ((collision & 1) != 0)
 		{
-			mpGameObject->GetModelComponent<TransformModelComponent>()->ResetNewPosY();
-			collision = mpGOLevel->GetModelComponent<LevelComponent>()->CheckAvatarCollision(
-				mpGameObject->GetModelComponent<TransformModelComponent>(),
-				mpGameObject->GetModelComponent<ColliderModelComponent>());
+			pTransform->ResetNewPosY();
+			collision = mpGOLevel->GetModelComponent<LevelComponent>()->CheckAvatarCollision(pTransform, pCollider);
 		}
 		else
 			mpCurKineticState->Fall();
 	if ((collision & 12) != 0)
-		mpGameObject->GetModelComponent<TransformModelComponent>()->ResetNewPosX();
+		pTransform->ResetNewPosX();
 	if ((collision & 2) != 0 && mpNewKineticState == mpStandingState)
-		mpGameObject->GetModelComponent<TransformModelComponent>()->ResetNewPosY();
+		pTransform->ResetNewPosY();
 	if ((collision & 1) != 0 && mpNewKineticState == mpFallingState)
 	{
-		mpGameObject->GetModelComponent<TransformModelComponent>()->ResetNewPosY();
+		pTransform->ResetNewPosY();
 		mpCurKineticState->Land();
 	}
+	// NpcCollision
+	if (mpCurHealthState == mpLivingState && mpGOLevel->GetModelComponent<LevelComponent>()->CheckNpcCollision(pTransform, pCollider))
+		SetDyingState();
 }
 
 void AvatarComponent::Switch()
 {
 	mpCurKineticState = mpNewKineticState;
 	mpCurWeaponState = mpNewWeaponState;
+	mpCurHealthState = mpNewHealthState;
 }
 
 ObsSubject* AvatarComponent::GetObsSubject()
@@ -117,9 +138,9 @@ void AvatarComponent::SetFallingState()
 	mpNewKineticState = mpFallingState;
 }
 
-void ieg::AvatarComponent::SetJumpingState()
+void AvatarComponent::SetJumpingState()
 {
-	((JumpingState*)mpJumpingState)->ResetJumpHeight();
+	mpJumpingState->ResetJumpHeight();
 	mpNewKineticState = mpJumpingState;
 	mpEngine->GetServiceLocator()->GetAudio()->PlaySound(mJumpSoundId);
 }
@@ -144,6 +165,21 @@ void AvatarComponent::SetReloadingState()
 	mpNewWeaponState = mpReloadingState;
 }
 
+void AvatarComponent::SetLivingState()
+{
+	mpNewHealthState = mpLivingState;
+}
+
+void AvatarComponent::SetDyingState()
+{
+	mpNewHealthState = mpDyingState;
+}
+
+void AvatarComponent::SetInvincibleState()
+{
+	mpNewHealthState = mpInvincibleState;
+}
+
 void AvatarComponent::FireBubble()
 {
 	TransformModelComponent* pTransform{ mpGameObject->GetModelComponent<TransformModelComponent>() };
@@ -156,38 +192,52 @@ void AvatarComponent::FireBubble()
 	mpGOLevel->GetModelComponent<LevelComponent>()->FireBubble(pos);
 }
 
+void AvatarComponent::Spawn()
+{
+	mpGameObject->GetModelComponent<TransformModelComponent>()->SetPos(AvatarManager::GetAvatarInitialPos(0));
+	mpGameObject->GetModelComponent<TransformModelComponent>()->Switch();
+}
+
 void AvatarComponent::Fire()
 {
-	mpCurWeaponState->Fire();
+	if (mpCurHealthState != mpDyingState)
+		mpCurWeaponState->Fire();
 }
 
 void AvatarComponent::Jump()
 {
-	mpCurKineticState->Jump();
+	if (mpCurHealthState != mpDyingState)
+		mpCurKineticState->Jump();
 }
 
 void AvatarComponent::Left()
 {
-	if (mMoveHorDelay <= 0)
+	if (mpCurHealthState != mpDyingState)
 	{
-		TransformModelComponent* pTransform{ mpGameObject->GetModelComponent<TransformModelComponent>() };
-		pTransform->SetIsLookingLeft(true);
-		pTransform->Move(-2, 0);
-		mMoveHorDelay += mMoveHor2PixelsTime;
+		if (mMoveHorDelay <= 0)
+		{
+			TransformModelComponent* pTransform{ mpGameObject->GetModelComponent<TransformModelComponent>() };
+			pTransform->SetIsLookingLeft(true);
+			pTransform->Move(-2, 0);
+			mMoveHorDelay += mMoveHor2PixelsTime;
+		}
+		mIsHorMoving = 2;
 	}
-	mIsHorMoving = 2;
 }
 
 void AvatarComponent::Right()
 {
-	if (mMoveHorDelay <= 0)
+	if (mpCurHealthState != mpDyingState)
 	{
-		TransformModelComponent* pTransform{ mpGameObject->GetModelComponent<TransformModelComponent>() };
-		pTransform->SetIsLookingLeft(false);
-		pTransform->Move(2, 0);
-		mMoveHorDelay += mMoveHor2PixelsTime;
+		if (mMoveHorDelay <= 0)
+		{
+			TransformModelComponent* pTransform{ mpGameObject->GetModelComponent<TransformModelComponent>() };
+			pTransform->SetIsLookingLeft(false);
+			pTransform->Move(2, 0);
+			mMoveHorDelay += mMoveHor2PixelsTime;
+		}
+		mIsHorMoving = 2;
 	}
-	mIsHorMoving = 2;
 }
 
 float AvatarComponent::GetMoveVer2PixelsTime()

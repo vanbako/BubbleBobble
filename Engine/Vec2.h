@@ -19,6 +19,11 @@ namespace ieg
 		Vec2& operator=(const Vec2& other) = default;
 		Vec2& operator=(Vec2&& other) = default;
 
+		Vec2<T> operator+(const Vec2<T>& rhs) const
+		{
+			return Vec2<T> { mX + rhs.mX, mY + rhs.mY };
+		};
+
 		const T& GetX() const { return mX; };
 		const T& GetY() const { return mY; };
 		void SetX(T x) { mX = x; };

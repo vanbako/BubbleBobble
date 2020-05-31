@@ -117,7 +117,7 @@ void NpcComponent::Switch()
 	mCurIsFiring = mNewIsFiring;
 }
 
-ObsSubject* ieg::NpcComponent::GetObsSubject()
+ObsSubject* NpcComponent::GetObsSubject()
 {
 	return mpObsSubject;
 }
