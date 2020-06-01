@@ -12,7 +12,7 @@ namespace ieg
 		explicit AvatarHealthState(ModelComponent* pModelComponent)
 			: State(pModelComponent)
 		{};
-		~AvatarHealthState() = default;
+		virtual ~AvatarHealthState() = default;
 		AvatarHealthState(const AvatarHealthState&) = delete;
 		AvatarHealthState(AvatarHealthState&&) = delete;
 		AvatarHealthState& operator=(const AvatarHealthState&) = delete;

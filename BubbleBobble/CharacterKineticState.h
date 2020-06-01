@@ -12,7 +12,7 @@ namespace ieg
 		explicit CharacterKineticState(ModelComponent* pModelComponent)
 			: State(pModelComponent)
 		{};
-		~CharacterKineticState() = default;
+		virtual ~CharacterKineticState() = default;
 		CharacterKineticState(const CharacterKineticState&) = delete;
 		CharacterKineticState(CharacterKineticState&&) = delete;
 		CharacterKineticState& operator=(const CharacterKineticState&) = delete;

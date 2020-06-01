@@ -206,6 +206,11 @@ xcopy "$(SolutionDir)3rdParty\Fmod\lib\x64\fmod.dll" "$(OutputPath)" /R /Y</Comm
     <ClInclude Include="AvatarComponent.h" />
     <ClInclude Include="AvatarHealthState.h" />
     <ClInclude Include="AvatarManager.h" />
+    <ClInclude Include="BubbleCaptureState.h" />
+    <ClInclude Include="BubbleCtrlComponent.h" />
+    <ClInclude Include="BubbleFloatingState.h" />
+    <ClInclude Include="BubbleKineticState.h" />
+    <ClInclude Include="BubblePoppingState.h" />
     <ClInclude Include="CharacterKineticState.h" />
     <ClInclude Include="CharacterWeaponState.h" />
     <ClInclude Include="Bubble.h" />
@@ -265,6 +270,11 @@ xcopy "$(SolutionDir)3rdParty\Fmod\lib\x64\fmod.dll" "$(OutputPath)" /R /Y</Comm
     <ClCompile Include="AvatarComponent.cpp" />
     <ClCompile Include="AvatarHealthState.cpp" />
     <ClCompile Include="AvatarManager.cpp" />
+    <ClCompile Include="BubbleCaptureState.cpp" />
+    <ClCompile Include="BubbleCtrlComponent.cpp" />
+    <ClCompile Include="BubbleFloatingState.cpp" />
+    <ClCompile Include="BubbleKineticState.cpp" />
+    <ClCompile Include="BubblePoppingState.cpp" />
     <ClCompile Include="CharacterKineticState.cpp" />
     <ClCompile Include="CharacterWeaponState.cpp" />
     <ClCompile Include="Bubble.cpp" />

@@ -49,6 +49,9 @@
     <Filter Include="State\CharacterWeaponState">
       <UniqueIdentifier>{51ae2f0b-c677-4dea-82e6-175c22c4d4d3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="State\BubbleKineticState">
+      <UniqueIdentifier>{782f1ff2-be91-4589-b085-9ad4cf47e66c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FireCommand.cpp">
@@ -225,6 +228,21 @@
     <ClCompile Include="CharacterWeaponState.cpp">
       <Filter>State\CharacterWeaponState</Filter>
     </ClCompile>
+    <ClCompile Include="BubbleCtrlComponent.cpp">
+      <Filter>Component\CtrlComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="BubbleKineticState.cpp">
+      <Filter>State\BubbleKineticState</Filter>
+    </ClCompile>
+    <ClCompile Include="BubbleCaptureState.cpp">
+      <Filter>State\BubbleKineticState</Filter>
+    </ClCompile>
+    <ClCompile Include="BubbleFloatingState.cpp">
+      <Filter>State\BubbleKineticState</Filter>
+    </ClCompile>
+    <ClCompile Include="BubblePoppingState.cpp">
+      <Filter>State\BubbleKineticState</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FireCommand.h">
@@ -397,6 +415,21 @@
     </ClInclude>
     <ClInclude Include="CharacterWeaponState.h">
       <Filter>State\CharacterWeaponState</Filter>
+    </ClInclude>
+    <ClInclude Include="BubbleCtrlComponent.h">
+      <Filter>Component\CtrlComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="BubbleKineticState.h">
+      <Filter>State\BubbleKineticState</Filter>
+    </ClInclude>
+    <ClInclude Include="BubbleCaptureState.h">
+      <Filter>State\BubbleKineticState</Filter>
+    </ClInclude>
+    <ClInclude Include="BubbleFloatingState.h">
+      <Filter>State\BubbleKineticState</Filter>
+    </ClInclude>
+    <ClInclude Include="BubblePoppingState.h">
+      <Filter>State\BubbleKineticState</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

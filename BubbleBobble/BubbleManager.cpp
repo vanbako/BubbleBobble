@@ -43,9 +43,10 @@ void BubbleManager::FireBubble(const Vec2<int>& pos)
 		GameObject* pBubble{ mpGOBubbles[bubble] };
 		if (!pBubble->IsActive())
 		{
-			pBubble->SetIsActive(true);
+			pBubble->GetModelComponent<BubbleComponent>()->SetCaptureState();
 			pBubble->GetModelComponent<TransformModelComponent>()->SetPos(pos);
 			pBubble->GetModelComponent<TransformModelComponent>()->Switch();
+			pBubble->SetIsActive(true);
 			break;
 		}
 	}

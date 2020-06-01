@@ -12,7 +12,7 @@ namespace ieg
 		explicit CharacterWeaponState(ModelComponent* pModelComponent)
 			: State(pModelComponent)
 		{};
-		~CharacterWeaponState() = default;
+		virtual ~CharacterWeaponState() = default;
 		CharacterWeaponState(const CharacterWeaponState&) = delete;
 		CharacterWeaponState(CharacterWeaponState&&) = delete;
 		CharacterWeaponState& operator=(const CharacterWeaponState&) = delete;

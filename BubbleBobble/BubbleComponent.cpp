@@ -1,6 +1,9 @@
 #include "pch.h"
 #include "BubbleComponent.h"
 #include "LevelComponent.h"
+#include "BubbleCaptureState.h"
+#include "BubbleFloatingState.h"
+#include "BubblePoppingState.h"
 #include "../Engine/Scene.h"
 #include "../Engine/InputManager.h"
 #include "../Engine/GameObject.h"
@@ -9,39 +12,29 @@
 
 using namespace ieg;
 
-const float BubbleComponent::mMoveHor2PixelsTime{ 0.06f };
-const float BubbleComponent::mMoveVer2PixelsTime{ 0.06f };
-
 BubbleComponent::BubbleComponent(GameObject* pGameObject, Minigin* pEngine, ...)
 	: ModelComponent(pGameObject, pEngine)
 	, mpGOLevel{ nullptr }
-	, mMoveHorDelay{ mMoveHor2PixelsTime }
-	, mMoveVerDelay{ mMoveVer2PixelsTime }
+	, mpCaptureState{ new BubbleCaptureState{ this } }
+	, mpFloatingState{ new BubbleFloatingState{ this } }
+	, mpPoppingState{ new BubblePoppingState{ this } }
+	, mpCurKineticState{ nullptr }
+	, mpNewKineticState{ nullptr }
 {
+	mpCurKineticState = mpCaptureState;
+	mpNewKineticState = mpFloatingState;
+}
+
+BubbleComponent::~BubbleComponent()
+{
+	delete mpPoppingState;
+	delete mpFloatingState;
+	delete mpCaptureState;
 }
 
 void BubbleComponent::Update(const float deltaTime)
 {
-	TransformModelComponent* pTransform{ mpGameObject->GetModelComponent<TransformModelComponent>() };
-	Vec2<int> pos{ pTransform->GetNewPos() };
-	if (mMoveVerDelay <= 0)
-	{
-		if (pos.GetY() < 24)
-			pTransform->Move(0, 24 - pos.GetY());
-		else
-			pTransform->Move(0, -2);
-		mMoveVerDelay += mMoveVer2PixelsTime;
-	}
-	if (mMoveHorDelay <= 0)
-	{
-		if (pos.GetX() < 128)
-			pTransform->Move(-2, 0);
-		else
-			pTransform->Move(2, 0);
-		mMoveVerDelay += mMoveVer2PixelsTime;
-	}
-	mMoveHorDelay -= deltaTime;
-	mMoveVerDelay -= deltaTime;
+	mpCurKineticState->Update(deltaTime);
 }
 
 void BubbleComponent::Collision()
@@ -54,7 +47,27 @@ void BubbleComponent::Collision()
 	//if ((collision & 1) != 0)
 }
 
+void BubbleComponent::Switch()
+{
+	mpCurKineticState = mpNewKineticState;
+}
+
 void BubbleComponent::SetLevel(GameObject* pLevel)
 {
 	mpGOLevel = pLevel;
+}
+
+void BubbleComponent::SetCaptureState()
+{
+	mpNewKineticState = mpCaptureState;
+}
+
+void BubbleComponent::SetFloatingState()
+{
+	mpNewKineticState = mpFloatingState;
+}
+
+void BubbleComponent::SetPoppingState()
+{
+	mpNewKineticState = mpPoppingState;
 }
