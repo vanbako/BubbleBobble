@@ -1,10 +1,10 @@
 #pragma once
-#include "AvatarWeaponState.h"
+#include "CharacterWeaponState.h"
 
 namespace ieg
 {
 	class ReloadingState final
-		: public AvatarWeaponState
+		: public CharacterWeaponState
 	{
 	public:
 		explicit ReloadingState(ModelComponent* pModelComponent);

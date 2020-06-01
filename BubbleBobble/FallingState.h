@@ -1,10 +1,10 @@
 #pragma once
-#include "AvatarKineticState.h"
+#include "CharacterKineticState.h"
 
 namespace ieg
 {
 	class FallingState final
-		: public AvatarKineticState
+		: public CharacterKineticState
 	{
 	public:
 		explicit FallingState(ModelComponent* pModelComponent);

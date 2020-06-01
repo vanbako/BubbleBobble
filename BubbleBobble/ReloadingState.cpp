@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "ReloadingState.h"
-#include "AvatarComponent.h"
+#include "CharacterComponent.h"
 #include "../Engine/GameObject.h"
 #include "../Engine/ModelComponent.h"
 #include "../Engine/TransformModelComponent.h"
@@ -10,7 +10,7 @@ using namespace ieg;
 const float ReloadingState::mReloadTime{ 0.1f };
 
 ReloadingState::ReloadingState(ModelComponent* pModelComponent)
-	: AvatarWeaponState(pModelComponent)
+	: CharacterWeaponState(pModelComponent)
 	, mReloadTimer{ mReloadTime }
 {
 }
@@ -27,5 +27,5 @@ void ReloadingState::Update(const float deltaTime)
 
 void ReloadingState::ReloadDone()
 {
-	((AvatarComponent*)mpModelComponent)->SetReadyState();
+	((CharacterComponent*)mpModelComponent)->SetReadyState();
 }

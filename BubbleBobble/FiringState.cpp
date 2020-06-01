@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "FiringState.h"
-#include "AvatarComponent.h"
+#include "CharacterComponent.h"
 #include "../Engine/GameObject.h"
 #include "../Engine/ModelComponent.h"
 #include "../Engine/TransformModelComponent.h"
@@ -10,7 +10,7 @@ using namespace ieg;
 const float FiringState::mFiringTime{ 0.3f };
 
 FiringState::FiringState(ModelComponent* pModelComponent)
-	: AvatarWeaponState(pModelComponent)
+	: CharacterWeaponState(pModelComponent)
 	, mFiringTimer{ mFiringTime }
 {
 }
@@ -27,5 +27,5 @@ void FiringState::Update(const float deltaTime)
 
 void FiringState::FiringDone()
 {
-	((AvatarComponent*)mpModelComponent)->SetReloadingState();
+	((CharacterComponent*)mpModelComponent)->SetReloadingState();
 }

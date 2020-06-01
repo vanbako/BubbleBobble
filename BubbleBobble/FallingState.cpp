@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "FallingState.h"
-#include "AvatarComponent.h"
+#include "CharacterComponent.h"
 #include "../Engine/GameObject.h"
 #include "../Engine/ModelComponent.h"
 #include "../Engine/TransformModelComponent.h"
@@ -8,9 +8,9 @@
 using namespace ieg;
 
 FallingState::FallingState(ModelComponent* pModelComponent)
-	: AvatarKineticState(pModelComponent)
+	: CharacterKineticState(pModelComponent)
 	, mIsVerMoving{ 0 }
-	, mMoveVerDelay{ AvatarComponent::GetMoveVer2PixelsTime() }
+	, mMoveVerDelay{ CharacterComponent::GetMoveVer2PixelsTime() }
 {
 }
 
@@ -23,7 +23,7 @@ void FallingState::Update(const float deltaTime)
 			pTransform->Move(0, -220);
 		else
 			pTransform->Move(0, 2);
-		mMoveVerDelay += AvatarComponent::GetMoveVer2PixelsTime();
+		mMoveVerDelay += CharacterComponent::GetMoveVer2PixelsTime();
 	}
 	mIsVerMoving = 1;
 	mMoveVerDelay -= deltaTime;
@@ -35,5 +35,5 @@ void FallingState::Jump()
 
 void FallingState::Land()
 {
-	((AvatarComponent*)mpModelComponent)->SetStandingState();
+	((CharacterComponent*)mpModelComponent)->SetStandingState();
 }

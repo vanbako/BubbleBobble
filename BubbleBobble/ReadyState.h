@@ -1,14 +1,14 @@
 #pragma once
-#include "AvatarWeaponState.h"
+#include "CharacterWeaponState.h"
 
 namespace ieg
 {
 	class ReadyState final
-		: public AvatarWeaponState
+		: public CharacterWeaponState
 	{
 	public:
 		explicit ReadyState(ModelComponent* pModelComponent)
-			: AvatarWeaponState(pModelComponent)
+			: CharacterWeaponState(pModelComponent)
 		{};
 		~ReadyState() = default;
 		ReadyState(const ReadyState&) = delete;

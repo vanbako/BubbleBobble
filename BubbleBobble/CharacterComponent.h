@@ -3,26 +3,65 @@
 
 namespace ieg
 {
+    class CharacterKineticState;
+    class StandingState;
+    class JumpingState;
+    class FallingState;
+    class CharacterWeaponState;
+    class ReadyState;
+    class FiringState;
+    class ReloadingState;
+    class ObsSubject;
+
     class CharacterComponent
         : public ModelComponent
     {
     public:
-        explicit CharacterComponent(GameObject* pGameObject, Minigin* pEngine, ...)
-            : ModelComponent(pGameObject, pEngine)
-        {};
-        virtual ~CharacterComponent() = default;
+        explicit CharacterComponent(GameObject* pGameObject, Minigin* pEngine, ...);
+        virtual ~CharacterComponent();
         CharacterComponent(const CharacterComponent&) = delete;
         CharacterComponent(CharacterComponent&&) = delete;
         CharacterComponent& operator=(const CharacterComponent&) = delete;
         CharacterComponent& operator=(CharacterComponent&&) = delete;
 
-        virtual void Update(const float deltaTime) = 0;
-        virtual void Collision() = 0;
-        virtual void Switch() = 0;
+        virtual void Update(const float deltaTime);
+        virtual void Collision();
+        virtual void Switch();
 
-        virtual void Fire() = 0;
-        virtual void Jump() = 0;
-        virtual void Left() = 0;
-        virtual void Right() = 0;
+        virtual void Fire();
+        virtual void Jump();
+        virtual void Left();
+        virtual void Right();
+
+        virtual void SetFallingState();
+        virtual void SetJumpingState();
+        virtual void SetStandingState();
+        virtual void SetReadyState();
+        virtual void SetFiringState();
+        virtual void SetReloadingState();
+
+        ObsSubject* GetObsSubject();
+        void SetLevel(GameObject* pLevel);
+        static float GetMoveVer2PixelsTime();
+    protected:
+        GameObject* mpGOLevel;
+        ObsSubject* mpObsSubject;
+        StandingState* mpStandingState;
+        JumpingState* mpJumpingState;
+        FallingState* mpFallingState;
+        CharacterKineticState
+            * mpCurKineticState,
+            * mpNewKineticState;
+        ReadyState* mpReadyState;
+        FiringState* mpFiringState;
+        ReloadingState* mpReloadingState;
+        CharacterWeaponState
+            * mpCurWeaponState,
+            * mpNewWeaponState;
+        int mIsHorMoving;
+        float mMoveHorDelay;
+
+        static const float mMoveHor2PixelsTime;
+        static const float mMoveVer2PixelsTime;
     };
 }

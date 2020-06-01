@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "StandingState.h"
-#include "AvatarComponent.h"
+#include "CharacterComponent.h"
 #include "../Engine/GameObject.h"
 #include "../Engine/ModelComponent.h"
 #include "../Engine/TransformModelComponent.h"
@@ -15,10 +15,10 @@ void StandingState::Update(const float deltaTime)
 
 void StandingState::Jump()
 {
-	((AvatarComponent*)mpModelComponent)->SetJumpingState();
+	((CharacterComponent*)mpModelComponent)->SetJumpingState();
 }
 
 void StandingState::Fall()
 {
-	((AvatarComponent*)mpModelComponent)->SetFallingState();
+	((CharacterComponent*)mpModelComponent)->SetFallingState();
 }

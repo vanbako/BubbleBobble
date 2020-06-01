@@ -1,14 +1,14 @@
 #pragma once
-#include "AvatarKineticState.h"
+#include "CharacterKineticState.h"
 
 namespace ieg
 {
 	class StandingState final
-		: public AvatarKineticState
+		: public CharacterKineticState
 	{
 	public:
 		explicit StandingState(ModelComponent* pModelComponent)
-			: AvatarKineticState(pModelComponent)
+			: CharacterKineticState(pModelComponent)
 		{};
 		~StandingState() = default;
 		StandingState(const StandingState&) = delete;

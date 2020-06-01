@@ -10,10 +10,10 @@ using namespace ieg;
 const int JumpingState::mMaxJumpHeight{ 42 };
 
 JumpingState::JumpingState(ModelComponent* pModelComponent)
-	: AvatarKineticState(pModelComponent)
+	: CharacterKineticState(pModelComponent)
 	, mIsVerMoving{ 0 }
 	, mJumpHeight{ 0 }
-	, mMoveVerDelay{ AvatarComponent::GetMoveVer2PixelsTime() }
+	, mMoveVerDelay{ CharacterComponent::GetMoveVer2PixelsTime() }
 {
 }
 
@@ -32,7 +32,7 @@ void JumpingState::Update(const float deltaTime)
 		{
 			mpModelComponent->GetGameObject()->GetModelComponent<TransformModelComponent>()->Move(0, -2);
 			mJumpHeight += 2;
-			mMoveVerDelay += AvatarComponent::GetMoveVer2PixelsTime();
+			mMoveVerDelay += CharacterComponent::GetMoveVer2PixelsTime();
 		}
 		mIsVerMoving = 2;
 	}
@@ -46,5 +46,5 @@ void JumpingState::Update(const float deltaTime)
 void JumpingState::Fall()
 {
 	mJumpHeight = 0;
-	((AvatarComponent*)mpModelComponent)->SetFallingState();
+	((CharacterComponent*)mpModelComponent)->SetFallingState();
 }

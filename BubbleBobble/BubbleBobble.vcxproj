@@ -206,8 +206,8 @@ xcopy "$(SolutionDir)3rdParty\Fmod\lib\x64\fmod.dll" "$(OutputPath)" /R /Y</Comm
     <ClInclude Include="AvatarComponent.h" />
     <ClInclude Include="AvatarHealthState.h" />
     <ClInclude Include="AvatarManager.h" />
-    <ClInclude Include="AvatarKineticState.h" />
-    <ClInclude Include="AvatarWeaponState.h" />
+    <ClInclude Include="CharacterKineticState.h" />
+    <ClInclude Include="CharacterWeaponState.h" />
     <ClInclude Include="Bubble.h" />
     <ClInclude Include="BubbleBobble.h" />
     <ClInclude Include="BubbleComponent.h" />
@@ -265,8 +265,8 @@ xcopy "$(SolutionDir)3rdParty\Fmod\lib\x64\fmod.dll" "$(OutputPath)" /R /Y</Comm
     <ClCompile Include="AvatarComponent.cpp" />
     <ClCompile Include="AvatarHealthState.cpp" />
     <ClCompile Include="AvatarManager.cpp" />
-    <ClCompile Include="AvatarKineticState.cpp" />
-    <ClCompile Include="AvatarWeaponState.cpp" />
+    <ClCompile Include="CharacterKineticState.cpp" />
+    <ClCompile Include="CharacterWeaponState.cpp" />
     <ClCompile Include="Bubble.cpp" />
     <ClCompile Include="BubbleBobble.cpp" />
     <ClCompile Include="BubbleComponent.cpp" />

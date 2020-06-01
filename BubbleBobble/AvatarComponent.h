@@ -4,15 +4,6 @@
 namespace ieg
 {
 	class Minigin;
-	class ObsSubject;
-	class AvatarKineticState;
-	class StandingState;
-	class JumpingState;
-	class FallingState;
-	class AvatarWeaponState;
-	class ReadyState;
-	class FiringState;
-	class ReloadingState;
 	class AvatarHealthState;
 	class LivingState;
 	class DyingState;
@@ -39,14 +30,8 @@ namespace ieg
 		void Collision() override;
 		void Switch() override;
 
-		ObsSubject* GetObsSubject();
-		void SetLevel(GameObject* pLevel);
-		void SetFallingState();
-		void SetJumpingState();
-		void SetStandingState();
-		void SetReadyState();
-		void SetFiringState();
-		void SetReloadingState();
+		void SetJumpingState() override;
+		void SetFiringState() override;
 		void SetLivingState();
 		void SetDyingState();
 		void SetInvincibleState();
@@ -58,34 +43,13 @@ namespace ieg
 		void Jump() override;
 		void Left() override;
 		void Right() override;
-
-		static float GetMoveVer2PixelsTime();
 	private:
-		GameObject* mpGOLevel;
-		ObsSubject* mpObsSubject;
-		StandingState* mpStandingState;
-		JumpingState* mpJumpingState;
-		FallingState* mpFallingState;
-		AvatarKineticState
-			*mpCurKineticState,
-			*mpNewKineticState;
-		ReadyState* mpReadyState;
-		FiringState* mpFiringState;
-		ReloadingState* mpReloadingState;
-		AvatarWeaponState
-			* mpCurWeaponState,
-			* mpNewWeaponState;
 		LivingState* mpLivingState;
 		DyingState* mpDyingState;
 		InvincibleState* mpInvincibleState;
 		AvatarHealthState
 			* mpCurHealthState,
 			* mpNewHealthState;
-		int mIsHorMoving;
-		float mMoveHorDelay;
 		int mJumpSoundId;
-
-		static const float mMoveHor2PixelsTime;
-		static const float mMoveVer2PixelsTime;
 	};
 }

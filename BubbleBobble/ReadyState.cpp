@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "ReadyState.h"
-#include "AvatarComponent.h"
+#include "CharacterComponent.h"
 #include "../Engine/GameObject.h"
 #include "../Engine/ModelComponent.h"
 #include "../Engine/TransformModelComponent.h"
@@ -14,6 +14,5 @@ void ReadyState::Update(const float deltaTime)
 
 void ReadyState::Fire()
 {
-	((AvatarComponent*)mpModelComponent)->SetFiringState();
-	((AvatarComponent*)mpModelComponent)->FireBubble();
+	((CharacterComponent*)mpModelComponent)->SetFiringState();
 }
