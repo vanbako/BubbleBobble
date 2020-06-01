@@ -2,6 +2,7 @@
 #include "NpcManager.h"
 #include "Npc.h"
 #include "NpcComponent.h"
+#include "NpcCtrlComponent.h"
 #include "../Engine/Minigin.h"
 #include "../Engine/GameObject.h"
 #include "../Engine/ColorRGBA8.h"
@@ -82,6 +83,10 @@ void NpcManager::SpawnNpc(NpcType npcType, Vec2<int>& pos, bool isLookingLeft, i
 		return;
 	mpGONpcs[npc]->GetModelComponent<NpcComponent>()->SetNpcType(npcType);
 	mSpawnWait[npc] = float(wait) / 20.f;
+	if (isLookingLeft)
+		mpGONpcs[npc]->GetCtrlComponent<NpcCtrlComponent>()->SetMove(NpcMove::Left);
+	else
+		mpGONpcs[npc]->GetCtrlComponent<NpcCtrlComponent>()->SetMove(NpcMove::Right);
 	TransformModelComponent* pTransform{ mpGONpcs[npc]->GetModelComponent<TransformModelComponent>() };
 	pTransform->SetPos(pos);
 	pTransform->SetIsLookingLeft(isLookingLeft);

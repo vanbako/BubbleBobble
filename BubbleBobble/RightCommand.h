@@ -14,6 +14,6 @@ namespace ieg
 		RightCommand& operator=(const RightCommand&) = delete;
 		RightCommand& operator=(RightCommand&&) = delete;
 
-		virtual void Execute(ModelComponent* pActor) override;
+		virtual void Execute(ModelComponent* pCharacter) override;
 	};
 }

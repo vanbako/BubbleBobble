@@ -28,7 +28,7 @@ const float AvatarComponent::mMoveHor2PixelsTime{ 0.04f };
 const float AvatarComponent::mMoveVer2PixelsTime{ 0.02f };
 
 AvatarComponent::AvatarComponent(GameObject* pGameObject, Minigin* pEngine, ...)
-	: ModelComponent(pGameObject, pEngine)
+	: CharacterComponent(pGameObject, pEngine)
 	, mpGOLevel{ nullptr }
 	, mpStandingState{ new StandingState{ this } }
 	, mpJumpingState{ new JumpingState{ this } }

@@ -187,6 +187,7 @@
     <ClInclude Include="ColliderModelComponent.h" />
     <ClInclude Include="ColorRGBA8.h" />
     <ClInclude Include="Command.h" />
+    <ClInclude Include="CtrlComponent.h" />
     <ClInclude Include="ModelComponent.h" />
     <ClInclude Include="Font.h" />
     <ClInclude Include="FpsViewComponent.h" />
@@ -217,6 +218,7 @@
   <ItemGroup>
     <ClCompile Include="ColliderModelComponent.cpp" />
     <ClCompile Include="ColorRGBA8.cpp" />
+    <ClCompile Include="CtrlComponent.cpp" />
     <ClCompile Include="ModelComponent.cpp" />
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="FpsViewComponent.cpp" />

@@ -14,6 +14,6 @@ namespace ieg
 		JumpCommand& operator=(const JumpCommand&) = delete;
 		JumpCommand& operator=(JumpCommand&&) = delete;
 
-		virtual void Execute(ModelComponent* pActor) override;
+		virtual void Execute(ModelComponent* pCharacter) override;
 	};
 }

@@ -55,6 +55,9 @@
     <Filter Include="State">
       <UniqueIdentifier>{fbd47ec7-abf0-4f7c-943a-837ffb62c665}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Component\CtrlComponent">
+      <UniqueIdentifier>{f8bdbc64-3c07-4f99-b091-80a17c1f4a5f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene.h">
@@ -147,6 +150,9 @@
     <ClInclude Include="State.h">
       <Filter>State</Filter>
     </ClInclude>
+    <ClInclude Include="CtrlComponent.h">
+      <Filter>Component\CtrlComponent</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Scene.cpp">
@@ -223,6 +229,9 @@
     </ClCompile>
     <ClCompile Include="State.cpp">
       <Filter>State</Filter>
+    </ClCompile>
+    <ClCompile Include="CtrlComponent.cpp">
+      <Filter>Component\CtrlComponent</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

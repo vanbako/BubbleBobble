@@ -4,7 +4,6 @@ namespace ieg
 {
 	class Minigin;
 	class GameObject;
-	class State;
 
 	class ModelComponent
 	{

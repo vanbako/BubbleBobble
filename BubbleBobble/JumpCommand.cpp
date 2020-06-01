@@ -1,10 +1,10 @@
 #include "pch.h"
 #include "JumpCommand.h"
-#include "AvatarComponent.h"
+#include "CharacterComponent.h"
 
 using namespace ieg;
 
-void JumpCommand::Execute(ModelComponent* pAvatar)
+void JumpCommand::Execute(ModelComponent* pCharacter)
 {
-	((AvatarComponent*)(pAvatar))->Jump();
+	((CharacterComponent*)(pCharacter))->Jump();
 }

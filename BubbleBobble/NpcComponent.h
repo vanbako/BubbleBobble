@@ -1,5 +1,5 @@
 #pragma once
-#include "../Engine/ModelComponent.h"
+#include "CharacterComponent.h"
 
 namespace ieg
 {
@@ -32,7 +32,7 @@ namespace ieg
 	};
 
 	class NpcComponent final
-		: public ModelComponent
+		: public CharacterComponent
 	{
 	public:
 		explicit NpcComponent(GameObject* pGameObject, Minigin* pEngine,...);
@@ -52,10 +52,10 @@ namespace ieg
 		void SetNpcType(NpcType npcType);
 		NpcType GetNpcType();
 
-		void Fire();
-		void Jump();
-		void Left();
-		void Right();
+		void Fire() override;
+		void Jump() override;
+		void Left() override;
+		void Right() override;
 	private:
 		GameObject* mpGOLevel;
 		ObsSubject* mpObsSubject;

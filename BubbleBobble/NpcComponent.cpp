@@ -14,7 +14,7 @@ const float NpcComponent::mMoveVer2PixelsTime{ 0.02f };
 const int NpcComponent::mMaxJumpHeight{ 42 };
 
 NpcComponent::NpcComponent(GameObject* pGameObject, Minigin* pEngine, ...)
-	: ModelComponent(pGameObject, pEngine)
+	: CharacterComponent(pGameObject, pEngine)
 	, mpGOLevel{ nullptr }
 	, mNpcType{ NpcType::ZenChan }
 	, mCurState{ NpcState::Standing }

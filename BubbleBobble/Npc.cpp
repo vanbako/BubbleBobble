@@ -3,6 +3,7 @@
 #include "BufferManager.h"
 #include "BufferAsprites.h"
 #include "NpcComponent.h"
+#include "NpcCtrlComponent.h"
 #include "LeftCommand.h"
 #include "RightCommand.h"
 #include "JumpCommand.h"
@@ -43,6 +44,7 @@ GameObject* Npc::CreateNpc(Minigin* pEngine, Scene* pScene, BufferManager* pBuff
 	pRenderComponent->SetTransformComponent(pTransformComponent);
 	pRenderComponent->SetIsSprite(true);
 	pGONpc->CreateModelComponent<NpcComponent>(pEngine);
+	pGONpc->CreateCtrlComponent<NpcCtrlComponent>(pEngine);
 	pGONpc->CreateModelComponent<ColliderModelComponent>(pEngine, Vec2<int>{ 0, 0 }, Vec2<int>{ 15, 15 });
 
 	ColorRGBA8* pPixels{ new ColorRGBA8[int(NpcType::Count) * mCount * mWidth * mHeight] };
@@ -91,7 +93,8 @@ GameObject* Npc::CopyNpc(Minigin* pEngine, GameObject* pGONpc)
 	pRenderComponent->SetTexture(pGONpc->GetViewComponent<RenderViewComponent>()->GetTexture());
 	pRenderComponent->SetSize(mWidth, mHeight);
 	pGONpcCopy->CreateModelComponent<NpcComponent>(pEngine);
-	pGONpcCopy->CreateModelComponent<ColliderModelComponent>(pEngine, Vec2<int>{ 0, 8 }, Vec2<int>{ 15, 7 });
+	pGONpcCopy->CreateCtrlComponent<NpcCtrlComponent>(pEngine);
+	pGONpcCopy->CreateModelComponent<ColliderModelComponent>(pEngine, Vec2<int>{ 0, 0 }, Vec2<int>{ 15, 15 });
 	return pGONpcCopy;
 }
 

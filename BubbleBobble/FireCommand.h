@@ -14,6 +14,6 @@ namespace ieg
 		FireCommand& operator=(const FireCommand&) = delete;
 		FireCommand& operator=(FireCommand&&) = delete;
 
-		virtual void Execute(ModelComponent* pActor) override;
+		virtual void Execute(ModelComponent* pCharacter) override;
 	};
 }

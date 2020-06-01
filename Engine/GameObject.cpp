@@ -5,6 +5,7 @@ using namespace ieg;
 
 GameObject::GameObject(Scene* pScene)
 	: SceneObject(pScene)
+	, mpCtrlComponents{}
 	, mpModelComponents{}
 	, mpViewComponents{}
 	, mIsActive{ false }
@@ -13,6 +14,8 @@ GameObject::GameObject(Scene* pScene)
 
 GameObject::~GameObject()
 {
+	for (CtrlComponent* pCtrlComponent : mpCtrlComponents)
+		delete pCtrlComponent;
 	for (ModelComponent* pModelComponent : mpModelComponents)
 		delete pModelComponent;
 	for (ViewComponent* pViewComponent : mpViewComponents)
@@ -23,6 +26,8 @@ void GameObject::Update(const float deltaTime)
 {
 	if (mIsActive)
 	{
+		for (CtrlComponent* pCtrlComponent : mpCtrlComponents)
+			pCtrlComponent->Update(deltaTime);
 		for (ModelComponent* pModelComponent : mpModelComponents)
 			pModelComponent->Update(deltaTime);
 		for (ModelComponent* pModelComponent : mpModelComponents)

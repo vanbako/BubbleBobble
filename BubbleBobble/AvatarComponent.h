@@ -1,5 +1,5 @@
 #pragma once
-#include "../Engine/ModelComponent.h"
+#include "CharacterComponent.h"
 
 namespace ieg
 {
@@ -25,7 +25,7 @@ namespace ieg
 	};
 
 	class AvatarComponent final
-		: public ModelComponent
+		: public CharacterComponent
 	{
 	public:
 		explicit AvatarComponent(GameObject* pGameObject, Minigin* pEngine,...);
@@ -54,10 +54,10 @@ namespace ieg
 		void FireBubble();
 		void Spawn();
 
-		void Fire();
-		void Jump();
-		void Left();
-		void Right();
+		void Fire() override;
+		void Jump() override;
+		void Left() override;
+		void Right() override;
 
 		static float GetMoveVer2PixelsTime();
 	private:

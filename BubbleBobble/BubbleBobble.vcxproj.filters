@@ -43,6 +43,12 @@
     <Filter Include="State\AvatarHealthState">
       <UniqueIdentifier>{94406bc1-66b9-48da-8029-6135bef815a8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Component\CtrlComponent">
+      <UniqueIdentifier>{e4a731b4-fa69-4c57-a4db-3e0107dca7fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\ModelComponent">
+      <UniqueIdentifier>{c5cf410f-6fe0-442b-a021-9a898b3bc02f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FireCommand.cpp">
@@ -105,29 +111,14 @@
     <ClCompile Include="Intro.cpp">
       <Filter>Prefabs</Filter>
     </ClCompile>
-    <ClCompile Include="IntroComponent.cpp">
-      <Filter>Component</Filter>
-    </ClCompile>
     <ClCompile Include="Start.cpp">
       <Filter>Prefabs</Filter>
-    </ClCompile>
-    <ClCompile Include="StartComponent.cpp">
-      <Filter>Component</Filter>
     </ClCompile>
     <ClCompile Include="BubbleBobble.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="AvatarComponent.cpp">
-      <Filter>Component</Filter>
-    </ClCompile>
     <ClCompile Include="Avatar.cpp">
       <Filter>Prefabs</Filter>
-    </ClCompile>
-    <ClCompile Include="HudComponent.cpp">
-      <Filter>Component</Filter>
-    </ClCompile>
-    <ClCompile Include="LevelComponent.cpp">
-      <Filter>Component</Filter>
     </ClCompile>
     <ClCompile Include="Bubble.cpp">
       <Filter>Prefabs</Filter>
@@ -135,17 +126,11 @@
     <ClCompile Include="Npc.cpp">
       <Filter>Prefabs</Filter>
     </ClCompile>
-    <ClCompile Include="NpcComponent.cpp">
-      <Filter>Component</Filter>
-    </ClCompile>
     <ClCompile Include="Start1Command.cpp">
       <Filter>Command</Filter>
     </ClCompile>
     <ClCompile Include="Start2Command.cpp">
       <Filter>Command</Filter>
-    </ClCompile>
-    <ClCompile Include="BubbleComponent.cpp">
-      <Filter>Component</Filter>
     </ClCompile>
     <ClCompile Include="pch.cpp">
       <Filter>Precompiled Header</Filter>
@@ -170,9 +155,6 @@
     </ClCompile>
     <ClCompile Include="Candy.cpp">
       <Filter>Prefabs</Filter>
-    </ClCompile>
-    <ClCompile Include="CandyComponent.cpp">
-      <Filter>Component</Filter>
     </ClCompile>
     <ClCompile Include="CandyManager.cpp">
       <Filter>Manager</Filter>
@@ -213,6 +195,36 @@
     <ClCompile Include="InvincibleState.cpp">
       <Filter>State\AvatarHealthState</Filter>
     </ClCompile>
+    <ClCompile Include="AvatarComponent.cpp">
+      <Filter>Component\ModelComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="BubbleComponent.cpp">
+      <Filter>Component\ModelComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="CandyComponent.cpp">
+      <Filter>Component\ModelComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="HudComponent.cpp">
+      <Filter>Component\ModelComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="IntroComponent.cpp">
+      <Filter>Component\ModelComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelComponent.cpp">
+      <Filter>Component\ModelComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="NpcComponent.cpp">
+      <Filter>Component\ModelComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="StartComponent.cpp">
+      <Filter>Component\ModelComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="NpcCtrlComponent.cpp">
+      <Filter>Component\CtrlComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="CharacterComponent.cpp">
+      <Filter>Component\ModelComponent</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FireCommand.h">
@@ -226,9 +238,6 @@
     </ClInclude>
     <ClInclude Include="RightCommand.h">
       <Filter>Command</Filter>
-    </ClInclude>
-    <ClInclude Include="IntroComponent.h">
-      <Filter>Component</Filter>
     </ClInclude>
     <ClInclude Include="Level.h">
       <Filter>Prefabs</Filter>
@@ -281,23 +290,11 @@
     <ClInclude Include="Start.h">
       <Filter>Prefabs</Filter>
     </ClInclude>
-    <ClInclude Include="StartComponent.h">
-      <Filter>Component</Filter>
-    </ClInclude>
     <ClInclude Include="BubbleBobble.h">
       <Filter>Game</Filter>
     </ClInclude>
-    <ClInclude Include="AvatarComponent.h">
-      <Filter>Component</Filter>
-    </ClInclude>
     <ClInclude Include="Avatar.h">
       <Filter>Prefabs</Filter>
-    </ClInclude>
-    <ClInclude Include="HudComponent.h">
-      <Filter>Component</Filter>
-    </ClInclude>
-    <ClInclude Include="LevelComponent.h">
-      <Filter>Component</Filter>
     </ClInclude>
     <ClInclude Include="Bubble.h">
       <Filter>Prefabs</Filter>
@@ -305,17 +302,11 @@
     <ClInclude Include="Npc.h">
       <Filter>Prefabs</Filter>
     </ClInclude>
-    <ClInclude Include="NpcComponent.h">
-      <Filter>Component</Filter>
-    </ClInclude>
     <ClInclude Include="Start1Command.h">
       <Filter>Command</Filter>
     </ClInclude>
     <ClInclude Include="Start2Command.h">
       <Filter>Command</Filter>
-    </ClInclude>
-    <ClInclude Include="BubbleComponent.h">
-      <Filter>Component</Filter>
     </ClInclude>
     <ClInclude Include="pch.h">
       <Filter>Precompiled Header</Filter>
@@ -337,9 +328,6 @@
     </ClInclude>
     <ClInclude Include="Candy.h">
       <Filter>Prefabs</Filter>
-    </ClInclude>
-    <ClInclude Include="CandyComponent.h">
-      <Filter>Component</Filter>
     </ClInclude>
     <ClInclude Include="CandyManager.h">
       <Filter>Manager</Filter>
@@ -379,6 +367,36 @@
     </ClInclude>
     <ClInclude Include="InvincibleState.h">
       <Filter>State\AvatarHealthState</Filter>
+    </ClInclude>
+    <ClInclude Include="AvatarComponent.h">
+      <Filter>Component\ModelComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="BubbleComponent.h">
+      <Filter>Component\ModelComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="CandyComponent.h">
+      <Filter>Component\ModelComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="HudComponent.h">
+      <Filter>Component\ModelComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="IntroComponent.h">
+      <Filter>Component\ModelComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelComponent.h">
+      <Filter>Component\ModelComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="NpcComponent.h">
+      <Filter>Component\ModelComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="StartComponent.h">
+      <Filter>Component\ModelComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="NpcCtrlComponent.h">
+      <Filter>Component\CtrlComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="CharacterComponent.h">
+      <Filter>Component\ModelComponent</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

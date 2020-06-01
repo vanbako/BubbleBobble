@@ -1,5 +1,6 @@
 #pragma once
 #include "SceneObject.h"
+#include "CtrlComponent.h"
 #include "ModelComponent.h"
 #include "ViewComponent.h"
 #include "TextViewComponent.h"
@@ -20,6 +21,18 @@ namespace ieg
 		GameObject(GameObject&& other) = delete;
 		GameObject& operator=(const GameObject& other) = delete;
 		GameObject& operator=(GameObject&& other) = delete;
+
+		template<class T>
+		T* CreateCtrlComponent(Minigin* pEngine, ...)
+		{
+			std::va_list args{};
+			va_start(args, pEngine);
+			T* pCtrlComponent{ new T{ this, pEngine, args } };
+			va_end(args);
+			if (pCtrlComponent != nullptr)
+				mpCtrlComponents.push_back(pCtrlComponent);
+			return pCtrlComponent;
+		}
 
 		template<class T>
 		T* CreateModelComponent(Minigin* pEngine,...)
@@ -53,6 +66,23 @@ namespace ieg
 				mpViewComponents.push_back(pViewComponent);
 			return pViewComponent;
 		}
+
+		template<class T>
+		const T* GetCtrlComponent() const
+		{
+			for (const auto pCtrlComponent : mpCtrlComponents)
+				if (typeid(*pCtrlComponent).hash_code() == typeid(T).hash_code())
+					return (T*)pCtrlComponent;
+			return nullptr;
+		};
+		template<class T>
+		T* GetCtrlComponent()
+		{
+			for (auto pCtrlComponent : mpCtrlComponents)
+				if (typeid(*pCtrlComponent).hash_code() == typeid(T).hash_code())
+					return (T*)pCtrlComponent;
+			return nullptr;
+		};
 
 		template<class T>
 		const T* GetModelComponent() const
@@ -95,6 +125,7 @@ namespace ieg
 		void SetIsActive(bool isActive) { mIsActive = isActive; };
 	private:
 		bool mIsActive;
+		std::vector<CtrlComponent*> mpCtrlComponents;
 		std::vector<ModelComponent*> mpModelComponents;
 		std::vector<ViewComponent*> mpViewComponents;
 	};
