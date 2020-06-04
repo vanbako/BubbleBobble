@@ -4,6 +4,7 @@
 namespace ieg
 {
 	class Buffer;
+	class ServiceLocator;
 
 	enum class EnumBuffer
 	{
@@ -29,8 +30,8 @@ namespace ieg
 		BufferManager& operator=(const BufferManager&) = delete;
 		BufferManager& operator=(BufferManager&&) = delete;
 
-		void LoadFiles();
-		Buffer* GetBuffer(EnumBuffer buffer);
+		void LoadFiles(ServiceLocator* pServiceLocator);
+		Buffer* GetBuffer(EnumBuffer buffer) noexcept;
 	private:
 		static const std::vector<std::string> mFilenames;
 		std::vector<Buffer*> mpBuffers;

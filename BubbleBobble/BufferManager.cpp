@@ -11,6 +11,8 @@
 #include "BufferBdata.h"
 #include "BufferBubble.h"
 #include "BufferBubcode.h"
+#include "../Engine/ServiceLocator.h"
+#include "../Engine/Logger.h"
 
 using namespace ieg;
 
@@ -48,13 +50,14 @@ BufferManager::~BufferManager()
 		delete pBuffer;
 }
 
-void BufferManager::LoadFiles()
+void BufferManager::LoadFiles(ServiceLocator* pServiceLocator)
 {
 	for (Buffer* pBuffer : mpBuffers)
-		pBuffer->LoadFile();
+		if (!pBuffer->LoadFile())
+			pServiceLocator->GetLogger()->Message(this, MsgType::Fatal, "Could not load Game input file");
 }
 
-Buffer* BufferManager::GetBuffer(EnumBuffer buffer)
+Buffer* BufferManager::GetBuffer(EnumBuffer buffer) noexcept
 {
 	return mpBuffers[int(buffer)];
 }

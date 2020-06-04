@@ -7,9 +7,6 @@ namespace ieg
 	class FireCommand;
 	class StartCommand;
 	class BufferManager;
-	class Hud;
-	class Intro;
-	class Start;
 
 	class BubbleBobble final
 	{
@@ -29,13 +26,10 @@ namespace ieg
 		BubbleBobble& operator=(BubbleBobble&&) = delete;
 
 		void Initialize();
-		void AddScenes();
+		void AddScenes() noexcept;
 	private:
 		Minigin* mpEngine;
 		BufferManager* mpBufferManager;
-		Intro* mpIntro;
-		Hud* mpHud;
-		Start* mpStart;
 		std::vector<Scene*> mpScenes;
 	};
 }

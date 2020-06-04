@@ -31,10 +31,10 @@ BubbleBobble::~BubbleBobble()
 
 void BubbleBobble::Initialize()
 {
-	mpBufferManager->LoadFiles();
+	mpBufferManager->LoadFiles(mpEngine->GetServiceLocator());
 }
 
-void BubbleBobble::AddScenes()
+void BubbleBobble::AddScenes() noexcept
 {
 	mpScenes[int(Scenes::Intro)] = mpEngine->GetSceneManager()->CreateScene("Intro");
 	mpScenes[int(Scenes::Start)] = mpEngine->GetSceneManager()->CreateScene("Start");

@@ -153,6 +153,15 @@
     <ClInclude Include="CtrlComponent.h">
       <Filter>Component\CtrlComponent</Filter>
     </ClInclude>
+    <ClInclude Include="Logger.h">
+      <Filter>ServiceLocator\Log</Filter>
+    </ClInclude>
+    <ClInclude Include="NullLogger.h">
+      <Filter>ServiceLocator\Log</Filter>
+    </ClInclude>
+    <ClInclude Include="FileLogger.h">
+      <Filter>ServiceLocator\Log</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Scene.cpp">
@@ -233,5 +242,12 @@
     <ClCompile Include="CtrlComponent.cpp">
       <Filter>Component\CtrlComponent</Filter>
     </ClCompile>
+    <ClCompile Include="NullLogger.cpp">
+      <Filter>ServiceLocator\Log</Filter>
+    </ClCompile>
+    <ClCompile Include="FileLogger.cpp">
+      <Filter>ServiceLocator\Log</Filter>
+    </ClCompile>
+    <ClCompile Include="Logger.cpp" />
   </ItemGroup>
 </Project>

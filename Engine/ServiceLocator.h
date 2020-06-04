@@ -5,6 +5,8 @@ namespace ieg
 {
 	class Audio;
 	class NullAudio;
+	class Logger;
+	class NullLogger;
 
 	class ServiceLocator final
 	{
@@ -18,9 +20,13 @@ namespace ieg
 
 		static void init();
 		static Audio* GetAudio();
-		static void RegisterAudioService(Audio* audioService);
+		static void RegisterAudioService(Audio* pAudioService);
+		static Logger* GetLogger();
+		static void RegisterLoggerService(Logger* pLoggerService);
 	private:
 		static Audio* mpAudioService;
 		static NullAudio mNullAudioService;
+		static Logger* mpLoggerService;
+		static NullLogger mNullLoggerService;
 	};
 }

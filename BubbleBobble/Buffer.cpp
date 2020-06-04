@@ -19,15 +19,16 @@ Buffer::~Buffer()
 
 bool Buffer::LoadFile()
 {
-	if (mpData == nullptr)
-	{
-		std::ifstream ifile{ "../Data/Amiga/" + mFilename, std::ios::binary | std::ios::ate };
-		mSize = int(ifile.tellg());
-		ifile.seekg(0);
-		mpData = new char[mSize];
-		ifile.read(mpData, mSize);
-		ifile.close();
-	}
+	if (mpData != nullptr)
+		return true;
+	std::ifstream ifile{ "../Data/Amiga/" + mFilename, std::ios::binary | std::ios::ate };
+	if (!ifile.is_open())
+		return false;
+	mSize = int(ifile.tellg());
+	ifile.seekg(0);
+	mpData = new char[mSize];
+	ifile.read(mpData, mSize);
+	ifile.close();
 	return true;
 }
 
