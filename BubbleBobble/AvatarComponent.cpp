@@ -110,7 +110,9 @@ void AvatarComponent::FireBubble()
 		pos.Move(-16, 0);
 	else
 		pos.Move(16, 0);
-	mpGOLevel->GetModelComponent<LevelComponent>()->FireBubble(pos);
+	LevelComponent* pLevelComponent{ mpGOLevel->GetModelComponent<LevelComponent>() };
+	if (pLevelComponent != nullptr)
+		pLevelComponent->FireBubble(pos);
 }
 
 void AvatarComponent::Spawn()
