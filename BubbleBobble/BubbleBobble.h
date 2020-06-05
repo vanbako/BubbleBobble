@@ -2,7 +2,6 @@
 
 namespace ieg
 {
-	class Scene;
 	class Minigin;
 	class FireCommand;
 	class StartCommand;
@@ -30,6 +29,5 @@ namespace ieg
 	private:
 		Minigin* mpEngine;
 		BufferManager* mpBufferManager;
-		std::vector<Scene*> mpScenes;
 	};
 }
