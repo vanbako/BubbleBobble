@@ -25,12 +25,15 @@ namespace ieg
 		void Switch() override;
 
 		void SetLevel(GameObject* pLevel);
+		void SetIsFiringLeft(bool isFiringLeft);
+		bool IsFiringLeft();
 
 		virtual void SetCaptureState();
 		virtual void SetFloatingState();
 		virtual void SetPoppingState();
 	private:
 		GameObject* mpGOLevel;
+		bool mIsFiringLeft;
 		BubbleCaptureState* mpCaptureState;
 		BubbleFloatingState* mpFloatingState;
 		BubblePoppingState* mpPoppingState;

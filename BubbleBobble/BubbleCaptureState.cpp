@@ -7,7 +7,7 @@
 
 using namespace ieg;
 
-const float BubbleCaptureState::mCaptureTime{ 1.f };
+const float BubbleCaptureState::mCaptureTime{ 0.6f };
 const float BubbleCaptureState::mMoveHor2PixelsTime{ 0.02f };
 
 BubbleCaptureState::BubbleCaptureState(ModelComponent* pModelComponent)
@@ -29,7 +29,7 @@ void BubbleCaptureState::Update(const float deltaTime)
 	Vec2<int> pos{ pTransform->GetNewPos() };
 	if (mMoveHorDelay <= 0.f)
 	{
-		if (pos.GetX() < 128)
+		if (((BubbleComponent*)mpModelComponent)->IsFiringLeft())
 			pTransform->Move(-2, 0);
 		else
 			pTransform->Move(2, 0);

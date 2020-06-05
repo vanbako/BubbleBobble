@@ -25,7 +25,7 @@ const int Avatar::mWidth{ 32 };
 const int Avatar::mHeight{ 16 };
 const int Avatar::mCount{ 16 };
 
-GameObject* Avatar::CreateAvatar(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, ColorRGBA8* pPalette, AvatarType avatarType)
+GameObject* Avatar::CreateAvatar(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, ObjectsManager* pObjectsManager, ColorRGBA8* pPalette, AvatarType avatarType)
 {
 	BufferAsprites* pAsprites{ (BufferAsprites*)pBufferManager->GetBuffer(EnumBuffer::Asprites) };
 
@@ -39,7 +39,8 @@ GameObject* Avatar::CreateAvatar(Minigin* pEngine, Scene* pScene, BufferManager*
 	RenderViewComponent* pRenderComponent{ pGOAvatar->CreateViewComponent<RenderViewComponent>(pEngine) };
 	pRenderComponent->SetTransformComponent(pTransformComponent);
 	pRenderComponent->SetIsSprite(true);
-	AvatarComponent* pAvatarComponent{ pGOAvatar->CreateModelComponent<AvatarComponent>(pEngine) };
+	AvatarComponent* pAvatarComponent{ pGOAvatar->CreateModelComponent<AvatarComponent>(pEngine, pObjectsManager) };
+	pAvatarComponent->SetAvatarType(avatarType);
 	pGOAvatar->CreateModelComponent<ColliderModelComponent>(pEngine, Vec2<int>{ 0, 8 }, Vec2<int>{ 15, 7 });
 
 	InputAction* pInputAction{ pScene->GetInputManager()->CreateInputAction() };

@@ -92,26 +92,82 @@ unsigned short LevelComponent::CheckAvatarCollision(TransformModelComponent* pTr
 	};
 	const Vec2<int>& size{ pCollider->GetSize() };
 	unsigned short collision{ 0 };
+	// Left Top: 1010
 	if (CheckCollisionPos(pos.GetX(), pos.GetY())) { collision |= 10; };
+	// Right Top: 0110
 	if (CheckCollisionPos(pos.GetX() + size.GetX(), pos.GetY())) { collision |= 6; };
 	if (CheckCollisionPos(pos.GetX(), pos.GetY() + size.GetY() - 8))
 	{
+		// Left Bottom&OneUp: 1000
 		if (CheckCollisionPos(pos.GetX(), pos.GetY() + size.GetY())) { collision |= 8; };
 	}
 	else
+		// Left Bottom: 1001
 		if (CheckCollisionPos(pos.GetX(), pos.GetY() + size.GetY())) { collision |= 9; };
 	if (CheckCollisionPos(pos.GetX() + size.GetX(), pos.GetY() + size.GetY() - 8))
 	{
+		// Right Bottom&OneUp: 0100
 		if (CheckCollisionPos(pos.GetX() + size.GetX(), pos.GetY() + size.GetY())) { collision |= 4; };
 	}
 	else
+		// Right Bottom: 0101
 		if (CheckCollisionPos(pos.GetX() + size.GetX(), pos.GetY() + size.GetY())) { collision |= 5; };
 	if (CheckCollisionPos(pos.GetX() + size.GetX() / 2, pos.GetY() + size.GetY() - 8))
 	{
+		// Middle Bottom&OneUp: 0100
 		if (CheckCollisionPos(pos.GetX() + size.GetX() / 2, pos.GetY() + size.GetY())) { collision |= 4; };
 	}
 	else
+		// Middle Bottom: 0101
 		if (CheckCollisionPos(pos.GetX() + size.GetX() / 2, pos.GetY() + size.GetY())) { collision |= 5; };
+	return collision;
+}
+
+unsigned short LevelComponent::CheckRectangleCollision(TransformModelComponent* pTransform, ColliderModelComponent* pCollider)
+{
+	unsigned short collision{ 0 };
+	if (pTransform == nullptr || pCollider == nullptr) return false;
+	const Vec2<int> posX{
+		pTransform->GetNewPos().GetX() + pCollider->GetRelPos().GetX(),
+		pTransform->GetPos().GetY() + pCollider->GetRelPos().GetY()
+	};
+	const Vec2<int> posY{
+		pTransform->GetPos().GetX() + pCollider->GetRelPos().GetX(),
+		pTransform->GetNewPos().GetY() + pCollider->GetRelPos().GetY()
+	};
+	const Vec2<int>& size{ pCollider->GetSize() };
+	// Left: 1000
+	if (CheckCollisionPos(posX.GetX(), posX.GetY()) ||
+		CheckCollisionPos(posX.GetX(), posX.GetY() + size.GetY() / 2) ||
+		CheckCollisionPos(posX.GetX(), posX.GetY() + size.GetY())
+		)
+	{
+		collision |= 8;
+	};
+	// Right: 0100
+	if (CheckCollisionPos(posX.GetX() + size.GetX(), posX.GetY()) ||
+		CheckCollisionPos(posX.GetX() + size.GetX(), posX.GetY() + size.GetY() / 2) ||
+		CheckCollisionPos(posX.GetX() + size.GetX(), posX.GetY() + size.GetY())
+		)
+	{
+		collision |= 4;
+	};
+	// Top: 0010
+	if (CheckCollisionPos(posY.GetX(), posY.GetY()) ||
+		CheckCollisionPos(posY.GetX() + size.GetX() / 2, posY.GetY()) ||
+		CheckCollisionPos(posY.GetX() + size.GetX(), posY.GetY())
+		)
+	{
+		collision |= 2;
+	};
+	// Bottom: 0001
+	if (CheckCollisionPos(posY.GetX(), posY.GetY() + size.GetY()) ||
+		CheckCollisionPos(posY.GetX() + size.GetX() / 2, posY.GetY() + size.GetY()) ||
+		CheckCollisionPos(posY.GetX() + size.GetX(), posY.GetY() + size.GetY())
+		)
+	{
+		collision |= 1;
+	};
 	return collision;
 }
 
@@ -136,9 +192,4 @@ bool LevelComponent::CheckCollisionPos(const int x, const int y)
 		return true;
 	else
 		return false;
-}
-
-void LevelComponent::FireBubble(Vec2<int>& pos)
-{
-	mpObjectsManager->GetBubbleManager()->FireBubble(pos);
 }

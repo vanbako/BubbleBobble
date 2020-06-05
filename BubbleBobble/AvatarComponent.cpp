@@ -12,6 +12,8 @@
 #include "DyingState.h"
 #include "InvincibleState.h"
 #include "AvatarManager.h"
+#include "ObjectsManager.h"
+#include "BubbleManager.h"
 #include "../Engine/Minigin.h"
 #include "../Engine/Scene.h"
 #include "../Engine/InputManager.h"
@@ -25,12 +27,19 @@ using namespace ieg;
 
 AvatarComponent::AvatarComponent(GameObject* pGameObject, Minigin* pEngine, ...)
 	: CharacterComponent(pGameObject, pEngine)
+	, mAvatarType{ AvatarType::Bub }
 	, mpLivingState{ new LivingState{ this } }
 	, mpDyingState{ new DyingState{ this } }
 	, mpInvincibleState{ new InvincibleState{ this } }
 	, mpCurHealthState{ nullptr }
 	, mpNewHealthState{ nullptr }
+	, mpObjectsManager{ nullptr }
 {
+	std::va_list args{};
+	va_start(args, pEngine);
+	std::va_list vaList{ va_arg(args, std::va_list) };
+	mpObjectsManager = va_arg(vaList, ObjectsManager*);
+	va_end(args);
 	mpCurHealthState = mpLivingState;
 	mpNewHealthState = mpLivingState;
 	mJumpSoundId = pEngine->GetServiceLocator()->GetAudio()->AddSound("../Data/Audio/jump.wav", false);
@@ -74,6 +83,16 @@ void AvatarComponent::Switch()
 	mpCurHealthState = mpNewHealthState;
 }
 
+void AvatarComponent::SetAvatarType(AvatarType avatarType)
+{
+	mAvatarType = avatarType;
+}
+
+AvatarType AvatarComponent::GetAvatarType()
+{
+	return mAvatarType;
+}
+
 void AvatarComponent::SetJumpingState()
 {
 	CharacterComponent::SetJumpingState();
@@ -104,15 +123,15 @@ void AvatarComponent::SetInvincibleState()
 void AvatarComponent::FireBubble()
 {
 	TransformModelComponent* pTransform{ mpGameObject->GetModelComponent<TransformModelComponent>() };
-	Vec2<int> pos{};
-	pos = pTransform->GetNewPos();
+	Vec2<int> pos1{ pTransform->GetPos() };
+	Vec2<int> pos2{ pos1 };
 	if (pTransform->GetIsLookingLeft())
-		pos.Move(-16, 0);
+		pos2.Move(-16, 0);
 	else
-		pos.Move(16, 0);
+		pos2.Move(16, 0);
 	LevelComponent* pLevelComponent{ mpGOLevel->GetModelComponent<LevelComponent>() };
 	if (pLevelComponent != nullptr)
-		pLevelComponent->FireBubble(pos);
+		mpObjectsManager->GetBubbleManager()->FireBubble(mAvatarType, pos1, pos2, pTransform->GetIsLookingLeft());
 }
 
 void AvatarComponent::Spawn()

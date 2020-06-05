@@ -8,7 +8,7 @@
 
 using namespace ieg;
 
-const float BubblePoppingState::mPoppingTime{ 1.f };
+const float BubblePoppingState::mPoppingTime{ 0.2f };
 
 BubblePoppingState::BubblePoppingState(ModelComponent* pModelComponent)
 	: BubbleKineticState(pModelComponent)
@@ -22,10 +22,11 @@ void BubblePoppingState::Update(const float deltaTime)
 	if (mPoppingTimer <= 0.f)
 	{
 		mPoppingTimer = mPoppingTime;
-		Pop();
+		PopDone();
 	}
 }
 
 void BubblePoppingState::PopDone()
 {
+	mpModelComponent->GetGameObject()->SetIsActive(false);
 }

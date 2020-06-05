@@ -42,7 +42,7 @@ HudComponent::HudComponent(GameObject* pGameObject, Minigin* pEngine, ...)
 	ColorRGBA8* pPalette{ va_arg(vaList, ColorRGBA8*) };
 	va_end(args);
 	Scene* pScene{ mpGameObject->GetScene() };
-	mpObjectsManager->CreateGameObjects(pEngine, mpBufferManager, pScene, pPalette, mpHudObserver);
+	mpObjectsManager->CreateGameObjects(pEngine, mpBufferManager, mpObjectsManager, pScene, pPalette, mpHudObserver);
 	// Level has to be created last
 	// It will Initialise the Avatars, Bubbles and Enemies
 	mpGOLevel = Level::CreateLevel(mLevel, pEngine, pScene, mpBufferManager, mpObjectsManager);

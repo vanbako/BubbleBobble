@@ -36,15 +36,17 @@ void BubbleManager::Init(GameObject* pGOLevel)
 	}
 }
 
-void BubbleManager::FireBubble(const Vec2<int>& pos)
+void BubbleManager::FireBubble(AvatarType avatarType, const Vec2<int>& pos1, const Vec2<int>& pos2, bool isFiringLeft)
 {
-	for (int bubble{ 0 }; bubble < AvatarManager::GetAvatarMax() * mpBubblesPerAvatarMax; ++bubble)
+	(pos1);
+	for (int bubble{ int(avatarType) * mpBubblesPerAvatarMax }; bubble < (int(avatarType) + 1) * mpBubblesPerAvatarMax; ++bubble)
 	{
 		GameObject* pBubble{ mpGOBubbles[bubble] };
 		if (!pBubble->IsActive())
 		{
 			pBubble->GetModelComponent<BubbleComponent>()->SetCaptureState();
-			pBubble->GetModelComponent<TransformModelComponent>()->SetPos(pos);
+			pBubble->GetModelComponent<BubbleComponent>()->SetIsFiringLeft(isFiringLeft);
+			pBubble->GetModelComponent<TransformModelComponent>()->SetPos(pos2);
 			pBubble->GetModelComponent<TransformModelComponent>()->Switch();
 			pBubble->SetIsActive(true);
 			break;

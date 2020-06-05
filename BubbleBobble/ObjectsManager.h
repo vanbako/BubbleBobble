@@ -28,7 +28,7 @@ namespace ieg
 		NpcManager* GetNpcManager();
 		CandyManager* GetCandyManager();
 
-		void CreateGameObjects(Minigin* pEngine, BufferManager* pBufferManager, Scene* pScene, ColorRGBA8* pPalette, Observer* pObserver);
+		void CreateGameObjects(Minigin* pEngine, BufferManager* pBufferManager, ObjectsManager* pObjectsManager, Scene* pScene, ColorRGBA8* pPalette, Observer* pObserver);
 		void InitGameObjects(GameObject* pGOLevel);
 	private:
 		AvatarManager* mpAvatarManager;

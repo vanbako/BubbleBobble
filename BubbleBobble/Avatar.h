@@ -8,6 +8,7 @@ namespace ieg
 	class BufferManager;
 	class ColorRGBA8;
 	class Texture2D;
+	class ObjectsManager;
 
 	enum class AvatarType
 	{
@@ -26,7 +27,7 @@ namespace ieg
 		Avatar& operator=(const Avatar&) = delete;
 		Avatar& operator=(Avatar&&) = delete;
 
-		static GameObject* CreateAvatar(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, ColorRGBA8* pPalette, AvatarType avatarType);
+		static GameObject* CreateAvatar(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, ObjectsManager* pObjectsManager, ColorRGBA8* pPalette, AvatarType avatarType);
 	private:
 		static const std::string mInputFile;
 		static const int mWidth;

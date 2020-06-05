@@ -23,9 +23,9 @@ ObjectsManager::~ObjectsManager()
 	delete mpAvatarManager;
 }
 
-void ObjectsManager::CreateGameObjects(Minigin* pEngine, BufferManager* pBufferManager, Scene* pScene, ColorRGBA8* pPalette, Observer* pObserver)
+void ObjectsManager::CreateGameObjects(Minigin* pEngine, BufferManager* pBufferManager, ObjectsManager* pObjectsManager, Scene* pScene, ColorRGBA8* pPalette, Observer* pObserver)
 {
-	mpAvatarManager->CreateAvatars(pEngine, pBufferManager, pScene, pPalette, pObserver);
+	mpAvatarManager->CreateAvatars(pEngine, pBufferManager, pObjectsManager, pScene, pPalette, pObserver);
 	mpBubbleManager->CreateBubbles(pEngine, pBufferManager, pScene, pPalette);
 	mpNpcManager->CreateNpcs(pEngine, pBufferManager, pScene, pPalette, pObserver);
 	mpCandyManager->CreateCandy(pEngine, pBufferManager, pScene, pPalette);

@@ -8,7 +8,7 @@
 
 using namespace ieg;
 
-const float BubbleFloatingState::mFloatingTime{ 4.f };
+const float BubbleFloatingState::mFloatingTime{ 3.f };
 const float BubbleFloatingState::mMoveHor2PixelsTime{ 0.12f };
 const float BubbleFloatingState::mMoveVer2PixelsTime{ 0.12f };
 
@@ -29,12 +29,10 @@ void BubbleFloatingState::Update(const float deltaTime)
 		Pop();
 	}
 	TransformModelComponent* pTransform{ mpModelComponent->GetGameObject()->GetModelComponent<TransformModelComponent>() };
-	Vec2<int> pos{ pTransform->GetNewPos() };
+	Vec2<int> pos{ pTransform->GetPos() };
 	if (mMoveVerDelay <= 0.f)
 	{
-		if (pos.GetY() < 24)
-			pTransform->Move(0, 24 - pos.GetY());
-		else
+		if (pos.GetY() > 24)
 			pTransform->Move(0, -2);
 		mMoveVerDelay += mMoveVer2PixelsTime;
 	}

@@ -1,5 +1,6 @@
 #pragma once
 #include "../Engine/ModelComponent.h"
+#include "Avatar.h"
 
 namespace ieg
 {
@@ -32,9 +33,9 @@ namespace ieg
 
 		ObsSubject* GetObsSubject();
 		unsigned short CheckAvatarCollision(TransformModelComponent *pTransform, ColliderModelComponent* pCollider);
+		unsigned short CheckRectangleCollision(TransformModelComponent* pTransform, ColliderModelComponent* pCollider);
 		bool CheckNpcCollision(TransformModelComponent* pTransform, ColliderModelComponent* pCollider);
 		bool CheckCollisionPos(int x, int y);
-		void FireBubble(Vec2<int>& pos);
 	private:
 		float mTest;
 		ObjectsManager* mpObjectsManager;

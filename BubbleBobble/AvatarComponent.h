@@ -1,5 +1,6 @@
 #pragma once
 #include "CharacterComponent.h"
+#include "Avatar.h"
 
 namespace ieg
 {
@@ -8,6 +9,7 @@ namespace ieg
 	class LivingState;
 	class DyingState;
 	class InvincibleState;
+	class ObjectsManager;
 
 	enum class AvatarEvent
 	{
@@ -30,6 +32,9 @@ namespace ieg
 		void Collision() override;
 		void Switch() override;
 
+		void SetAvatarType(AvatarType avatarType);
+		AvatarType GetAvatarType();
+
 		void SetJumpingState() override;
 		void SetFiringState() override;
 		void SetLivingState();
@@ -44,6 +49,8 @@ namespace ieg
 		void Left() override;
 		void Right() override;
 	private:
+		ObjectsManager* mpObjectsManager;
+		AvatarType mAvatarType;
 		LivingState* mpLivingState;
 		DyingState* mpDyingState;
 		InvincibleState* mpInvincibleState;

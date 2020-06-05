@@ -8,6 +8,7 @@ namespace ieg
 	class BufferManager;
 	class GameObject;
 	class Observer;
+	class ObjectsManager;
 
 	class AvatarManager
 	{
@@ -19,7 +20,7 @@ namespace ieg
 		AvatarManager& operator=(const AvatarManager&) = delete;
 		AvatarManager& operator=(AvatarManager&&) = delete;
 
-		void CreateAvatars(Minigin * pEngine, BufferManager * pBufferManager, Scene * pScene, ColorRGBA8 * pPalette, Observer* pObserver);
+		void CreateAvatars(Minigin * pEngine, BufferManager * pBufferManager, ObjectsManager* pObjectsManager, Scene * pScene, ColorRGBA8 * pPalette, Observer* pObserver);
 		void Init(GameObject * pGOLevel);
 		void DeactivateAll();
 

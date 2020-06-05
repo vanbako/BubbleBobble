@@ -15,6 +15,7 @@ using namespace ieg;
 BubbleComponent::BubbleComponent(GameObject* pGameObject, Minigin* pEngine, ...)
 	: ModelComponent(pGameObject, pEngine)
 	, mpGOLevel{ nullptr }
+	, mIsFiringLeft{ false }
 	, mpCaptureState{ new BubbleCaptureState{ this } }
 	, mpFloatingState{ new BubbleFloatingState{ this } }
 	, mpPoppingState{ new BubblePoppingState{ this } }
@@ -39,12 +40,14 @@ void BubbleComponent::Update(const float deltaTime)
 
 void BubbleComponent::Collision()
 {
-	//unsigned short collision{ mpGOLevel->GetModelComponent<LevelComponent>()->CheckBubbleCollision(
-	//mpGameObject->GetModelComponent<TransformModelComponent>(),
-	//mpGameObject->GetModelComponent<ColliderModelComponent>()) };
-	//if ((collision & 12) != 0)
-	//if ((collision & 2) != 0)
-	//if ((collision & 1) != 0)
+	// LevelCollision
+	TransformModelComponent* pTransform{ mpGameObject->GetModelComponent<TransformModelComponent>() };
+	ColliderModelComponent* pCollider{ mpGameObject->GetModelComponent<ColliderModelComponent>() };
+	unsigned short collision{ mpGOLevel->GetModelComponent<LevelComponent>()->CheckRectangleCollision(pTransform, pCollider) };
+	if ((collision & 3) != 0)
+		pTransform->ResetNewPosY();
+	if ((collision & 12) != 0)
+		pTransform->ResetNewPosX();
 }
 
 void BubbleComponent::Switch()
@@ -55,6 +58,16 @@ void BubbleComponent::Switch()
 void BubbleComponent::SetLevel(GameObject* pLevel)
 {
 	mpGOLevel = pLevel;
+}
+
+void BubbleComponent::SetIsFiringLeft(bool isFiringLeft)
+{
+	mIsFiringLeft = isFiringLeft;
+}
+
+bool BubbleComponent::IsFiringLeft()
+{
+	return mIsFiringLeft;
 }
 
 void BubbleComponent::SetCaptureState()
