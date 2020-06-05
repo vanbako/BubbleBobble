@@ -13,9 +13,6 @@
     <Filter Include="Component">
       <UniqueIdentifier>{33caf348-596f-4c32-b75c-d22d9cd28916}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game">
-      <UniqueIdentifier>{293f5462-bf7d-49a6-a9bd-b2c08c4db186}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Prefabs">
       <UniqueIdentifier>{5067143d-99e5-4394-b72b-f672f0a19a4d}</UniqueIdentifier>
     </Filter>
@@ -116,9 +113,6 @@
     </ClCompile>
     <ClCompile Include="Start.cpp">
       <Filter>Prefabs</Filter>
-    </ClCompile>
-    <ClCompile Include="BubbleBobble.cpp">
-      <Filter>Game</Filter>
     </ClCompile>
     <ClCompile Include="Avatar.cpp">
       <Filter>Prefabs</Filter>
@@ -243,6 +237,9 @@
     <ClCompile Include="BubblePoppingState.cpp">
       <Filter>State\BubbleKineticState</Filter>
     </ClCompile>
+    <ClCompile Include="BubbleBobble.cpp">
+      <Filter>Prefabs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FireCommand.h">
@@ -307,9 +304,6 @@
     </ClInclude>
     <ClInclude Include="Start.h">
       <Filter>Prefabs</Filter>
-    </ClInclude>
-    <ClInclude Include="BubbleBobble.h">
-      <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="Avatar.h">
       <Filter>Prefabs</Filter>
@@ -430,6 +424,9 @@
     </ClInclude>
     <ClInclude Include="BubblePoppingState.h">
       <Filter>State\BubbleKineticState</Filter>
+    </ClInclude>
+    <ClInclude Include="BubbleBobble.h">
+      <Filter>Prefabs</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

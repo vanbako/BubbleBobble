@@ -43,7 +43,6 @@ namespace ieg
 		void Left() override;
 		void Right() override;
 	private:
-
 		NpcType mNpcType;
 	};
 }
