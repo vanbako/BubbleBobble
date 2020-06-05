@@ -2,10 +2,10 @@
 #include "InputAction.h"
 #include "Command.h"
 #include "ModelComponent.h"
+#include <fstream>
 
 using namespace ieg;
 
-// Only InputManager can create InputAction
 InputAction::InputAction(WORD code, int key, ModelComponent* pActor)
 	: mGamepadButtonCode{ code }
 	, mKeyboardKey{ key }
@@ -28,6 +28,32 @@ void InputAction::SetGamepadButtonCode(const WORD code)
 void InputAction::SetKeyboardKey(const int key)
 {
 	mKeyboardKey = key;
+}
+
+void InputAction::LoadInput(const std::string& filename, const std::string& code, int defaultKey, WORD defaultGamepad)
+{
+	int key{};
+	WORD gamepad{};
+	std::ifstream iFile{ "../Data/Input/" + filename };
+	if (iFile.is_open())
+	{
+		std::string command{};
+		int tmpKey{};
+		WORD tmpGamepad{};
+		while (iFile >> command >> tmpKey >> tmpGamepad)
+			if (command.compare(code) == 0)
+			{
+				key = tmpKey;
+				gamepad = tmpGamepad;
+				break;
+			}
+	}
+	if (key == 0)
+		key = defaultKey;
+	if (gamepad == 0)
+		gamepad = defaultGamepad;
+	SetKeyboardKey(key);
+	SetGamepadButtonCode(gamepad);
 }
 
 void InputAction::SetActor(ModelComponent* pComponent)

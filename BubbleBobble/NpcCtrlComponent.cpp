@@ -22,7 +22,7 @@ NpcCtrlComponent::NpcCtrlComponent(GameObject* pGameObject, Minigin* pEngine, ..
 {
 }
 
-ieg::NpcCtrlComponent::~NpcCtrlComponent()
+NpcCtrlComponent::~NpcCtrlComponent()
 {
 	delete mpRightCommand;
 	delete mpLeftCommand;

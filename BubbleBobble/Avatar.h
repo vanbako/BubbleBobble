@@ -28,6 +28,7 @@ namespace ieg
 
 		static GameObject* CreateAvatar(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, ColorRGBA8* pPalette, AvatarType avatarType);
 	private:
+		static const std::string mInputFile;
 		static const int mWidth;
 		static const int mHeight;
 		static const int mCount;

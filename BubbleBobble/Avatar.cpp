@@ -20,6 +20,7 @@
 
 using namespace ieg;
 
+const std::string Avatar::mInputFile{ "Avatar.txt" };
 const int Avatar::mWidth{ 32 };
 const int Avatar::mHeight{ 16 };
 const int Avatar::mCount{ 16 };
@@ -43,9 +44,11 @@ GameObject* Avatar::CreateAvatar(Minigin* pEngine, Scene* pScene, BufferManager*
 
 	InputAction* pInputAction{ pScene->GetInputManager()->CreateInputAction() };
 	if (avatarType == AvatarType::Bub)
-		pInputAction->SetKeyboardKey(VK_LEFT);
+		pInputAction->LoadInput(mInputFile, "bubleft", VK_LEFT, 0);
+		//pInputAction->SetKeyboardKey(VK_LEFT);
 	else
-		pInputAction->SetGamepadButtonCode(XINPUT_GAMEPAD_DPAD_LEFT);
+		pInputAction->LoadInput(mInputFile, "bobleft", 0, XINPUT_GAMEPAD_DPAD_LEFT);
+		//pInputAction->SetGamepadButtonCode(XINPUT_GAMEPAD_DPAD_LEFT);
 	pInputAction->CreateAndSetCommand<LeftCommand>();
 	pInputAction->SetActor(pAvatarComponent);
 

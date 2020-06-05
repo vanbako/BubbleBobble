@@ -1,7 +1,6 @@
 #pragma once
 #include "Command.h"
 
-// Only InputManager can create InputAction
 namespace ieg
 {
 	class Command;
@@ -26,6 +25,8 @@ namespace ieg
 				delete mpCommand;
 			mpCommand = new T;
 		}
+		void LoadInput(const std::string& filename, const std::string& code, int defaultKey, WORD defaultGamepad);
+
 		void SetActor(ModelComponent* pComponent);
 		const WORD GetGamepadButtonCode() const;
 		const int GetKeyboardKey() const;

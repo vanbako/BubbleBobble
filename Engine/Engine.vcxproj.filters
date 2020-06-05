@@ -248,6 +248,8 @@
     <ClCompile Include="FileLogger.cpp">
       <Filter>ServiceLocator\Log</Filter>
     </ClCompile>
-    <ClCompile Include="Logger.cpp" />
+    <ClCompile Include="Logger.cpp">
+      <Filter>ServiceLocator\Log</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
