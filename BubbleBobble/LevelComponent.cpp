@@ -171,6 +171,50 @@ unsigned short LevelComponent::CheckRectangleCollision(TransformModelComponent* 
 	return collision;
 }
 
+unsigned short LevelComponent::CheckRectanglePosCollision(const Vec2<int>& pos, ColliderModelComponent* pCollider)
+{
+	unsigned short collision{ 0 };
+	if (pCollider == nullptr) return false;
+	const Vec2<int> rPos{
+		pos.GetX() + pCollider->GetRelPos().GetX(),
+		pos.GetY() + pCollider->GetRelPos().GetY()
+	};
+	const Vec2<int>& size{ pCollider->GetSize() };
+	// Left: 1000
+	if (CheckCollisionPos(rPos.GetX(), rPos.GetY()) ||
+		CheckCollisionPos(rPos.GetX(), rPos.GetY() + size.GetY() / 2) ||
+		CheckCollisionPos(rPos.GetX(), rPos.GetY() + size.GetY())
+		)
+	{
+		collision |= 8;
+	};
+	// Right: 0100
+	if (CheckCollisionPos(rPos.GetX() + size.GetX(), rPos.GetY()) ||
+		CheckCollisionPos(rPos.GetX() + size.GetX(), rPos.GetY() + size.GetY() / 2) ||
+		CheckCollisionPos(rPos.GetX() + size.GetX(), rPos.GetY() + size.GetY())
+		)
+	{
+		collision |= 4;
+	};
+	// Top: 0010
+	if (CheckCollisionPos(rPos.GetX(), rPos.GetY()) ||
+		CheckCollisionPos(rPos.GetX() + size.GetX() / 2, rPos.GetY()) ||
+		CheckCollisionPos(rPos.GetX() + size.GetX(), rPos.GetY())
+		)
+	{
+		collision |= 2;
+	};
+	// Bottom: 0001
+	if (CheckCollisionPos(rPos.GetX(), rPos.GetY() + size.GetY()) ||
+		CheckCollisionPos(rPos.GetX() + size.GetX() / 2, rPos.GetY() + size.GetY()) ||
+		CheckCollisionPos(rPos.GetX() + size.GetX(), rPos.GetY() + size.GetY())
+		)
+	{
+		collision |= 1;
+	};
+	return collision;
+}
+
 bool LevelComponent::CheckNpcCollision(TransformModelComponent* pTransform, ColliderModelComponent* pCollider)
 {
 	GameObject* pGONpc{ mpObjectsManager->GetNpcManager()->GetNextActiveNpc(nullptr) };
