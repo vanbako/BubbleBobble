@@ -9,6 +9,7 @@
 #include "Avatar.h"
 #include "NpcComponent.h"
 #include "ObjectsManager.h"
+#include "AvatarManager.h"
 #include "BubbleManager.h"
 #include "NpcManager.h"
 #include "../Engine/GameObject.h"
@@ -215,13 +216,25 @@ unsigned short LevelComponent::CheckRectanglePosCollision(const Vec2<int>& pos, 
 	return collision;
 }
 
-bool LevelComponent::CheckNpcCollision(TransformModelComponent* pTransform, ColliderModelComponent* pCollider)
+GameObject* LevelComponent::CheckNpcCollision(TransformModelComponent* pTransform, ColliderModelComponent* pCollider)
 {
 	GameObject* pGONpc{ mpObjectsManager->GetNpcManager()->GetNextActiveNpc(nullptr) };
 	while (pGONpc != nullptr)
 	{
 		if (pGONpc->GetModelComponent<ColliderModelComponent>()->DoesCollide(pGONpc->GetModelComponent<TransformModelComponent>(), pTransform, pCollider))
-			return true;
+			return pGONpc;
+		pGONpc = mpObjectsManager->GetNpcManager()->GetNextActiveNpc(pGONpc);
+	}
+	return nullptr;
+}
+
+bool LevelComponent::CheckBubbleNpcCollision(TransformModelComponent* pTransform, ColliderModelComponent* pCollider)
+{
+	GameObject* pGONpc{ mpObjectsManager->GetNpcManager()->GetNextActiveNpc(nullptr) };
+	while (pGONpc != nullptr)
+	{
+		if (pGONpc->GetModelComponent<ColliderModelComponent>()->DoesCollide(pGONpc->GetModelComponent<TransformModelComponent>(), pTransform, pCollider))
+			return pGONpc->GetModelComponent<NpcComponent>()->Capture();
 		pGONpc = mpObjectsManager->GetNpcManager()->GetNextActiveNpc(pGONpc);
 	}
 	return false;
@@ -236,4 +249,9 @@ bool LevelComponent::CheckCollisionPos(const int x, const int y)
 		return true;
 	else
 		return false;
+}
+
+void LevelComponent::SpawnAvatar(AvatarType avatarType)
+{
+	mpObjectsManager->GetAvatarManager()->Spawn(avatarType);
 }

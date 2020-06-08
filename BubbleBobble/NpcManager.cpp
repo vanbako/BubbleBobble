@@ -82,6 +82,8 @@ void NpcManager::SpawnNpc(NpcType npcType, Vec2<int>& pos, bool isLookingLeft, i
 	if (npc < 0)
 		return;
 	mpGONpcs[npc]->GetModelComponent<NpcComponent>()->SetNpcType(npcType);
+	mpGONpcs[npc]->GetModelComponent<NpcComponent>()->SetStandingState();
+	mpGONpcs[npc]->GetModelComponent<NpcComponent>()->SetReadyState();
 	mSpawnWait[npc] = float(wait) / 20.f;
 	if (isLookingLeft)
 		mpGONpcs[npc]->GetCtrlComponent<NpcCtrlComponent>()->SetMove(NpcMove::Left);

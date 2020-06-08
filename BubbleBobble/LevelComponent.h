@@ -35,8 +35,10 @@ namespace ieg
 		unsigned short CheckAvatarCollision(TransformModelComponent *pTransform, ColliderModelComponent* pCollider);
 		unsigned short CheckRectangleCollision(TransformModelComponent* pTransform, ColliderModelComponent* pCollider);
 		unsigned short CheckRectanglePosCollision(const Vec2<int>& pos, ColliderModelComponent* pCollider);
-		bool CheckNpcCollision(TransformModelComponent* pTransform, ColliderModelComponent* pCollider);
+		GameObject* CheckNpcCollision(TransformModelComponent* pTransform, ColliderModelComponent* pCollider);
+		bool CheckBubbleNpcCollision(TransformModelComponent* pTransform, ColliderModelComponent* pCollider);
 		bool CheckCollisionPos(int x, int y);
+		void SpawnAvatar(AvatarType avatarType);
 	private:
 		float mTest;
 		ObjectsManager* mpObjectsManager;

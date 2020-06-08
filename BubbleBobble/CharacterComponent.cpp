@@ -3,6 +3,7 @@
 #include "StandingState.h"
 #include "JumpingState.h"
 #include "FallingState.h"
+#include "FloatingState.h"
 #include "ReadyState.h"
 #include "FiringState.h"
 #include "ReloadingState.h"
@@ -24,6 +25,7 @@ CharacterComponent::CharacterComponent(GameObject* pGameObject, Minigin* pEngine
 	, mpStandingState{ new StandingState{ this } }
 	, mpJumpingState{ new JumpingState{ this } }
 	, mpFallingState{ new FallingState{ this } }
+	, mpFloatingState{ new FloatingState{ this } }
 	, mpCurKineticState{ nullptr }
 	, mpNewKineticState{ nullptr }
 	, mpReadyState{ new ReadyState{ this } }
@@ -45,6 +47,7 @@ CharacterComponent::~CharacterComponent()
 	delete mpReloadingState;
 	delete mpFiringState;
 	delete mpReadyState;
+	delete mpFloatingState;
 	delete mpFallingState;
 	delete mpJumpingState;
 	delete mpStandingState;
@@ -122,15 +125,25 @@ void CharacterComponent::Right()
 	mIsHorMoving = 2;
 }
 
-void CharacterComponent::SetFallingState()
+void CharacterComponent::SetFloatingState()
 {
-	mpNewKineticState = mpFallingState;
+	mpNewKineticState = mpFloatingState;
+}
+
+bool ieg::CharacterComponent::IsFloatingState()
+{
+	return mpCurKineticState == mpFloatingState;
 }
 
 void CharacterComponent::SetJumpingState()
 {
 	mpJumpingState->ResetJumpHeight();
 	mpNewKineticState = mpJumpingState;
+}
+
+void CharacterComponent::SetFallingState()
+{
+	mpNewKineticState = mpFallingState;
 }
 
 void CharacterComponent::SetStandingState()
@@ -151,19 +164,4 @@ void CharacterComponent::SetFiringState()
 void CharacterComponent::SetReloadingState()
 {
 	mpNewWeaponState = mpReloadingState;
-}
-
-ObsSubject* CharacterComponent::GetObsSubject()
-{
-	return mpObsSubject;
-}
-
-void CharacterComponent::SetLevel(GameObject* pLevel)
-{
-	mpGOLevel = pLevel;
-}
-
-float CharacterComponent::GetMoveVer2PixelsTime()
-{
-	return mMoveVer2PixelsTime;
 }

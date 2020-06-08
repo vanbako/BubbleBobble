@@ -6,6 +6,7 @@
 #include "AvatarManager.h"
 #include "../Engine/GameObject.h"
 #include "../Engine/TransformModelComponent.h"
+#include "../Engine/ColliderModelComponent.h"
 
 using namespace ieg;
 
@@ -51,4 +52,11 @@ void BubbleManager::FireBubble(AvatarType avatarType, const Vec2<int>& pos, bool
 			break;
 		}
 	}
+}
+
+ColliderModelComponent* BubbleManager::GetCollider()
+{
+	if (mpGOBubbles.size() == 0)
+		return nullptr;
+	return mpGOBubbles[0]->GetModelComponent<ColliderModelComponent>();
 }

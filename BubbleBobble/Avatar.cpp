@@ -31,11 +31,11 @@ GameObject* Avatar::CreateAvatar(Minigin* pEngine, Scene* pScene, BufferManager*
 
 	GameObject* pGOAvatar{ pScene->CreateObject<GameObject>() };
 	TransformModelComponent* pTransformComponent{ pGOAvatar->CreateModelComponent<TransformModelComponent>(pEngine) };
-	if (avatarType == AvatarType::Bub)
-		pTransformComponent->SetPos(16, 176);
-	else
-		pTransformComponent->SetPos(208, 176);
-	pTransformComponent->Switch();
+	//if (avatarType == AvatarType::Bub)
+	//	pTransformComponent->SetPos(16, 176);
+	//else
+	//	pTransformComponent->SetPos(208, 176);
+	//pTransformComponent->Switch();
 	RenderViewComponent* pRenderComponent{ pGOAvatar->CreateViewComponent<RenderViewComponent>(pEngine) };
 	pRenderComponent->SetTransformComponent(pTransformComponent);
 	pRenderComponent->SetIsSprite(true);

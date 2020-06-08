@@ -1,4 +1,5 @@
 #pragma once
+#include "Avatar.h"
 
 namespace ieg
 {
@@ -23,6 +24,7 @@ namespace ieg
 		void CreateAvatars(Minigin * pEngine, BufferManager * pBufferManager, ObjectsManager* pObjectsManager, Scene * pScene, ColorRGBA8 * pPalette, Observer* pObserver);
 		void Init(GameObject * pGOLevel);
 		void DeactivateAll();
+		void Spawn(AvatarType avatar);
 
 		static const int GetAvatarMax() { return mpAvatarMax; };
 		static const Vec2<int>& GetAvatarInitialPos(int avatar) { return mpAvatarInitialPos[avatar]; };

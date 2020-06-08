@@ -240,6 +240,9 @@
     <ClCompile Include="BubbleBobble.cpp">
       <Filter>Prefabs</Filter>
     </ClCompile>
+    <ClCompile Include="FloatingState.cpp">
+      <Filter>State\CharacterKineticState</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FireCommand.h">
@@ -427,6 +430,9 @@
     </ClInclude>
     <ClInclude Include="BubbleBobble.h">
       <Filter>Prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="FloatingState.h">
+      <Filter>State\CharacterKineticState</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

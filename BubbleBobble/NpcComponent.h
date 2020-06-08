@@ -42,6 +42,8 @@ namespace ieg
 		void Jump() override;
 		void Left() override;
 		void Right() override;
+		void Pop();
+		bool Capture();
 	private:
 		NpcType mNpcType;
 	};

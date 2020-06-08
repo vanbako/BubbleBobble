@@ -33,7 +33,9 @@ namespace ieg
 		static const int mWidth;
 		static const int mHeight;
 		static const int mCount;
+		static const int mCaptureCount;
 		static const NpcData mNpcData[];
+		static const NpcData mNpcCaptureData[];
 
 		static void DrawSprite(ColorRGBA8* pSprite, ColorRGBA8* pPixels, int offset, int loc);
 	};

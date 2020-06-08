@@ -9,9 +9,7 @@ namespace ieg
 		: public State
 	{
 	public:
-		explicit CharacterKineticState(ModelComponent* pModelComponent)
-			: State(pModelComponent)
-		{};
+		explicit CharacterKineticState(ModelComponent* pModelComponent);
 		virtual ~CharacterKineticState() = default;
 		CharacterKineticState(const CharacterKineticState&) = delete;
 		CharacterKineticState(CharacterKineticState&&) = delete;
@@ -22,5 +20,6 @@ namespace ieg
 		virtual void Jump() = 0;
 		virtual void Fall() = 0;
 		virtual void Land() = 0;
+		virtual void Capture();
 	};
 }

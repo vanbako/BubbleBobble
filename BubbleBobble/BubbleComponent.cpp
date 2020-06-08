@@ -47,7 +47,14 @@ void BubbleComponent::Collision()
 	if ((collision & 3) != 0)
 		pTransform->ResetNewPosY();
 	if ((collision & 12) != 0)
+	{
 		pTransform->ResetNewPosX();
+		mpCurKineticState->CaptureDone();
+	}
+	// NpcCollision
+	if (mpCurKineticState == mpCaptureState)
+		if (mpGOLevel->GetModelComponent<LevelComponent>()->CheckBubbleNpcCollision(pTransform, pCollider))
+			mpGameObject->SetIsActive(false);
 }
 
 void BubbleComponent::Switch()

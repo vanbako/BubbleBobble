@@ -35,9 +35,14 @@ void AvatarManager::Init(GameObject* pGOLevel)
 	for (int avatar{ 0 }; avatar < mpAvatarMax; ++avatar)
 	{
 		mpGOAvatars[avatar]->GetModelComponent<AvatarComponent>()->SetLevel(pGOLevel);
-		mpGOAvatars[avatar]->GetModelComponent<TransformModelComponent>()->SetPos(mpAvatarInitialPos[avatar]);
-		mpGOAvatars[avatar]->GetModelComponent<TransformModelComponent>()->Switch();
+		TransformModelComponent* pTransform{ mpGOAvatars[avatar]->GetModelComponent<TransformModelComponent>() };
+		pTransform->SetPos(mpAvatarInitialPos[avatar]);
+		pTransform->Switch();
 		mpGOAvatars[avatar]->SetIsActive(true);
+		if ((AvatarType)avatar == AvatarType::Bob)
+			pTransform->SetIsLookingLeft(true);
+		else
+			pTransform->SetIsLookingLeft(false);
 	}
 }
 
@@ -45,4 +50,21 @@ void AvatarManager::DeactivateAll()
 {
 	for (int avatar{ 0 }; avatar < mpAvatarMax; ++avatar)
 		mpGOAvatars[avatar]->SetIsActive(false);
+}
+
+void AvatarManager::Spawn(AvatarType avatar)
+{
+	GameObject* pGOAvatar{ mpGOAvatars[int(avatar)] };
+	TransformModelComponent* pTransform{ pGOAvatar->GetModelComponent<TransformModelComponent>() };
+	pTransform->SetPos(mpAvatarInitialPos[int(avatar)]);
+	pTransform->Switch();
+	AvatarComponent* pAvatarComponent{ pGOAvatar->GetModelComponent<AvatarComponent>() };
+	pAvatarComponent->SetStandingState();
+	pAvatarComponent->SetInvincibleState();
+	pAvatarComponent->SetReadyState();
+	pGOAvatar->SetIsActive(true);
+	if (avatar == AvatarType::Bob)
+		pTransform->SetIsLookingLeft(true);
+	else
+		pTransform->SetIsLookingLeft(false);
 }

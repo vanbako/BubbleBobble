@@ -73,8 +73,18 @@ void AvatarComponent::Collision()
 	// NpcCollision
 	TransformModelComponent* pTransform{ mpGameObject->GetModelComponent<TransformModelComponent>() };
 	ColliderModelComponent* pCollider{ mpGameObject->GetModelComponent<ColliderModelComponent>() };
-	if (mpCurHealthState == mpLivingState && mpGOLevel->GetModelComponent<LevelComponent>()->CheckNpcCollision(pTransform, pCollider))
-		SetDyingState();
+	if (mpCurHealthState == mpLivingState)
+	{
+		GameObject* pGONpc{ mpGOLevel->GetModelComponent<LevelComponent>()->CheckNpcCollision(pTransform, pCollider) };
+		if (pGONpc != nullptr)
+		{
+			NpcComponent* pNpcComponent{ pGONpc->GetModelComponent<NpcComponent>() };
+			if (pNpcComponent->IsFloatingState())
+				pNpcComponent->Pop();
+			else
+				SetDyingState();
+		}
+	}
 }
 
 void AvatarComponent::Switch()
@@ -122,8 +132,9 @@ void AvatarComponent::SetInvincibleState()
 
 void AvatarComponent::FireBubble()
 {
+	BubbleManager* pBubbleManager{ mpObjectsManager->GetBubbleManager() };
 	TransformModelComponent* pTransform{ mpGameObject->GetModelComponent<TransformModelComponent>() };
-	ColliderModelComponent* pCollider{ mpGameObject->GetModelComponent<ColliderModelComponent>() };
+	ColliderModelComponent* pCollider{ pBubbleManager->GetCollider() };
 	Vec2<int> pos1{ pTransform->GetPos() };
 	Vec2<int> pos2{ pos1 };
 	Vec2<int> pos3{ pos1 };
@@ -141,18 +152,17 @@ void AvatarComponent::FireBubble()
 	if (pLevelComponent != nullptr)
 	{
 		if (pLevelComponent->CheckRectanglePosCollision(pos3, pCollider) == 0)
-			mpObjectsManager->GetBubbleManager()->FireBubble(mAvatarType, pos3, pTransform->GetIsLookingLeft());
+			pBubbleManager->FireBubble(mAvatarType, pos3, pTransform->GetIsLookingLeft());
 		else if (pLevelComponent->CheckRectanglePosCollision(pos2, pCollider) == 0)
-			mpObjectsManager->GetBubbleManager()->FireBubble(mAvatarType, pos2, pTransform->GetIsLookingLeft());
+			pBubbleManager->FireBubble(mAvatarType, pos2, pTransform->GetIsLookingLeft());
 		else if (pLevelComponent->CheckRectanglePosCollision(pos1, pCollider) == 0)
-			mpObjectsManager->GetBubbleManager()->FireBubble(mAvatarType, pos1, pTransform->GetIsLookingLeft());
+			pBubbleManager->FireBubble(mAvatarType, pos1, pTransform->GetIsLookingLeft());
 	}
 }
 
 void AvatarComponent::Spawn()
 {
-	mpGameObject->GetModelComponent<TransformModelComponent>()->SetPos(AvatarManager::GetAvatarInitialPos(0));
-	mpGameObject->GetModelComponent<TransformModelComponent>()->Switch();
+	mpGOLevel->GetModelComponent<LevelComponent>()->SpawnAvatar(mAvatarType);
 }
 
 void AvatarComponent::Fire()
