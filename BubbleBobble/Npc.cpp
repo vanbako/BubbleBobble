@@ -49,7 +49,7 @@ GameObject* Npc::CreateNpc(Minigin* pEngine, Scene* pScene, BufferManager* pBuff
 {
 	BufferAsprites* pAsprites{ (BufferAsprites*)pBufferManager->GetBuffer(EnumBuffer::Asprites) };
 
-	GameObject* pGONpc{ pScene->CreateObject<GameObject>() };
+	GameObject* pGONpc{ pScene->CreateObject<GameObject>(Order::front) };
 	TransformModelComponent* pTransformComponent{ pGONpc->CreateModelComponent<TransformModelComponent>(pEngine) };
 	RenderViewComponent* pRenderComponent{ pGONpc->CreateViewComponent<RenderViewComponent>(pEngine) };
 	pRenderComponent->SetTransformComponent(pTransformComponent);
@@ -98,8 +98,9 @@ GameObject* Npc::CreateNpc(Minigin* pEngine, Scene* pScene, BufferManager* pBuff
 		int(NpcType::Count) * (mCount + mCaptureCount) * mWidth * sizeof(ColorRGBA8),
 		SDL_PIXELFORMAT_RGBA32) };
 	// Debug
-	SDL_SaveBMP(pSurface, "Npcs.bmp");
+	//SDL_SaveBMP(pSurface, "Npcs.bmp");
 	SDL_Texture* pSDLTexture{ SDL_CreateTextureFromSurface(pEngine->GetRenderer()->GetSDLRenderer(), pSurface) };
+	SDL_FreeSurface(pSurface);
 	pRenderComponent->SetTexture(pSDLTexture);
 	pRenderComponent->SetSize(mWidth, mHeight);
 	pRenderComponent->SetIndex(0);
@@ -110,7 +111,7 @@ GameObject* Npc::CreateNpc(Minigin* pEngine, Scene* pScene, BufferManager* pBuff
 
 GameObject* Npc::CopyNpc(Minigin* pEngine, GameObject* pGONpc)
 {
-	GameObject* pGONpcCopy{ pGONpc->GetScene()->CreateObject<GameObject>() };
+	GameObject* pGONpcCopy{ pGONpc->GetScene()->CreateObject<GameObject>(Order::front) };
 	TransformModelComponent* pTransformComponent{ pGONpcCopy->CreateModelComponent<TransformModelComponent>(pEngine) };
 	RenderViewComponent* pRenderComponent{ pGONpcCopy->CreateViewComponent<RenderViewComponent>(pEngine) };
 	pRenderComponent->SetTransformComponent(pTransformComponent);

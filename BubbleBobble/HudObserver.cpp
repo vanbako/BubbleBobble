@@ -26,7 +26,7 @@ void HudObserver::OnNotify(size_t subject, int event, int value)
 		switch (AvatarEvent(event))
 		{
 		case AvatarEvent::Score:
-			//mpHudComponent->Score(value);
+			mpHudComponent->DeltaScore(value);
 			break;
 		case AvatarEvent::Die:
 			break;

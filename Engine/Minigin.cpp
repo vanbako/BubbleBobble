@@ -12,8 +12,6 @@
 #include "Scene.h"
 #include "TransformModelComponent.h"
 #include "RenderViewComponent.h"
-#include "TextViewComponent.h"
-#include "FpsViewComponent.h"
 #include "Logger.h"
 
 using namespace ieg;

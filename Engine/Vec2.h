@@ -24,6 +24,13 @@ namespace ieg
 			return Vec2<T> { mX + rhs.mX, mY + rhs.mY };
 		};
 
+		Vec2<T>& operator+=(const Vec2<T>& rhs)
+		{
+			mX += rhs.mX;
+			mY += rhs.mY;
+			return *this;
+		};
+
 		const T& GetX() const { return mX; };
 		const T& GetY() const { return mY; };
 		void SetX(T x) { mX = x; };

@@ -3,7 +3,6 @@
 #include "CtrlComponent.h"
 #include "ModelComponent.h"
 #include "ViewComponent.h"
-#include "TextViewComponent.h"
 #include "State.h"
 #include <cstdarg>
 
@@ -50,18 +49,6 @@ namespace ieg
 		T* CreateViewComponent(Minigin* pEngine,...)
 		{
 			T* pViewComponent{ new T{ pEngine } };
-			if (pViewComponent != nullptr)
-				mpViewComponents.push_back(pViewComponent);
-			return pViewComponent;
-		}
-		template<>
-		TextViewComponent* CreateViewComponent(Minigin* pEngine,...)
-		{
-			std::va_list args{};
-			va_start(args, pEngine);
-			Font* pFont{ va_arg(args, Font*) };
-			va_end(args);
-			TextViewComponent* pViewComponent{ new TextViewComponent{ pEngine, pFont } };
 			if (pViewComponent != nullptr)
 				mpViewComponents.push_back(pViewComponent);
 			return pViewComponent;

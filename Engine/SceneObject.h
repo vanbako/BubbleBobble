@@ -7,11 +7,7 @@ namespace ieg
 	class SceneObject
 	{
 	public:
-		explicit SceneObject(Scene* pScene)
-			: mpScene{ pScene }
-			, mIsToBeDeleted{ false }
-		{
-		};
+		explicit SceneObject(Scene* pScene);
 		virtual ~SceneObject() = default;
 		SceneObject(const SceneObject& other) = delete;
 		SceneObject(SceneObject&& other) = delete;
@@ -28,12 +24,12 @@ namespace ieg
 		bool IsToBeDeleted() const { return mIsToBeDeleted; };
 		void SetIsToBeDeleted(bool isToBeDeleted) { mIsToBeDeleted = isToBeDeleted; };
 
-		Scene* GetScene()
-		{
-			return mpScene;
-		};
+		Scene* GetScene() { return mpScene; };
+		SceneObject* GetParent() { return mpParent; };
+		void SetParent(SceneObject* pParent) { mpParent = pParent; };
 	protected:
 		Scene* mpScene;
 		bool mIsToBeDeleted;
+		SceneObject* mpParent;
 	};
 }

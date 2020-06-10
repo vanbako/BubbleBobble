@@ -27,7 +27,7 @@ const int Intro::mHeight{ 200 };
 
 GameObject* Intro::CreateIntro(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, Scene* pGameScene)
 {
-	GameObject* pGOIntro = pScene->CreateObject<GameObject>();
+	GameObject* pGOIntro = pScene->CreateObject<GameObject>(Order::back);
 	TransformModelComponent* pTransformComponent{ pGOIntro->CreateModelComponent<TransformModelComponent>(pEngine) };
 	pTransformComponent->SetPos(0, 0);
 	RenderViewComponent* pRenderComponent{ pGOIntro->CreateViewComponent<RenderViewComponent>(pEngine) };

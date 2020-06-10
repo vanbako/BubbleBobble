@@ -22,7 +22,7 @@ GameObject* Candy::CreateCandy(Minigin* pEngine, Scene* pScene, BufferManager* p
 {
 	BufferAsprites* pAsprites{ (BufferAsprites*)pBufferManager->GetBuffer(EnumBuffer::Asprites) };
 
-	GameObject* pGOCandy{ pScene->CreateObject<GameObject>() };
+	GameObject* pGOCandy{ pScene->CreateObject<GameObject>(Order::middle) };
 	pGOCandy->SetIsActive(false);
 	TransformModelComponent* pTransformComponent{ pGOCandy->CreateModelComponent<TransformModelComponent>(pEngine) };
 	RenderViewComponent* pRenderComponent{ pGOCandy->CreateViewComponent<RenderViewComponent>(pEngine) };
@@ -58,7 +58,7 @@ GameObject* Candy::CreateCandy(Minigin* pEngine, Scene* pScene, BufferManager* p
 
 GameObject* Candy::CopyCandy(Minigin* pEngine, GameObject* pGOCandy)
 {
-	GameObject* pGOCandyCopy{ pGOCandy->GetScene()->CreateObject<GameObject>() };
+	GameObject* pGOCandyCopy{ pGOCandy->GetScene()->CreateObject<GameObject>(Order::middle) };
 	pGOCandyCopy->SetIsActive(false);
 	TransformModelComponent* pTransformComponent{ pGOCandyCopy->CreateModelComponent<TransformModelComponent>(pEngine) };
 	RenderViewComponent* pRenderComponent{ pGOCandyCopy->CreateViewComponent<RenderViewComponent>(pEngine) };

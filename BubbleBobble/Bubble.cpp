@@ -22,7 +22,7 @@ GameObject* Bubble::CreateBubble(Minigin* pEngine, Scene* pScene, BufferManager*
 {
 	BufferAsprites* pAsprites{ (BufferAsprites*)pBufferManager->GetBuffer(EnumBuffer::Asprites) };
 
-	GameObject* pGOBubble{ pScene->CreateObject<GameObject>() };
+	GameObject* pGOBubble{ pScene->CreateObject<GameObject>(Order::middle) };
 	pGOBubble->SetIsActive(false);
 	TransformModelComponent* pTransformComponent{ pGOBubble->CreateModelComponent<TransformModelComponent>(pEngine) };
 	RenderViewComponent* pRenderComponent{ pGOBubble->CreateViewComponent<RenderViewComponent>(pEngine) };
@@ -61,7 +61,7 @@ GameObject* Bubble::CreateBubble(Minigin* pEngine, Scene* pScene, BufferManager*
 
 GameObject* Bubble::CopyBubble(Minigin* pEngine, GameObject* pGOBubble)
 {
-	GameObject* pGOBubbleCopy{ pGOBubble->GetScene()->CreateObject<GameObject>() };
+	GameObject* pGOBubbleCopy{ pGOBubble->GetScene()->CreateObject<GameObject>(Order::middle) };
 	pGOBubbleCopy->SetIsActive(false);
 	TransformModelComponent* pTransformComponent{ pGOBubbleCopy->CreateModelComponent<TransformModelComponent>(pEngine) };
 	RenderViewComponent* pRenderComponent{ pGOBubbleCopy->CreateViewComponent<RenderViewComponent>(pEngine) };

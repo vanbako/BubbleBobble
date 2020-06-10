@@ -265,6 +265,7 @@ xcopy "$(SolutionDir)3rdParty\Fmod\lib\x64\fmod.dll" "$(OutputPath)" /R /Y</Comm
     <ClInclude Include="Start1Command.h" />
     <ClInclude Include="Start2Command.h" />
     <ClInclude Include="StartComponent.h" />
+    <ClInclude Include="TextComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Avatar.cpp" />
@@ -336,6 +337,7 @@ xcopy "$(SolutionDir)3rdParty\Fmod\lib\x64\fmod.dll" "$(OutputPath)" /R /Y</Comm
     <ClCompile Include="Start1Command.cpp" />
     <ClCompile Include="Start2Command.cpp" />
     <ClCompile Include="StartComponent.cpp" />
+    <ClCompile Include="TextComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Engine\Engine.vcxproj">

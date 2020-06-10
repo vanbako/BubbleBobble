@@ -31,8 +31,11 @@ namespace ieg
 		HudObserver* GetObserver();
 		GameObject* GetLevel();
 		void NextLevel();
+
+		void DeltaScore(int value);
 	private:
 		BufferManager* mpBufferManager;
+		ColorRGBA8* mpPalette;
 		int mLevel;
 		ObjectsManager* mpObjectsManager;
 		GameObject* mpGOLevel;
@@ -40,5 +43,11 @@ namespace ieg
 		int mSoundId;
 		bool mIsSoundPlaying;
 		bool mEndLevel;
+		std::vector<int> mScores;
+		std::vector<GameObject*> mpGOScores;
+
+		static const int mColorIndex[];
+
+		void CreateScores();
 	};
 }

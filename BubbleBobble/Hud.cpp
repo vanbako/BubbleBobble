@@ -33,7 +33,7 @@ GameObject* Hud::CreateHud(Minigin* pEngine, Scene* pScene, BufferManager* pBuff
 	BufferAsprites* pAsprites{ (BufferAsprites*)pBufferManager->GetBuffer(EnumBuffer::Asprites) };
 	BufferAblocks* pAblocks{ (BufferAblocks*)pBufferManager->GetBuffer(EnumBuffer::Ablocks) };
 
-	GameObject* pGOHud{ pScene->CreateObject<GameObject>() };
+	GameObject* pGOHud{ pScene->CreateObject<GameObject>(Order::back) };
 	TransformModelComponent* pTransformComponent{ pGOHud->CreateModelComponent<TransformModelComponent>(pEngine) };
 	pTransformComponent->SetPos(mPos);
 	RenderViewComponent* pRenderComponent{ pGOHud->CreateViewComponent<RenderViewComponent>(pEngine) };

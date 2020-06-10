@@ -29,7 +29,7 @@ GameObject* Avatar::CreateAvatar(Minigin* pEngine, Scene* pScene, BufferManager*
 {
 	BufferAsprites* pAsprites{ (BufferAsprites*)pBufferManager->GetBuffer(EnumBuffer::Asprites) };
 
-	GameObject* pGOAvatar{ pScene->CreateObject<GameObject>() };
+	GameObject* pGOAvatar{ pScene->CreateObject<GameObject>(Order::front) };
 	TransformModelComponent* pTransformComponent{ pGOAvatar->CreateModelComponent<TransformModelComponent>(pEngine) };
 	RenderViewComponent* pRenderComponent{ pGOAvatar->CreateViewComponent<RenderViewComponent>(pEngine) };
 	pRenderComponent->SetTransformComponent(pTransformComponent);

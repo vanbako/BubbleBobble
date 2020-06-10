@@ -117,13 +117,7 @@
     <ClInclude Include="RenderViewComponent.h">
       <Filter>Component\ViewComponent</Filter>
     </ClInclude>
-    <ClInclude Include="TextViewComponent.h">
-      <Filter>Component\ViewComponent</Filter>
-    </ClInclude>
     <ClInclude Include="ViewComponent.h">
-      <Filter>Component\ViewComponent</Filter>
-    </ClInclude>
-    <ClInclude Include="FpsViewComponent.h">
       <Filter>Component\ViewComponent</Filter>
     </ClInclude>
     <ClInclude Include="GameObject.h">
@@ -215,13 +209,7 @@
     <ClCompile Include="RenderViewComponent.cpp">
       <Filter>Component\ViewComponent</Filter>
     </ClCompile>
-    <ClCompile Include="TextViewComponent.cpp">
-      <Filter>Component\ViewComponent</Filter>
-    </ClCompile>
     <ClCompile Include="ViewComponent.cpp">
-      <Filter>Component\ViewComponent</Filter>
-    </ClCompile>
-    <ClCompile Include="FpsViewComponent.cpp">
       <Filter>Component\ViewComponent</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
@@ -250,6 +238,9 @@
     </ClCompile>
     <ClCompile Include="Logger.cpp">
       <Filter>ServiceLocator\Log</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneObject.cpp">
+      <Filter>Scene</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

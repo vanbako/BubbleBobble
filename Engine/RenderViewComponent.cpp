@@ -3,6 +3,7 @@
 #include "TransformModelComponent.h"
 #include "ResourceManager.h"
 #include "Renderer.h"
+#include "GameObject.h"
 #include "Minigin.h"
 
 using namespace ieg;
@@ -46,7 +47,11 @@ void RenderViewComponent::Render() const
 {
 	if (mpTransformComponent != nullptr && mpTexture != nullptr)
 	{
-		Vec2 pos{ mpTransformComponent->GetPos() };
+		GameObject* pParent{ (GameObject*)mpTransformComponent->GetGameObject()->GetParent() };
+		Vec2<int> pos{};
+		if (pParent != nullptr)
+			pos = pParent->GetModelComponent<TransformModelComponent>()->GetPos();
+		pos += mpTransformComponent->GetPos();
 		if (mIsSprite)
 			pos.SetX((pos.GetX() / 16) * 16);
 		if (mSize.GetX() == 0)

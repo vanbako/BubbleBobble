@@ -34,7 +34,7 @@ GameObject* Level::CreateLevel(int level, Minigin* pEngine, Scene* pScene, Buffe
 	BufferAblocks* pAblocks{ (BufferAblocks*)pBufferManager->GetBuffer(EnumBuffer::Ablocks) };
 	BufferBdata* pBdata{ (BufferBdata*)pBufferManager->GetBuffer(EnumBuffer::Bdata) };
 
-	GameObject* pGOLevel{ pScene->CreateObject<GameObject>() };
+	GameObject* pGOLevel{ pScene->CreateObject<GameObject>(Order::back) };
 	TransformModelComponent* pTransformComponent{ pGOLevel->CreateModelComponent<TransformModelComponent>(pEngine) };
 	pTransformComponent->SetPos(0, 0);
 	RenderViewComponent* pRenderComponent{ pGOLevel->CreateViewComponent<RenderViewComponent>(pEngine) };

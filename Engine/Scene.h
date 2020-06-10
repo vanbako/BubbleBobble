@@ -1,6 +1,7 @@
 #pragma once
 #include "SceneManager.h"
 #include "GameObject.h"
+#include <map>
 
 namespace ieg
 {
@@ -8,6 +9,13 @@ namespace ieg
 	class InputManager;
 	class Renderer;
 	class GameObject;
+
+	enum class Order
+	{
+		back = 0,
+		middle,
+		front
+	};
 
 	class Scene final
 	{
@@ -20,13 +28,11 @@ namespace ieg
 		Scene& operator=(Scene&& other) = delete;
 
 		template <class T>
-		T* CreateObject()
+		T* CreateObject(Order order)
 		{
 			T* pSceneObject{ new T{ this } };
 			if (pSceneObject != nullptr)
-			{
-				mpObjects.push_back(pSceneObject);
-			}
+				mpObjects.emplace(int(order), pSceneObject);
 			return pSceneObject;
 		}
 		void RemoveObject(GameObject* pGameObject);
@@ -37,6 +43,6 @@ namespace ieg
 	private:
 		std::string mName;
 		InputManager* mpInputManager;
-		std::vector<SceneObject*> mpObjects;
+		std::multimap<int, SceneObject*> mpObjects;
 	};
 }

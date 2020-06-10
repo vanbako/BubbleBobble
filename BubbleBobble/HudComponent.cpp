@@ -15,6 +15,7 @@
 #include "BubbleManager.h"
 #include "HudObserver.h"
 #include "LevelComponent.h"
+#include "TextComponent.h"
 #include "../Engine/ColorRGBA8.h"
 #include "../Engine/Minigin.h"
 #include "../Engine/GameObject.h"
@@ -23,8 +24,11 @@
 #include "../Engine/Audio.h"
 #include "../Engine/TransformModelComponent.h"
 #include "../Engine/ObsSubject.h"
+#include <string>
 
 using namespace ieg;
+
+const int HudComponent::mColorIndex[]{ 15, 7 };
 
 HudComponent::HudComponent(GameObject* pGameObject, Minigin* pEngine, ...)
 	: ModelComponent(pGameObject, pEngine)
@@ -34,6 +38,9 @@ HudComponent::HudComponent(GameObject* pGameObject, Minigin* pEngine, ...)
 	, mLevel{ 0 }
 	, mEndLevel{ false }
 	, mpHudObserver{ new HudObserver{ this } }
+	, mpGOScores{}
+	, mScores{}
+	, mpPalette{ new ColorRGBA8[BufferBubble::GetPaletteColorCount()] }
 {
 	std::va_list args{};
 	va_start(args, pEngine);
@@ -41,17 +48,21 @@ HudComponent::HudComponent(GameObject* pGameObject, Minigin* pEngine, ...)
 	mpBufferManager = va_arg(vaList, BufferManager*);
 	ColorRGBA8* pPalette{ va_arg(vaList, ColorRGBA8*) };
 	va_end(args);
+	std::memcpy(mpPalette, pPalette, BufferBubble::GetPaletteColorCount() * sizeof(ColorRGBA8));
 	Scene* pScene{ mpGameObject->GetScene() };
-	mpObjectsManager->CreateGameObjects(pEngine, mpBufferManager, mpObjectsManager, pScene, pPalette, mpHudObserver);
+	mpObjectsManager->CreateGameObjects(pEngine, mpBufferManager, mpObjectsManager, pScene, mpPalette, mpHudObserver);
 	// Level has to be created last
 	// It will Initialise the Avatars, Bubbles and Enemies
 	mpGOLevel = Level::CreateLevel(mLevel, pEngine, pScene, mpBufferManager, mpObjectsManager);
 	mpGOLevel->GetModelComponent<LevelComponent>()->GetObsSubject()->AddObserver(mpHudObserver);
 	mSoundId = pEngine->GetServiceLocator()->GetAudio()->AddSound("../Data/Audio/gameloop.wav", true);
+	// Scores
+	CreateScores();
 }
 
 HudComponent::~HudComponent()
 {
+	delete mpPalette;
 	delete mpHudObserver;
 	delete mpObjectsManager;
 	mpEngine->GetServiceLocator()->GetAudio()->StopSound(mSoundId);
@@ -90,4 +101,38 @@ void HudComponent::NextLevel()
 	mEndLevel = true;
 	mLevel += 1;
 	mpGOLevel->SetIsToBeDeleted(true);
+}
+
+void HudComponent::DeltaScore(int value)
+{
+	int score{ (value & 0xffff0000) >> 16};
+	int delta{ value & 0xffff };
+	mScores[score] += delta;
+	mpGOScores[score]->GetModelComponent<TextComponent>()->SetText(std::to_string(mScores[score]), mColorIndex[score]);
+}
+
+void HudComponent::CreateScores()
+{
+	Scene* pScene{ mpGameObject->GetScene() };
+	int posY[]{ 72, 120 };
+	GameObject* pGOScore{};
+	TextComponent* pText{};
+	TransformModelComponent* pTransform{};
+	RenderViewComponent* pRenderComponent{};
+	for (int score{ 0 }; score < AvatarManager::GetAvatarMax(); ++score)
+	{
+		pGOScore = pScene->CreateObject<GameObject>(Order::front);
+		mScores.push_back(0);
+		mpGOScores.push_back(pGOScore);
+		pGOScore->SetParent(mpGameObject);
+		pText = pGOScore->CreateModelComponent<TextComponent>(mpEngine, mpBufferManager, mpPalette);
+		pTransform = pGOScore->CreateModelComponent<TransformModelComponent>(mpEngine);
+		pTransform->SetPos(8, posY[score]);
+		pTransform->Switch();
+		pRenderComponent = pGOScore->CreateViewComponent<RenderViewComponent>(mpEngine);
+		pRenderComponent->SetTransformComponent(pTransform);
+		pText->SetRenderViewComponent(pRenderComponent);
+		pText->SetText("0", mColorIndex[score]);
+		pGOScore->SetIsActive(true);
+	}
 }

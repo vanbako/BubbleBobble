@@ -50,7 +50,7 @@ GameObject* Start::CreateStart(Minigin* pEngine, Scene* pScene, BufferManager* p
 
 GameObject* Start::CreateBackground(Minigin* pEngine, Scene* pScene, Scene* pGameScene, BufferAblocks* pAblocks, ColorRGBA8* pPalette)
 {
-	GameObject* pGOStart{ pScene->CreateObject<GameObject>() };
+	GameObject* pGOStart{ pScene->CreateObject<GameObject>(Order::back) };
 	TransformModelComponent* pTransformComponent{ pGOStart->CreateModelComponent<TransformModelComponent>(pEngine) };
 	pTransformComponent->SetPos(0, 0);
 	RenderViewComponent* pRenderComponent{ pGOStart->CreateViewComponent<RenderViewComponent>(pEngine) };
@@ -87,7 +87,7 @@ void Start::CreateBubBobAnim(Sprite sprite, int x, Minigin* pEngine, Scene* pSce
 	int
 		width{ BufferAsprites::GetWidth() },
 		height{ mSpriteHeight };
-	GameObject* pGameObject{ pScene->CreateObject<GameObject>() };
+	GameObject* pGameObject{ pScene->CreateObject<GameObject>(Order::front) };
 	TransformModelComponent* pTransformComponent{ pGameObject->CreateModelComponent<TransformModelComponent>(pEngine) };
 	pTransformComponent->SetPos(x, 96);
 	RenderViewComponent* pRenderComponent{ pGameObject->CreateViewComponent<RenderViewComponent>(pEngine) };
