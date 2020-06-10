@@ -48,6 +48,7 @@ GameObject* Candy::CreateCandy(Minigin* pEngine, Scene* pScene, BufferManager* p
 		mCount * mWidth * sizeof(ColorRGBA8),
 		SDL_PIXELFORMAT_RGBA32) };
 	SDL_Texture* pSDLTexture{ SDL_CreateTextureFromSurface(pEngine->GetRenderer()->GetSDLRenderer(), pSurface) };
+	SDL_FreeSurface(pSurface);
 	pRenderComponent->SetTexture(pSDLTexture);
 	pRenderComponent->SetSize(mWidth, mHeight);
 	pRenderComponent->SetIndex(0);

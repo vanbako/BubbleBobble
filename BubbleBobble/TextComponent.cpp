@@ -51,8 +51,8 @@ void TextComponent::Update(const float deltaTime)
 		SDL_PIXELFORMAT_RGBA32) };
 	SDL_Texture* pSDLTexture{ SDL_CreateTextureFromSurface(mpEngine->GetRenderer()->GetSDLRenderer(), pSurface) };
 	// Debug
-	SDL_SaveBMP(pSurface, "Text.bmp");
-	//SDL_FreeSurface(pSurface);
+	//SDL_SaveBMP(pSurface, "Text.bmp");
+	SDL_FreeSurface(pSurface);
 	mpRenderViewComponent->ReplaceTexture(pSDLTexture);
 	delete[] pPixels;
 

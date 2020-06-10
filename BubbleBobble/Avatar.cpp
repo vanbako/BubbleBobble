@@ -90,6 +90,7 @@ GameObject* Avatar::CreateAvatar(Minigin* pEngine, Scene* pScene, BufferManager*
 		mCount * mWidth * sizeof(ColorRGBA8),
 		SDL_PIXELFORMAT_RGBA32) };
 	SDL_Texture* pSDLTexture{ SDL_CreateTextureFromSurface(pEngine->GetRenderer()->GetSDLRenderer(), pSurface) };
+	SDL_FreeSurface(pSurface);
 	pRenderComponent->SetTexture(pSDLTexture);
 	pRenderComponent->SetSize(mWidth, mHeight);
 	if (avatarType == AvatarType::Bub)

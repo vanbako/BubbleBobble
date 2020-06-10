@@ -75,6 +75,7 @@ GameObject* Start::CreateBackground(Minigin* pEngine, Scene* pScene, Scene* pGam
 		mWidth * sizeof(ColorRGBA8),
 		SDL_PIXELFORMAT_RGBA32) };
 	SDL_Texture* pSDLTexture{ SDL_CreateTextureFromSurface(pEngine->GetRenderer()->GetSDLRenderer(), pSurface) };
+	SDL_FreeSurface(pSurface);
 	pRenderComponent->SetTexture(pSDLTexture);
 	delete[] pPixels;
 
@@ -111,6 +112,7 @@ void Start::CreateBubBobAnim(Sprite sprite, int x, Minigin* pEngine, Scene* pSce
 		int(BufferAsprites::GetWidth() * mSpriteAnimCount * sizeof(ColorRGBA8)),
 		SDL_PIXELFORMAT_RGBA32) };
 	SDL_Texture* pSDLTexture{ SDL_CreateTextureFromSurface(pEngine->GetRenderer()->GetSDLRenderer(), pSurface) };
+	SDL_FreeSurface(pSurface);
 	pRenderComponent->SetTexture(pSDLTexture);
 	pRenderComponent->SetSize(width, height);
 	pRenderComponent->SetIndex(0);

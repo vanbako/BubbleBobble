@@ -78,6 +78,7 @@ GameObject* Hud::CreateHud(Minigin* pEngine, Scene* pScene, BufferManager* pBuff
 		mWidth * sizeof(ColorRGBA8),
 		SDL_PIXELFORMAT_RGBA32) };
 	SDL_Texture* pSDLTexture{ SDL_CreateTextureFromSurface(pEngine->GetRenderer()->GetSDLRenderer(), pSurface) };
+	SDL_FreeSurface(pSurface);
 	pRenderComponent->SetTexture(pSDLTexture);
 	delete[] pPalette;
 	delete[] pPixels;
