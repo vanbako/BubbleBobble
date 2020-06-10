@@ -14,6 +14,8 @@
 #include "AvatarManager.h"
 #include "ObjectsManager.h"
 #include "BubbleManager.h"
+#include "CandyComponent.h"
+#include "../Engine/ObsSubject.h"
 #include "../Engine/Minigin.h"
 #include "../Engine/Scene.h"
 #include "../Engine/InputManager.h"
@@ -34,6 +36,7 @@ AvatarComponent::AvatarComponent(GameObject* pGameObject, Minigin* pEngine, ...)
 	, mpCurHealthState{ nullptr }
 	, mpNewHealthState{ nullptr }
 	, mpObjectsManager{ nullptr }
+	, mpObsSubject{ new ObsSubject{} }
 {
 	std::va_list args{};
 	va_start(args, pEngine);
@@ -47,6 +50,7 @@ AvatarComponent::AvatarComponent(GameObject* pGameObject, Minigin* pEngine, ...)
 
 AvatarComponent::~AvatarComponent()
 {
+	delete mpObsSubject;
 	delete mpInvincibleState;
 	delete mpDyingState;
 	delete mpLivingState;
@@ -70,12 +74,14 @@ void AvatarComponent::Collision()
 {
 	// LevelCollision
 	CharacterComponent::Collision();
-	// NpcCollision
+	// ObjectCollision
 	TransformModelComponent* pTransform{ mpGameObject->GetModelComponent<TransformModelComponent>() };
 	ColliderModelComponent* pCollider{ mpGameObject->GetModelComponent<ColliderModelComponent>() };
 	if (mpCurHealthState != mpDyingState)
 	{
-		GameObject* pGONpc{ mpGOLevel->GetModelComponent<LevelComponent>()->CheckNpcCollision(pTransform, pCollider) };
+		LevelComponent* pLevel{ mpGOLevel->GetModelComponent<LevelComponent>() };
+		// NpcCollision
+		GameObject* pGONpc{ pLevel->CheckNpcCollision(pTransform, pCollider) };
 		if (pGONpc != nullptr)
 		{
 			NpcComponent* pNpcComponent{ pGONpc->GetModelComponent<NpcComponent>() };
@@ -83,6 +89,14 @@ void AvatarComponent::Collision()
 				pNpcComponent->Pop();
 			else
 				mpCurHealthState->Die();
+		}
+		// CandyCollision
+		GameObject* pGOCandy{ pLevel->CheckCandyCollision(pTransform, pCollider) };
+		if (pGOCandy != nullptr)
+		{
+			CandyComponent* pCandyComponent{ pGOCandy->GetModelComponent<CandyComponent>() };
+			pCandyComponent->Seize();
+			mpObsSubject->Notify(typeid(this).hash_code(), int(AvatarEvent::Score), 100);
 		}
 	}
 }
@@ -101,6 +115,11 @@ void AvatarComponent::SetAvatarType(AvatarType avatarType)
 AvatarType AvatarComponent::GetAvatarType()
 {
 	return mAvatarType;
+}
+
+ObsSubject* AvatarComponent::GetObsSubject()
+{
+	return mpObsSubject;
 }
 
 void AvatarComponent::SetJumpingState()

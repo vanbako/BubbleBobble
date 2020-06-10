@@ -70,6 +70,45 @@ void CandyManager::SpawnCandy(CandyType candyType, const Vec2<int>& pos)
 	mpGOCandy[candy]->SetIsActive(true);
 }
 
+GameObject* CandyManager::GetNextActiveCandy(GameObject* pGOCandy)
+{
+	if (pGOCandy == nullptr)
+		return GetFirstActiveCandy();
+	int candy1{ -1 };
+	for (int i{ 0 }; i < mCandyMax; ++i)
+		if (mpGOCandy[i]->IsActive() && mpGOCandy[i] == pGOCandy)
+		{
+			candy1 = i;
+			break;
+		}
+	if (candy1 == -1)
+		return nullptr;
+	int candy2{ -1 };
+	for (int i{ candy1 + 1 }; i < mCandyMax; ++i)
+		if (mpGOCandy[i]->IsActive())
+		{
+			candy2 = i;
+			break;
+		}
+	if (candy2 == -1)
+		return nullptr;
+	return mpGOCandy[candy2];
+}
+
+GameObject* CandyManager::GetFirstActiveCandy()
+{
+	int candy{ -1 };
+	for (int i{ 0 }; i < mCandyMax; ++i)
+		if (mpGOCandy[i]->IsActive())
+		{
+			candy = i;
+			break;
+		}
+	if (candy == -1)
+		return nullptr;
+	return mpGOCandy[candy];
+}
+
 int CandyManager::GetInactiveCandy()
 {
 	int candy{ -1 };

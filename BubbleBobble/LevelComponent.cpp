@@ -230,6 +230,18 @@ GameObject* LevelComponent::CheckNpcCollision(TransformModelComponent* pTransfor
 	return nullptr;
 }
 
+GameObject* LevelComponent::CheckCandyCollision(TransformModelComponent* pTransform, ColliderModelComponent* pCollider)
+{
+	GameObject* pGOCandy{ mpObjectsManager->GetCandyManager()->GetNextActiveCandy(nullptr) };
+	while (pGOCandy != nullptr)
+	{
+		if (pGOCandy->GetModelComponent<ColliderModelComponent>()->DoesCollide(pGOCandy->GetModelComponent<TransformModelComponent>(), pTransform, pCollider))
+			return pGOCandy;
+		pGOCandy = mpObjectsManager->GetCandyManager()->GetNextActiveCandy(pGOCandy);
+	}
+	return nullptr;
+}
+
 bool LevelComponent::CheckBubbleNpcCollision(TransformModelComponent* pTransform, ColliderModelComponent* pCollider)
 {
 	GameObject* pGONpc{ mpObjectsManager->GetNpcManager()->GetNextActiveNpc(nullptr) };

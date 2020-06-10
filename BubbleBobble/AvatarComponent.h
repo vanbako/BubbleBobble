@@ -10,6 +10,7 @@ namespace ieg
 	class DyingState;
 	class InvincibleState;
 	class ObjectsManager;
+	class ObsSubject;
 
 	enum class AvatarEvent
 	{
@@ -34,6 +35,7 @@ namespace ieg
 
 		void SetAvatarType(AvatarType avatarType);
 		AvatarType GetAvatarType();
+		ObsSubject* GetObsSubject();
 
 		void SetJumpingState() override;
 		void SetFiringState() override;
@@ -57,6 +59,7 @@ namespace ieg
 		AvatarHealthState
 			* mpCurHealthState,
 			* mpNewHealthState;
+		ObsSubject* mpObsSubject;
 		int mJumpSoundId;
 	};
 }

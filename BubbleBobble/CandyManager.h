@@ -26,12 +26,14 @@ namespace ieg
 		void SpawnCandy(NpcType npcType, TransformModelComponent* pTransform);
 		void SpawnCandy(CandyType candyType, TransformModelComponent* pTransform);
 		void SpawnCandy(CandyType candyType, const Vec2<int>& pos);
+		GameObject* GetNextActiveCandy(GameObject* pGONpc);
 	private:
 		std::vector<GameObject*> mpGOCandy;
 
 		static const int mCandyMax;
 		static const std::vector<CandyType> mNpcCandyList;
 
+		GameObject* GetFirstActiveCandy();
 		int GetInactiveCandy();
 	};
 }

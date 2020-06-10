@@ -21,13 +21,8 @@ namespace ieg
 		void Switch() override {};
 
 		void SetLevel(GameObject* pLevel);
+		void Seize();
 	private:
 		GameObject* mpGOLevel;
-		//float
-		//	mMoveHorDelay,
-		//	mMoveVerDelay;
-
-		//static const float mMoveHor2PixelsTime;
-		//static const float mMoveVer2PixelsTime;
 	};
 }
