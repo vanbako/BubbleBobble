@@ -11,6 +11,24 @@ namespace ieg
 
 	enum class CandyType
 	{
+		Bananas = 0,
+		Apple,
+		Pear,
+		Icecream,
+		Cornetto,
+		Cake,
+		Beer,
+		Strawberry,
+		Corn,
+		Diamond,
+		Coctail,
+		Fries,
+		Strawberrypie,
+		Melon,
+		Crown,
+		Cherrypie,
+		Fireworks,
+		Sunday
 	};
 
 	class Candy

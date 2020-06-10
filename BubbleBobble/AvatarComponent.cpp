@@ -82,7 +82,7 @@ void AvatarComponent::Collision()
 			if (pNpcComponent->IsFloatingState())
 				pNpcComponent->Pop();
 			else
-				SetDyingState();
+				mpCurHealthState->Die();
 		}
 	}
 }

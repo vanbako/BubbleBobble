@@ -10,6 +10,7 @@ namespace ieg
 	class ColliderModelComponent;
 	class ObsSubject;
 	class ObjectsManager;
+	enum class NpcType;
 
 	enum class LevelEvent
 	{
@@ -39,6 +40,7 @@ namespace ieg
 		bool CheckBubbleNpcCollision(TransformModelComponent* pTransform, ColliderModelComponent* pCollider);
 		bool CheckCollisionPos(int x, int y);
 		void SpawnAvatar(AvatarType avatarType);
+		void SpawnCandy(NpcType npcType, TransformModelComponent* pTransform);
 	private:
 		float mTest;
 		ObjectsManager* mpObjectsManager;

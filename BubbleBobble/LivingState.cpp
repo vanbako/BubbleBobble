@@ -14,4 +14,5 @@ void LivingState::Update(const float deltaTime)
 
 void LivingState::Die()
 {
+	((AvatarComponent*)mpModelComponent)->SetDyingState();
 }

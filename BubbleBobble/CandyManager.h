@@ -7,6 +7,7 @@ namespace ieg
 	class ColorRGBA8;
 	class BufferManager;
 	class GameObject;
+	enum class CandyType;
 
 	class CandyManager
 	{
@@ -20,8 +21,12 @@ namespace ieg
 
 		void CreateCandy(Minigin* pEngine, BufferManager* pBufferManager, Scene* pScene, ColorRGBA8* pPalette);
 		void Init(GameObject* pGOLevel);
+		void SpawnCandy(NpcType npcType, TransformModelComponent* pTransform);
+		void SpawnCandy(CandyType candyType, const Vec2<int>& pos);
 	private:
-		static const int mpCandyMax{ 12 };
 		std::vector<GameObject*> mpGOCandy;
+
+		static const int mCandyMax;
+		static const std::vector<CandyType> mNpcCandyList;
 	};
 }

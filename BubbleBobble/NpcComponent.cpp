@@ -44,31 +44,30 @@ NpcType NpcComponent::GetNpcType()
 
 void NpcComponent::Jump()
 {
-	// TODO: override in state
 	if (mpCurKineticState == mpStandingState)
 		CharacterComponent::Jump();
 }
 
 void NpcComponent::Left()
 {
-	// TODO: override in state
 	if (mpCurKineticState == mpStandingState)
 		CharacterComponent::Left();
 }
 
 void NpcComponent::Right()
 {
-	// TODO: override in state
 	if (mpCurKineticState == mpStandingState)
 		CharacterComponent::Right();
 }
 
 void NpcComponent::Pop()
 {
-	// TODO: override in state
 	// TODO: Spawn Candy
 	if (mpCurKineticState == mpFloatingState)
+	{
 		mpGameObject->SetIsActive(false);
+		mpGOLevel->GetModelComponent<LevelComponent>()->SpawnCandy(mNpcType, mpGameObject->GetModelComponent<TransformModelComponent>()->GetPos());
+	}
 }
 
 bool NpcComponent::Capture()

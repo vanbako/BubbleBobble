@@ -12,6 +12,7 @@
 #include "AvatarManager.h"
 #include "BubbleManager.h"
 #include "NpcManager.h"
+#include "CandyManager.h"
 #include "../Engine/GameObject.h"
 #include "../Engine/ColorRGBA8.h"
 #include "../Engine/ColliderModelComponent.h"
@@ -254,4 +255,9 @@ bool LevelComponent::CheckCollisionPos(const int x, const int y)
 void LevelComponent::SpawnAvatar(AvatarType avatarType)
 {
 	mpObjectsManager->GetAvatarManager()->Spawn(avatarType);
+}
+
+void LevelComponent::SpawnCandy(NpcType npcType, TransformModelComponent* pTransform)
+{
+	mpObjectsManager->GetCandyManager()->SpawnCandy(npcType, pTransform);
 }
