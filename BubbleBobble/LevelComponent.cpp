@@ -8,6 +8,7 @@
 #include "BufferBubble.h"
 #include "Avatar.h"
 #include "NpcComponent.h"
+#include "CandyComponent.h"
 #include "ObjectsManager.h"
 #include "AvatarManager.h"
 #include "BubbleManager.h"

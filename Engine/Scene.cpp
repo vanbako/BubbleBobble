@@ -34,7 +34,11 @@ void Scene::RemoveObject(GameObject* pGameObject)
 void Scene::Update(const float deltaTime)
 {
 	for (SceneObject*& pObject : mpObjects)
-		pObject->Update(deltaTime);
+		pObject->CtrlUpdate(deltaTime);
+	for (SceneObject*& pObject : mpObjects)
+		pObject->ModelUpdate(deltaTime);
+	for (SceneObject*& pObject : mpObjects)
+		pObject->ModelCollision();
 	for (SceneObject*& pObject : mpObjects)
 		if (pObject->IsToBeDeleted())
 		{
@@ -47,12 +51,16 @@ void Scene::Update(const float deltaTime)
 		),
 		mpObjects.end()
 	);
+	for (SceneObject*& pObject : mpObjects)
+		pObject->ModelSwitch();
+	for (SceneObject*& pObject : mpObjects)
+		pObject->ViewUpdate(deltaTime);
 }
 
 void Scene::Render() const
 {
 	for (auto pObject{ mpObjects.crbegin() }; pObject != mpObjects.crend(); ++pObject)
-		(*pObject)->Render();
+		(*pObject)->ViewRender();
 }
 
 InputManager* Scene::GetInputManager()

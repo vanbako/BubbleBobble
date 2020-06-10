@@ -27,7 +27,7 @@ GameObject* Candy::CreateCandy(Minigin* pEngine, Scene* pScene, BufferManager* p
 	TransformModelComponent* pTransformComponent{ pGOCandy->CreateModelComponent<TransformModelComponent>(pEngine) };
 	RenderViewComponent* pRenderComponent{ pGOCandy->CreateViewComponent<RenderViewComponent>(pEngine) };
 	pRenderComponent->SetTransformComponent(pTransformComponent);
-	pRenderComponent->SetIsSprite(true);
+	pRenderComponent->SetIsSprite(false);
 	pGOCandy->CreateModelComponent<CandyComponent>(pEngine);
 	pGOCandy->CreateModelComponent<ColliderModelComponent>(pEngine, Vec2<int>{ 0, 0 }, Vec2<int>{ 15, 15 });
 

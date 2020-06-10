@@ -23,11 +23,11 @@ namespace ieg
 		void SetLevel(GameObject* pLevel);
 	private:
 		GameObject* mpGOLevel;
-		float
-			mMoveHorDelay,
-			mMoveVerDelay;
+		//float
+		//	mMoveHorDelay,
+		//	mMoveVerDelay;
 
-		static const float mMoveHor2PixelsTime;
-		static const float mMoveVer2PixelsTime;
+		//static const float mMoveHor2PixelsTime;
+		//static const float mMoveVer2PixelsTime;
 	};
 }

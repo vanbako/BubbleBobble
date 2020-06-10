@@ -11,16 +11,15 @@
 using namespace ieg;
 
 const int CandyManager::mCandyMax{ 12 };
-const std::vector<CandyType> mNpcCandyList{
+const std::vector<CandyType> CandyManager::mNpcCandyList{
 	CandyType::Bananas,
 	CandyType::Apple,
-	CandyType::,
-	CandyType::,
-	CandyType::,
-	CandyType::,
-	CandyType::,
-	CandyType::,
-	CandyType::,
+	CandyType::Pear,
+	CandyType::Icecream,
+	CandyType::Cornetto,
+	CandyType::Cake,
+	CandyType::Beer,
+	CandyType::Strawberry
 };
 
 CandyManager::CandyManager()
@@ -49,9 +48,36 @@ void CandyManager::Init(GameObject* pGOLevel)
 
 void CandyManager::SpawnCandy(NpcType npcType, TransformModelComponent* pTransform)
 {
-	SpawnCandy(mNpcCandyList[int(npcType)], pTransform->GetPos());
+	SpawnCandy(mNpcCandyList[int(npcType)], pTransform);
+}
+
+void CandyManager::SpawnCandy(CandyType candyType, TransformModelComponent* pTransform)
+{
+	SpawnCandy(candyType, pTransform->GetPos());
 }
 
 void CandyManager::SpawnCandy(CandyType candyType, const Vec2<int>& pos)
 {
+	int candy{ GetInactiveCandy() };
+	if (candy < 0)
+		return;
+	(candyType);
+	//CandyComponent* pCandyComponent{ mpGOCandy[candy]->GetModelComponent<CandyComponent>() };
+	//pCandyComponent->SetCandyType(candyType);
+	TransformModelComponent* pTransform{ mpGOCandy[candy]->GetModelComponent<TransformModelComponent>() };
+	pTransform->SetPos(pos);
+	pTransform->Switch();
+	mpGOCandy[candy]->SetIsActive(true);
+}
+
+int CandyManager::GetInactiveCandy()
+{
+	int candy{ -1 };
+	for (int i{ 0 }; i < mCandyMax; ++i)
+		if (!mpGOCandy[i]->IsActive())
+		{
+			candy = i;
+			break;
+		}
+	return candy;
 }

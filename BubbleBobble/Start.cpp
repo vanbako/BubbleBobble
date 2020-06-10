@@ -40,9 +40,9 @@ GameObject* Start::CreateStart(Minigin* pEngine, Scene* pScene, BufferManager* p
 	ColorRGBA8* pPalette{ new ColorRGBA8[BufferBubble::GetPaletteColorCount()] };
 	pBubble->GetLevelColors(pPalette, 0);
 
-	GameObject* pGameObject{ CreateBackground(pEngine, pScene, pGameScene, pAblocks, pPalette) };
 	CreateBubBobAnim(Sprite::BubBubble, 64, pEngine, pScene, pAsprites, pPalette);
 	CreateBubBobAnim(Sprite::BobBubble, 192, pEngine, pScene, pAsprites, pPalette);
+	GameObject* pGameObject{ CreateBackground(pEngine, pScene, pGameScene, pAblocks, pPalette) };
 
 	delete[] pPalette;
 	return pGameObject;

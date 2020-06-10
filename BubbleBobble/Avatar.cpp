@@ -31,11 +31,6 @@ GameObject* Avatar::CreateAvatar(Minigin* pEngine, Scene* pScene, BufferManager*
 
 	GameObject* pGOAvatar{ pScene->CreateObject<GameObject>() };
 	TransformModelComponent* pTransformComponent{ pGOAvatar->CreateModelComponent<TransformModelComponent>(pEngine) };
-	//if (avatarType == AvatarType::Bub)
-	//	pTransformComponent->SetPos(16, 176);
-	//else
-	//	pTransformComponent->SetPos(208, 176);
-	//pTransformComponent->Switch();
 	RenderViewComponent* pRenderComponent{ pGOAvatar->CreateViewComponent<RenderViewComponent>(pEngine) };
 	pRenderComponent->SetTransformComponent(pTransformComponent);
 	pRenderComponent->SetIsSprite(true);
@@ -46,34 +41,32 @@ GameObject* Avatar::CreateAvatar(Minigin* pEngine, Scene* pScene, BufferManager*
 	InputAction* pInputAction{ pScene->GetInputManager()->CreateInputAction() };
 	if (avatarType == AvatarType::Bub)
 		pInputAction->LoadInput(mInputFile, "bubleft", VK_LEFT, 0);
-		//pInputAction->SetKeyboardKey(VK_LEFT);
 	else
 		pInputAction->LoadInput(mInputFile, "bobleft", 0, XINPUT_GAMEPAD_DPAD_LEFT);
-		//pInputAction->SetGamepadButtonCode(XINPUT_GAMEPAD_DPAD_LEFT);
 	pInputAction->CreateAndSetCommand<LeftCommand>();
 	pInputAction->SetActor(pAvatarComponent);
 
 	pInputAction = pScene->GetInputManager()->CreateInputAction();
 	if (avatarType == AvatarType::Bub)
-		pInputAction->SetKeyboardKey(VK_RIGHT);
+		pInputAction->LoadInput(mInputFile, "bubright", VK_RIGHT, 0);
 	else
-		pInputAction->SetGamepadButtonCode(XINPUT_GAMEPAD_DPAD_RIGHT);
+		pInputAction->LoadInput(mInputFile, "bobright", 0, XINPUT_GAMEPAD_DPAD_RIGHT);
 	pInputAction->CreateAndSetCommand<RightCommand>();
 	pInputAction->SetActor(pAvatarComponent);
 
 	pInputAction = pScene->GetInputManager()->CreateInputAction();
 	if (avatarType == AvatarType::Bub)
-		pInputAction->SetKeyboardKey(VK_UP);
+		pInputAction->LoadInput(mInputFile, "bubup", VK_UP, 0);
 	else
-		pInputAction->SetGamepadButtonCode(XINPUT_GAMEPAD_DPAD_UP);
+		pInputAction->LoadInput(mInputFile, "bobup", 0, XINPUT_GAMEPAD_DPAD_UP);
 	pInputAction->CreateAndSetCommand<JumpCommand>();
 	pInputAction->SetActor(pAvatarComponent);
 
 	pInputAction = pScene->GetInputManager()->CreateInputAction();
 	if (avatarType == AvatarType::Bub)
-		pInputAction->SetKeyboardKey(VK_SPACE);
+		pInputAction->LoadInput(mInputFile, "bubfire", VK_SPACE, 0);
 	else
-		pInputAction->SetGamepadButtonCode(XINPUT_GAMEPAD_A);
+		pInputAction->LoadInput(mInputFile, "bobfire", 0, XINPUT_GAMEPAD_A);
 	pInputAction->CreateAndSetCommand<FireCommand>();
 	pInputAction->SetActor(pAvatarComponent);
 

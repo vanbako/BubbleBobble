@@ -73,7 +73,7 @@ void AvatarComponent::Collision()
 	// NpcCollision
 	TransformModelComponent* pTransform{ mpGameObject->GetModelComponent<TransformModelComponent>() };
 	ColliderModelComponent* pCollider{ mpGameObject->GetModelComponent<ColliderModelComponent>() };
-	if (mpCurHealthState == mpLivingState)
+	if (mpCurHealthState != mpDyingState)
 	{
 		GameObject* pGONpc{ mpGOLevel->GetModelComponent<LevelComponent>()->CheckNpcCollision(pTransform, pCollider) };
 		if (pGONpc != nullptr)

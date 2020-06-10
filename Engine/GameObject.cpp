@@ -22,28 +22,44 @@ GameObject::~GameObject()
 		delete pViewComponent;
 }
 
-void GameObject::Update(const float deltaTime)
+void GameObject::CtrlUpdate(const float deltaTime)
 {
 	if (mIsActive)
-	{
 		for (CtrlComponent* pCtrlComponent : mpCtrlComponents)
 			pCtrlComponent->Update(deltaTime);
-		for (ModelComponent* pModelComponent : mpModelComponents)
-			pModelComponent->Update(deltaTime);
-		for (ModelComponent* pModelComponent : mpModelComponents)
-			pModelComponent->Collision();
-		for (ModelComponent* pModelComponent : mpModelComponents)
-			pModelComponent->Switch();
-		for (ViewComponent* pViewComponent : mpViewComponents)
-			pViewComponent->Update(deltaTime);
-	}
 }
 
-void GameObject::Render() const
+void GameObject::ModelUpdate(const float deltaTime)
 {
 	if (mIsActive)
-	{
+		for (ModelComponent* pModelComponent : mpModelComponents)
+			pModelComponent->Update(deltaTime);
+}
+
+void GameObject::ModelCollision()
+{
+	if (mIsActive)
+		for (ModelComponent* pModelComponent : mpModelComponents)
+			pModelComponent->Collision();
+}
+
+void GameObject::ModelSwitch()
+{
+	if (mIsActive)
+		for (ModelComponent* pModelComponent : mpModelComponents)
+			pModelComponent->Switch();
+}
+
+void GameObject::ViewUpdate(const float deltaTime)
+{
+	if (mIsActive)
+		for (ViewComponent* pViewComponent : mpViewComponents)
+			pViewComponent->Update(deltaTime);
+}
+
+void GameObject::ViewRender() const
+{
+	if (mIsActive)
 		for (ViewComponent* pViewComponent : mpViewComponents)
 			pViewComponent->Render();
-	}
 }

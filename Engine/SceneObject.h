@@ -18,8 +18,12 @@ namespace ieg
 		SceneObject& operator=(const SceneObject& other) = delete;
 		SceneObject& operator=(SceneObject&& other) = delete;
 
-		virtual void Update(const float deltaTime) = 0;
-		virtual void Render() const = 0;
+		virtual void CtrlUpdate(const float deltaTime) = 0;
+		virtual void ModelUpdate(const float deltaTime) = 0;
+		virtual void ModelCollision() = 0;
+		virtual void ModelSwitch() = 0;
+		virtual void ViewUpdate(const float deltaTime) = 0;
+		virtual void ViewRender() const = 0;
 
 		bool IsToBeDeleted() const { return mIsToBeDeleted; };
 		void SetIsToBeDeleted(bool isToBeDeleted) { mIsToBeDeleted = isToBeDeleted; };

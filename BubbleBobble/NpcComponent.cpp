@@ -66,13 +66,14 @@ void NpcComponent::Pop()
 	if (mpCurKineticState == mpFloatingState)
 	{
 		mpGameObject->SetIsActive(false);
-		mpGOLevel->GetModelComponent<LevelComponent>()->SpawnCandy(mNpcType, mpGameObject->GetModelComponent<TransformModelComponent>()->GetPos());
+		mpGOLevel->GetModelComponent<LevelComponent>()->SpawnCandy(mNpcType, mpGameObject->GetModelComponent<TransformModelComponent>());
 	}
 }
 
 bool NpcComponent::Capture()
 {
 	SetFloatingState();
+	mpGameObject->GetModelComponent<TransformModelComponent>()->ResetNewPos();
 	mpGameObject->GetViewComponent<RenderViewComponent>()->SetType(int(NpcType::Count) * 16 + int(mNpcType) * 8);
 	return true;
 }

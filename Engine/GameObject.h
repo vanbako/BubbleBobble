@@ -118,8 +118,12 @@ namespace ieg
 			return nullptr;
 		};
 
-		void Update(const float deltaTime) override;
-		void Render() const override;
+		void CtrlUpdate(const float deltaTime) override;
+		void ModelUpdate(const float deltaTime) override;
+		void ModelCollision() override;
+		void ModelSwitch() override;
+		void ViewUpdate(const float deltaTime) override;
+		void ViewRender() const override;
 
 		const bool& IsActive() const { return mIsActive; };
 		void SetIsActive(bool isActive) { mIsActive = isActive; };

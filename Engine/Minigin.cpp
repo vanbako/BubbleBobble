@@ -14,6 +14,7 @@
 #include "RenderViewComponent.h"
 #include "TextViewComponent.h"
 #include "FpsViewComponent.h"
+#include "Logger.h"
 
 using namespace ieg;
 
@@ -61,9 +62,10 @@ bool Minigin::Initialize()
 	if (mpResourceManager == nullptr || mpSceneManager == nullptr)
 		return false;
 	if (SDL_Init(SDL_INIT_VIDEO) != 0)
-		// TODO: Add logger line
-		//throw std::runtime_error(std::string("SDL_Init Error: ") + SDL_GetError());
+	{
+		mpServiceLocator->GetLogger()->Message(this, MsgType::Fatal, std::string("SDL_Init Error: ") + SDL_GetError());
 		return false;
+	}
 
 	mpWindow = SDL_CreateWindow(
 		"Bubble Bobble",
@@ -74,9 +76,10 @@ bool Minigin::Initialize()
 		SDL_WINDOW_OPENGL
 	);
 	if (mpWindow == nullptr)
-		// TODO: Add logger line
-		//throw std::runtime_error(std::string("SDL_CreateWindow Error: ") + SDL_GetError());
+	{
+		mpServiceLocator->GetLogger()->Message(this, MsgType::Fatal, std::string("SDL_CreateWindow Error: ") + SDL_GetError());
 		return false;
+	}
 
 	mpRenderer->Init(mpWindow);
 	return true;

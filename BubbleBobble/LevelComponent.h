@@ -11,6 +11,7 @@ namespace ieg
 	class ObsSubject;
 	class ObjectsManager;
 	enum class NpcType;
+	enum class CandyType;
 
 	enum class LevelEvent
 	{
