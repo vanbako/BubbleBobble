@@ -21,10 +21,11 @@ AvatarManager::AvatarManager()
 
 void AvatarManager::CreateAvatars(Minigin* pEngine, BufferManager* pBufferManager, ObjectsManager* pObjectsManager, Scene* pScene, ColorRGBA8* pPalette, Observer* pObserver)
 {
+	GameObject* pGOAvatar{ nullptr };
 	for (int avatar{ 0 }; avatar < mpAvatarMax; ++avatar)
 	{
 		mpGOAvatars.push_back(Avatar::CreateAvatar(pEngine, pScene, pBufferManager, pObjectsManager, pPalette, AvatarType(avatar)));
-		GameObject* pGOAvatar{ mpGOAvatars.back() };
+		pGOAvatar = mpGOAvatars.back();
 		pGOAvatar->GetModelComponent<AvatarComponent>()->GetObsSubject()->AddObserver(pObserver);
 		pGOAvatar->SetIsActive(false);
 	}

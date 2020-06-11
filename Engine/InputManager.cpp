@@ -56,11 +56,11 @@ bool InputManager::IsGamepadButtonPressed(WORD gamepadButtonCode) const
 void InputManager::HandleInput()
 {
 	for (auto pInputAction : mpInputActions)
-		if (pInputAction->GetCommand() != nullptr &&
-			(IsGamepadButtonPressed(pInputAction->GetGamepadButtonCode()) ||
+		if (pInputAction->GetCommand() != nullptr)
+			if (IsGamepadButtonPressed(pInputAction->GetGamepadButtonCode()) ||
 				IsKeyboardKeyDown(pInputAction->GetKeyboardKey())
-				))
-			pInputAction->GetCommand()->Execute(pInputAction->GetActor());
+				)
+				pInputAction->GetCommand()->Execute(pInputAction->GetActor());
 }
 
 InputAction* InputManager::CreateInputAction()

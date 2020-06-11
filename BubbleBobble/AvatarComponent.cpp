@@ -96,7 +96,10 @@ void AvatarComponent::Collision()
 		{
 			CandyComponent* pCandyComponent{ pGOCandy->GetModelComponent<CandyComponent>() };
 			pCandyComponent->Seize();
-			mpObsSubject->Notify(typeid(this).hash_code(), int(AvatarEvent::Score), 100);
+			mpObsSubject->Notify(
+				typeid(this).hash_code(),
+				int(AvatarEvent::Score),
+				(int(mAvatarType) << 16) | 100);
 		}
 	}
 }

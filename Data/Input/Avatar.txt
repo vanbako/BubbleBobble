@@ -1,8 +1,8 @@
-bubleft 37 -1
-bobleft -1 4
-bubright 39 -1
-bobright -1 8
-bubup 38 -1
-bobup -1 1
-bubfire 32 -1
-bobfire -1 4096
+bubleft 37 0
+bobleft 0 4
+bubright 39 0
+bobright 0 8
+bubup 38 0
+bobup 0 1
+bubfire 32 0
+bobfire 0 4096
