@@ -18,7 +18,7 @@ namespace ieg
 		ServiceLocator& operator=(const ServiceLocator&) = delete;
 		ServiceLocator& operator=(ServiceLocator&&) = delete;
 
-		static void init();
+		static void Init();
 		static Audio* GetAudio();
 		static void RegisterAudioService(Audio* pAudioService);
 		static Logger* GetLogger();

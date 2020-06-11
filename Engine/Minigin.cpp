@@ -25,6 +25,7 @@ Minigin::Minigin()
 	, mpRenderer{ new Renderer{} }
 	, mpServiceLocator{ new ServiceLocator{} }
 {
+	mpServiceLocator->Init();
 }
 
 Minigin::~Minigin()

@@ -12,9 +12,10 @@ NullAudio ServiceLocator::mNullAudioService{};
 Logger* ServiceLocator::mpLoggerService{ nullptr };
 NullLogger ServiceLocator::mNullLoggerService{};
 
-void ServiceLocator::init()
+void ServiceLocator::Init()
 {
 	mpAudioService = &mNullAudioService;
+	mpLoggerService = &mNullLoggerService;
 }
 
 Audio* ServiceLocator::GetAudio()

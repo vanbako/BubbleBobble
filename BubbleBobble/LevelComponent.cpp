@@ -74,17 +74,14 @@ LevelComponent::~LevelComponent()
 void LevelComponent::Update(const float deltaTime)
 {
 	(deltaTime);
-	// Temporary end level after x seconds
-	//mTest -= deltaTime;
-	//if (mTest <= 0.f)
-	//	mpObsSubject->Notify(typeid(this).hash_code(), int(LevelEvent::End), 0);
-	// End temporary
 }
 
 ObsSubject* LevelComponent::GetObsSubject()
 {
 	return mpObsSubject;
 }
+
+// TODO: change unsigned short to bitset
 
 unsigned short LevelComponent::CheckAvatarCollision(TransformModelComponent* pTransform, ColliderModelComponent* pCollider)
 {
