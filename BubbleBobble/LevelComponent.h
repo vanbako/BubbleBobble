@@ -43,6 +43,7 @@ namespace ieg
 		bool CheckCollisionPos(int x, int y);
 		void SpawnAvatar(AvatarType avatarType);
 		void SpawnCandy(NpcType npcType, TransformModelComponent* pTransform);
+		void CheckLastNpc();
 	private:
 		float mTest;
 		ObjectsManager* mpObjectsManager;

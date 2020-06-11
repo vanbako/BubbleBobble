@@ -75,9 +75,9 @@ void LevelComponent::Update(const float deltaTime)
 {
 	(deltaTime);
 	// Temporary end level after x seconds
-	mTest -= deltaTime;
-	if (mTest <= 0.f)
-		mpObsSubject->Notify(typeid(this).hash_code(), int(LevelEvent::End), 0);
+	//mTest -= deltaTime;
+	//if (mTest <= 0.f)
+	//	mpObsSubject->Notify(typeid(this).hash_code(), int(LevelEvent::End), 0);
 	// End temporary
 }
 
@@ -273,4 +273,10 @@ void LevelComponent::SpawnAvatar(AvatarType avatarType)
 void LevelComponent::SpawnCandy(NpcType npcType, TransformModelComponent* pTransform)
 {
 	mpObjectsManager->GetCandyManager()->SpawnCandy(npcType, pTransform);
+}
+
+void LevelComponent::CheckLastNpc()
+{
+	if (mpObjectsManager->GetNpcManager()->GetNextActiveNpc(nullptr) == nullptr)
+		mpObsSubject->Notify(typeid(this).hash_code(), int(LevelEvent::End), 0);
 }

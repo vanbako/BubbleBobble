@@ -62,11 +62,12 @@ void NpcComponent::Right()
 
 void NpcComponent::Pop()
 {
-	// TODO: Spawn Candy
 	if (mpCurKineticState == mpFloatingState)
 	{
 		mpGameObject->SetIsActive(false);
-		mpGOLevel->GetModelComponent<LevelComponent>()->SpawnCandy(mNpcType, mpGameObject->GetModelComponent<TransformModelComponent>());
+		LevelComponent* pLevel{ mpGOLevel->GetModelComponent<LevelComponent>() };
+		pLevel->SpawnCandy(mNpcType, mpGameObject->GetModelComponent<TransformModelComponent>());
+		pLevel->CheckLastNpc();
 	}
 }
 
