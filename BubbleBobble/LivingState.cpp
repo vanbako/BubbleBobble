@@ -4,6 +4,7 @@
 #include "../Engine/GameObject.h"
 #include "../Engine/ModelComponent.h"
 #include "../Engine/TransformModelComponent.h"
+#include "../Engine/ObsSubject.h"
 
 using namespace ieg;
 
@@ -14,5 +15,11 @@ void LivingState::Update(const float deltaTime)
 
 void LivingState::Die()
 {
-	((AvatarComponent*)mpModelComponent)->SetDyingState();
+	AvatarComponent* pAvatarComponent{ ((AvatarComponent*)mpModelComponent) };
+	pAvatarComponent->GetObsSubject()->Notify(
+		typeid(pAvatarComponent).hash_code(),
+		int(AvatarEvent::Die),
+		int(pAvatarComponent->GetAvatarType())
+	);
+	pAvatarComponent->SetDyingState();
 }

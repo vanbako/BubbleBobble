@@ -29,6 +29,7 @@ void HudObserver::OnNotify(size_t subject, int event, int value)
 			mpHudComponent->DeltaScore(value);
 			break;
 		case AvatarEvent::Die:
+			mpHudComponent->AvatarDie(value);
 			break;
 		};
 	if (subject == typeid(NpcComponent*).hash_code())

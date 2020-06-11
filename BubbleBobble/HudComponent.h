@@ -33,6 +33,7 @@ namespace ieg
 		void NextLevel();
 
 		void DeltaScore(int value);
+		void AvatarDie(int value);
 	private:
 		BufferManager* mpBufferManager;
 		ColorRGBA8* mpPalette;
@@ -44,10 +45,15 @@ namespace ieg
 		bool mIsSoundPlaying;
 		bool mEndLevel;
 		std::vector<int> mScores;
+		std::vector<int> mLives;
 		std::vector<GameObject*> mpGOScores;
+		std::vector<GameObject*> mpGOLives;
 
 		static const int mColorIndex[];
+		static const int mStartLives;
+		static const int mMaxLives;
 
 		void CreateScores();
+		void CreateLives();
 	};
 }

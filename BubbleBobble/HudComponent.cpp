@@ -29,6 +29,8 @@
 using namespace ieg;
 
 const int HudComponent::mColorIndex[]{ 15, 7 };
+const int HudComponent::mStartLives{ 5 };
+const int HudComponent::mMaxLives{ 7 };
 
 HudComponent::HudComponent(GameObject* pGameObject, Minigin* pEngine, ...)
 	: ModelComponent(pGameObject, pEngine)
@@ -40,6 +42,7 @@ HudComponent::HudComponent(GameObject* pGameObject, Minigin* pEngine, ...)
 	, mpHudObserver{ new HudObserver{ this } }
 	, mpGOScores{}
 	, mScores{}
+	, mLives{}
 	, mpPalette{ new ColorRGBA8[BufferBubble::GetPaletteColorCount()] }
 {
 	std::va_list args{};
@@ -56,8 +59,8 @@ HudComponent::HudComponent(GameObject* pGameObject, Minigin* pEngine, ...)
 	mpGOLevel = Level::CreateLevel(mLevel, pEngine, pScene, mpBufferManager, mpObjectsManager);
 	mpGOLevel->GetModelComponent<LevelComponent>()->GetObsSubject()->AddObserver(mpHudObserver);
 	mSoundId = pEngine->GetServiceLocator()->GetAudio()->AddSound("../Data/Audio/gameloop.wav", true);
-	// Scores
 	CreateScores();
+	CreateLives();
 }
 
 HudComponent::~HudComponent()
@@ -111,6 +114,18 @@ void HudComponent::DeltaScore(int value)
 	mpGOScores[score]->GetModelComponent<TextComponent>()->SetText(std::to_string(mScores[score]), mColorIndex[score]);
 }
 
+void HudComponent::AvatarDie(int value)
+{
+	if (value < 0 || value >= 2)
+		return;
+	mLives[value] -= 1;
+	TextComponent* pText{ mpGOLives[value]->GetModelComponent<TextComponent>() };
+	std::string lives{ "       " };
+	for (int i{ 0 }; i < mLives[value]; ++i)
+		lives[mMaxLives - i - 1] = '@';
+	pText->SetText(lives, mColorIndex[value]);
+}
+
 void HudComponent::CreateScores()
 {
 	Scene* pScene{ mpGameObject->GetScene() };
@@ -134,5 +149,31 @@ void HudComponent::CreateScores()
 		pText->SetRenderViewComponent(pRenderComponent);
 		pText->SetText("0", mColorIndex[score]);
 		pGOScore->SetIsActive(true);
+	}
+}
+
+void HudComponent::CreateLives()
+{
+	Scene* pScene{ mpGameObject->GetScene() };
+	int posY[]{ 88, 136 };
+	GameObject* pGOLive{};
+	TextComponent* pText{};
+	TransformModelComponent* pTransform{};
+	RenderViewComponent* pRenderComponent{};
+	for (int score{ 0 }; score < AvatarManager::GetAvatarMax(); ++score)
+	{
+		pGOLive = pScene->CreateObject<GameObject>(Order::front);
+		mLives.push_back(mStartLives);
+		mpGOLives.push_back(pGOLive);
+		pGOLive->SetParent(mpGameObject);
+		pText = pGOLive->CreateModelComponent<TextComponent>(mpEngine, mpBufferManager, mpPalette);
+		pTransform = pGOLive->CreateModelComponent<TransformModelComponent>(mpEngine);
+		pTransform->SetPos(8, posY[score]);
+		pTransform->Switch();
+		pRenderComponent = pGOLive->CreateViewComponent<RenderViewComponent>(mpEngine);
+		pRenderComponent->SetTransformComponent(pTransform);
+		pText->SetRenderViewComponent(pRenderComponent);
+		pText->SetText("  @@@@@", mColorIndex[score]);
+		pGOLive->SetIsActive(true);
 	}
 }
