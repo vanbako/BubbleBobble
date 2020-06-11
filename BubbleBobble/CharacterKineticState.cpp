@@ -8,8 +8,3 @@ CharacterKineticState::CharacterKineticState(ModelComponent* pModelComponent)
 	: State(pModelComponent)
 {
 }
-
-void CharacterKineticState::Capture()
-{
-	((CharacterComponent*)mpModelComponent)->SetFloatingState();
-}

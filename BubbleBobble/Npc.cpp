@@ -98,7 +98,7 @@ GameObject* Npc::CreateNpc(Minigin* pEngine, Scene* pScene, BufferManager* pBuff
 		int(NpcType::Count) * (mCount + mCaptureCount) * mWidth * sizeof(ColorRGBA8),
 		SDL_PIXELFORMAT_RGBA32) };
 	// Debug
-	//SDL_SaveBMP(pSurface, "Npcs.bmp");
+	SDL_SaveBMP(pSurface, "Npcs.bmp");
 	SDL_Texture* pSDLTexture{ SDL_CreateTextureFromSurface(pEngine->GetRenderer()->GetSDLRenderer(), pSurface) };
 	SDL_FreeSurface(pSurface);
 	pRenderComponent->SetTexture(pSDLTexture);

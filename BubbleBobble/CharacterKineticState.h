@@ -20,6 +20,6 @@ namespace ieg
 		virtual void Jump() = 0;
 		virtual void Fall() = 0;
 		virtual void Land() = 0;
-		virtual void Capture();
+		virtual void Capture() = 0;
 	};
 }

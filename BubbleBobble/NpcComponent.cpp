@@ -73,8 +73,10 @@ void NpcComponent::Pop()
 
 bool NpcComponent::Capture()
 {
-	SetFloatingState();
-	mpGameObject->GetModelComponent<TransformModelComponent>()->ResetNewPos();
+	mpCurKineticState->Capture();
+	TransformModelComponent* pTransform{ mpGameObject->GetModelComponent<TransformModelComponent>() };
+	pTransform->ResetNewPos();
+	pTransform->SetIsLookingLeft(false);
 	mpGameObject->GetViewComponent<RenderViewComponent>()->SetType(int(NpcType::Count) * 16 + int(mNpcType) * 8);
 	return true;
 }

@@ -22,3 +22,8 @@ void StandingState::Fall()
 {
 	((CharacterComponent*)mpModelComponent)->SetFallingState();
 }
+
+void StandingState::Capture()
+{
+	((CharacterComponent*)mpModelComponent)->SetFloatingState();
+}

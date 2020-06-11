@@ -48,3 +48,8 @@ void JumpingState::Fall()
 	mJumpHeight = 0;
 	((CharacterComponent*)mpModelComponent)->SetFallingState();
 }
+
+void JumpingState::Capture()
+{
+	((CharacterComponent*)mpModelComponent)->SetFloatingState();
+}

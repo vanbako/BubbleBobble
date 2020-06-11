@@ -19,6 +19,7 @@ namespace ieg
 		virtual void Jump() override {};
 		virtual void Fall() override;
 		virtual void Land() override {};
+		virtual void Capture() override;
 	private:
 		int	mIsVerMoving;
 		int mJumpHeight;

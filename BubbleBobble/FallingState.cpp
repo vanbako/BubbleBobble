@@ -37,3 +37,8 @@ void FallingState::Land()
 {
 	((CharacterComponent*)mpModelComponent)->SetStandingState();
 }
+
+void FallingState::Capture()
+{
+	((CharacterComponent*)mpModelComponent)->SetFloatingState();
+}
