@@ -40,8 +40,8 @@ GameObject* Start::CreateStart(Minigin* pEngine, Scene* pScene, BufferManager* p
 	ColorRGBA8* pPalette{ new ColorRGBA8[BufferBubble::GetPaletteColorCount()] };
 	pBubble->GetLevelColors(pPalette, 0);
 
-	CreateBubBobAnim(Sprite::BubBubble, 64, pEngine, pScene, pAsprites, pPalette);
-	CreateBubBobAnim(Sprite::BobBubble, 192, pEngine, pScene, pAsprites, pPalette);
+	CreateBubBobAnim(Sprite::BubBubble, 80, pEngine, pScene, pAsprites, pPalette);
+	CreateBubBobAnim(Sprite::BobBubble, 208, pEngine, pScene, pAsprites, pPalette);
 	GameObject* pGameObject{ CreateBackground(pEngine, pScene, pGameScene, pAblocks, pPalette) };
 
 	delete[] pPalette;
@@ -112,11 +112,18 @@ void Start::CreateBubBobAnim(Sprite sprite, int x, Minigin* pEngine, Scene* pSce
 		int(BufferAsprites::GetWidth() * mSpriteAnimCount * sizeof(ColorRGBA8)),
 		SDL_PIXELFORMAT_RGBA32) };
 	SDL_Texture* pSDLTexture{ SDL_CreateTextureFromSurface(pEngine->GetRenderer()->GetSDLRenderer(), pSurface) };
+	// Debug
+	//if (sprite == Sprite::BubBubble)
+	//	SDL_SaveBMP(pSurface, "BubBubble.bmp");
+	//else
+	//	SDL_SaveBMP(pSurface, "BobBubble.bmp");
 	SDL_FreeSurface(pSurface);
 	pRenderComponent->SetTexture(pSDLTexture);
 	pRenderComponent->SetSize(width, height);
 	pRenderComponent->SetIndex(0);
 	pRenderComponent->SetAnimation(mAnimDelay, 0, 1);
+
+	pGameObject->SetIsActive(true);
 	delete[] pPixels;
 }
 

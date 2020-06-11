@@ -9,7 +9,7 @@
 using namespace ieg;
 
 //const float StartComponent::mStartWaitVal{ 8.917f };
-const float StartComponent::mStartWaitVal{ 1.5f };
+const float StartComponent::mStartWaitVal{ 2.5f };
 
 StartComponent::StartComponent(GameObject* pGameObject, Minigin* pEngine,...)
 	: ModelComponent(pGameObject, pEngine)
