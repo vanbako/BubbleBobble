@@ -1,4 +1,7 @@
 #pragma once
+#include <thread>
+#include <atomic>
+#include <mutex>
 
 namespace ieg
 {
@@ -9,7 +12,7 @@ namespace ieg
 	{
 	public:
 		explicit CtrlComponent(GameObject* pGameObject, Minigin* pEngine);
-		virtual ~CtrlComponent() = default;
+		virtual ~CtrlComponent();
 		CtrlComponent(const CtrlComponent& other) = delete;
 		CtrlComponent(CtrlComponent&& other) = delete;
 		CtrlComponent& operator=(const CtrlComponent& other) = delete;
@@ -18,7 +21,13 @@ namespace ieg
 		virtual void Update(const float deltaTime) = 0;
 
 		GameObject* GetGameObject();
+		bool Lock(std::chrono::duration<float> duration);
+		void Unlock();
+		void CtrlLoop();
 	protected:
+		std::thread mThread;
+		std::atomic<bool> mRunThread;
+		std::timed_mutex mMutex;
 		Minigin* mpEngine;
 		GameObject* mpGameObject;
 	};

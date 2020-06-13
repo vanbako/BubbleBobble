@@ -34,7 +34,7 @@ void Scene::RemoveObject(GameObject* pGameObject)
 void Scene::Update(const float deltaTime)
 {
 	for (auto& objectPair : mpObjects)
-		objectPair.second->CtrlUpdate(deltaTime);
+		objectPair.second->CtrlLock();
 	for (auto& objectPair : mpObjects)
 		objectPair.second->ModelUpdate(deltaTime);
 	for (auto& objectPair : mpObjects)
@@ -63,6 +63,8 @@ void Scene::Update(const float deltaTime)
 		objectPair.second->ModelSwitch();
 	for (auto& objectPair : mpObjects)
 		objectPair.second->ViewUpdate(deltaTime);
+	for (auto& objectPair : mpObjects)
+		objectPair.second->CtrlUnlock();
 }
 
 void Scene::Render() const

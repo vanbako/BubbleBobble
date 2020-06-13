@@ -22,7 +22,7 @@ namespace ieg
 		AvatarManager& operator=(AvatarManager&&) = delete;
 
 		void CreateAvatars(Minigin * pEngine, BufferManager * pBufferManager, ObjectsManager* pObjectsManager, Scene * pScene, ColorRGBA8 * pPalette, Observer* pObserver);
-		void Init(GameObject * pGOLevel);
+		void Init(GameObject * pGOLevel, int players);
 		void Activate(int players);
 		void DeactivateAll();
 		void Spawn(AvatarType avatar);

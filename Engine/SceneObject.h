@@ -16,6 +16,8 @@ namespace ieg
 
 		virtual void OnSceneActivation(int value) = 0;
 		virtual void CtrlUpdate(const float deltaTime) = 0;
+		virtual void CtrlLock() = 0;
+		virtual void CtrlUnlock() = 0;
 		virtual void ModelUpdate(const float deltaTime) = 0;
 		virtual void ModelCollision() = 0;
 		virtual void ModelSwitch() = 0;

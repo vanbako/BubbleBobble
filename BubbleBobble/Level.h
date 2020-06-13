@@ -23,7 +23,7 @@ namespace ieg
 		Level& operator=(const Level&) = delete;
 		Level& operator=(Level&&) = delete;
 
-		static GameObject* CreateLevel(int level, Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, ObjectsManager* pObjectsManager);
+		static GameObject* CreateLevel(int level, Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, ObjectsManager* pObjectsManager, int players);
 		static const int GetBlockCount();
 		static const int GetEnemyDataBytes();
 		static const int GetEnemyDataSize();

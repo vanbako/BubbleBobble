@@ -27,9 +27,9 @@ void AvatarManager::CreateAvatars(Minigin* pEngine, BufferManager* pBufferManage
 	}
 }
 
-void AvatarManager::Init(GameObject* pGOLevel)
+void AvatarManager::Init(GameObject* pGOLevel, int players)
 {
-	for (int avatar{ 0 }; avatar < mpAvatarMax; ++avatar)
+	for (int avatar{ 0 }; avatar < players; ++avatar)
 	{
 		mpGOAvatars[avatar]->GetModelComponent<AvatarComponent>()->SetLevel(pGOLevel);
 		TransformModelComponent* pTransform{ mpGOAvatars[avatar]->GetModelComponent<TransformModelComponent>() };

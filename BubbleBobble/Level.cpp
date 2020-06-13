@@ -18,7 +18,7 @@ const int Level::mHeight{ 200 };
 const int Level::mEnemyDataSize{ 3 };
 const int Level::mMaxEnemies{ 6 };
 
-GameObject* Level::CreateLevel(int level, Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, ObjectsManager* pObjectsManager)
+GameObject* Level::CreateLevel(int level, Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, ObjectsManager* pObjectsManager, int players)
 {
 	BufferBubble* pBubble{ (BufferBubble*)pBufferManager->GetBuffer(EnumBuffer::Bubble) };
 	BufferAblocks* pAblocks{ (BufferAblocks*)pBufferManager->GetBuffer(EnumBuffer::Ablocks) };
@@ -44,7 +44,7 @@ GameObject* Level::CreateLevel(int level, Minigin* pEngine, Scene* pScene, Buffe
 	std::memset(pEnemyData, 0, GetEnemyDataBytes());
 	pBdata->GetEnemies(pEnemyData, level);
 
-	pGOLevel->CreateModelComponent<LevelComponent>(pEngine, pBufferManager, pLevelPalette, pLayout, pEnemyData, pObjectsManager, level);
+	pGOLevel->CreateModelComponent<LevelComponent>(pEngine, pBufferManager, pLevelPalette, pLayout, pEnemyData, pObjectsManager, level, players);
 
 	DrawBlocks(pAblocks, pPixels, pLevelPalette, pLayout, level);
 	DrawBigBlocks(pAblocks, pPixels, pLevelPalette, pBubble, level);

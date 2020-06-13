@@ -51,9 +51,9 @@ CandyManager* ObjectsManager::GetCandyManager()
 	return mpCandyManager;
 }
 
-void ObjectsManager::InitGameObjects(GameObject* pGOLevel)
+void ObjectsManager::InitGameObjects(GameObject* pGOLevel, int players)
 {
-	mpAvatarManager->Init(pGOLevel);
+	mpAvatarManager->Init(pGOLevel, players);
 	mpBubbleManager->Init(pGOLevel);
 	mpNpcManager->Init(pGOLevel);
 	mpCandyManager->Init(pGOLevel);

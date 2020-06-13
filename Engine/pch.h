@@ -8,11 +8,13 @@
 #include <cstdarg>
 #include <chrono>
 #include <thread>
+#include <atomic>
+#include <mutex>
 #include <cstdarg>
 #include <set>
 #include <map>
 #include <exception>
-
+#include <thread>
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_ttf.h>

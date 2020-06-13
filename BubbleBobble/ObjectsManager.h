@@ -29,7 +29,7 @@ namespace ieg
 		CandyManager* GetCandyManager();
 
 		void CreateGameObjects(Minigin* pEngine, BufferManager* pBufferManager, ObjectsManager* pObjectsManager, Scene* pScene, ColorRGBA8* pPalette, Observer* pObserver);
-		void InitGameObjects(GameObject* pGOLevel);
+		void InitGameObjects(GameObject* pGOLevel, int players);
 		void DeactivateAll();
 	private:
 		AvatarManager* mpAvatarManager;

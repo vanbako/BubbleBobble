@@ -46,6 +46,7 @@ namespace ieg
 		void CheckLastNpc();
 	private:
 		int mLevel;
+		int mPlayers;
 		float mEndLevelTime;
 		float mTest;
 		ObjectsManager* mpObjectsManager;

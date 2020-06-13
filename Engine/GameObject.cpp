@@ -28,11 +28,26 @@ void GameObject::OnSceneActivation(int value)
 		pModelComponent->OnSceneActivation(value);
 }
 
-void GameObject::CtrlUpdate(const float deltaTime)
+//void GameObject::CtrlUpdate(const float deltaTime)
+//{
+//	if (mIsActive)
+//		for (CtrlComponent* pCtrlComponent : mpCtrlComponents)
+//			pCtrlComponent->Update(deltaTime);
+//}
+
+void GameObject::CtrlLock()
+{
+	std::chrono::duration<float> waitForLock{ 0.005f };
+	if (mIsActive)
+		for (CtrlComponent* pCtrlComponent : mpCtrlComponents)
+			pCtrlComponent->Lock(waitForLock);
+}
+
+void GameObject::CtrlUnlock()
 {
 	if (mIsActive)
 		for (CtrlComponent* pCtrlComponent : mpCtrlComponents)
-			pCtrlComponent->Update(deltaTime);
+			pCtrlComponent->Unlock();
 }
 
 void GameObject::ModelUpdate(const float deltaTime)

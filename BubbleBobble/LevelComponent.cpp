@@ -30,6 +30,7 @@ LevelComponent::LevelComponent(GameObject* pGameObject, Minigin* pEngine, ...)
 	, mLevel{ 0 }
 	, mEndLevelTime{ mEndLevelWait }
 	, mEndLevel{ false }
+	, mPlayers{ 1 }
 {
 	std::va_list args{};
 	va_start(args, pEngine);
@@ -41,12 +42,13 @@ LevelComponent::LevelComponent(GameObject* pGameObject, Minigin* pEngine, ...)
 	char* pEnemyData{ va_arg(vaList, char*) };
 	mpObjectsManager = va_arg(vaList, ObjectsManager*);
 	mLevel = va_arg(vaList, int);
+	mPlayers = va_arg(vaList, int);
 	va_end(args);
 
 	std::memcpy(mpPalette, pLevelPalette, sizeof(ColorRGBA8) * BufferBubble::GetPaletteColorCount());
 	std::memcpy(mpLayout, pLayout, Level::GetBlockCount());
 	std::memcpy(mpEnemyData, pEnemyData, Level::GetEnemyDataBytes());
-	mpObjectsManager->InitGameObjects(mpGameObject);
+	mpObjectsManager->InitGameObjects(mpGameObject, mPlayers);
 	// NPC data from Bdata
 	//  byte0           byte1           byte2
 	//  7 6 5 4 3 2 1 0 7 6 5 4 3 2 1 0 7 6 5 4 3 2 1 0

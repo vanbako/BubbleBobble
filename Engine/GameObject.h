@@ -106,7 +106,9 @@ namespace ieg
 			return nullptr;
 		};
 
-		void CtrlUpdate(const float deltaTime) override;
+		void CtrlUpdate(const float deltaTime) override { (deltaTime); };
+		virtual void CtrlLock() override;
+		virtual void CtrlUnlock() override;
 		void ModelUpdate(const float deltaTime) override;
 		void ModelCollision() override;
 		void ModelSwitch() override;
