@@ -348,6 +348,8 @@ healthchecksdb
 !3rdParty/Fmod/lib/x86
 !3rdParty/Fmod/lib/x64
 !3rdParty/Visual Leak Detector/lib/Win32
+!3rdParty/Visual Leak Detector/bin
 !3rdParty/Visual Leak Detector/bin/Win32
 !3rdParty/Visual Leak Detector/lib/Win64
+!3rdParty/Visual Leak Detector/bin
 !3rdParty/Visual Leak Detector/bin/Win64
