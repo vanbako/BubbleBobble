@@ -54,7 +54,7 @@ GameObject* Level::CreateLevel(int level, Minigin* pEngine, Scene* pScene, Buffe
 	std::memset(pEnemyData, 0, GetEnemyDataBytes());
 	pBdata->GetEnemies(pEnemyData, level);
 
-	pGOLevel->CreateModelComponent<LevelComponent>(pEngine, pBufferManager, pLevelPalette, pLayout, pEnemyData, pObjectsManager);
+	pGOLevel->CreateModelComponent<LevelComponent>(pEngine, pBufferManager, pLevelPalette, pLayout, pEnemyData, pObjectsManager, level);
 
 	DrawBlocks(pAblocks, pPixels, pLevelPalette, pLayout, level);
 	DrawBigBlocks(pAblocks, pPixels, pLevelPalette, pBubble, level);

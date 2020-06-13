@@ -45,6 +45,8 @@ namespace ieg
 		void SpawnCandy(NpcType npcType, TransformModelComponent* pTransform);
 		void CheckLastNpc();
 	private:
+		int mLevel;
+		float mEndLevelTime;
 		float mTest;
 		ObjectsManager* mpObjectsManager;
 		char
@@ -52,5 +54,8 @@ namespace ieg
 			*mpEnemyData;
 		ColorRGBA8* mpPalette;
 		ObsSubject* mpObsSubject;
+		bool mEndLevel;
+
+		static const float mEndLevelWait;
 	};
 }

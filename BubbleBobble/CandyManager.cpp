@@ -5,6 +5,8 @@
 #include "NpcComponent.h"
 #include "Candy.h"
 #include "AvatarManager.h"
+#include "BufferManager.h"
+#include "BufferAirflow.h"
 #include "../Engine/GameObject.h"
 #include "../Engine/TransformModelComponent.h"
 
@@ -24,11 +26,13 @@ const std::vector<CandyType> CandyManager::mNpcCandyList{
 
 CandyManager::CandyManager()
 	: mpGOCandy{}
+	, mpBufferManager{ nullptr }
 {
 }
 
 void CandyManager::CreateCandy(Minigin* pEngine, BufferManager* pBufferManager, Scene* pScene, ColorRGBA8* pPalette)
 {
+	mpBufferManager = pBufferManager;
 	if (mpGOCandy.size() != 0)
 		return;
 	mpGOCandy.push_back(Candy::CreateCandy(pEngine, pScene, pBufferManager, pPalette));
@@ -52,26 +56,34 @@ void CandyManager::DeactivateAll()
 		mpGOCandy[candy]->SetIsActive(false);
 }
 
-void CandyManager::SpawnCandy(NpcType npcType, TransformModelComponent* pTransform)
+void CandyManager::SpawnCandy(NpcType npcType, TransformModelComponent* pTransform, int level)
 {
-	SpawnCandy(mNpcCandyList[int(npcType)], pTransform);
+	SpawnCandy(mNpcCandyList[int(npcType)], pTransform, level);
 }
 
-void CandyManager::SpawnCandy(CandyType candyType, TransformModelComponent* pTransform)
+void CandyManager::SpawnCandy(CandyType candyType, TransformModelComponent* pTransform, int level)
 {
-	SpawnCandy(candyType, pTransform->GetPos());
+	SpawnCandy(candyType, pTransform->GetPos(), level);
 }
 
-void CandyManager::SpawnCandy(CandyType candyType, const Vec2<int>& pos)
+void CandyManager::SpawnCandy(CandyType candyType, const Vec2<int>& pos, int level)
 {
 	int candy{ GetInactiveCandy() };
 	if (candy < 0)
 		return;
 	(candyType);
+	(pos);
+	BufferAirflow* pAirflow{ (BufferAirflow*)mpBufferManager->GetBuffer(EnumBuffer::Airflow) };
+	SpawnLocation sLoc{ pAirflow->GetSpawnLocations(level) };
+	Vec2<int> p{};
+	if ((std::rand() % 2) == 0)
+		p = Vec2<int>{ int((sLoc.c[0] & 0xf8) >> 3) * 8, int(((sLoc.c[0] & 0x07) << 2) | ((sLoc.c[1] & 0xc0) >> 6)) * 8 };
+	else
+		p = Vec2<int>{ int((sLoc.c[1] & 0x3e) >> 1) * 8, int(((sLoc.c[1] & 0x01) << 4) | ((sLoc.c[2] & 0xf0) >> 4)) * 8 };
 	//CandyComponent* pCandyComponent{ mpGOCandy[candy]->GetModelComponent<CandyComponent>() };
 	//pCandyComponent->SetCandyType(candyType);
 	TransformModelComponent* pTransform{ mpGOCandy[candy]->GetModelComponent<TransformModelComponent>() };
-	pTransform->SetPos(pos);
+	pTransform->SetPos(p);
 	pTransform->Switch();
 	mpGOCandy[candy]->SetIsActive(true);
 }

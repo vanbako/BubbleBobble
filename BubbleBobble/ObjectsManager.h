@@ -13,7 +13,7 @@ namespace ieg
 	class ColorRGBA8;
 	class Observer;
 
-	class ObjectsManager
+	class ObjectsManager final
 	{
 	public:
 		explicit ObjectsManager();

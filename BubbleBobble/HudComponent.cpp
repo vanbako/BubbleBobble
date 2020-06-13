@@ -123,10 +123,7 @@ void HudComponent::AvatarDie(int value)
 	if (mLives[value] > 0)
 		DrawLives();
 	else
-	{
-		//lives = "GameOver";
 		GameOver();
-	}
 }
 
 void HudComponent::DrawLives()
@@ -161,6 +158,7 @@ void HudComponent::GameOver()
 	ScoresInit();
 	LivesInit();
 	mpGOLevel->SetIsToBeDeleted(true);
+	mpEngine->GetServiceLocator()->GetAudio()->StopSound(mSoundId);
 	mpEngine->GetSceneManager()->SetActiveScene(mpIntroScene);
 }
 

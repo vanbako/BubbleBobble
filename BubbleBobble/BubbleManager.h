@@ -10,7 +10,7 @@ namespace ieg
 	class GameObject;
 	class ColliderModelComponent;
 
-	class BubbleManager
+	class BubbleManager final
 	{
 	public:
 		explicit BubbleManager();

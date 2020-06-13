@@ -11,7 +11,7 @@ namespace ieg
 	class Observer;
 	class ObjectsManager;
 
-	class AvatarManager
+	class AvatarManager final
 	{
 	public:
 		explicit AvatarManager();

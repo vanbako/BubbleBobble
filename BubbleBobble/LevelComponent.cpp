@@ -23,6 +23,8 @@
 
 using namespace ieg;
 
+const float LevelComponent::mEndLevelWait{ 4.f };
+
 LevelComponent::LevelComponent(GameObject* pGameObject, Minigin* pEngine, ...)
 	: ModelComponent(pGameObject, pEngine)
 	, mpLayout{ new char[Level::GetBlockCount()] }
@@ -31,6 +33,9 @@ LevelComponent::LevelComponent(GameObject* pGameObject, Minigin* pEngine, ...)
 	, mpObjectsManager{ nullptr }
 	, mTest{ 15.f }
 	, mpObsSubject{ new ObsSubject{} }
+	, mLevel{ 0 }
+	, mEndLevelTime{ mEndLevelWait }
+	, mEndLevel{ false }
 {
 	std::va_list args{};
 	va_start(args, pEngine);
@@ -41,6 +46,7 @@ LevelComponent::LevelComponent(GameObject* pGameObject, Minigin* pEngine, ...)
 	char* pLayout{ va_arg(vaList, char*) };
 	char* pEnemyData{ va_arg(vaList, char*) };
 	mpObjectsManager = va_arg(vaList, ObjectsManager*);
+	mLevel = va_arg(vaList, int);
 	va_end(args);
 
 	std::memcpy(mpPalette, pLevelPalette, sizeof(ColorRGBA8) * BufferBubble::GetPaletteColorCount());
@@ -73,7 +79,14 @@ LevelComponent::~LevelComponent()
 
 void LevelComponent::Update(const float deltaTime)
 {
-	(deltaTime);
+	if (!mEndLevel)
+		return;
+	mEndLevelTime -= deltaTime;
+	if (mEndLevelTime <= 0.f)
+	{
+		mEndLevel = false;
+		mpObsSubject->Notify(typeid(this).hash_code(), int(LevelEvent::End), 0);
+	}
 }
 
 ObsSubject* LevelComponent::GetObsSubject()
@@ -269,11 +282,14 @@ void LevelComponent::SpawnAvatar(AvatarType avatarType)
 
 void LevelComponent::SpawnCandy(NpcType npcType, TransformModelComponent* pTransform)
 {
-	mpObjectsManager->GetCandyManager()->SpawnCandy(npcType, pTransform);
+	mpObjectsManager->GetCandyManager()->SpawnCandy(npcType, pTransform, mLevel);
 }
 
 void LevelComponent::CheckLastNpc()
 {
 	if (mpObjectsManager->GetNpcManager()->GetNextActiveNpc(nullptr) == nullptr)
-		mpObsSubject->Notify(typeid(this).hash_code(), int(LevelEvent::End), 0);
+	{
+		mEndLevelTime = mEndLevelWait;
+		mEndLevel = true;
+	}
 }

@@ -10,7 +10,7 @@ namespace ieg
 	class BufferManager;
 	class Observer;
 
-	class NpcManager
+	class NpcManager final
 	{
 	public:
 		explicit NpcManager();
