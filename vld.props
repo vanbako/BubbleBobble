@@ -10,6 +10,9 @@
     <ClCompile>
       <AdditionalIncludeDirectories>$(SolutionDir)3rdParty\Visual Leak Detector\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
+    <PostBuildEvent>
+      <Command>xcopy "$(SolutionDir)3rdParty\Visual Leak Detector\lib\Win$(PlatformArchitecture)\*.*" "$(OutDir)" /y /D</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup />
 </Project>
