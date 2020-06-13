@@ -20,12 +20,14 @@ namespace ieg
 		StartComponent& operator=(const StartComponent&) = delete;
 		StartComponent& operator=(StartComponent&&) = delete;
 
+		void OnSceneActivation(int value) override;
 		void Update(const float deltaTime) override;
 		void Collision() override {};
 		void Switch() override {};
 
 		void SetStartScene(Scene* pScene);
 	private:
+		int mPlayers;
 		Scene* mpStartScene;
 		Audio* mpAudio;
 		int mStartSoundId;

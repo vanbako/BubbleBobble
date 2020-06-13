@@ -18,6 +18,7 @@ namespace ieg
 		IntroComponent& operator=(const IntroComponent&) = delete;
 		IntroComponent& operator=(IntroComponent&&) = delete;
 
+		void OnSceneActivation(int value) override { (value); };
 		void Update(const float deltaTime) override;
 		void Collision() override {};
 		void Switch() override {};

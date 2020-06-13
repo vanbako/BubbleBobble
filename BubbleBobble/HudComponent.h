@@ -23,6 +23,7 @@ namespace ieg
 		HudComponent& operator=(const HudComponent&) = delete;
 		HudComponent& operator=(HudComponent&&) = delete;
 
+		void OnSceneActivation(int value) override;
 		void Update(const float deltaTime) override;
 		void Collision() override {};
 		void Switch() override {};
@@ -35,6 +36,7 @@ namespace ieg
 		void AvatarDie(int value);
 		void GameOver();
 	private:
+		int mPlayers;
 		BufferManager* mpBufferManager;
 		ColorRGBA8* mpPalette;
 		Scene* mpIntroScene;

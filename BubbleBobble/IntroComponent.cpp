@@ -36,13 +36,12 @@ void IntroComponent::SetStartScene(Scene* pScene)
 
 void IntroComponent::Start(int players) const
 {
-	(players);
 	if (mpStartScene != nullptr)
 	{
 		if (mStartAudio)
 			mpAudio->StopSound(mStartSoundId);
 		else
 			mpAudio->StopSound(mIntroSoundId);
-		mpEngine->GetSceneManager()->SetActiveScene(mpStartScene);
+		mpEngine->GetSceneManager()->SetActiveScene(mpStartScene, players);
 	}
 }

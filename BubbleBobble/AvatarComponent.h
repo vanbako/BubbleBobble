@@ -29,6 +29,7 @@ namespace ieg
 		AvatarComponent& operator=(const AvatarComponent&) = delete;
 		AvatarComponent& operator=(AvatarComponent&&) = delete;
 
+		void OnSceneActivation(int value) override { (value); };
 		void Update(const float deltaTime) override;
 		void Collision() override;
 		void Switch() override;

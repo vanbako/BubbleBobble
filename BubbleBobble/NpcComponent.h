@@ -34,6 +34,7 @@ namespace ieg
 		NpcComponent& operator=(const NpcComponent&) = delete;
 		NpcComponent& operator=(NpcComponent&&) = delete;
 
+		void OnSceneActivation(int value) override { (value); };
 		void Update(const float deltaTime) override;
 
 		void SetNpcType(NpcType npcType);

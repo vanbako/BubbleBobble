@@ -22,6 +22,12 @@ GameObject::~GameObject()
 		delete pViewComponent;
 }
 
+void GameObject::OnSceneActivation(int value)
+{
+	for (ModelComponent* pModelComponent : mpModelComponents)
+		pModelComponent->OnSceneActivation(value);
+}
+
 void GameObject::CtrlUpdate(const float deltaTime)
 {
 	if (mIsActive)

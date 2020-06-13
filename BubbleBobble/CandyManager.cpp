@@ -12,8 +12,8 @@ using namespace ieg;
 
 const int CandyManager::mCandyMax{ 12 };
 const std::vector<CandyType> CandyManager::mNpcCandyList{
-	CandyType::Bananas,
-	CandyType::Apple,
+	CandyType::Melon,
+	CandyType::Fries,
 	CandyType::Pear,
 	CandyType::Icecream,
 	CandyType::Cornetto,
@@ -78,8 +78,8 @@ void CandyManager::SpawnCandy(CandyType candyType, const Vec2<int>& pos, int lev
 		p = Vec2<int>{ int((sLoc.c[0] & 0xf8) >> 3) * 8, int(((sLoc.c[0] & 0x07) << 2) | ((sLoc.c[1] & 0xc0) >> 6)) * 8 };
 	else
 		p = Vec2<int>{ int((sLoc.c[1] & 0x3e) >> 1) * 8, int(((sLoc.c[1] & 0x01) << 4) | ((sLoc.c[2] & 0xf0) >> 4)) * 8 };
-	//CandyComponent* pCandyComponent{ mpGOCandy[candy]->GetModelComponent<CandyComponent>() };
-	//pCandyComponent->SetCandyType(candyType);
+	CandyComponent* pCandyComponent{ mpGOCandy[candy]->GetModelComponent<CandyComponent>() };
+	pCandyComponent->SetCandyType(candyType);
 	TransformModelComponent* pTransform{ mpGOCandy[candy]->GetModelComponent<TransformModelComponent>() };
 	pTransform->SetPos(p);
 	pTransform->Switch();

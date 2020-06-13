@@ -25,14 +25,15 @@ Scene* SceneManager::CreateScene(const std::string& name)
 	return pScene;
 }
 
-void SceneManager::SetActiveScene(const std::string& name)
+void SceneManager::SetActiveScene(const std::string& name, int value)
 {
-	mpActiveScene = mpScenes.at(name);
+	SetActiveScene(mpScenes.at(name), value);
 }
 
-void SceneManager::SetActiveScene(Scene* pScene)
+void SceneManager::SetActiveScene(Scene* pScene, int value)
 {
 	mpActiveScene = pScene;
+	pScene->OnActivation(value);
 }
 
 bool SceneManager::Update(const float deltaTime)

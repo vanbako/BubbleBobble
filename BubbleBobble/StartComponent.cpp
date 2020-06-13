@@ -8,6 +8,7 @@ const float StartComponent::mStartWaitVal{ 2.5f };
 
 StartComponent::StartComponent(GameObject* pGameObject, Minigin* pEngine,...)
 	: ModelComponent(pGameObject, pEngine)
+	, mPlayers{ 1 }
 	, mpStartScene{ nullptr }
 	, mpAudio{ pEngine->GetServiceLocator()->GetAudio() }
 	, mStartSoundId{ 0 }
@@ -16,6 +17,11 @@ StartComponent::StartComponent(GameObject* pGameObject, Minigin* pEngine,...)
 	, mSwapWait{ 0.5f }
 {
 	mStartSoundId = mpAudio->AddSound("../Data/Audio/gamestart.wav", false);
+}
+
+void StartComponent::OnSceneActivation(int value)
+{
+	mPlayers = value;
 }
 
 void StartComponent::Update(const float deltaTime)
@@ -30,7 +36,7 @@ void StartComponent::Update(const float deltaTime)
 	else
 	{
 		mpAudio->StopSound(mStartSoundId);
-		mpEngine->GetSceneManager()->SetActiveScene(mpStartScene);
+		mpEngine->GetSceneManager()->SetActiveScene(mpStartScene, mPlayers);
 	}
 }
 

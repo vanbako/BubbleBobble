@@ -31,7 +31,7 @@ GameObject* Intro::CreateIntro(Minigin* pEngine, Scene* pScene, BufferManager* p
 	pInputAction = pScene->GetInputManager()->CreateInputAction();
 	pInputAction->SetKeyboardKey('2');
 	pInputAction->SetGamepadButtonCode(XINPUT_GAMEPAD_START);
-	pInputAction->CreateAndSetCommand<Start1Command>();
+	pInputAction->CreateAndSetCommand<Start2Command>();
 	pInputAction->SetActor(pIntroComponent);
 
 	BufferBubble* pBubble{ (BufferBubble*)pBufferManager->GetBuffer(EnumBuffer::Bubble) };

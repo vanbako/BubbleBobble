@@ -20,6 +20,8 @@ namespace ieg
 		GameObject& operator=(const GameObject& other) = delete;
 		GameObject& operator=(GameObject&& other) = delete;
 
+		virtual void OnSceneActivation(int value) override;
+
 		template<class T>
 		T* CreateCtrlComponent(Minigin* pEngine, ...)
 		{

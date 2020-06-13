@@ -43,6 +43,15 @@ void AvatarManager::Init(GameObject* pGOLevel)
 	}
 }
 
+void AvatarManager::Activate(int players)
+{
+	for (int avatar{ 0 }; avatar < mpAvatarMax; ++avatar)
+		if (avatar < players)
+			mpGOAvatars[avatar]->SetIsActive(true);
+		else
+			mpGOAvatars[avatar]->SetIsActive(false);
+}
+
 void AvatarManager::DeactivateAll()
 {
 	for (int avatar{ 0 }; avatar < mpAvatarMax; ++avatar)

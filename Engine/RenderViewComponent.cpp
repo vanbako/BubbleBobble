@@ -26,13 +26,16 @@ RenderViewComponent::RenderViewComponent(Minigin* pEngine)
 
 void RenderViewComponent::Update(const float deltaTime)
 {
-	mCurrDelay -= deltaTime;
-	if (mCurrDelay <= 0.f)
+	if (mIsAnimating)
 	{
-		mCurrDelay += mDelay;
-		mIndex += 1;
-		if (mIndex > mStopIndex)
-			mIndex = mStartIndex;
+		mCurrDelay -= deltaTime;
+		if (mCurrDelay <= 0.f)
+		{
+			mCurrDelay += mDelay;
+			mIndex += 1;
+			if (mIndex > mStopIndex)
+				mIndex = mStartIndex;
+		}
 	}
 	if (mIsSprite)
 	{

@@ -19,6 +19,7 @@ namespace ieg
 		BubbleComponent& operator=(const BubbleComponent&) = delete;
 		BubbleComponent& operator=(BubbleComponent&&) = delete;
 
+		void OnSceneActivation(int value) override { (value); };
 		void Update(const float deltaTime) override;
 		void Collision() override;
 		void Switch() override;

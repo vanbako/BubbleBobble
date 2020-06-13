@@ -14,7 +14,7 @@ void BubbleBobble::Create(Minigin* pEngine, BufferManager* pBufferManager)
 	Scene* pIntroScene{ pEngine->GetSceneManager()->CreateScene("Intro") };
 	Scene* pStartScene{ pEngine->GetSceneManager()->CreateScene("Start") };
 	Scene* pGameScene{ pEngine->GetSceneManager()->CreateScene("Game") };
-	pEngine->GetSceneManager()->SetActiveScene(pIntroScene);
+	pEngine->GetSceneManager()->SetActiveScene(pIntroScene, 0);
 
 	Intro::CreateIntro(pEngine, pIntroScene, pBufferManager, pStartScene);
 	Start::CreateStart(pEngine, pStartScene, pBufferManager, pGameScene);

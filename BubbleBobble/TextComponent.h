@@ -16,6 +16,7 @@ namespace ieg
 		TextComponent& operator=(const TextComponent&) = delete;
 		TextComponent& operator=(TextComponent&&) = delete;
 
+		void OnSceneActivation(int value) override { (value); };
 		void Update(const float deltaTime) override;
 		void Collision() override {};
 		void Switch() override {};

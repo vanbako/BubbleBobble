@@ -37,6 +37,7 @@ namespace ieg
 		void RemoveObject(GameObject* pGameObject);
 		void Update(const float deltaTime);
 		void Render() const;
+		void OnActivation(int value);
 
 		InputManager* GetInputManager();
 	private:

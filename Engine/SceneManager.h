@@ -16,8 +16,8 @@ namespace ieg
 		SceneManager& operator=(SceneManager&&) = delete;
 
 		Scene* CreateScene(const std::string& name);
-		void SetActiveScene(const std::string& name);
-		void SetActiveScene(Scene* pScene);
+		void SetActiveScene(const std::string& name, int value);
+		void SetActiveScene(Scene* pScene, int value);
 
 		bool Update(const float deltaTime);
 		void Render();

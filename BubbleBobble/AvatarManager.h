@@ -23,6 +23,7 @@ namespace ieg
 
 		void CreateAvatars(Minigin * pEngine, BufferManager * pBufferManager, ObjectsManager* pObjectsManager, Scene * pScene, ColorRGBA8 * pPalette, Observer* pObserver);
 		void Init(GameObject * pGOLevel);
+		void Activate(int players);
 		void DeactivateAll();
 		void Spawn(AvatarType avatar);
 

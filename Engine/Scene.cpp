@@ -6,7 +6,7 @@
 using namespace ieg;
 
 Scene::Scene(const std::string& name)
-	: mName(name)
+	: mName{ name }
 	, mpInputManager(new InputManager{})
 	, mpObjects{}
 {
@@ -69,6 +69,12 @@ void Scene::Render() const
 {
 	for (auto& objectPair : mpObjects)
 		objectPair.second->ViewRender();
+}
+
+void Scene::OnActivation(int value)
+{
+	for (auto& objectPair : mpObjects)
+		objectPair.second->OnSceneActivation(value);
 }
 
 InputManager* Scene::GetInputManager()

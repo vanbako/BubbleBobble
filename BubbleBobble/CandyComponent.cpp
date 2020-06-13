@@ -28,3 +28,8 @@ void CandyComponent::Seize()
 {
 	mpGameObject->SetIsActive(false);
 }
+
+void CandyComponent::SetCandyType(CandyType candyType)
+{
+	mpGameObject->GetViewComponent<RenderViewComponent>()->SetIndex(int(candyType));
+}

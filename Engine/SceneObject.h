@@ -14,6 +14,7 @@ namespace ieg
 		SceneObject& operator=(const SceneObject& other) = delete;
 		SceneObject& operator=(SceneObject&& other) = delete;
 
+		virtual void OnSceneActivation(int value) = 0;
 		virtual void CtrlUpdate(const float deltaTime) = 0;
 		virtual void ModelUpdate(const float deltaTime) = 0;
 		virtual void ModelCollision() = 0;

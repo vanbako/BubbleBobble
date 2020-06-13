@@ -28,6 +28,7 @@ namespace ieg
 		LevelComponent& operator=(const LevelComponent&) = delete;
 		LevelComponent& operator=(LevelComponent&&) = delete;
 
+		void OnSceneActivation(int value) override { (value); };
 		void Update(const float deltaTime) override;
 		void Collision() override {};
 		void Switch() override {};
