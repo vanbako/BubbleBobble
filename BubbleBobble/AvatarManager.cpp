@@ -2,10 +2,6 @@
 #include "AvatarManager.h"
 #include "Avatar.h"
 #include "AvatarComponent.h"
-#include "../Engine/GameObject.h"
-#include "../Engine/Observer.h"
-#include "../Engine/ObsSubject.h"
-#include "../Engine/TransformModelComponent.h"
 
 using namespace ieg;
 

@@ -16,15 +16,6 @@
 #include "HudObserver.h"
 #include "LevelComponent.h"
 #include "TextComponent.h"
-#include "../Engine/ColorRGBA8.h"
-#include "../Engine/Minigin.h"
-#include "../Engine/GameObject.h"
-#include "../Engine/Scene.h"
-#include "../Engine/ServiceLocator.h"
-#include "../Engine/Audio.h"
-#include "../Engine/TransformModelComponent.h"
-#include "../Engine/ObsSubject.h"
-#include <string>
 
 using namespace ieg;
 

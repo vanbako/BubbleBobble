@@ -7,16 +7,6 @@
 #include "LeftCommand.h"
 #include "RightCommand.h"
 #include "JumpCommand.h"
-#include "../Engine/Minigin.h"
-#include "../Engine/Scene.h"
-#include "../Engine/Renderer.h"
-#include "../Engine/TransformModelComponent.h"
-#include "../Engine/ColliderModelComponent.h"
-#include "../Engine/RenderViewComponent.h"
-#include "../Engine/InputAction.h"
-#include "../Engine/InputManager.h"
-#include "../Engine/ColorRGBA8.h"
-#include <SDL.h>
 
 using namespace ieg;
 

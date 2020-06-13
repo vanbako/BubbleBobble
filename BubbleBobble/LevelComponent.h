@@ -1,5 +1,4 @@
 #pragma once
-#include "../Engine/ModelComponent.h"
 #include "Avatar.h"
 
 namespace ieg

@@ -7,8 +7,6 @@
 #include "AvatarManager.h"
 #include "BufferManager.h"
 #include "BufferAirflow.h"
-#include "../Engine/GameObject.h"
-#include "../Engine/TransformModelComponent.h"
 
 using namespace ieg;
 

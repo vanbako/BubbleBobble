@@ -1,8 +1,6 @@
 #include "pch.h"
 #include "BubbleCtrlComponent.h"
 #include "BubbleComponent.h"
-#include "../Engine/GameObject.h"
-#include <cstdlib>
 
 using namespace ieg;
 

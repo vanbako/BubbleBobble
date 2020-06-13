@@ -1,6 +1,5 @@
 #pragma once
 #include "NpcComponent.h"
-#include "../Engine/ModelComponent.h"
 
 namespace ieg
 {

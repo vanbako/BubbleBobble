@@ -1,7 +1,6 @@
 #include "pch.h"
 #include "ColliderModelComponent.h"
-#include "../Engine/TransformModelComponent.h"
-#include <cstdarg>
+#include "TransformModelComponent.h"
 
 using namespace ieg;
 

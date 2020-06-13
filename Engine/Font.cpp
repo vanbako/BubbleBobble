@@ -1,5 +1,4 @@
 #include "pch.h"
-#include <SDL_ttf.h>
 #include "Font.h"
 
 using namespace ieg;

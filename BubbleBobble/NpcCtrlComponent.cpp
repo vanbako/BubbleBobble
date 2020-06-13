@@ -4,8 +4,6 @@
 #include "LeftCommand.h"
 #include "RightCommand.h"
 #include "NpcComponent.h"
-#include "../Engine/GameObject.h"
-#include <cstdlib>
 
 using namespace ieg;
 

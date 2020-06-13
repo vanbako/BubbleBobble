@@ -1,9 +1,6 @@
 #include "pch.h"
 #include "BubblePoppingState.h"
 #include "BubbleComponent.h"
-#include "../Engine/GameObject.h"
-#include "../Engine/ModelComponent.h"
-#include "../Engine/TransformModelComponent.h"
 #include "BubbleFloatingState.h"
 
 using namespace ieg;

@@ -1,6 +1,5 @@
 #include "pch.h"
 #include "Texture2D.h"
-#include <SDL.h>
 
 using namespace ieg;
 

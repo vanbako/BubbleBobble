@@ -1,5 +1,4 @@
 #pragma once
-#include "../Engine/ModelComponent.h"
 
 namespace ieg
 {

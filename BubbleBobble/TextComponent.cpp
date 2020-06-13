@@ -2,12 +2,6 @@
 #include "TextComponent.h"
 #include "BufferAblocks.h"
 #include "BufferManager.h"
-#include "../Engine/ColorRGBA8.h"
-#include "../Engine/RenderViewComponent.h"
-#include "../Engine/Minigin.h"
-#include "../Engine/Renderer.h"
-#include <cstdarg>
-#include <SDL.h>
 
 using namespace ieg;
 

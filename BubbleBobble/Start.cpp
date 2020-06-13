@@ -5,19 +5,6 @@
 #include "BufferAsprites.h"
 #include "BufferAblocks.h"
 #include "StartComponent.h"
-#include "../Engine/ColorRGBA8.h"
-#include "../Engine/GameObject.h"
-#include "../Engine/Scene.h"
-#include "../Engine/Minigin.h"
-#include "../Engine/Renderer.h"
-#include "../Engine/Texture2D.h"
-#include "../Engine/ResourceManager.h"
-#include "../Engine/InputManager.h"
-#include "../Engine/InputAction.h"
-#include "../Engine/ServiceLocator.h"
-#include "../Engine/TransformModelComponent.h"
-#include "../Engine/RenderViewComponent.h"
-#include <SDL.h>
 
 using namespace ieg;
 

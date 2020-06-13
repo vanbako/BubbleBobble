@@ -3,11 +3,6 @@
 #include "Npc.h"
 #include "NpcComponent.h"
 #include "NpcCtrlComponent.h"
-#include "../Engine/Minigin.h"
-#include "../Engine/GameObject.h"
-#include "../Engine/ColorRGBA8.h"
-#include "../Engine/ObsSubject.h"
-#include "../Engine/TransformModelComponent.h"
 
 using namespace ieg;
 

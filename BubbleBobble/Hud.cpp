@@ -1,21 +1,11 @@
 #include "pch.h"
 #include "Hud.h"
 #include "Level.h"
-#include "../Engine/ColorRGBA8.h"
 #include "BufferManager.h"
 #include "BufferAsprites.h"
 #include "BufferAblocks.h"
 #include "BufferBubble.h"
 #include "HudComponent.h"
-#include "../Engine/GameObject.h"
-#include "../Engine/Scene.h"
-#include "../Engine/Minigin.h"
-#include "../Engine/Renderer.h"
-#include "../Engine/Texture2D.h"
-#include "../Engine/ResourceManager.h"
-#include "../Engine/TransformModelComponent.h"
-#include "../Engine/RenderViewComponent.h"
-#include <SDL.h>
 
 using namespace ieg;
 

@@ -1,7 +1,6 @@
 #pragma once
 #include "SceneManager.h"
 #include "GameObject.h"
-#include <map>
 
 namespace ieg
 {

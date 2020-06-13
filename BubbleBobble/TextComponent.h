@@ -1,6 +1,4 @@
 #pragma once
-#include "../Engine/ModelComponent.h"
-#include "../Engine/RenderViewComponent.h"
 
 namespace ieg
 {

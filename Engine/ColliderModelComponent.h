@@ -1,5 +1,6 @@
 #pragma once
 #include "ModelComponent.h"
+#include "Vec2.h"
 
 namespace ieg
 {

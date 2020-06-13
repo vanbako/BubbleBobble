@@ -1,7 +1,5 @@
 #include "pch.h"
 #include "FileLogger.h"
-#include <exception>
-#include <fstream>
 
 using namespace ieg;
 

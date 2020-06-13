@@ -1,9 +1,6 @@
 #include "pch.h"
 #include "BubbleCaptureState.h"
 #include "BubbleComponent.h"
-#include "../Engine/GameObject.h"
-#include "../Engine/ModelComponent.h"
-#include "../Engine/TransformModelComponent.h"
 
 using namespace ieg;
 

@@ -4,9 +4,6 @@
 #include "HudComponent.h"
 #include "Bubble.h"
 #include "AvatarManager.h"
-#include "../Engine/GameObject.h"
-#include "../Engine/TransformModelComponent.h"
-#include "../Engine/ColliderModelComponent.h"
 
 using namespace ieg;
 

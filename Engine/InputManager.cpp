@@ -3,7 +3,6 @@
 #include "InputAction.h"
 #include "Command.h"
 #include "ModelComponent.h"
-#include <SDL.h>
 
 using namespace ieg;
 

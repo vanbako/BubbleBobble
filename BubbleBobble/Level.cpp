@@ -6,17 +6,7 @@
 #include "BufferBdata.h"
 #include "LevelComponent.h"
 #include "NpcManager.h"
-#include "../Engine/ColorRGBA8.h"
 #include "Avatar.h"
-#include "../Engine/GameObject.h"
-#include "../Engine/Scene.h"
-#include "../Engine/Minigin.h"
-#include "../Engine/Renderer.h"
-#include "../Engine/Texture2D.h"
-#include "../Engine/ResourceManager.h"
-#include "../Engine/TransformModelComponent.h"
-#include "../Engine/RenderViewComponent.h"
-#include <SDL.h>
 
 using namespace ieg;
 

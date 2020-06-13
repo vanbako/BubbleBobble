@@ -1,10 +1,6 @@
 #include "pch.h"
 #include "LivingState.h"
 #include "AvatarComponent.h"
-#include "../Engine/GameObject.h"
-#include "../Engine/ModelComponent.h"
-#include "../Engine/TransformModelComponent.h"
-#include "../Engine/ObsSubject.h"
 
 using namespace ieg;
 

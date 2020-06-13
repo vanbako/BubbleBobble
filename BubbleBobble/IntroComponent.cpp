@@ -1,9 +1,5 @@
 #include "pch.h"
 #include "IntroComponent.h"
-#include "../Engine/Minigin.h"
-#include "../Engine/SceneManager.h"
-#include "../Engine/Scene.h"
-#include "../Engine/ServiceLocator.h"
 
 using namespace ieg;
 

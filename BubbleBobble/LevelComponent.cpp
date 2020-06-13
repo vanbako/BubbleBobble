@@ -14,12 +14,6 @@
 #include "BubbleManager.h"
 #include "NpcManager.h"
 #include "CandyManager.h"
-#include "../Engine/GameObject.h"
-#include "../Engine/ColorRGBA8.h"
-#include "../Engine/ColliderModelComponent.h"
-#include "../Engine/TransformModelComponent.h"
-#include "../Engine/Scene.h"
-#include "../Engine/ObsSubject.h"
 
 using namespace ieg;
 

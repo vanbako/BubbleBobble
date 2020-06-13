@@ -1,5 +1,4 @@
 #pragma once
-#include "../Engine/CtrlComponent.h"
 
 namespace ieg
 {

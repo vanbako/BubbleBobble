@@ -3,22 +3,9 @@
 #include "BufferManager.h"
 #include "BufferBubble.h"
 #include "BufferApic.h"
-#include "../Engine/ColorRGBA8.h"
 #include "IntroComponent.h"
 #include "Start1Command.h"
 #include "Start2Command.h"
-#include "../Engine/GameObject.h"
-#include "../Engine/Scene.h"
-#include "../Engine/Minigin.h"
-#include "../Engine/Renderer.h"
-#include "../Engine/Texture2D.h"
-#include "../Engine/ResourceManager.h"
-#include "../Engine/InputManager.h"
-#include "../Engine/InputAction.h"
-#include "../Engine/ServiceLocator.h"
-#include "../Engine/TransformModelComponent.h"
-#include "../Engine/RenderViewComponent.h"
-#include <SDL.h>
 
 using namespace ieg;
 

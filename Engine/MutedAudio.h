@@ -1,7 +1,6 @@
 #pragma once
 #include "Audio.h"
 #include <fstream>
-#include <string>
 
 namespace ieg
 {

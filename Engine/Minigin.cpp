@@ -1,13 +1,10 @@
 #include "pch.h"
 #include "Minigin.h"
-#include <chrono>
-#include <thread>
 #include "InputManager.h"
 #include "SceneManager.h"
 #include "Renderer.h"
 #include "ResourceManager.h"
 #include "ServiceLocator.h"
-#include <SDL.h>
 #include "GameObject.h"
 #include "Scene.h"
 #include "TransformModelComponent.h"

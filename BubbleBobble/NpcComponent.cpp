@@ -8,10 +8,6 @@
 #include "ReadyState.h"
 #include "FiringState.h"
 #include "ReloadingState.h"
-#include "../Engine/GameObject.h"
-#include "../Engine/TransformModelComponent.h"
-#include "../Engine/RenderViewComponent.h"
-#include "../Engine/ColliderModelComponent.h"
 
 using namespace ieg;
 

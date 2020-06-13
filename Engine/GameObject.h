@@ -4,7 +4,6 @@
 #include "ModelComponent.h"
 #include "ViewComponent.h"
 #include "State.h"
-#include <cstdarg>
 
 namespace ieg
 {

@@ -1,8 +1,5 @@
 #include "pch.h"
 #include "BubbleBobble.h"
-#include "../Engine/Minigin.h"
-#include "../Engine/SceneManager.h"
-#include "../Engine/Scene.h"
 #include "BufferManager.h"
 #include "Intro.h"
 #include "Start.h"

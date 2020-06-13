@@ -1,6 +1,5 @@
 #include "pch.h"
 #include "ModelComponent.h"
-#include "GameObject.h"
 
 using namespace ieg;
 
