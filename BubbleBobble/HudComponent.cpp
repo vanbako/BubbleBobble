@@ -20,7 +20,7 @@
 using namespace ieg;
 
 const int HudComponent::mColorIndex[]{ 15, 7 };
-const int HudComponent::mStartLives{ 5 };
+const int HudComponent::mStartLives{ 4 };
 const int HudComponent::mMaxLives{ 7 };
 
 HudComponent::HudComponent(GameObject* pGameObject, Minigin* pEngine, ...)
@@ -229,7 +229,7 @@ void HudComponent::CreateLives()
 		pRenderComponent = pGOLive[avatar]->CreateViewComponent<RenderViewComponent>(mpEngine);
 		pRenderComponent->SetTransformComponent(pTransform);
 		pText->SetRenderViewComponent(pRenderComponent);
-		pText->SetText("  @@@@@", mColorIndex[avatar]);
+		pText->SetText("   @@@@", mColorIndex[avatar]);
 	}
 	for (int avatar{ 0 }; avatar < mPlayers; ++avatar)
 		pGOLive[avatar]->SetIsActive(true);
