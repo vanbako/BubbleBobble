@@ -50,6 +50,7 @@ HudComponent::HudComponent(GameObject* pGameObject, Minigin* pEngine, ...)
 	std::va_list vaList{ va_arg(args, std::va_list) };
 	mpBufferManager = va_arg(vaList, BufferManager*);
 	ColorRGBA8* pPalette{ va_arg(vaList, ColorRGBA8*) };
+	mpIntroScene = va_arg(vaList, Scene*);
 	va_end(args);
 	std::memcpy(mpPalette, pPalette, BufferBubble::GetPaletteColorCount() * sizeof(ColorRGBA8));
 	Scene* pScene{ mpGameObject->GetScene() };
@@ -119,11 +120,62 @@ void HudComponent::AvatarDie(int value)
 	if (value < 0 || value >= 2)
 		return;
 	mLives[value] -= 1;
-	TextComponent* pText{ mpGOLives[value]->GetModelComponent<TextComponent>() };
-	std::string lives{ "       " };
-	for (int i{ 0 }; i < mLives[value]; ++i)
-		lives[mMaxLives - i - 1] = '@';
-	pText->SetText(lives, mColorIndex[value]);
+	if (mLives[value] > 0)
+		DrawLives();
+	else
+	{
+		//lives = "GameOver";
+		GameOver();
+	}
+}
+
+void HudComponent::DrawLives()
+{
+	TextComponent* pText{};
+	std::string lives{};
+	for (int avatar{ 0 }; avatar < AvatarManager::GetAvatarMax(); ++avatar)
+	{
+		lives = "       ";
+		for (int i{ 0 }; i < mLives[avatar]; ++i)
+			lives[mMaxLives - i - 1] = '@';
+		pText = mpGOLives[avatar]->GetModelComponent<TextComponent>();
+		pText->SetText(lives, mColorIndex[avatar]);
+	}
+}
+
+void HudComponent::DrawScores()
+{
+	TextComponent* pText{};
+	for (int avatar{ 0 }; avatar < AvatarManager::GetAvatarMax(); ++avatar)
+	{
+		pText = mpGOScores[avatar]->GetModelComponent<TextComponent>();
+		pText->SetText(std::to_string(mScores[avatar]), mColorIndex[avatar]);
+	}
+}
+
+void HudComponent::GameOver()
+{
+	mpObjectsManager->DeactivateAll();
+	mEndLevel = true;
+	mLevel = 0;
+	ScoresInit();
+	LivesInit();
+	mpGOLevel->SetIsToBeDeleted(true);
+	mpEngine->GetSceneManager()->SetActiveScene(mpIntroScene);
+}
+
+void HudComponent::ScoresInit()
+{
+	for (int avatar{ 0 }; avatar < AvatarManager::GetAvatarMax(); ++avatar)
+		mScores[avatar] = 0;
+	DrawScores();
+}
+
+void HudComponent::LivesInit()
+{
+	for (int avatar{ 0 }; avatar < AvatarManager::GetAvatarMax(); ++avatar)
+		mLives[avatar] = mStartLives;
+	DrawLives();
 }
 
 void HudComponent::CreateScores()

@@ -22,6 +22,7 @@ namespace ieg
 
 		void CreateBubbles(Minigin* pEngine, BufferManager* pBufferManager, Scene* pScene, ColorRGBA8* pPalette);
 		void Init(GameObject* pGOLevel);
+		void DeactivateAll();
 		void FireBubble(AvatarType avatarType, const Vec2<int>& pos, bool isFiringLeft);
 		ColliderModelComponent* GetCollider();
 	private:

@@ -20,7 +20,7 @@ namespace ieg
 		Hud& operator=(const Hud&) = delete;
 		Hud& operator=(Hud&&) = delete;
 
-		static GameObject* CreateHud(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager);
+		static GameObject* CreateHud(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, Scene* pIntroScene);
 	private:
 		static const Vec2<int> mPos;
 		static const int mWidth;

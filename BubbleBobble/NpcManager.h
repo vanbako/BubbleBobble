@@ -23,6 +23,7 @@ namespace ieg
 		void CreateNpcs(Minigin* pEngine, BufferManager* pBufferManager, Scene* pScene, ColorRGBA8* pPalette, Observer* pObserver);
 		void SetIsActive(int index, bool isActive);
 		void Init(GameObject* pGOLevel);
+		void DeactivateAll();
 		void SpawnNpc(NpcType npcType, Vec2<int>& pos, bool isLookingLeft, int wait);
 		void SpawnWaitUpdate(const float deltaTime);
 		int GetNpcMax();

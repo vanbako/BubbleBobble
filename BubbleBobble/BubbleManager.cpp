@@ -37,6 +37,12 @@ void BubbleManager::Init(GameObject* pGOLevel)
 	}
 }
 
+void BubbleManager::DeactivateAll()
+{
+	for (int bubble{ 0 }; bubble < AvatarManager::GetAvatarMax() * mpBubblesPerAvatarMax; ++bubble)
+		mpGOBubbles[bubble]->SetIsActive(false);
+}
+
 void BubbleManager::FireBubble(AvatarType avatarType, const Vec2<int>& pos, bool isFiringLeft)
 {
 	for (int bubble{ int(avatarType) * mpBubblesPerAvatarMax }; bubble < (int(avatarType) + 1) * mpBubblesPerAvatarMax; ++bubble)

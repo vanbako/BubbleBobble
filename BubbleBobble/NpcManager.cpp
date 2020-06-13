@@ -76,6 +76,12 @@ void NpcManager::Init(GameObject* pGOLevel)
 	}
 }
 
+void NpcManager::DeactivateAll()
+{
+	for (int npc{ 0 }; npc < mNpcMax; ++npc)
+		mpGONpcs[npc]->SetIsActive(false);
+}
+
 void NpcManager::SpawnNpc(NpcType npcType, Vec2<int>& pos, bool isLookingLeft, int wait)
 {
 	int npc{ GetInactiveNpc() };

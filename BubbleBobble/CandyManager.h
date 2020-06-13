@@ -23,6 +23,7 @@ namespace ieg
 
 		void CreateCandy(Minigin* pEngine, BufferManager* pBufferManager, Scene* pScene, ColorRGBA8* pPalette);
 		void Init(GameObject* pGOLevel);
+		void DeactivateAll();
 		void SpawnCandy(NpcType npcType, TransformModelComponent* pTransform);
 		void SpawnCandy(CandyType candyType, TransformModelComponent* pTransform);
 		void SpawnCandy(CandyType candyType, const Vec2<int>& pos);

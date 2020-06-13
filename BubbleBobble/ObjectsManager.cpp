@@ -58,3 +58,11 @@ void ObjectsManager::InitGameObjects(GameObject* pGOLevel)
 	mpNpcManager->Init(pGOLevel);
 	mpCandyManager->Init(pGOLevel);
 }
+
+void ObjectsManager::DeactivateAll()
+{
+	mpAvatarManager->DeactivateAll();
+	mpBubbleManager->DeactivateAll();
+	mpNpcManager->DeactivateAll();
+	mpCandyManager->DeactivateAll();
+}

@@ -34,9 +34,11 @@ namespace ieg
 
 		void DeltaScore(int value);
 		void AvatarDie(int value);
+		void GameOver();
 	private:
 		BufferManager* mpBufferManager;
 		ColorRGBA8* mpPalette;
+		Scene* mpIntroScene;
 		int mLevel;
 		ObjectsManager* mpObjectsManager;
 		GameObject* mpGOLevel;
@@ -55,5 +57,9 @@ namespace ieg
 
 		void CreateScores();
 		void CreateLives();
+		void DrawLives();
+		void DrawScores();
+		void LivesInit();
+		void ScoresInit();
 	};
 }

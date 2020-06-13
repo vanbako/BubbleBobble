@@ -21,5 +21,5 @@ void BubbleBobble::Create(Minigin* pEngine, BufferManager* pBufferManager)
 
 	Intro::CreateIntro(pEngine, pIntroScene, pBufferManager, pStartScene);
 	Start::CreateStart(pEngine, pStartScene, pBufferManager, pGameScene);
-	Hud::CreateHud(pEngine, pGameScene, pBufferManager);
+	Hud::CreateHud(pEngine, pGameScene, pBufferManager, pIntroScene);
 }

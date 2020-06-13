@@ -27,7 +27,7 @@ const int Hud::mBlockHeight{ 25 };
 const int Hud::mChrWidth{ 8 };
 const int Hud::mChrHeight{ 25 };
 
-GameObject* Hud::CreateHud(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager)
+GameObject* Hud::CreateHud(Minigin* pEngine, Scene* pScene, BufferManager* pBufferManager, Scene* pIntroScene)
 {
 	BufferBubble* pBubble{ (BufferBubble*)pBufferManager->GetBuffer(EnumBuffer::Bubble) };
 	BufferAsprites* pAsprites{ (BufferAsprites*)pBufferManager->GetBuffer(EnumBuffer::Asprites) };
@@ -44,7 +44,7 @@ GameObject* Hud::CreateHud(Minigin* pEngine, Scene* pScene, BufferManager* pBuff
 
 	pBubble->GetLevelColors(pPalette, 0);
 
-	pGOHud->CreateModelComponent<HudComponent>(pEngine, pBufferManager, pPalette);
+	pGOHud->CreateModelComponent<HudComponent>(pEngine, pBufferManager, pPalette, pIntroScene);
 
 	ColorRGBA8* pSprite{ new ColorRGBA8[ BufferAsprites::GetWidth() * BufferAsprites::GetHeight() * 2] };
 	pAsprites->GetSprites(pSprite, 1, Sprite::HudBUB, pPalette);

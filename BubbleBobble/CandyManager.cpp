@@ -46,6 +46,12 @@ void CandyManager::Init(GameObject* pGOLevel)
 	}
 }
 
+void CandyManager::DeactivateAll()
+{
+	for (int candy{ 0 }; candy < mCandyMax; ++candy)
+		mpGOCandy[candy]->SetIsActive(false);
+}
+
 void CandyManager::SpawnCandy(NpcType npcType, TransformModelComponent* pTransform)
 {
 	SpawnCandy(mNpcCandyList[int(npcType)], pTransform);
