@@ -253,8 +253,9 @@ bool LevelComponent::CheckBubbleNpcCollision(TransformModelComponent* pTransform
 	GameObject* pGONpc{ mpObjectsManager->GetNpcManager()->GetNextActiveNpc(nullptr) };
 	while (pGONpc != nullptr)
 	{
-		if (pGONpc->GetModelComponent<ColliderModelComponent>()->DoesCollide(pGONpc->GetModelComponent<TransformModelComponent>(), pTransform, pCollider))
-			return pGONpc->GetModelComponent<NpcComponent>()->Capture();
+		if (!pGONpc->GetModelComponent<NpcComponent>()->IsFloatingState())
+			if (pGONpc->GetModelComponent<ColliderModelComponent>()->DoesCollide(pGONpc->GetModelComponent<TransformModelComponent>(), pTransform, pCollider))
+				return pGONpc->GetModelComponent<NpcComponent>()->Capture();
 		pGONpc = mpObjectsManager->GetNpcManager()->GetNextActiveNpc(pGONpc);
 	}
 	return false;
