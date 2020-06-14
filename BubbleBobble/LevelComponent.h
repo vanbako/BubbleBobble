@@ -41,6 +41,7 @@ namespace ieg
 		GameObject* CheckNpcCollision(TransformModelComponent* pTransform, ColliderModelComponent* pCollider);
 		GameObject* CheckCandyCollision(TransformModelComponent* pTransform, ColliderModelComponent* pCollider);
 		bool CheckBubbleNpcCollision(TransformModelComponent* pTransform, ColliderModelComponent* pCollider);
+		bool CheckBubbleCollision(TransformModelComponent* pTransform, ColliderModelComponent* pCollider);
 		bool CheckCollisionPos(int x, int y);
 		void SpawnAvatar(AvatarType avatarType);
 		void SpawnCandy(NpcType npcType, TransformModelComponent* pTransform);

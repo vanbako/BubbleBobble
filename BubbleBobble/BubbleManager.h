@@ -25,8 +25,11 @@ namespace ieg
 		void DeactivateAll();
 		void FireBubble(AvatarType avatarType, const Vec2<int>& pos, bool isFiringLeft);
 		ColliderModelComponent* GetCollider();
+		GameObject* GetNextActiveBubble(GameObject* pGOBubble);
 	private:
 		static const int mpBubblesPerAvatarMax{ 8 };
 		std::vector<GameObject*> mpGOBubbles;
+
+		GameObject* GetFirstActiveBubble();
 	};
 }

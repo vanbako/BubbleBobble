@@ -63,3 +63,42 @@ ColliderModelComponent* BubbleManager::GetCollider()
 		return nullptr;
 	return mpGOBubbles[0]->GetModelComponent<ColliderModelComponent>();
 }
+
+GameObject* BubbleManager::GetNextActiveBubble(GameObject* pGOBubble)
+{
+	if (pGOBubble == nullptr)
+		return GetFirstActiveBubble();
+	int bubble1{ -1 };
+	for (int i{ 0 }; i < AvatarManager::GetAvatarMax() * mpBubblesPerAvatarMax; ++i)
+		if (mpGOBubbles[i]->IsActive() && mpGOBubbles[i] == pGOBubble)
+		{
+			bubble1 = i;
+			break;
+		}
+	if (bubble1 == -1)
+		return nullptr;
+	int bubble2{ -1 };
+	for (int i{ bubble1 + 1 }; i < AvatarManager::GetAvatarMax() * mpBubblesPerAvatarMax; ++i)
+		if (mpGOBubbles[i]->IsActive())
+		{
+			bubble2 = i;
+			break;
+		}
+	if (bubble2 == -1)
+		return nullptr;
+	return mpGOBubbles[bubble2];
+}
+
+GameObject* BubbleManager::GetFirstActiveBubble()
+{
+	int bubble{ -1 };
+	for (int i{ 0 }; i < AvatarManager::GetAvatarMax() * mpBubblesPerAvatarMax; ++i)
+		if (mpGOBubbles[i]->IsActive())
+		{
+			bubble = i;
+			break;
+		}
+	if (bubble == -1)
+		return nullptr;
+	return mpGOBubbles[bubble];
+}

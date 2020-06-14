@@ -9,6 +9,7 @@
 #include "Avatar.h"
 #include "NpcComponent.h"
 #include "CandyComponent.h"
+#include "BubbleComponent.h"
 #include "ObjectsManager.h"
 #include "AvatarManager.h"
 #include "BubbleManager.h"
@@ -257,6 +258,19 @@ bool LevelComponent::CheckBubbleNpcCollision(TransformModelComponent* pTransform
 			if (pGONpc->GetModelComponent<ColliderModelComponent>()->DoesCollide(pGONpc->GetModelComponent<TransformModelComponent>(), pTransform, pCollider))
 				return pGONpc->GetModelComponent<NpcComponent>()->Capture();
 		pGONpc = mpObjectsManager->GetNpcManager()->GetNextActiveNpc(pGONpc);
+	}
+	return false;
+}
+
+bool ieg::LevelComponent::CheckBubbleCollision(TransformModelComponent* pTransform, ColliderModelComponent* pCollider)
+{
+	GameObject* pGOBubble{ mpObjectsManager->GetBubbleManager()->GetNextActiveBubble(nullptr) };
+	while (pGOBubble != nullptr)
+	{
+		if (!pGOBubble->GetModelComponent<BubbleComponent>()->IsFloatingState())
+			if (pGOBubble->GetModelComponent<ColliderModelComponent>()->DoesCollide(pGOBubble->GetModelComponent<TransformModelComponent>(), pTransform, pCollider))
+				return true;
+		pGOBubble = mpObjectsManager->GetBubbleManager()->GetNextActiveBubble(pGOBubble);
 	}
 	return false;
 }

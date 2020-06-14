@@ -82,6 +82,11 @@ void BubbleComponent::SetFloatingState()
 	mpNewKineticState = mpFloatingState;
 }
 
+bool BubbleComponent::IsFloatingState()
+{
+	return mpCurKineticState == mpFloatingState;
+}
+
 void BubbleComponent::SetPoppingState()
 {
 	mpNewKineticState = mpPoppingState;

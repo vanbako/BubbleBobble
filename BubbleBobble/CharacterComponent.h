@@ -41,6 +41,7 @@ namespace ieg
 		virtual void SetReadyState();
 		virtual void SetFiringState();
 		virtual void SetReloadingState();
+		virtual bool HasBubbleCollision();
 
 		ObsSubject* GetObsSubject() { return mpObsSubject; };
 		void SetLevel(GameObject* pLevel) { mpGOLevel = pLevel; };

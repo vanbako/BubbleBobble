@@ -31,6 +31,7 @@ namespace ieg
 
 		virtual void SetCaptureState();
 		virtual void SetFloatingState();
+		bool IsFloatingState();
 		virtual void SetPoppingState();
 	private:
 		GameObject* mpGOLevel;

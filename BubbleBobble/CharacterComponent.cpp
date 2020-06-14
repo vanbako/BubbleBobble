@@ -168,6 +168,13 @@ void CharacterComponent::SetReloadingState()
 	mpNewWeaponState = mpReloadingState;
 }
 
+bool CharacterComponent::HasBubbleCollision()
+{
+	TransformModelComponent* pTransform{ mpGameObject->GetModelComponent<TransformModelComponent>() };
+	ColliderModelComponent* pCollider{ mpGameObject->GetModelComponent<ColliderModelComponent>() };
+	return mpGOLevel->GetModelComponent<LevelComponent>()->CheckBubbleCollision(pTransform, pCollider);
+}
+
 bool CharacterComponent::HasWallCollision()
 {
 	return mHasWallCollision;

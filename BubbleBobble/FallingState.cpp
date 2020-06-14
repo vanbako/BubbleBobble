@@ -28,6 +28,8 @@ void FallingState::Update(const float deltaTime)
 
 void FallingState::Jump()
 {
+	if (((CharacterComponent*)mpModelComponent)->HasBubbleCollision())
+		((CharacterComponent*)mpModelComponent)->SetJumpingState();
 }
 
 void FallingState::Land()
