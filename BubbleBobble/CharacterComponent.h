@@ -44,6 +44,8 @@ namespace ieg
 
 		ObsSubject* GetObsSubject() { return mpObsSubject; };
 		void SetLevel(GameObject* pLevel) { mpGOLevel = pLevel; };
+		bool HasWallCollision();
+
 		static float GetMoveVer2PixelsTime() { return mMoveVer2PixelsTime; };
 	protected:
 		GameObject* mpGOLevel;
@@ -63,6 +65,7 @@ namespace ieg
 			* mpNewWeaponState;
 		int mIsHorMoving;
 		float mMoveHorDelay;
+		bool mHasWallCollision;
 
 		static const float mMoveHor2PixelsTime;
 		static const float mMoveVer2PixelsTime;

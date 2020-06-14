@@ -28,6 +28,7 @@ namespace ieg
 
 		void Update(const float deltaTime) override;
 		void SetMove(NpcMove move);
+		void SwitchX();
 	private:
 		float mTimer;
 		NpcMove mMove;

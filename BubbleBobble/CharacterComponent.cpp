@@ -31,6 +31,7 @@ CharacterComponent::CharacterComponent(GameObject* pGameObject, Minigin* pEngine
 	, mpNewWeaponState{ nullptr }
 	, mIsHorMoving{ 0 }
 	, mMoveHorDelay{ mMoveHor2PixelsTime }
+	, mHasWallCollision{ false }
 {
 	mpCurKineticState = mpStandingState;
 	mpNewKineticState = mpStandingState;
@@ -71,7 +72,12 @@ void CharacterComponent::Collision()
 		else
 			mpCurKineticState->Fall();
 	if ((collision & 12) != 0)
+	{
+		mHasWallCollision = true;
 		pTransform->ResetNewPosX();
+	}
+	else
+		mHasWallCollision = false;
 	if ((collision & 2) != 0 && mpNewKineticState == mpStandingState)
 		pTransform->ResetNewPosY();
 	if ((collision & 1) != 0 && mpNewKineticState == mpFallingState)
@@ -160,4 +166,9 @@ void CharacterComponent::SetFiringState()
 void CharacterComponent::SetReloadingState()
 {
 	mpNewWeaponState = mpReloadingState;
+}
+
+bool CharacterComponent::HasWallCollision()
+{
+	return mHasWallCollision;
 }

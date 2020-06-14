@@ -67,3 +67,11 @@ void NpcCtrlComponent::SetMove(NpcMove move)
 {
 	mMove = move;
 }
+
+void NpcCtrlComponent::SwitchX()
+{
+	if (mMove == NpcMove::Left)
+		mMove = NpcMove::Right;
+	else if (mMove == NpcMove::Right)
+		mMove = NpcMove::Left;
+}

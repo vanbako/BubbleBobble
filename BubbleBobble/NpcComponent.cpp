@@ -8,6 +8,7 @@
 #include "ReadyState.h"
 #include "FiringState.h"
 #include "ReloadingState.h"
+#include "NpcCtrlComponent.h"
 
 using namespace ieg;
 
@@ -30,7 +31,11 @@ void NpcComponent::Update(const float deltaTime)
 void NpcComponent::Collision()
 {
 	if (mpCurKineticState != mpFloatingState)
+	{
 		CharacterComponent::Collision();
+		if (HasWallCollision())
+			mpGameObject->GetCtrlComponent<NpcCtrlComponent>()->SwitchX();
+	}
 	else
 	{
 		TransformModelComponent* pTransform{ mpGameObject->GetModelComponent<TransformModelComponent>() };
