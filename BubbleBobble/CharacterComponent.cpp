@@ -129,6 +129,7 @@ void CharacterComponent::Right()
 
 void CharacterComponent::SetFloatingState()
 {
+	mpFloatingState->ResetTimer();
 	mpNewKineticState = mpFloatingState;
 }
 

@@ -5,7 +5,7 @@
 
 using namespace ieg;
 
-const float FloatingState::mFloatingTime{ 6.f };
+const float FloatingState::mFloatingTime{ 8.f };
 const float FloatingState::mMoveHor2PixelsTime{ 0.12f };
 const float FloatingState::mMoveVer2PixelsTime{ 0.12f };
 
@@ -49,4 +49,9 @@ void FloatingState::Update(const float deltaTime)
 void FloatingState::Fall()
 {
 	((CharacterComponent*)mpModelComponent)->SetFallingState();
+}
+
+void FloatingState::ResetTimer()
+{
+	mFloatingTimer = mFloatingTime;
 }

@@ -19,6 +19,8 @@ namespace ieg
 		virtual void Fall() override;
 		virtual void Land() override {};
 		virtual void Capture() override {};
+
+		void ResetTimer();
 	private:
 		float mFloatingTimer;
 		float
