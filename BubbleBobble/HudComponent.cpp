@@ -35,6 +35,7 @@ HudComponent::HudComponent(GameObject* pGameObject, Minigin* pEngine, ...)
 	, mEndLevel{ false }
 	, mpHudObserver{ new HudObserver{ this } }
 	, mpGOScores{}
+	, mpGOLevelNumber{}
 	, mScores{}
 	, mLives{}
 	, mpPalette{ new ColorRGBA8[BufferBubble::GetPaletteColorCount()] }
@@ -54,6 +55,7 @@ HudComponent::HudComponent(GameObject* pGameObject, Minigin* pEngine, ...)
 	// It will Initialise the Avatars, Bubbles and Enemies
 	mpGOLevel = Level::CreateLevel(mLevel, pEngine, pScene, mpBufferManager, mpObjectsManager, mPlayers);
 	mpGOLevel->GetModelComponent<LevelComponent>()->GetObsSubject()->AddObserver(mpHudObserver);
+	CreateLevelNumber();
 	CreateScores();
 	CreateLives();
 	mGameSoundId = mpAudio->AddSound("../Data/Audio/gameloop.wav", true);
@@ -124,6 +126,10 @@ void HudComponent::NextLevel()
 	mEndLevel = true;
 	mLevel += 1;
 	mpGOLevel->SetIsToBeDeleted(true);
+	char buf[3]{};
+	snprintf(buf, 3, "%02d", mLevel + 1);
+	std::string strLevel{ buf };
+	mpGOLevelNumber->GetModelComponent<TextComponent>()->SetText(strLevel, 4);
 }
 
 void HudComponent::DeltaScore(int value)
@@ -204,6 +210,19 @@ void HudComponent::LivesInit()
 	for (int avatar{ 0 }; avatar < mPlayers; ++avatar)
 		mLives[avatar] = mStartLives;
 	DrawLives();
+}
+
+void HudComponent::CreateLevelNumber()
+{
+	Scene* pScene{ mpGameObject->GetScene() };
+	mpGOLevelNumber = pScene->CreateObject<GameObject>(Order::middle);
+	TextComponent* pText{ mpGOLevelNumber->CreateModelComponent<TextComponent>(mpEngine, mpBufferManager, mpPalette) };
+	TransformModelComponent* pTransform{ mpGOLevelNumber->CreateModelComponent<TransformModelComponent>(mpEngine) };
+	RenderViewComponent* pRenderComponent{ mpGOLevelNumber->CreateViewComponent<RenderViewComponent>(mpEngine) };
+	pRenderComponent->SetTransformComponent(pTransform);
+	pText->SetRenderViewComponent(pRenderComponent);
+	pText->SetText("01", 4);
+	mpGOLevelNumber->SetIsActive(true);
 }
 
 void HudComponent::CreateScores()

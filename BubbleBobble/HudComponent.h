@@ -46,7 +46,9 @@ namespace ieg
 		int mLevel;
 		int mGameSoundId, mGameOverSoundId;
 		ObjectsManager* mpObjectsManager;
-		GameObject* mpGOLevel;
+		GameObject
+			* mpGOLevel,
+			* mpGOLevelNumber;
 		HudObserver* mpHudObserver;
 		bool mIsGameOver;
 		std::vector<int> mScores;
@@ -60,6 +62,7 @@ namespace ieg
 		static const int mMaxLives;
 		static const float mGameOverDelay;
 
+		void CreateLevelNumber();
 		void CreateScores();
 		void CreateLives();
 		void DrawLives();
