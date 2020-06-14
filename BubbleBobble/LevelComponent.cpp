@@ -264,7 +264,10 @@ bool LevelComponent::CheckBubbleNpcCollision(TransformModelComponent* pTransform
 bool LevelComponent::CheckCollisionPos(const int x, const int y)
 {
 	if (x < 0 || x > 255) return false;
-	if (y < 8 || y > 199) return false;
+	//if (y < 8 || y > 199) return false;
+	if (y < 8 || y > 199)
+		if ((y < 8) && (x < 16 || x > 239)) return true;
+		else return false;
 
 	if (mpLayout[x / 8 + y / 8 * 32] != 0)
 		return true;
