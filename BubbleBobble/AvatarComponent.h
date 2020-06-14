@@ -64,6 +64,6 @@ namespace ieg
 			* mpCurHealthState,
 			* mpNewHealthState;
 		ObsSubject* mpObsSubject;
-		int mJumpSoundId;
+		int mJumpSoundId, mCatchSoundId;
 	};
 }

@@ -28,6 +28,8 @@ AvatarComponent::AvatarComponent(GameObject* pGameObject, Minigin* pEngine, ...)
 	, mpNewHealthState{ nullptr }
 	, mpObjectsManager{ nullptr }
 	, mpObsSubject{ new ObsSubject{} }
+	, mJumpSoundId{ 0 }
+	, mCatchSoundId{ 0 }
 {
 	std::va_list args{};
 	va_start(args, pEngine);
@@ -37,6 +39,7 @@ AvatarComponent::AvatarComponent(GameObject* pGameObject, Minigin* pEngine, ...)
 	mpCurHealthState = mpLivingState;
 	mpNewHealthState = mpLivingState;
 	mJumpSoundId = pEngine->GetServiceLocator()->GetAudio()->AddSound("../Data/Audio/jump.wav", false);
+	mCatchSoundId = pEngine->GetServiceLocator()->GetAudio()->AddSound("../Data/Audio/catch.wav", false);
 }
 
 AvatarComponent::~AvatarComponent()
@@ -85,6 +88,7 @@ void AvatarComponent::Collision()
 		GameObject* pGOCandy{ pLevel->CheckCandyCollision(pTransform, pCollider) };
 		if (pGOCandy != nullptr)
 		{
+			mpEngine->GetServiceLocator()->GetAudio()->PlaySound(mCatchSoundId);
 			CandyComponent* pCandyComponent{ pGOCandy->GetModelComponent<CandyComponent>() };
 			pCandyComponent->Seize();
 			mpObsSubject->Notify(
