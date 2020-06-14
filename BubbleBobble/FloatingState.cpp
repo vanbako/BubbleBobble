@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "FloatingState.h"
 #include "CharacterComponent.h"
+#include "NpcComponent.h"
 
 using namespace ieg;
 
@@ -22,7 +23,8 @@ void FloatingState::Update(const float deltaTime)
 	if (mFloatingTimer <= 0.f)
 	{
 		mFloatingTimer = mFloatingTime;
-		//Pop();
+		((NpcComponent*)mpModelComponent)->Release();
+		Fall();
 	}
 	TransformModelComponent* pTransform{ mpModelComponent->GetGameObject()->GetModelComponent<TransformModelComponent>() };
 	Vec2<int> pos{ pTransform->GetPos() };
@@ -42,4 +44,9 @@ void FloatingState::Update(const float deltaTime)
 	}
 	mMoveHorDelay -= deltaTime;
 	mMoveVerDelay -= deltaTime;
+}
+
+void FloatingState::Fall()
+{
+	((CharacterComponent*)mpModelComponent)->SetFallingState();
 }

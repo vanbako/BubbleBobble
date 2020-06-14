@@ -77,6 +77,12 @@ void NpcComponent::Right()
 		CharacterComponent::Right();
 }
 
+void NpcComponent::Release()
+{
+	if (mpCurKineticState == mpFloatingState)
+		mpGameObject->GetViewComponent<RenderViewComponent>()->SetType(int(mNpcType) * 16);
+}
+
 void NpcComponent::Pop()
 {
 	if (mpCurKineticState == mpFloatingState)
