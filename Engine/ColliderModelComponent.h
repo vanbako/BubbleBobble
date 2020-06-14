@@ -19,6 +19,7 @@ namespace ieg
 		ColliderModelComponent& operator=(ColliderModelComponent&&) = delete;
 
 		void OnSceneActivation(int value) override { (value); };
+		void OnSceneDeactivation(int value) override { (value); };
 		void Update(const float deltaTime) override { (deltaTime); };
 		void Collision() override {};
 		void Switch() override {};

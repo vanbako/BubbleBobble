@@ -25,9 +25,10 @@ const int HudComponent::mMaxLives{ 7 };
 
 HudComponent::HudComponent(GameObject* pGameObject, Minigin* pEngine, ...)
 	: ModelComponent(pGameObject, pEngine)
+	, mpAudio{ pEngine->GetServiceLocator()->GetAudio() }
 	, mPlayers{ 1 }
 	, mpObjectsManager{ new ObjectsManager{} }
-	, mSoundId{ 0 }
+	, mGameSoundId{ 0 }
 	, mIsSoundPlaying{ false }
 	, mLevel{ 0 }
 	, mEndLevel{ false }
@@ -51,9 +52,9 @@ HudComponent::HudComponent(GameObject* pGameObject, Minigin* pEngine, ...)
 	// It will Initialise the Avatars, Bubbles and Enemies
 	mpGOLevel = Level::CreateLevel(mLevel, pEngine, pScene, mpBufferManager, mpObjectsManager, mPlayers);
 	mpGOLevel->GetModelComponent<LevelComponent>()->GetObsSubject()->AddObserver(mpHudObserver);
-	mSoundId = pEngine->GetServiceLocator()->GetAudio()->AddSound("../Data/Audio/gameloop.wav", true);
 	CreateScores();
 	CreateLives();
+	mGameSoundId = mpAudio->AddSound("../Data/Audio/gameloop.wav", false);
 }
 
 HudComponent::~HudComponent()
@@ -61,11 +62,13 @@ HudComponent::~HudComponent()
 	delete mpPalette;
 	delete mpHudObserver;
 	delete mpObjectsManager;
-	mpEngine->GetServiceLocator()->GetAudio()->StopSound(mSoundId);
+	mpEngine->GetServiceLocator()->GetAudio()->StopSound(mGameSoundId);
 }
 
 void HudComponent::OnSceneActivation(int value)
 {
+	mpAudio->PlaySound(mGameSoundId);
+	mIsSoundPlaying = true;
 	mPlayers = value;
 	mpObjectsManager->GetAvatarManager()->Activate(value);
 	for (int avatar{ 0 }; avatar < mPlayers; ++avatar)
@@ -77,12 +80,19 @@ void HudComponent::OnSceneActivation(int value)
 	}
 }
 
+void HudComponent::OnSceneDeactivation(int value)
+{
+	(value);
+	mpAudio->StopSound(mGameSoundId);
+	mIsSoundPlaying = false;
+}
+
 void HudComponent::Update(const float deltaTime)
 {
 	mpObjectsManager->GetNpcManager()->SpawnWaitUpdate(deltaTime);
 	if (!mIsSoundPlaying)
 	{
-		mpEngine->GetServiceLocator()->GetAudio()->PlaySound(mSoundId);
+		mpEngine->GetServiceLocator()->GetAudio()->PlaySound(mGameSoundId);
 		mIsSoundPlaying = true;
 	}
 	if (mEndLevel)
@@ -163,7 +173,7 @@ void HudComponent::GameOver()
 	ScoresInit();
 	LivesInit();
 	mpGOLevel->SetIsToBeDeleted(true);
-	mpEngine->GetServiceLocator()->GetAudio()->StopSound(mSoundId);
+	mpEngine->GetServiceLocator()->GetAudio()->StopSound(mGameSoundId);
 	mpEngine->GetSceneManager()->SetActiveScene(mpIntroScene, 0);
 }
 

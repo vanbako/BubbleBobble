@@ -28,6 +28,13 @@ void GameObject::OnSceneActivation(int value)
 		pModelComponent->OnSceneActivation(value);
 }
 
+void GameObject::OnSceneDeactivation(int value)
+{
+	for (ModelComponent* pModelComponent : mpModelComponents)
+		pModelComponent->OnSceneDeactivation(value);
+}
+
+// Ctrl Components are now in a separate thread
 //void GameObject::CtrlUpdate(const float deltaTime)
 //{
 //	if (mIsActive)

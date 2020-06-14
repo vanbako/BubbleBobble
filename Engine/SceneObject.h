@@ -15,6 +15,7 @@ namespace ieg
 		SceneObject& operator=(SceneObject&& other) = delete;
 
 		virtual void OnSceneActivation(int value) = 0;
+		virtual void OnSceneDeactivation(int value) = 0;
 		virtual void CtrlUpdate(const float deltaTime) = 0;
 		virtual void CtrlLock() = 0;
 		virtual void CtrlUnlock() = 0;

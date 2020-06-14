@@ -17,6 +17,7 @@ namespace ieg
 		TransformModelComponent& operator=(TransformModelComponent&&) = delete;
 
 		void OnSceneActivation(int value) override { (value); };
+		void OnSceneDeactivation(int value) override { (value); };
 		void Update(const float deltaTime) override;
 		void Collision() override {};
 		void Switch() override;

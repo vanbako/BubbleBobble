@@ -79,6 +79,12 @@ void Scene::OnActivation(int value)
 		objectPair.second->OnSceneActivation(value);
 }
 
+void Scene::OnDeactivation(int value)
+{
+	for (auto& objectPair : mpObjects)
+		objectPair.second->OnSceneDeactivation(value);
+}
+
 InputManager* Scene::GetInputManager()
 {
 	return mpInputManager;

@@ -12,13 +12,14 @@ namespace ieg
 	{
 	public:
 		explicit IntroComponent(GameObject* pGameObject, Minigin* pEngine,...);
-		~IntroComponent() = default;
+		~IntroComponent();
 		IntroComponent(const IntroComponent&) = delete;
 		IntroComponent(IntroComponent&&) = delete;
 		IntroComponent& operator=(const IntroComponent&) = delete;
 		IntroComponent& operator=(IntroComponent&&) = delete;
 
-		void OnSceneActivation(int value) override { (value); };
+		void OnSceneActivation(int value) override;
+		void OnSceneDeactivation(int value) override;
 		void Update(const float deltaTime) override;
 		void Collision() override {};
 		void Switch() override {};

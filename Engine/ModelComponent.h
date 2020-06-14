@@ -16,6 +16,7 @@ namespace ieg
 		ModelComponent& operator=(ModelComponent&& other) = delete;
 
 		virtual void OnSceneActivation(int value) = 0;
+		virtual void OnSceneDeactivation(int value) = 0;
 		virtual void Update(const float deltaTime) = 0;
 		virtual void Collision() = 0;
 		virtual void Switch() = 0;

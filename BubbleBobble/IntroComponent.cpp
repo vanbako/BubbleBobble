@@ -17,6 +17,30 @@ IntroComponent::IntroComponent(GameObject* pGameObject, Minigin* pEngine,...)
 	mpAudio->PlaySound(mStartSoundId);
 }
 
+IntroComponent::~IntroComponent()
+{
+	if (mStartAudio)
+		mpAudio->StopSound(mStartSoundId);
+	else
+		mpAudio->StopSound(mIntroSoundId);
+}
+
+void IntroComponent::OnSceneActivation(int value)
+{
+	(value);
+	if (!mStartAudio)
+		mpAudio->PlaySound(mIntroSoundId);
+}
+
+void IntroComponent::OnSceneDeactivation(int value)
+{
+	(value);
+	if (mStartAudio)
+		mpAudio->StopSound(mStartSoundId);
+	else
+		mpAudio->StopSound(mIntroSoundId);
+}
+
 void IntroComponent::Update(const float deltaTime)
 {
 	if (mStartAudio)
@@ -37,11 +61,5 @@ void IntroComponent::SetStartScene(Scene* pScene)
 void IntroComponent::Start(int players) const
 {
 	if (mpStartScene != nullptr)
-	{
-		if (mStartAudio)
-			mpAudio->StopSound(mStartSoundId);
-		else
-			mpAudio->StopSound(mIntroSoundId);
 		mpEngine->GetSceneManager()->SetActiveScene(mpStartScene, players);
-	}
 }

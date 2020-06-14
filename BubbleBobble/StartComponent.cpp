@@ -13,31 +13,34 @@ StartComponent::StartComponent(GameObject* pGameObject, Minigin* pEngine,...)
 	, mpAudio{ pEngine->GetServiceLocator()->GetAudio() }
 	, mStartSoundId{ 0 }
 	, mStartWait{ mStartWaitVal }
-	, mPlaySound{ false }
 	, mSwapWait{ 0.5f }
 {
 	mStartSoundId = mpAudio->AddSound("../Data/Audio/gamestart.wav", false);
 }
 
+StartComponent::~StartComponent()
+{
+	mpAudio->StopSound(mStartSoundId);
+}
+
 void StartComponent::OnSceneActivation(int value)
 {
+	mpAudio->PlaySound(mStartSoundId);
 	mPlayers = value;
+}
+
+void StartComponent::OnSceneDeactivation(int value)
+{
+	(value);
+	mpAudio->StopSound(mStartSoundId);
 }
 
 void StartComponent::Update(const float deltaTime)
 {
-	if (!mPlaySound)
-	{
-		mpAudio->PlaySound(mStartSoundId);
-		mPlaySound = true;
-	}
 	if (mStartWait > 0.f)
 		mStartWait -= deltaTime;
 	else
-	{
-		mpAudio->StopSound(mStartSoundId);
 		mpEngine->GetSceneManager()->SetActiveScene(mpStartScene, mPlayers);
-	}
 }
 
 void StartComponent::SetStartScene(Scene* pScene)

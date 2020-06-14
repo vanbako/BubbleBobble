@@ -38,6 +38,7 @@ namespace ieg
 		void Update(const float deltaTime);
 		void Render() const;
 		void OnActivation(int value);
+		void OnDeactivation(int value);
 
 		InputManager* GetInputManager();
 	private:

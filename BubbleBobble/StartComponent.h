@@ -14,13 +14,14 @@ namespace ieg
 	{
 	public:
 		explicit StartComponent(GameObject* pGameObject, Minigin* pEngine,...);
-		~StartComponent() = default;
+		~StartComponent();
 		StartComponent(const StartComponent&) = delete;
 		StartComponent(StartComponent&&) = delete;
 		StartComponent& operator=(const StartComponent&) = delete;
 		StartComponent& operator=(StartComponent&&) = delete;
 
 		void OnSceneActivation(int value) override;
+		void OnSceneDeactivation(int value) override;
 		void Update(const float deltaTime) override;
 		void Collision() override {};
 		void Switch() override {};
@@ -32,7 +33,6 @@ namespace ieg
 		Audio* mpAudio;
 		int mStartSoundId;
 		float mStartWait;
-		bool mPlaySound;
 		float mSwapWait;
 
 		static const float mStartWaitVal;

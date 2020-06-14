@@ -32,6 +32,8 @@ void SceneManager::SetActiveScene(const std::string& name, int value)
 
 void SceneManager::SetActiveScene(Scene* pScene, int value)
 {
+	if (mpActiveScene != nullptr)
+		mpActiveScene->OnDeactivation(value);
 	mpActiveScene = pScene;
 	pScene->OnActivation(value);
 }

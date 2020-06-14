@@ -24,6 +24,7 @@ namespace ieg
 		HudComponent& operator=(HudComponent&&) = delete;
 
 		void OnSceneActivation(int value) override;
+		void OnSceneDeactivation(int value) override;
 		void Update(const float deltaTime) override;
 		void Collision() override {};
 		void Switch() override {};
@@ -37,14 +38,15 @@ namespace ieg
 		void GameOver();
 	private:
 		int mPlayers;
+		Audio* mpAudio;
 		BufferManager* mpBufferManager;
 		ColorRGBA8* mpPalette;
 		Scene* mpIntroScene;
 		int mLevel;
+		int mGameSoundId;
 		ObjectsManager* mpObjectsManager;
 		GameObject* mpGOLevel;
 		HudObserver* mpHudObserver;
-		int mSoundId;
 		bool mIsSoundPlaying;
 		bool mEndLevel;
 		std::vector<int> mScores;
