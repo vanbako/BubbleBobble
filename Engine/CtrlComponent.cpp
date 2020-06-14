@@ -38,6 +38,8 @@ void CtrlComponent::Unlock()
 
 void CtrlComponent::CtrlLoop()
 {
+	int seedVar{ 0 };
+	std::srand(unsigned int((unsigned long long)&seedVar));
 	std::chrono::duration<float> sleepTime{ 0.02f };
 	std::chrono::duration<float> waitForLock{ 0.005f };
 	while (mRunThread.load())
