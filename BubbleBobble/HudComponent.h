@@ -34,8 +34,9 @@ namespace ieg
 		void NextLevel();
 
 		void DeltaScore(int value);
-		void AvatarDie(int value);
+		void AvatarDie(int avatar);
 		void GameOver();
+		void BackToIntro();
 	private:
 		int mPlayers;
 		Audio* mpAudio;
@@ -43,20 +44,22 @@ namespace ieg
 		ColorRGBA8* mpPalette;
 		Scene* mpIntroScene;
 		int mLevel;
-		int mGameSoundId;
+		int mGameSoundId, mGameOverSoundId;
 		ObjectsManager* mpObjectsManager;
 		GameObject* mpGOLevel;
 		HudObserver* mpHudObserver;
-		bool mIsSoundPlaying;
-		bool mEndLevel;
+		bool mIsGameOver;
+		float mGameOverTimer;
 		std::vector<int> mScores;
 		std::vector<int> mLives;
 		std::vector<GameObject*> mpGOScores;
 		std::vector<GameObject*> mpGOLives;
+		bool mEndLevel;
 
 		static const int mColorIndex[];
 		static const int mStartLives;
 		static const int mMaxLives;
+		static const float mGameOverDelay;
 
 		void CreateScores();
 		void CreateLives();

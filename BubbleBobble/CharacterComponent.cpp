@@ -126,7 +126,7 @@ void CharacterComponent::SetFloatingState()
 	mpNewKineticState = mpFloatingState;
 }
 
-bool ieg::CharacterComponent::IsFloatingState()
+bool CharacterComponent::IsFloatingState()
 {
 	return mpCurKineticState == mpFloatingState;
 }

@@ -31,7 +31,11 @@ void AvatarManager::Init(GameObject* pGOLevel, int players)
 {
 	for (int avatar{ 0 }; avatar < players; ++avatar)
 	{
-		mpGOAvatars[avatar]->GetModelComponent<AvatarComponent>()->SetLevel(pGOLevel);
+		AvatarComponent* pAvatarComponent{ mpGOAvatars[avatar]->GetModelComponent<AvatarComponent>() };
+		pAvatarComponent->SetLevel(pGOLevel);
+		pAvatarComponent->SetStandingState();
+		pAvatarComponent->SetLivingState();
+		pAvatarComponent->SetReadyState();
 		TransformModelComponent* pTransform{ mpGOAvatars[avatar]->GetModelComponent<TransformModelComponent>() };
 		pTransform->SetPos(mpAvatarInitialPos[avatar]);
 		pTransform->Switch();
@@ -52,10 +56,24 @@ void AvatarManager::Activate(int players)
 			mpGOAvatars[avatar]->SetIsActive(false);
 }
 
+void AvatarManager::Deactivate(int avatar)
+{
+	mpGOAvatars[avatar]->SetIsActive(false);
+}
+
 void AvatarManager::DeactivateAll()
 {
 	for (int avatar{ 0 }; avatar < mpAvatarMax; ++avatar)
 		mpGOAvatars[avatar]->SetIsActive(false);
+}
+
+bool AvatarManager::AreAllDeactive()
+{
+	bool areAllDeactive{ true };
+	for (int avatar{ 0 }; avatar < mpAvatarMax; ++avatar)
+		if (mpGOAvatars[avatar]->IsActive())
+			areAllDeactive = false;
+	return areAllDeactive;
 }
 
 void AvatarManager::Spawn(AvatarType avatar)

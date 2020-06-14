@@ -24,7 +24,9 @@ namespace ieg
 		void CreateAvatars(Minigin * pEngine, BufferManager * pBufferManager, ObjectsManager* pObjectsManager, Scene * pScene, ColorRGBA8 * pPalette, Observer* pObserver);
 		void Init(GameObject * pGOLevel, int players);
 		void Activate(int players);
+		void Deactivate(int avatar);
 		void DeactivateAll();
+		bool AreAllDeactive();
 		void Spawn(AvatarType avatar);
 
 		static const int GetAvatarMax() { return mpAvatarMax; };

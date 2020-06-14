@@ -22,6 +22,7 @@ using namespace ieg;
 const int HudComponent::mColorIndex[]{ 15, 7 };
 const int HudComponent::mStartLives{ 4 };
 const int HudComponent::mMaxLives{ 7 };
+const float HudComponent::mGameOverDelay{ 3.f };
 
 HudComponent::HudComponent(GameObject* pGameObject, Minigin* pEngine, ...)
 	: ModelComponent(pGameObject, pEngine)
@@ -29,7 +30,7 @@ HudComponent::HudComponent(GameObject* pGameObject, Minigin* pEngine, ...)
 	, mPlayers{ 1 }
 	, mpObjectsManager{ new ObjectsManager{} }
 	, mGameSoundId{ 0 }
-	, mIsSoundPlaying{ false }
+	, mGameOverSoundId{ 0 }
 	, mLevel{ 0 }
 	, mEndLevel{ false }
 	, mpHudObserver{ new HudObserver{ this } }
@@ -37,6 +38,8 @@ HudComponent::HudComponent(GameObject* pGameObject, Minigin* pEngine, ...)
 	, mScores{}
 	, mLives{}
 	, mpPalette{ new ColorRGBA8[BufferBubble::GetPaletteColorCount()] }
+	, mIsGameOver{ false }
+	, mGameOverTimer{ mGameOverDelay }
 {
 	std::va_list args{};
 	va_start(args, pEngine);
@@ -55,6 +58,7 @@ HudComponent::HudComponent(GameObject* pGameObject, Minigin* pEngine, ...)
 	CreateScores();
 	CreateLives();
 	mGameSoundId = mpAudio->AddSound("../Data/Audio/gameloop.wav", true);
+	mGameOverSoundId = mpAudio->AddSound("../Data/Audio/gameover.wav", false);
 }
 
 HudComponent::~HudComponent()
@@ -62,13 +66,14 @@ HudComponent::~HudComponent()
 	delete mpPalette;
 	delete mpHudObserver;
 	delete mpObjectsManager;
-	mpEngine->GetServiceLocator()->GetAudio()->StopSound(mGameSoundId);
+	mpAudio->StopSound(mGameOverSoundId);
+	mpAudio->StopSound(mGameSoundId);
 }
 
 void HudComponent::OnSceneActivation(int value)
 {
+	mIsGameOver = false;
 	mpAudio->PlaySound(mGameSoundId);
-	mIsSoundPlaying = true;
 	mPlayers = value;
 	mpObjectsManager->GetAvatarManager()->Activate(value);
 	for (int avatar{ 0 }; avatar < mPlayers; ++avatar)
@@ -83,24 +88,28 @@ void HudComponent::OnSceneActivation(int value)
 void HudComponent::OnSceneDeactivation(int value)
 {
 	(value);
+	mpAudio->StopSound(mGameOverSoundId);
 	mpAudio->StopSound(mGameSoundId);
-	mIsSoundPlaying = false;
 }
 
 void HudComponent::Update(const float deltaTime)
 {
-	mpObjectsManager->GetNpcManager()->SpawnWaitUpdate(deltaTime);
-	if (!mIsSoundPlaying)
+	if (mIsGameOver)
 	{
-		mpEngine->GetServiceLocator()->GetAudio()->PlaySound(mGameSoundId);
-		mIsSoundPlaying = true;
+		mGameOverTimer -= deltaTime;
+		if (mGameOverTimer <= 0.f)
+			BackToIntro();
 	}
-	if (mEndLevel)
+	else
 	{
-		mpGameObject->GetScene();
-		mpGOLevel = Level::CreateLevel(mLevel, mpEngine, mpGameObject->GetScene(), mpBufferManager, mpObjectsManager, mPlayers);
-		mpGOLevel->GetModelComponent<LevelComponent>()->GetObsSubject()->AddObserver(mpHudObserver);
-		mEndLevel = false;
+		mpObjectsManager->GetNpcManager()->SpawnWaitUpdate(deltaTime);
+		if (mEndLevel)
+		{
+			mpGameObject->GetScene();
+			mpGOLevel = Level::CreateLevel(mLevel, mpEngine, mpGameObject->GetScene(), mpBufferManager, mpObjectsManager, mPlayers);
+			mpGOLevel->GetModelComponent<LevelComponent>()->GetObsSubject()->AddObserver(mpHudObserver);
+			mEndLevel = false;
+		}
 	}
 }
 
@@ -130,15 +139,19 @@ void HudComponent::DeltaScore(int value)
 	mpGOScores[score]->GetModelComponent<TextComponent>()->SetText(std::to_string(mScores[score]), mColorIndex[score]);
 }
 
-void HudComponent::AvatarDie(int value)
+void HudComponent::AvatarDie(int avatar)
 {
-	if (value < 0 || value >= 2)
+	if (avatar < 0 || avatar >= 2)
 		return;
-	mLives[value] -= 1;
-	if (mLives[value] > 0)
+	mLives[avatar] -= 1;
+	if (mLives[avatar] > 0)
 		DrawLives();
 	else
-		GameOver();
+	{
+		mpObjectsManager->GetAvatarManager()->Deactivate(avatar);
+		if (mpObjectsManager->GetAvatarManager()->AreAllDeactive())
+			GameOver();
+	}
 }
 
 void HudComponent::DrawLives()
@@ -167,13 +180,20 @@ void HudComponent::DrawScores()
 
 void HudComponent::GameOver()
 {
+	mpAudio->StopSound(mGameSoundId);
+	mpAudio->PlaySound(mGameOverSoundId);
+	mIsGameOver = true;
+	mGameOverTimer = mGameOverDelay;
+}
+
+void HudComponent::BackToIntro()
+{
 	mpObjectsManager->DeactivateAll();
 	mEndLevel = true;
 	mLevel = 0;
 	ScoresInit();
 	LivesInit();
 	mpGOLevel->SetIsToBeDeleted(true);
-	mpEngine->GetServiceLocator()->GetAudio()->StopSound(mGameSoundId);
 	mpEngine->GetSceneManager()->SetActiveScene(mpIntroScene, 0);
 }
 
