@@ -7,9 +7,7 @@ namespace ieg
 		: public CharacterKineticState
 	{
 	public:
-		explicit FloatingState(ModelComponent* pModelComponent)
-			: CharacterKineticState(pModelComponent)
-		{};
+		explicit FloatingState(ModelComponent* pModelComponent);
 		~FloatingState() = default;
 		FloatingState(const FloatingState&) = delete;
 		FloatingState(FloatingState&&) = delete;
@@ -21,5 +19,14 @@ namespace ieg
 		virtual void Fall() override {};
 		virtual void Land() override {};
 		virtual void Capture() override {};
+	private:
+		float mFloatingTimer;
+		float
+			mMoveHorDelay,
+			mMoveVerDelay;
+
+		static const float mFloatingTime;
+		static const float mMoveHor2PixelsTime;
+		static const float mMoveVer2PixelsTime;
 	};
 }

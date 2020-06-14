@@ -37,6 +37,7 @@ namespace ieg
 		void OnSceneActivation(int value) override { (value); };
 		void OnSceneDeactivation(int value) override { (value); };
 		void Update(const float deltaTime) override;
+		void Collision() override;
 
 		void SetNpcType(NpcType npcType);
 		NpcType GetNpcType();

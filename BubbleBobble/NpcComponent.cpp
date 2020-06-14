@@ -27,6 +27,22 @@ void NpcComponent::Update(const float deltaTime)
 	}
 }
 
+void NpcComponent::Collision()
+{
+	if (mpCurKineticState != mpFloatingState)
+		CharacterComponent::Collision();
+	else
+	{
+		TransformModelComponent* pTransform{ mpGameObject->GetModelComponent<TransformModelComponent>() };
+		ColliderModelComponent* pCollider{ mpGameObject->GetModelComponent<ColliderModelComponent>() };
+		unsigned short collision{ mpGOLevel->GetModelComponent<LevelComponent>()->CheckRectangleCollision(pTransform, pCollider) };
+		if ((collision & 3) != 0)
+			pTransform->ResetNewPosY();
+		if ((collision & 12) != 0)
+			pTransform->ResetNewPosX();
+	}
+}
+
 void NpcComponent::SetNpcType(NpcType npcType)
 {
 	mNpcType = npcType;

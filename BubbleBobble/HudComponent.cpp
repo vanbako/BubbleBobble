@@ -54,7 +54,7 @@ HudComponent::HudComponent(GameObject* pGameObject, Minigin* pEngine, ...)
 	mpGOLevel->GetModelComponent<LevelComponent>()->GetObsSubject()->AddObserver(mpHudObserver);
 	CreateScores();
 	CreateLives();
-	mGameSoundId = mpAudio->AddSound("../Data/Audio/gameloop.wav", false);
+	mGameSoundId = mpAudio->AddSound("../Data/Audio/gameloop.wav", true);
 }
 
 HudComponent::~HudComponent()
