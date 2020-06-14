@@ -22,7 +22,7 @@ using namespace ieg;
 const int HudComponent::mColorIndex[]{ 15, 7 };
 const int HudComponent::mStartLives{ 4 };
 const int HudComponent::mMaxLives{ 7 };
-const float HudComponent::mGameOverDelay{ 3.f };
+const float HudComponent::mGameOverDelay{ 2.58f };
 
 HudComponent::HudComponent(GameObject* pGameObject, Minigin* pEngine, ...)
 	: ModelComponent(pGameObject, pEngine)
@@ -39,7 +39,6 @@ HudComponent::HudComponent(GameObject* pGameObject, Minigin* pEngine, ...)
 	, mLives{}
 	, mpPalette{ new ColorRGBA8[BufferBubble::GetPaletteColorCount()] }
 	, mIsGameOver{ false }
-	, mGameOverTimer{ mGameOverDelay }
 {
 	std::va_list args{};
 	va_start(args, pEngine);
@@ -95,11 +94,7 @@ void HudComponent::OnSceneDeactivation(int value)
 void HudComponent::Update(const float deltaTime)
 {
 	if (mIsGameOver)
-	{
-		mGameOverTimer -= deltaTime;
-		if (mGameOverTimer <= 0.f)
-			BackToIntro();
-	}
+		BackToIntro();
 	else
 	{
 		mpObjectsManager->GetNpcManager()->SpawnWaitUpdate(deltaTime);
@@ -183,7 +178,7 @@ void HudComponent::GameOver()
 	mpAudio->StopSound(mGameSoundId);
 	mpAudio->PlaySound(mGameOverSoundId);
 	mIsGameOver = true;
-	mGameOverTimer = mGameOverDelay;
+	mpGameObject->GetScene()->Freeze(mGameOverDelay);
 }
 
 void HudComponent::BackToIntro()

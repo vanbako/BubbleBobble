@@ -9,6 +9,8 @@ Scene::Scene(const std::string& name)
 	: mName{ name }
 	, mpInputManager(new InputManager{})
 	, mpObjects{}
+	, mIsFrozen{ false }
+	, mFreezeTimer{ 0.f }
 {
 }
 
@@ -33,6 +35,13 @@ void Scene::RemoveObject(GameObject* pGameObject)
 
 void Scene::Update(const float deltaTime)
 {
+	if (mIsFrozen)
+	{
+		mFreezeTimer -= deltaTime;
+		if (mFreezeTimer <= 0.f)
+			mIsFrozen = false;
+		return;
+	}
 	for (auto& objectPair : mpObjects)
 		objectPair.second->CtrlLock();
 	for (auto& objectPair : mpObjects)
@@ -83,6 +92,12 @@ void Scene::OnDeactivation(int value)
 {
 	for (auto& objectPair : mpObjects)
 		objectPair.second->OnSceneDeactivation(value);
+}
+
+void Scene::Freeze(const float delay)
+{
+	mFreezeTimer = delay;
+	mIsFrozen = true;
 }
 
 InputManager* Scene::GetInputManager()

@@ -49,7 +49,6 @@ namespace ieg
 		GameObject* mpGOLevel;
 		HudObserver* mpHudObserver;
 		bool mIsGameOver;
-		float mGameOverTimer;
 		std::vector<int> mScores;
 		std::vector<int> mLives;
 		std::vector<GameObject*> mpGOScores;

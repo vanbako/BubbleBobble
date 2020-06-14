@@ -39,11 +39,14 @@ namespace ieg
 		void Render() const;
 		void OnActivation(int value);
 		void OnDeactivation(int value);
+		void Freeze(const float delay);
 
 		InputManager* GetInputManager();
 	private:
 		std::string mName;
 		InputManager* mpInputManager;
 		std::multimap<int, SceneObject*> mpObjects;
+		float mFreezeTimer;
+		bool mIsFrozen;
 	};
 }
