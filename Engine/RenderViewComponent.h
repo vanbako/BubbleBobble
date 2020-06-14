@@ -34,6 +34,7 @@ namespace ieg
 		Texture2D* SetTexture(SDL_Texture* pSDLTexture);
 		Texture2D* ReplaceTexture(SDL_Texture* pSDLTexture);
 		void SetIsSprite(bool isSprite);
+		void SetIsOnOff(bool isOnOff, float onOffDelay = 0.15f);
 	private:
 		TransformModelComponent* mpTransformComponent;
 		Texture2D* mpTexture;
@@ -41,12 +42,13 @@ namespace ieg
 		int mIndex;
 		int mType;
 		float
-			mDelay,
-			mCurrDelay;
+			mDelay, mCurrDelay,
+			mOnOffDelay, mCurrOnOffDelay;
 		int
 			mStartIndex,
 			mStopIndex;
 		bool mIsAnimating;
+		bool mIsOnOff, mIsOn;
 		bool mIsSprite;
 	};
 }

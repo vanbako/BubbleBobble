@@ -141,6 +141,12 @@ void AvatarComponent::SetDyingState()
 void AvatarComponent::SetInvincibleState()
 {
 	mpNewHealthState = mpInvincibleState;
+	SetRenderInvincible(true);
+}
+
+void AvatarComponent::SetRenderInvincible(bool setOn)
+{
+	mpGameObject->GetViewComponent<RenderViewComponent>()->SetIsOnOff(setOn);
 }
 
 void AvatarComponent::FireBubble()

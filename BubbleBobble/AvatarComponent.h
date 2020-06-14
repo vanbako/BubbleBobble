@@ -45,6 +45,8 @@ namespace ieg
 		void SetDyingState();
 		void SetInvincibleState();
 
+		void SetRenderInvincible(bool setOn);
+
 		void FireBubble();
 		void Spawn();
 

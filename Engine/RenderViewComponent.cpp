@@ -17,6 +17,10 @@ RenderViewComponent::RenderViewComponent(Minigin* pEngine)
 	, mType{ 0 }
 	, mDelay{ 0.f }
 	, mCurrDelay{ 0.f }
+	, mIsOnOff{ false }
+	, mIsOn{ true }
+	, mOnOffDelay{ 0.15f }
+	, mCurrOnOffDelay{ 0.f }
 	, mStartIndex{ 0 }
 	, mStopIndex{ 0 }
 	, mIsAnimating{ false }
@@ -44,10 +48,21 @@ void RenderViewComponent::Update(const float deltaTime)
 			mIndex += 8;
 		mIndex += (mpTransformComponent->GetPos().GetX() % 16) / 2;
 	}
+	if (mIsOnOff)
+	{
+		mCurrOnOffDelay -= deltaTime;
+		if (mCurrOnOffDelay <= 0.f)
+		{
+			mCurrOnOffDelay += mOnOffDelay;
+			mIsOn = !mIsOn;
+		}
+	}
 }
 
 void RenderViewComponent::Render() const
 {
+	if (mIsOnOff && !mIsOn)
+		return;
 	if (mpTransformComponent != nullptr && mpTexture != nullptr)
 	{
 		GameObject* pParent{ (GameObject*)mpTransformComponent->GetGameObject()->GetParent() };
@@ -131,4 +146,11 @@ Texture2D* RenderViewComponent::ReplaceTexture(SDL_Texture* pSDLTexture)
 void RenderViewComponent::SetIsSprite(bool isSprite)
 {
 	mIsSprite = isSprite;
+}
+
+void RenderViewComponent::SetIsOnOff(bool isOnOff, float onOffDelay)
+{
+	mIsOnOff = isOnOff;
+	mOnOffDelay = onOffDelay;
+	mIsOn = !isOnOff;
 }

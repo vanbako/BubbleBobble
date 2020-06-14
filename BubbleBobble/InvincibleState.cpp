@@ -24,5 +24,6 @@ void InvincibleState::Update(const float deltaTime)
 
 void InvincibleState::InvincibleDone()
 {
+	((AvatarComponent*)mpModelComponent)->SetRenderInvincible(false);
 	((AvatarComponent*)mpModelComponent)->SetLivingState();
 }
