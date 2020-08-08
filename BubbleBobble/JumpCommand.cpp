@@ -1,10 +1,10 @@
-#include "pch.h"
-#include "JumpCommand.h"
-#include "CharacterComponent.h"
+module BubbleBobble:Command;
+
+import :Component;
 
 using namespace ieg;
 
-void JumpCommand::Execute(ModelComponent* pCharacter)
+void JumpCommand::Execute(ModelComponent* pActor)
 {
-	((CharacterComponent*)(pCharacter))->Jump();
+	((CharacterComponent*)(pActor))->Jump();
 }

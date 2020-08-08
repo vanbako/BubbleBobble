@@ -1,6 +1,6 @@
-#include "pch.h"
-#include "ReloadingState.h"
-#include "CharacterComponent.h"
+module BubbleBobble:State;
+
+import :Component;
 
 using namespace ieg;
 

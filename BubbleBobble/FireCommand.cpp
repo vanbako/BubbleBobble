@@ -1,10 +1,10 @@
-#include "pch.h"
-#include "FireCommand.h"
-#include "CharacterComponent.h"
+module BubbleBobble:Command;
+
+import :Component;
 
 using namespace ieg;
 
-void FireCommand::Execute(ModelComponent* pCharacter)
+void FireCommand::Execute(ModelComponent* pActor)
 {
-	((CharacterComponent*)(pCharacter))->Fire();
+	((CharacterComponent*)(pActor))->Fire();
 }

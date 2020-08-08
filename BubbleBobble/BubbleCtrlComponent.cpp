@@ -1,6 +1,4 @@
-#include "pch.h"
-#include "BubbleCtrlComponent.h"
-#include "BubbleComponent.h"
+module BubbleBobble:Component;
 
 using namespace ieg;
 

@@ -4,9 +4,7 @@ import :Component;
 
 namespace ieg
 {
-	class ModelComponent;
-
-	class State
+	export class State
 	{
 	public:
 		explicit State(ModelComponent* pModelComponent);

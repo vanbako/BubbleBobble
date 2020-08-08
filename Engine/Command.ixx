@@ -1,9 +1,9 @@
 export module Engine:Command;
 
+import :Component;
+
 namespace ieg
 {
-	class ModelComponent;
-
 	export class Command
 	{
 	public:

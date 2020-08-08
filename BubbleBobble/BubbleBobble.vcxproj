@@ -201,55 +201,21 @@ xcopy "$(SolutionDir)3rdParty\Fmod\lib\x64\fmod.dll" "$(OutputPath)" /R /Y</Comm
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Avatar.h" />
-    <ClInclude Include="AvatarComponent.h" />
-    <ClInclude Include="AvatarHealthState.h" />
     <ClInclude Include="AvatarManager.h" />
-    <ClInclude Include="BubbleCaptureState.h" />
-    <ClInclude Include="BubbleCtrlComponent.h" />
-    <ClInclude Include="BubbleFloatingState.h" />
-    <ClInclude Include="BubbleKineticState.h" />
-    <ClInclude Include="BubblePoppingState.h" />
-    <ClInclude Include="CharacterKineticState.h" />
-    <ClInclude Include="CharacterWeaponState.h" />
     <ClInclude Include="Bubble.h" />
     <ClInclude Include="BubbleBobble.h" />
-    <ClInclude Include="BubbleComponent.h" />
     <ClInclude Include="BubbleManager.h" />
     <ClInclude Include="Candy.h" />
-    <ClInclude Include="CandyComponent.h" />
     <ClInclude Include="CandyManager.h" />
-    <ClInclude Include="CharacterComponent.h" />
-    <ClInclude Include="DyingState.h" />
-    <ClInclude Include="FallingState.h" />
-    <ClInclude Include="FiringState.h" />
-    <ClInclude Include="FloatingState.h" />
     <ClInclude Include="Hud.h" />
-    <ClInclude Include="HudComponent.h" />
     <ClInclude Include="HudObserver.h" />
     <ClInclude Include="Intro.h" />
-    <ClInclude Include="IntroComponent.h" />
-    <ClInclude Include="InvincibleState.h" />
-    <ClInclude Include="JumpCommand.h" />
-    <ClInclude Include="JumpingState.h" />
-    <ClInclude Include="LeftCommand.h" />
     <ClInclude Include="Level.h" />
-    <ClInclude Include="LevelComponent.h" />
-    <ClInclude Include="LivingState.h" />
     <ClInclude Include="Npc.h" />
-    <ClInclude Include="NpcComponent.h" />
-    <ClInclude Include="NpcCtrlComponent.h" />
     <ClInclude Include="NpcManager.h" />
     <ClInclude Include="ObjectsManager.h" />
     <ClInclude Include="pch.h" />
-    <ClInclude Include="ReadyState.h" />
-    <ClInclude Include="ReloadingState.h" />
-    <ClInclude Include="RightCommand.h" />
-    <ClInclude Include="StandingState.h" />
     <ClInclude Include="Start.h" />
-    <ClInclude Include="Start1Command.h" />
-    <ClInclude Include="Start2Command.h" />
-    <ClInclude Include="StartComponent.h" />
-    <ClInclude Include="TextComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Avatar.cpp" />
@@ -288,6 +254,7 @@ xcopy "$(SolutionDir)3rdParty\Fmod\lib\x64\fmod.dll" "$(OutputPath)" /R /Y</Comm
     <ClCompile Include="Color.ixx" />
     <ClCompile Include="ColorXRGB4.cpp" />
     <ClCompile Include="Command.ixx" />
+    <ClCompile Include="Component.ixx" />
     <ClCompile Include="DyingState.cpp" />
     <ClCompile Include="FallingState.cpp" />
     <ClCompile Include="FireCommand.cpp" />
@@ -306,12 +273,15 @@ xcopy "$(SolutionDir)3rdParty\Fmod\lib\x64\fmod.dll" "$(OutputPath)" /R /Y</Comm
     <ClCompile Include="LevelComponent.cpp" />
     <ClCompile Include="LivingState.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Manager.ixx" />
     <ClCompile Include="Npc.cpp" />
     <ClCompile Include="NpcComponent.cpp" />
     <ClCompile Include="NpcCtrlComponent.cpp" />
     <ClCompile Include="NpcManager.cpp" />
     <ClCompile Include="ObjectsManager.cpp" />
+    <ClCompile Include="Observer.ixx" />
     <ClCompile Include="pch.cpp" />
+    <ClCompile Include="Prefabs.ixx" />
     <ClCompile Include="ReadyState.cpp" />
     <ClCompile Include="ReloadingState.cpp" />
     <ClCompile Include="RightCommand.cpp" />
@@ -320,6 +290,7 @@ xcopy "$(SolutionDir)3rdParty\Fmod\lib\x64\fmod.dll" "$(OutputPath)" /R /Y</Comm
     <ClCompile Include="Start1Command.cpp" />
     <ClCompile Include="Start2Command.cpp" />
     <ClCompile Include="StartComponent.cpp" />
+    <ClCompile Include="State.ixx" />
     <ClCompile Include="TextComponent.cpp" />
   </ItemGroup>
   <ItemGroup>

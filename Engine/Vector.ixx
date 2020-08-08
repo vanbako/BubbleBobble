@@ -2,7 +2,7 @@ export module Engine:Vector;
 
 namespace ieg
 {
-	template<class T>
+	export template<class T>
 	class Vec2 final
 	{
 	public:

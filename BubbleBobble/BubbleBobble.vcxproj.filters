@@ -256,17 +256,23 @@
     <ClCompile Include="Command.ixx">
       <Filter>Command</Filter>
     </ClCompile>
+    <ClCompile Include="Component.ixx">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="State.ixx">
+      <Filter>State</Filter>
+    </ClCompile>
+    <ClCompile Include="Prefabs.ixx">
+      <Filter>Prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager.ixx">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Observer.ixx">
+      <Filter>Observer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="JumpCommand.h">
-      <Filter>Command</Filter>
-    </ClInclude>
-    <ClInclude Include="LeftCommand.h">
-      <Filter>Command</Filter>
-    </ClInclude>
-    <ClInclude Include="RightCommand.h">
-      <Filter>Command</Filter>
-    </ClInclude>
     <ClInclude Include="Level.h">
       <Filter>Prefabs</Filter>
     </ClInclude>
@@ -287,12 +293,6 @@
     </ClInclude>
     <ClInclude Include="Npc.h">
       <Filter>Prefabs</Filter>
-    </ClInclude>
-    <ClInclude Include="Start1Command.h">
-      <Filter>Command</Filter>
-    </ClInclude>
-    <ClInclude Include="Start2Command.h">
-      <Filter>Command</Filter>
     </ClInclude>
     <ClInclude Include="pch.h">
       <Filter>Precompiled Header</Filter>
@@ -318,95 +318,8 @@
     <ClInclude Include="CandyManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
-    <ClInclude Include="FallingState.h">
-      <Filter>State\CharacterKineticState</Filter>
-    </ClInclude>
-    <ClInclude Include="JumpingState.h">
-      <Filter>State\CharacterKineticState</Filter>
-    </ClInclude>
-    <ClInclude Include="StandingState.h">
-      <Filter>State\CharacterKineticState</Filter>
-    </ClInclude>
-    <ClInclude Include="ReadyState.h">
-      <Filter>State\CharacterWeaponState</Filter>
-    </ClInclude>
-    <ClInclude Include="FiringState.h">
-      <Filter>State\CharacterWeaponState</Filter>
-    </ClInclude>
-    <ClInclude Include="ReloadingState.h">
-      <Filter>State\CharacterWeaponState</Filter>
-    </ClInclude>
-    <ClInclude Include="AvatarHealthState.h">
-      <Filter>State\AvatarHealthState</Filter>
-    </ClInclude>
-    <ClInclude Include="LivingState.h">
-      <Filter>State\AvatarHealthState</Filter>
-    </ClInclude>
-    <ClInclude Include="DyingState.h">
-      <Filter>State\AvatarHealthState</Filter>
-    </ClInclude>
-    <ClInclude Include="InvincibleState.h">
-      <Filter>State\AvatarHealthState</Filter>
-    </ClInclude>
-    <ClInclude Include="AvatarComponent.h">
-      <Filter>Component\ModelComponent</Filter>
-    </ClInclude>
-    <ClInclude Include="BubbleComponent.h">
-      <Filter>Component\ModelComponent</Filter>
-    </ClInclude>
-    <ClInclude Include="CandyComponent.h">
-      <Filter>Component\ModelComponent</Filter>
-    </ClInclude>
-    <ClInclude Include="HudComponent.h">
-      <Filter>Component\ModelComponent</Filter>
-    </ClInclude>
-    <ClInclude Include="IntroComponent.h">
-      <Filter>Component\ModelComponent</Filter>
-    </ClInclude>
-    <ClInclude Include="LevelComponent.h">
-      <Filter>Component\ModelComponent</Filter>
-    </ClInclude>
-    <ClInclude Include="NpcComponent.h">
-      <Filter>Component\ModelComponent</Filter>
-    </ClInclude>
-    <ClInclude Include="StartComponent.h">
-      <Filter>Component\ModelComponent</Filter>
-    </ClInclude>
-    <ClInclude Include="NpcCtrlComponent.h">
-      <Filter>Component\CtrlComponent</Filter>
-    </ClInclude>
-    <ClInclude Include="CharacterComponent.h">
-      <Filter>Component\ModelComponent</Filter>
-    </ClInclude>
-    <ClInclude Include="CharacterKineticState.h">
-      <Filter>State\CharacterKineticState</Filter>
-    </ClInclude>
-    <ClInclude Include="CharacterWeaponState.h">
-      <Filter>State\CharacterWeaponState</Filter>
-    </ClInclude>
-    <ClInclude Include="BubbleCtrlComponent.h">
-      <Filter>Component\CtrlComponent</Filter>
-    </ClInclude>
-    <ClInclude Include="BubbleKineticState.h">
-      <Filter>State\BubbleKineticState</Filter>
-    </ClInclude>
-    <ClInclude Include="BubbleCaptureState.h">
-      <Filter>State\BubbleKineticState</Filter>
-    </ClInclude>
-    <ClInclude Include="BubbleFloatingState.h">
-      <Filter>State\BubbleKineticState</Filter>
-    </ClInclude>
-    <ClInclude Include="BubblePoppingState.h">
-      <Filter>State\BubbleKineticState</Filter>
-    </ClInclude>
     <ClInclude Include="BubbleBobble.h">
       <Filter>Prefabs</Filter>
-    </ClInclude>
-    <ClInclude Include="FloatingState.h">
-      <Filter>State\CharacterKineticState</Filter>
-    </ClInclude>
-    <ClInclude Include="TextComponent.h">
-      <Filter>Component\ModelComponent</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

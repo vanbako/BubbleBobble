@@ -1,6 +1,6 @@
-#include "pch.h"
-#include "Start2Command.h"
-#include "IntroComponent.h"
+module BubbleBobble:Command;
+
+import :Component;
 
 using namespace ieg;
 

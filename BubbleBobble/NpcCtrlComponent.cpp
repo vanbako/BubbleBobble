@@ -1,9 +1,6 @@
-#include "pch.h"
-#include "NpcCtrlComponent.h"
-#include "JumpCommand.h"
-#include "LeftCommand.h"
-#include "RightCommand.h"
-#include "NpcComponent.h"
+module BubbleBobble:Component;
+
+import :Command;
 
 using namespace ieg;
 

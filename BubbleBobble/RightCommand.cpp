@@ -1,10 +1,10 @@
-#include "pch.h"
-#include "RightCommand.h"
-#include "CharacterComponent.h"
+module BubbleBobble:Command;
+
+import :Component;
 
 using namespace ieg;
 
-void RightCommand::Execute(ModelComponent* pCharacter)
+void RightCommand::Execute(ModelComponent* pActor)
 {
-	((CharacterComponent*)(pCharacter))->Right();
+	((CharacterComponent*)(pActor))->Right();
 }
