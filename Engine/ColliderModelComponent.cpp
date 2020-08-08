@@ -1,6 +1,4 @@
-#include "pch.h"
-#include "ColliderModelComponent.h"
-#include "TransformModelComponent.h"
+module Engine:Component;
 
 using namespace ieg;
 

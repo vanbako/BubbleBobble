@@ -96,14 +96,12 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level4</WarningLevel>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <TreatWarningAsError>true</TreatWarningAsError>
-      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <EnableModules>true</EnableModules>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -116,14 +114,12 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level4</WarningLevel>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <TreatWarningAsError>true</TreatWarningAsError>
-      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <EnableModules>true</EnableModules>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -136,16 +132,14 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level4</WarningLevel>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <TreatWarningAsError>true</TreatWarningAsError>
-      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <EnableModules>true</EnableModules>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -160,16 +154,14 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level4</WarningLevel>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <TreatWarningAsError>true</TreatWarningAsError>
-      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <EnableModules>true</EnableModules>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -183,45 +175,17 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Audio.h" />
-    <ClInclude Include="ColliderModelComponent.h" />
-    <ClInclude Include="ColorRGBA8.h" />
-    <ClInclude Include="Command.h" />
-    <ClInclude Include="CtrlComponent.h" />
-    <ClInclude Include="FileLogger.h" />
-    <ClInclude Include="Logger.h" />
-    <ClInclude Include="ModelComponent.h" />
-    <ClInclude Include="Font.h" />
-    <ClInclude Include="GameObject.h" />
-    <ClInclude Include="InputAction.h" />
-    <ClInclude Include="InputManager.h" />
-    <ClInclude Include="Minigin.h" />
-    <ClInclude Include="MutedAudio.h" />
-    <ClInclude Include="NullAudio.h" />
-    <ClInclude Include="NullLogger.h" />
-    <ClInclude Include="Observer.h" />
-    <ClInclude Include="ObsSubject.h" />
-    <ClInclude Include="pch.h" />
-    <ClInclude Include="RegularAudio.h" />
-    <ClInclude Include="RenderViewComponent.h" />
-    <ClInclude Include="Renderer.h" />
-    <ClInclude Include="ResourceManager.h" />
-    <ClInclude Include="Scene.h" />
-    <ClInclude Include="SceneManager.h" />
-    <ClInclude Include="SceneObject.h" />
-    <ClInclude Include="ServiceLocator.h" />
-    <ClInclude Include="State.h" />
-    <ClInclude Include="Texture2D.h" />
-    <ClInclude Include="TransformModelComponent.h" />
-    <ClInclude Include="Vec2.h" />
-    <ClInclude Include="ViewComponent.h" />
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="ColliderModelComponent.cpp" />
+    <ClCompile Include="Color.ixx" />
     <ClCompile Include="ColorRGBA8.cpp" />
+    <ClCompile Include="Command.ixx" />
+    <ClCompile Include="Component.ixx" />
     <ClCompile Include="CtrlComponent.cpp" />
+    <ClCompile Include="Engine.ixx" />
     <ClCompile Include="FileLogger.cpp" />
+    <ClCompile Include="Input.ixx" />
     <ClCompile Include="Logger.cpp" />
+    <ClCompile Include="Minigin.ixx" />
     <ClCompile Include="ModelComponent.cpp" />
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="GameObject.cpp" />
@@ -231,24 +195,26 @@
     <ClCompile Include="MutedAudio.cpp" />
     <ClCompile Include="NullAudio.cpp" />
     <ClCompile Include="NullLogger.cpp" />
+    <ClCompile Include="Object.ixx" />
+    <ClCompile Include="Observer.ixx" />
     <ClCompile Include="ObsSubject.cpp" />
-    <ClCompile Include="pch.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
-    </ClCompile>
     <ClCompile Include="RegularAudio.cpp" />
+    <ClCompile Include="Render.ixx" />
     <ClCompile Include="RenderViewComponent.cpp" />
     <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="Resource.ixx" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="Scene.ixx" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SceneObject.cpp" />
     <ClCompile Include="ServiceLocator.cpp" />
+    <ClCompile Include="ServiceLocator.ixx" />
     <ClCompile Include="State.cpp" />
+    <ClCompile Include="State.ixx" />
     <ClCompile Include="Texture2D.cpp" />
     <ClCompile Include="TransformModelComponent.cpp" />
+    <ClCompile Include="Vector.ixx" />
     <ClCompile Include="ViewComponent.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

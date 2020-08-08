@@ -1,5 +1,4 @@
-#include "pch.h"
-#include "ColorRGBA8.h"
+module Engine:Color;
 
 using namespace ieg;
 

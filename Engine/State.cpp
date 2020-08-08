@@ -1,5 +1,4 @@
-#include "pch.h"
-#include "State.h"
+module Engine:State;
 
 using namespace ieg;
 

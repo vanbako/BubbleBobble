@@ -1,5 +1,4 @@
-#include "pch.h"
-#include "Texture2D.h"
+module Engine:Resource;
 
 using namespace ieg;
 

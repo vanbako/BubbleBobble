@@ -1,6 +1,4 @@
-#include "pch.h"
-#include "ObsSubject.h"
-#include "Observer.h"
+module Engine:Observer;
 
 using namespace ieg;
 

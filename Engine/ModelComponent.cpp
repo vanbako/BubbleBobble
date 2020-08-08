@@ -1,5 +1,4 @@
-#include "pch.h"
-#include "ModelComponent.h"
+module Engine:Component;
 
 using namespace ieg;
 

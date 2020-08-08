@@ -1,5 +1,4 @@
-#include "pch.h"
-#include "ViewComponent.h"
+module Engine:Component;
 
 using namespace ieg;
 

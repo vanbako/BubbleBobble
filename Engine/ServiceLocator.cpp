@@ -1,9 +1,4 @@
-#include "pch.h"
-#include "ServiceLocator.h"
-#include "Audio.h"
-#include "MutedAudio.h"
-#include "NullAudio.h"
-#include "NullLogger.h"
+module Engine:ServiceLocator;
 
 using namespace ieg;
 

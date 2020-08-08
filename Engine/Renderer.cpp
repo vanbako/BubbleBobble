@@ -1,7 +1,4 @@
-#include "pch.h"
-#include "Renderer.h"
-#include "SceneManager.h"
-#include "Texture2D.h"
+module Engine:Render;
 
 using namespace ieg;
 

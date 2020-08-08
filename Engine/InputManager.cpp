@@ -1,8 +1,4 @@
-#include "pch.h"
-#include "InputManager.h"
-#include "InputAction.h"
-#include "Command.h"
-#include "ModelComponent.h"
+module Engine:Input;
 
 using namespace ieg;
 

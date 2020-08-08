@@ -1,6 +1,4 @@
-#include "pch.h"
-#include "CtrlComponent.h"
-#include "GameObject.h"
+module Engine:Component;
 
 using namespace ieg;
 

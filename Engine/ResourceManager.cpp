@@ -1,8 +1,4 @@
-#include "pch.h"
-#include "ResourceManager.h"
-#include "Renderer.h"
-#include "Texture2D.h"
-#include "Font.h"
+module Engine:Resource;
 
 using namespace ieg;
 

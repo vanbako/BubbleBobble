@@ -1,5 +1,4 @@
-#include "pch.h"
-#include "Font.h"
+module Engine:Resource;
 
 using namespace ieg;
 

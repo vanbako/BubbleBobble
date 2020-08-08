@@ -1,5 +1,4 @@
-#include "pch.h"
-#include "SceneObject.h"
+module Engine:Scene;
 
 using namespace ieg;
 

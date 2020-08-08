@@ -1,5 +1,4 @@
-#include "pch.h"
-#include "RegularAudio.h"
+module Engine:ServiceLocator;
 
 using namespace ieg;
 

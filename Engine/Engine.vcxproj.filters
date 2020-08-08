@@ -28,9 +28,6 @@
     <Filter Include="Object">
       <UniqueIdentifier>{94b062b4-6dd2-4f73-b85e-d889c2204a65}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Precompiled Header">
-      <UniqueIdentifier>{9f4f4cca-3ef3-425d-aa17-528c83b7d760}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Color">
       <UniqueIdentifier>{070b57c7-6931-4557-ab4d-d1ea31750559}</UniqueIdentifier>
     </Filter>
@@ -58,104 +55,6 @@
     <Filter Include="Component\CtrlComponent">
       <UniqueIdentifier>{f8bdbc64-3c07-4f99-b091-80a17c1f4a5f}</UniqueIdentifier>
     </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Scene.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneManager.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneObject.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="InputAction.h">
-      <Filter>Input</Filter>
-    </ClInclude>
-    <ClInclude Include="InputManager.h">
-      <Filter>Input</Filter>
-    </ClInclude>
-    <ClInclude Include="ServiceLocator.h">
-      <Filter>ServiceLocator</Filter>
-    </ClInclude>
-    <ClInclude Include="ResourceManager.h">
-      <Filter>Resource</Filter>
-    </ClInclude>
-    <ClInclude Include="Texture2D.h">
-      <Filter>Resource</Filter>
-    </ClInclude>
-    <ClInclude Include="Font.h">
-      <Filter>Resource</Filter>
-    </ClInclude>
-    <ClInclude Include="Renderer.h">
-      <Filter>Render</Filter>
-    </ClInclude>
-    <ClInclude Include="Minigin.h">
-      <Filter>Minigin</Filter>
-    </ClInclude>
-    <ClInclude Include="Audio.h">
-      <Filter>ServiceLocator\Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="MutedAudio.h">
-      <Filter>ServiceLocator\Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="NullAudio.h">
-      <Filter>ServiceLocator\Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="RegularAudio.h">
-      <Filter>ServiceLocator\Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="ColorRGBA8.h">
-      <Filter>Color</Filter>
-    </ClInclude>
-    <ClInclude Include="ModelComponent.h">
-      <Filter>Component\ModelComponent</Filter>
-    </ClInclude>
-    <ClInclude Include="TransformModelComponent.h">
-      <Filter>Component\ModelComponent</Filter>
-    </ClInclude>
-    <ClInclude Include="RenderViewComponent.h">
-      <Filter>Component\ViewComponent</Filter>
-    </ClInclude>
-    <ClInclude Include="ViewComponent.h">
-      <Filter>Component\ViewComponent</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>Object</Filter>
-    </ClInclude>
-    <ClInclude Include="ColliderModelComponent.h">
-      <Filter>Component\ModelComponent</Filter>
-    </ClInclude>
-    <ClInclude Include="pch.h">
-      <Filter>Precompiled Header</Filter>
-    </ClInclude>
-    <ClInclude Include="Command.h">
-      <Filter>Command</Filter>
-    </ClInclude>
-    <ClInclude Include="Vec2.h">
-      <Filter>Vector</Filter>
-    </ClInclude>
-    <ClInclude Include="Observer.h">
-      <Filter>Observer</Filter>
-    </ClInclude>
-    <ClInclude Include="ObsSubject.h">
-      <Filter>Observer</Filter>
-    </ClInclude>
-    <ClInclude Include="State.h">
-      <Filter>State</Filter>
-    </ClInclude>
-    <ClInclude Include="CtrlComponent.h">
-      <Filter>Component\CtrlComponent</Filter>
-    </ClInclude>
-    <ClInclude Include="Logger.h">
-      <Filter>ServiceLocator\Log</Filter>
-    </ClInclude>
-    <ClInclude Include="NullLogger.h">
-      <Filter>ServiceLocator\Log</Filter>
-    </ClInclude>
-    <ClInclude Include="FileLogger.h">
-      <Filter>ServiceLocator\Log</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Scene.cpp">
@@ -218,9 +117,6 @@
     <ClCompile Include="ColliderModelComponent.cpp">
       <Filter>Component\ModelComponent</Filter>
     </ClCompile>
-    <ClCompile Include="pch.cpp">
-      <Filter>Precompiled Header</Filter>
-    </ClCompile>
     <ClCompile Include="ObsSubject.cpp">
       <Filter>Observer</Filter>
     </ClCompile>
@@ -241,6 +137,46 @@
     </ClCompile>
     <ClCompile Include="SceneObject.cpp">
       <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine.ixx" />
+    <ClCompile Include="Color.ixx">
+      <Filter>Color</Filter>
+    </ClCompile>
+    <ClCompile Include="Command.ixx">
+      <Filter>Command</Filter>
+    </ClCompile>
+    <ClCompile Include="Component.ixx">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector.ixx">
+      <Filter>Vector</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.ixx">
+      <Filter>Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Minigin.ixx">
+      <Filter>Minigin</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.ixx">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.ixx">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Observer.ixx">
+      <Filter>Observer</Filter>
+    </ClCompile>
+    <ClCompile Include="Render.ixx">
+      <Filter>Render</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource.ixx">
+      <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="State.ixx">
+      <Filter>State</Filter>
+    </ClCompile>
+    <ClCompile Include="ServiceLocator.ixx">
+      <Filter>ServiceLocator</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

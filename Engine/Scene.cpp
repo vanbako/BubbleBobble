@@ -1,7 +1,4 @@
-#include "pch.h"
-#include "Scene.h"
-#include "InputManager.h"
-#include "GameObject.h"
+module Engine:Scene;
 
 using namespace ieg;
 

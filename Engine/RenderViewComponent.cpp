@@ -1,10 +1,4 @@
-#include "pch.h"
-#include "RenderViewComponent.h"
-#include "TransformModelComponent.h"
-#include "ResourceManager.h"
-#include "Renderer.h"
-#include "GameObject.h"
-#include "Minigin.h"
+module Engine:Component;
 
 using namespace ieg;
 
