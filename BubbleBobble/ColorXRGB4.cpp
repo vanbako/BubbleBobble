@@ -1,5 +1,6 @@
-#include "pch.h"
-#include "ColorXRGB4.h"
+module BubbleBobble:Color;
+
+import Engine;
 
 using namespace ieg;
 

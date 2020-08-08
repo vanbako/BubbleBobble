@@ -1,4 +1,11 @@
+module;
+#include <SDL.h>
+
 module Engine:Render;
+
+import :Scene;
+import :Resource;
+import std.core;
 
 using namespace ieg;
 

@@ -1,4 +1,10 @@
+module;
+
+#include <typeinfo>
+
 module Engine:ServiceLocator;
+
+import std.core;
 
 using namespace ieg;
 

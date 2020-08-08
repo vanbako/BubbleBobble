@@ -2,15 +2,17 @@ module;
 
 #include <cstdarg>
 
-export module Engine:Object;
+export module Engine:GameObject;
 
 import :Scene;
-import :Component;
 import std.core;
 
 namespace ieg
 {
 	class Minigin;
+	class CtrlComponent;
+	class ModelComponent;
+	class ViewComponent;
 
 	export class GameObject final
 		: public SceneObject

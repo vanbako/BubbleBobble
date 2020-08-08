@@ -195,7 +195,7 @@
     <ClCompile Include="MutedAudio.cpp" />
     <ClCompile Include="NullAudio.cpp" />
     <ClCompile Include="NullLogger.cpp" />
-    <ClCompile Include="Object.ixx" />
+    <ClCompile Include="GameObject.ixx" />
     <ClCompile Include="Observer.ixx" />
     <ClCompile Include="ObsSubject.cpp" />
     <ClCompile Include="RegularAudio.cpp" />

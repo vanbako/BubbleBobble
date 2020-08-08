@@ -1,3 +1,7 @@
+module;
+
+#include <cstdarg>
+
 module Engine:Component;
 
 using namespace ieg;

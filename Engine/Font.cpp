@@ -1,3 +1,7 @@
+module;
+#include <SDL.h>
+#include <SDL_ttf.h>
+
 module Engine:Resource;
 
 using namespace ieg;

@@ -1,6 +1,4 @@
-#include "pch.h"
-#include "BufferAsprites.h"
-#include "../Engine/ColorRGBA8.h"
+module BubbleBobble:Buffer;
 
 using namespace ieg;
 

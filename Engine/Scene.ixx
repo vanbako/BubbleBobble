@@ -7,7 +7,6 @@ namespace ieg
 	class SceneObject;
 	class InputManager;
 	class Renderer;
-	class GameObject;
 
 	enum class Order
 	{
@@ -34,7 +33,7 @@ namespace ieg
 				mpObjects.emplace(int(order), pSceneObject);
 			return pSceneObject;
 		}
-		void RemoveObject(GameObject* pGameObject);
+		void RemoveObject(SceneObject* pSceneObject);
 		void Update(const float deltaTime);
 		void Render() const;
 		void OnActivation(int value);

@@ -246,11 +246,18 @@
     <ClCompile Include="TextComponent.cpp">
       <Filter>Component\ModelComponent</Filter>
     </ClCompile>
+    <ClCompile Include="BubbleBobble.ixx" />
+    <ClCompile Include="Buffer.ixx">
+      <Filter>Buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="Color.ixx">
+      <Filter>Color</Filter>
+    </ClCompile>
+    <ClCompile Include="Command.ixx">
+      <Filter>Command</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="FireCommand.h">
-      <Filter>Command</Filter>
-    </ClInclude>
     <ClInclude Include="JumpCommand.h">
       <Filter>Command</Filter>
     </ClInclude>
@@ -262,45 +269,6 @@
     </ClInclude>
     <ClInclude Include="Level.h">
       <Filter>Prefabs</Filter>
-    </ClInclude>
-    <ClInclude Include="Buffer.h">
-      <Filter>Buffer</Filter>
-    </ClInclude>
-    <ClInclude Include="BufferManager.h">
-      <Filter>Buffer</Filter>
-    </ClInclude>
-    <ClInclude Include="BufferAblocks.h">
-      <Filter>Buffer</Filter>
-    </ClInclude>
-    <ClInclude Include="BufferBubble.h">
-      <Filter>Buffer</Filter>
-    </ClInclude>
-    <ClInclude Include="ColorXRGB4.h">
-      <Filter>Color</Filter>
-    </ClInclude>
-    <ClInclude Include="BufferAdwarf.h">
-      <Filter>Buffer</Filter>
-    </ClInclude>
-    <ClInclude Include="BufferAextend.h">
-      <Filter>Buffer</Filter>
-    </ClInclude>
-    <ClInclude Include="BufferAirflow.h">
-      <Filter>Buffer</Filter>
-    </ClInclude>
-    <ClInclude Include="BufferApic.h">
-      <Filter>Buffer</Filter>
-    </ClInclude>
-    <ClInclude Include="BufferAsecret.h">
-      <Filter>Buffer</Filter>
-    </ClInclude>
-    <ClInclude Include="BufferAsprites.h">
-      <Filter>Buffer</Filter>
-    </ClInclude>
-    <ClInclude Include="BufferBdata.h">
-      <Filter>Buffer</Filter>
-    </ClInclude>
-    <ClInclude Include="BufferBubcode.h">
-      <Filter>Buffer</Filter>
     </ClInclude>
     <ClInclude Include="Hud.h">
       <Filter>Prefabs</Filter>

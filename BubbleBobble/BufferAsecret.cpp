@@ -1,5 +1,4 @@
-#include "pch.h"
-#include "BufferAsecret.h"
+module BubbleBobble:Buffer;
 
 using namespace ieg;
 

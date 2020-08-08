@@ -1,6 +1,4 @@
-#include "pch.h"
-#include "Buffer.h"
-#include <fstream>
+module BubbleBobble:Buffer;
 
 using namespace ieg;
 

@@ -12,7 +12,7 @@ import std.core;
 
 namespace ieg
 {
-	enum class MsgType
+	export enum class MsgType
 	{
 		Info = 0,
 		Warning,

@@ -1,3 +1,6 @@
+module;
+#include <SDL.h>
+
 module Engine:Resource;
 
 using namespace ieg;

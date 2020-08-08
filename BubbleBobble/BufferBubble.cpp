@@ -1,7 +1,6 @@
-#include "pch.h"
-#include "BufferBubble.h"
-#include "../Engine/ColorRGBA8.h"
-#include "ColorXRGB4.h"
+module BubbleBobble:Buffer;
+
+import :Color;
 
 using namespace ieg;
 

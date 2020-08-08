@@ -1,5 +1,7 @@
 module Engine:Scene;
 
+import :Input;
+
 using namespace ieg;
 
 SceneManager::SceneManager()

@@ -1,5 +1,7 @@
-#include "pch.h"
-#include "GameObject.h"
+module Engine:GameObject;
+
+import :Component;
+import std.core;
 
 using namespace ieg;
 

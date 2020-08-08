@@ -25,9 +25,6 @@
     <Filter Include="ServiceLocator\Log">
       <UniqueIdentifier>{a6e87cd6-595a-4fc7-912f-aa82d07ddec5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Object">
-      <UniqueIdentifier>{94b062b4-6dd2-4f73-b85e-d889c2204a65}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Color">
       <UniqueIdentifier>{070b57c7-6931-4557-ab4d-d1ea31750559}</UniqueIdentifier>
     </Filter>
@@ -54,6 +51,9 @@
     </Filter>
     <Filter Include="Component\CtrlComponent">
       <UniqueIdentifier>{f8bdbc64-3c07-4f99-b091-80a17c1f4a5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject">
+      <UniqueIdentifier>{94b062b4-6dd2-4f73-b85e-d889c2204a65}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -112,7 +112,7 @@
       <Filter>Component\ViewComponent</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
-      <Filter>Object</Filter>
+      <Filter>GameObject</Filter>
     </ClCompile>
     <ClCompile Include="ColliderModelComponent.cpp">
       <Filter>Component\ModelComponent</Filter>
@@ -157,9 +157,6 @@
     <ClCompile Include="Minigin.ixx">
       <Filter>Minigin</Filter>
     </ClCompile>
-    <ClCompile Include="Object.ixx">
-      <Filter>Object</Filter>
-    </ClCompile>
     <ClCompile Include="Scene.ixx">
       <Filter>Scene</Filter>
     </ClCompile>
@@ -177,6 +174,9 @@
     </ClCompile>
     <ClCompile Include="ServiceLocator.ixx">
       <Filter>ServiceLocator</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.ixx">
+      <Filter>GameObject</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

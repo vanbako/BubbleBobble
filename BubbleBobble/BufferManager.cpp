@@ -1,18 +1,4 @@
-#include "pch.h"
-#include "BufferManager.h"
-#include "Buffer.h"
-#include "BufferAblocks.h"
-#include "BufferAdwarf.h"
-#include "BufferAextend.h"
-#include "BufferAirflow.h"
-#include "BufferApic.h"
-#include "BufferAsecret.h"
-#include "BufferAsprites.h"
-#include "BufferBdata.h"
-#include "BufferBubble.h"
-#include "BufferBubcode.h"
-#include "../Engine/ServiceLocator.h"
-#include "../Engine/Logger.h"
+module BubbleBobble:Buffer;
 
 using namespace ieg;
 

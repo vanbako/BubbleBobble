@@ -12,10 +12,9 @@ struct SDL_Texture;
 namespace ieg
 {
 	class Minigin;
-	class GameObject;
-	class Minigin;
 	class TransformModelComponent;
 	class Texture2D;
+	class GameObject;
 
 	export class CtrlComponent
 	{

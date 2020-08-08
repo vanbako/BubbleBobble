@@ -1,5 +1,7 @@
 module Engine:Component;
 
+import :GameObject;
+
 using namespace ieg;
 
 CtrlComponent::CtrlComponent(GameObject* pGameObject, Minigin* pEngine)

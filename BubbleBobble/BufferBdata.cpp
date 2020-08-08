@@ -1,5 +1,4 @@
-#include "pch.h"
-#include "BufferBdata.h"
+module BubbleBobble:Buffer;
 
 using namespace ieg;
 

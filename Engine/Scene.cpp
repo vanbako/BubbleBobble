@@ -1,5 +1,7 @@
 module Engine:Scene;
 
+import :Input;
+
 using namespace ieg;
 
 Scene::Scene(const std::string& name)
@@ -18,10 +20,10 @@ Scene::~Scene()
 	delete mpInputManager;
 }
 
-void Scene::RemoveObject(GameObject* pGameObject)
+void Scene::RemoveObject(SceneObject* pSceneObject)
 {
 	auto it{ mpObjects.begin() };
-	while ((it != mpObjects.end()) && ((*it).second != pGameObject))
+	while ((it != mpObjects.end()) && ((*it).second != pSceneObject))
 		++it;
 	if (it != mpObjects.end())
 	{

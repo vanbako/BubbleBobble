@@ -5,7 +5,7 @@ export import :Command;
 export import :Component;
 export import :Input;
 export import :Minigin;
-export import :Object;
+export import :GameObject;
 export import :Observer;
 export import :Render;
 export import :Resource;

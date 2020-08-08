@@ -1,4 +1,14 @@
+module;
+#include <SDL.h>
+#include <SDL_image.h>
+#include <SDL_ttf.h>
+
 module Engine:Minigin;
+
+import :Resource;
+import :Scene;
+import :Render;
+import :ServiceLocator;
 
 using namespace ieg;
 

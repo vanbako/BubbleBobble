@@ -1,4 +1,13 @@
+module;
+
+#include <typeinfo>
+
 module Engine:Component;
+
+import :Minigin;
+import :GameObject;
+import :Render;
+import :Resource;
 
 using namespace ieg;
 
