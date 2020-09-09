@@ -129,9 +129,6 @@
     <ClCompile Include="Start2Command.cpp">
       <Filter>Command</Filter>
     </ClCompile>
-    <ClCompile Include="pch.cpp">
-      <Filter>Precompiled Header</Filter>
-    </ClCompile>
     <ClCompile Include="Main.cpp">
       <Filter>Main</Filter>
     </ClCompile>
@@ -297,26 +294,8 @@
     <ClInclude Include="pch.h">
       <Filter>Precompiled Header</Filter>
     </ClInclude>
-    <ClInclude Include="HudObserver.h">
-      <Filter>Observer</Filter>
-    </ClInclude>
-    <ClInclude Include="NpcManager.h">
-      <Filter>Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="BubbleManager.h">
-      <Filter>Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjectsManager.h">
-      <Filter>Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="AvatarManager.h">
-      <Filter>Manager</Filter>
-    </ClInclude>
     <ClInclude Include="Candy.h">
       <Filter>Prefabs</Filter>
-    </ClInclude>
-    <ClInclude Include="CandyManager.h">
-      <Filter>Manager</Filter>
     </ClInclude>
     <ClInclude Include="BubbleBobble.h">
       <Filter>Prefabs</Filter>

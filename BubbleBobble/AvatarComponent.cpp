@@ -1,20 +1,12 @@
-#include "pch.h"
-#include "AvatarComponent.h"
-#include "LevelComponent.h"
-#include "HudComponent.h"
-#include "StandingState.h"
-#include "JumpingState.h"
-#include "FallingState.h"
-#include "ReadyState.h"
-#include "FiringState.h"
-#include "ReloadingState.h"
-#include "LivingState.h"
-#include "DyingState.h"
-#include "InvincibleState.h"
-#include "AvatarManager.h"
-#include "ObjectsManager.h"
-#include "BubbleManager.h"
-#include "CandyComponent.h"
+module;
+#include <typeinfo>
+#include <cstdarg>
+
+module BubbleBobble:Component;
+import Engine;
+import :Prefabs;
+import :State;
+import :Manager;
 
 using namespace ieg;
 

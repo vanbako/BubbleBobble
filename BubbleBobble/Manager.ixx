@@ -10,6 +10,8 @@ namespace ieg
 	class NpcManager;
 	class CandyManager;
 	class BufferManager;
+	enum class NpcType;
+	enum class CandyType;
 
 	export class ObjectsManager final
 	{
@@ -61,5 +63,84 @@ namespace ieg
 		std::vector<GameObject*> mpGOAvatars;
 
 		static const Vec2<int> mpAvatarInitialPos[mpAvatarMax];
+	};
+
+	export class BubbleManager final
+	{
+	public:
+		explicit BubbleManager();
+		~BubbleManager() = default;
+		BubbleManager(const BubbleManager&) = delete;
+		BubbleManager(BubbleManager&&) = delete;
+		BubbleManager& operator=(const BubbleManager&) = delete;
+		BubbleManager& operator=(BubbleManager&&) = delete;
+
+		void CreateBubbles(Minigin* pEngine, BufferManager* pBufferManager, Scene* pScene, ColorRGBA8* pPalette);
+		void Init(GameObject* pGOLevel);
+		void DeactivateAll();
+		void FireBubble(AvatarType avatarType, const Vec2<int>& pos, bool isFiringLeft);
+		ColliderModelComponent* GetCollider();
+		GameObject* GetNextActiveBubble(GameObject* pGOBubble);
+	private:
+		static const int mpBubblesPerAvatarMax{ 8 };
+		std::vector<GameObject*> mpGOBubbles;
+
+		GameObject* GetFirstActiveBubble();
+	};
+
+	export class CandyManager final
+	{
+	public:
+		explicit CandyManager();
+		~CandyManager() = default;
+		CandyManager(const CandyManager&) = delete;
+		CandyManager(CandyManager&&) = delete;
+		CandyManager& operator=(const CandyManager&) = delete;
+		CandyManager& operator=(CandyManager&&) = delete;
+
+		void CreateCandy(Minigin* pEngine, BufferManager* pBufferManager, Scene* pScene, ColorRGBA8* pPalette);
+		void Init(GameObject* pGOLevel);
+		void DeactivateAll();
+		void SpawnCandy(NpcType npcType, TransformModelComponent* pTransform, int level);
+		void SpawnCandy(CandyType candyType, TransformModelComponent* pTransform, int level);
+		void SpawnCandy(CandyType candyType, const Vec2<int>& pos, int level);
+		GameObject* GetNextActiveCandy(GameObject* pGONpc);
+	private:
+		std::vector<GameObject*> mpGOCandy;
+		BufferManager* mpBufferManager;
+
+		static const int mCandyMax;
+		static const std::vector<CandyType> mNpcCandyList;
+
+		GameObject* GetFirstActiveCandy();
+		int GetInactiveCandy();
+	};
+
+	export class NpcManager final
+	{
+	public:
+		explicit NpcManager();
+		~NpcManager() = default;
+		NpcManager(const NpcManager&) = delete;
+		NpcManager(NpcManager&&) = delete;
+		NpcManager& operator=(const NpcManager&) = delete;
+		NpcManager& operator=(NpcManager&&) = delete;
+
+		void CreateNpcs(Minigin* pEngine, BufferManager* pBufferManager, Scene* pScene, ColorRGBA8* pPalette, Observer* pObserver);
+		void SetIsActive(int index, bool isActive);
+		void Init(GameObject* pGOLevel);
+		void DeactivateAll();
+		void SpawnNpc(NpcType npcType, Vec2<int>& pos, bool isLookingLeft, int wait);
+		void SpawnWaitUpdate(const float deltaTime);
+		int GetNpcMax();
+		GameObject* GetNextActiveNpc(GameObject* pGONpc);
+	private:
+		static const int mNpcMax{ 6 };
+		std::vector<GameObject*> mpGONpcs;
+		std::vector<float> mSpawnWait;
+
+		void SetLevel(int index, GameObject* pGOLevel);
+		int GetInactiveNpc();
+		GameObject* GetFirstActiveNpc();
 	};
 }

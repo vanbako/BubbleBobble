@@ -1,9 +1,8 @@
-#include "pch.h"
-#include "HudObserver.h"
-#include "HudComponent.h"
-#include "LevelComponent.h"
-#include "AvatarComponent.h"
-#include "NpcComponent.h"
+module;
+#include <typeinfo>
+
+module BubbleBobble:Observer;
+import :Component;
 
 using namespace ieg;
 

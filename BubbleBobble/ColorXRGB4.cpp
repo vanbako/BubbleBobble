@@ -1,5 +1,4 @@
 module BubbleBobble:Color;
-
 import Engine;
 
 using namespace ieg;

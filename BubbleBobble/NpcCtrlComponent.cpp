@@ -1,5 +1,4 @@
 module BubbleBobble:Component;
-
 import :Command;
 
 using namespace ieg;

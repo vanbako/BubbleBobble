@@ -201,19 +201,13 @@ xcopy "$(SolutionDir)3rdParty\Fmod\lib\x64\fmod.dll" "$(OutputPath)" /R /Y</Comm
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Avatar.h" />
-    <ClInclude Include="AvatarManager.h" />
     <ClInclude Include="Bubble.h" />
     <ClInclude Include="BubbleBobble.h" />
-    <ClInclude Include="BubbleManager.h" />
     <ClInclude Include="Candy.h" />
-    <ClInclude Include="CandyManager.h" />
     <ClInclude Include="Hud.h" />
-    <ClInclude Include="HudObserver.h" />
     <ClInclude Include="Intro.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="Npc.h" />
-    <ClInclude Include="NpcManager.h" />
-    <ClInclude Include="ObjectsManager.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Start.h" />
   </ItemGroup>
@@ -280,7 +274,6 @@ xcopy "$(SolutionDir)3rdParty\Fmod\lib\x64\fmod.dll" "$(OutputPath)" /R /Y</Comm
     <ClCompile Include="NpcManager.cpp" />
     <ClCompile Include="ObjectsManager.cpp" />
     <ClCompile Include="Observer.ixx" />
-    <ClCompile Include="pch.cpp" />
     <ClCompile Include="Prefabs.ixx" />
     <ClCompile Include="ReadyState.cpp" />
     <ClCompile Include="ReloadingState.cpp" />
